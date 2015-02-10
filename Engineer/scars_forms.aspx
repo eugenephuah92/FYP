@@ -11,170 +11,191 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                                <span class="glyphicon glyphicon-plus"></span>
                                 <strong>Section 1</strong>
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <div class="panel-body">
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding-top:10pt">
                             <form class="form-horizontal pad10" action="#" method="post">
                                 <div class="form-group">
-                                    <label for="carNo" class="col-lg-3 control-label">Car No:</label>
+                                    <label for="txtCarNo" class="col-lg-3 control-label">Car No</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="carNo" placeholder="Car No" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtCarNo" placeholder="Car No" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="carRev" class="col-lg-3 control-label">Car Revision:</label>
+                                    <label for="txtCarRev" class="col-lg-3 control-label">Car Revision</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="carRev" placeholder="Car Revision" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtCarRev" placeholder="Car Revision" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="carType" class="col-lg-3 control-label">Car Type:</label>
+                                    <label for="txtCarType" class="col-lg-3 control-label">Car Type</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="carType" placeholder="Car Type" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtCarType" placeholder="Car Type" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="preAlert" class="col-lg-3 control-label">Pre Alert:</label>
+                                    <label for="rdbPreAlert" class="col-lg-3 control-label">Pre Alert</label>
                                     <div class="col-lg-8">
                                         <div class="radio">
                                             <label>
-                                                <asp:RadioButton ID="preAlertYes" Text="Yes" GroupName="AlertRadio" runat="server" />
-                                                
+                                                <asp:RadioButton ID="rdbPreAlertYes" Text="Yes" GroupName="AlertRadio" runat="server" />  
                                             </label>
-                                            </div>
+                                        </div>
                                         <div class="radio">
                                             <label>
-                                                <asp:RadioButton ID="preAlertNo" Text="No" GroupName="AlertRadio" runat="server" />
+                                                <asp:RadioButton ID="rdbPreAlertNo" Text="No" GroupName="AlertRadio" runat="server" />
                                             </label>
                                         </div>
                                     </div>
+                                    <br /><br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="relatedCarNo" class="col-lg-3 control-label">Related Car No:</label>
+                                    <label for="txtRelatedCarNo" class="col-lg-3 control-label">Related Car No</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="relatedCarNo" placeholder="Related Car No" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtRelatedCarNo" placeholder="Related Car No" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="relatedCarRev" class="col-lg-3 control-label">Related Car Rev:</label>
+                                    <label for="txtRelatedCarRev" class="col-lg-3 control-label">Related Car Rev</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="relatedCarRev" placeholder="Related Car Rev" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtRelatedCarRev" placeholder="Related Car Rev" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="originator" class="col-lg-3 control-label">Originator:</label>
+                                    <label for="txtOriginator" class="col-lg-3 control-label">Originator</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="originator" placeholder="Originator" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtOriginator" placeholder="Originator" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="recurrence" class="col-lg-3 control-label">Recurrence (Ref.No.):</label>
+                                    <label for="txtRecurrence" class="col-lg-3 control-label">Recurrence (Ref.No.)</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="recurrence" placeholder="Recurrence (Ref.No.)" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtRecurrence" placeholder="Recurrence (Ref.No.)" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="supplierContact" class="col-lg-3 control-label">Supplier Contact:</label>
+                                    <label for="txtSupplierContact" class="col-lg-3 control-label">Supplier Contact</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="supplierContact" placeholder="SupplierContact" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtSupplierContact" placeholder="SupplierContact" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="supplierEmail" class="col-lg-3 control-label">Supplier Email:</label>
+                                    <label for="txtSupplierEmail" class="col-lg-3 control-label">Supplier Email</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="supplierEmail" placeholder="Supplier Email">
+                                        <asp:TextBox CssClass="form-control" ID="txtSupplierEmail" placeholder="Supplier Email" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="issuedDate" class="col-lg-3 control-label">Issued Date:</label>
+                                    <label for="cldIssuedDate" class="col-lg-3 control-label">Issued Date</label>
                                     <div class="col-lg-8">
-				                        <input type="text" class="form-control" id="issuedDate" placeholder="Issued Date">
+				                        <input type="date" class="form-control" ID="cldIssuedDate" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="originatorDept" class="col-lg-3 control-label">Originator Department:</label>
+                                    <label for="txtOriginatorDept" class="col-lg-3 control-label">Originator Department</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="originatorDept" placeholder="Originator Department">
+                                        <asp:TextBox CssClass="form-control" ID="txtOriginatorDept" placeholder="Originator Department" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="originatorContact" class="col-lg-3 control-label">Originator Contact:</label>
+                                    <label for="txtOriginatorContact" class="col-lg-3 control-label">Originator Contact</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="originatorContact" placeholder="Originator Contact">
+                                        <asp:TextBox CssClass="form-control" ID="txtOriginatorContact" placeholder="Originator Contact" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="partNo" class="col-lg-3 control-label">Part No:</label>
+                                    <label for="txtPartNo" class="col-lg-3 control-label">Part No</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="partNo" placeholder="Part No.">
+                                        <asp:TextBox CssClass="form-control" ID="txtPartNo" placeholder="Part No." runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="partDesc" class="col-lg-3 control-label">Part Description:</label>
+                                    <label for="txtPartDesc" class="col-lg-3 control-label">Part Description</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="partDesc" placeholder="Part Description">
+                                        <asp:TextBox CssClass="form-control" ID="txtPartDesc" placeholder="Part Description" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="businessUnit" class="col-lg-3 control-label">Business Unit:</label>
+                                    <label for="txtBusinessUnit" class="col-lg-3 control-label">Business Unit</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="businessUnit" placeholder="Business Unit">
+                                        <asp:TextBox CssClass="form-control" ID="txtBusinessUnit" placeholder="Business Unit" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="deptPL" class="col-lg-3 control-label">Dept / PL:</label>
+                                    <label for="txtDeptPL" class="col-lg-3 control-label">Dept / PL</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="deptPL" placeholder="Dept / PL">
+                                        <asp:TextBox CssClass="form-control" ID="txtDeptPL" placeholder="Dept / PL" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="commodity" class="col-lg-3 control-label">Commodity:</label>
+                                    <label for="txtCommodity" class="col-lg-3 control-label">Commodity</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="commodity" placeholder="Commodity">
+                                        <asp:TextBox CssClass="form-control" ID="txtCommodity" placeholder="Commodity" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="defectQty" class="col-lg-3 control-label">Defect Quantity:</label>
+                                    <label for="txtDefectQty" class="col-lg-3 control-label">Defect Quantity</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="defectQty" placeholder="Defect Quantity">
+                                        <asp:TextBox CssClass="form-control" ID="txtDefectQty" placeholder="Defect Quantity" runat="server" />
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="defectType" class="col-lg-3 control-label">Defect Type:</label>
+                                    <label for="lstDefectType" class="col-lg-3 control-label">Defect Type</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control" id="defectType">
-                                            <option selected>Please select defect type</option>
-                                            <option>Non-Performance</option>
-                                            <option>Performance</option>
-                                        </select>
+                                        <asp:DropDownList CssClass="form-control" ID="lstDefectType" runat="server">
+                                            <asp:ListItem>Please select defect type</asp:ListItem>
+                                            <asp:ListItem>Performance</asp:ListItem>
+                                            <asp:ListItem>Non-Performance</asp:ListItem>
+                                        </asp:DropDownList>
                                     </div>
+                                    <br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="nonConformity" class="col-lg-3 control-label">Non-Conformity Reported:</label>
+                                    <label for="txtNonConformity" class="col-lg-3 control-label">Non-Conformity Reported</label>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" rows="2" id="nonConformity" placeholder="Non-Conformity Reported"></textarea>
+                                        <asp:TextBox CssClass="form-control" ID="txtNonConformity" placeholder="Non-Conformity Reported" TextMode="MultiLine" Rows="2" runat="server" />
                                     </div>
+                                    <br /><br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="rejectReason" class="col-lg-3 control-label">Reject Reason for Previous Revision:</label>
+                                    <label for="txtRejectReason" class="col-lg-3 control-label">Reject Reason for Previous Revision</label>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" rows="2" id="rejectReason" placeholder="Reject Reason for Previous Revision"></textarea>
+                                        <asp:TextBox CssClass="form-control" ID="txtRejectReason" placeholder="Reject Reason for Previous Revision" TextMode="MultiLine" Rows="2" runat="server" />
                                     </div>
+                                    <br /><br /><br />
                                 </div>
                                 <div class="form-group">
-                                    <label for="dateClose" class="col-lg-3 control-label">Expected Date Close:</label>
+                                    <label for="cldDateClose" class="col-lg-3 control-label">Expected Date Close</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="dateClose" placeholder="Expected Date Close">
+                                        <input type="date" class="form-control" ID="cldDateClose" runat="server" />
+                                        <br />
                                     </div>
+                                    <br /><br />
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="padding-bottom:20pt">
                                     <div class="col-lg-8 col-lg-offset-3">
-                                        <button class="btn btn-primary">Save</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" runat="server" Text="Save" />
                                     </div>
                                 </div>
                             </form>
@@ -183,12 +204,26 @@
                 </div><!--End of Section 1-->
                 <br />
                 <h4>SCAR Response Form</h4>
+                <asp:LinkButton CssClass="btn btn-default" ID="btnExpand" Text="Expand all" runat="server" />
+                <asp:LinkButton CssClass="btn btn-default" ID="btnCollapse" Text="Collapse all" runat="server" />
+                <!-- GET BACK TO THIS LATER               
+                <script type="text/javascript">
+                    $('.closeall').click(function () {
+                        $('.panel-collapse.in')
+                          .collapse('hide');
+                    });
+                    $('.openall').click(function () {
+                        $('.panel-collapse:not(".in")')
+                          .collapse('show');
+                    });
+                </script>
+                -->
+                <br /><br />
                 <!--Section 2-->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
-                                <span class="glyphicon glyphicon-minus"></span>
                                 <strong>Section 2</strong>
                             </a>
                         </h4>
@@ -198,20 +233,20 @@
                             <div class="panel-group" id="accordion2">
                                 <form class="form-horizontal pad10" action="#" method="post">
                                     <div class="form-group">
-                                        <label for="rootCause" class="col-lg-3 control-label">Root Cause Option:</label>
+                                        <label for="lstRootCause" class="col-lg-3 control-label">Root Cause Option</label>
                                         <div class="col-lg-8">
-                                            <select class="form-control" id="rootCause">
-                                                <option selected>Please select root cause</option>
-                                                <option>Production - Assembly</option>
-                                                <option>Production - Machine</option>
-                                                <option>Production - Micro</option>
-                                                <option>Production - Micro (CM)</option>
-                                                <option>Production - MTA</option>
-                                                <option>Production - MTA (CM)</option>
-                                                <option>Production - Planning</option>
-                                                <option>Production - Process</option>
-                                                <option>Production - Test</option>
-                                            </select>
+                                            <asp:DropDownList CssClass="form-control" ID="lstRootCause" runat="server">
+                                                <asp:ListItem>Please select root cause</asp:ListItem>
+                                                <asp:ListItem>Production - Assembly</asp:ListItem>
+                                                <asp:ListItem>Production - Machine</asp:ListItem>
+                                                <asp:ListItem>Production - Micro</asp:ListItem>
+                                                <asp:ListItem>Production - Micro (CM)</asp:ListItem>
+                                                <asp:ListItem>Production - MTA</asp:ListItem>
+                                                <asp:ListItem>Production - MTA (CM)</asp:ListItem>
+                                                <asp:ListItem>Production - Planning</asp:ListItem>
+                                                <asp:ListItem>Production - Process</asp:ListItem>
+                                                <asp:ListItem>Production - Test</asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                 </form>
@@ -220,7 +255,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse3">
-                                                <strong>S0 - Overall Summary</strong>
+                                                <strong>S0 - Overall Summary </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -229,10 +264,9 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="overallSummary" class="col-lg-3 control-label">S0 - Overall Summary:</label>
+                                                    <label for="txtOverallSummary" class="col-lg-3 control-label">S0 - Overall Summary</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="3" id="overallSummary" placeholder="Overall Summary"></textarea>
-                                                        <span class="help-block">Max 1000 characters</span>
+                                                        <asp:TextBox CssClass="form-control" ID="txtOverallSummary" placeholder="Overall Summary" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -244,7 +278,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                                                <strong>S1 - Problem Verification</strong>
+                                                <strong>S1 - Problem Verification </strong>(Max 1000 characters)
                                             </a>
                                                 <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -253,23 +287,22 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="probVerification" class="col-lg-3 control-label">S1 - Problem Verification:</label>
+                                                    <label for="txtProbVerification" class="col-lg-3 control-label">S1 - Problem Verification</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="3" id="probVerification" placeholder="Problem Verification"></textarea>
-                                                        <span class="help-block">Max 1000 characters</span>
+                                                        <asp:TextBox CssClass="form-control" ID="txtProbVerification" placeholder="Problem Verification" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="preAlert" class="col-lg-3 control-label">Status:</label>
+                                                    <label for="rdbPreAlert" class="col-lg-3 control-label">Status</label>
                                                     <div class="col-lg-8">
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios" id="status1" value="valid" checked=""> Valid
+                                                                <asp:RadioButton ID="rdbValid" Text="Valid" GroupName="status" runat="server" />
                                                             </label>
                                                             </div>
                                                         <div class="radio">
                                                             <label>
-                                                                <input type="radio" name="optionsRadios" id="status2" value="invalid"> Invalid 
+                                                                <asp:RadioButton ID="rdbInvalid" Text="Invalid" GroupName="status" runat="server" />
                                                             </label>
                                                         </div>
                                                     </div>
@@ -283,7 +316,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse5">
-                                                <strong>S2 - Containment Action</strong>
+                                                <strong>S2 - Containment Action </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -292,48 +325,48 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="containmentAction" class="col-lg-3 control-label">S21 - Containment Action:</label>
+                                                    <label for="txtContainmentAction" class="col-lg-3 control-label">S21 - Containment Action</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="containmentAction" placeholder="Containment Action">
+                                                        <asp:TextBox CssClass="form-control" ID="txtContainmentAction" placeholder="Containment Action" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="implementationDate" class="col-lg-3 control-label">S22 - Implementation Date:</label>
+                                                    <label for="cldS2ImplementationDate" class="col-lg-3 control-label">S22 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="S2implementationDate" placeholder="Implementation Date">
+                                                        <asp:Calendar ID="cldS2ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="responsiblePerson" class="col-lg-3 control-label">S23 - Responsible Person:</label>
+                                                    <label for="txtS2ResponsiblePerson" class="col-lg-3 control-label">S23 - Responsible Person</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="responsiblePerson" placeholder="Responsible Person">
+                                                        <asp:TextBox CssClass="form-control" ID="txtS2ResponsiblePerson" placeholder="Responsible Person" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="containmentResult" class="col-lg-3 control-label">S24 - Containment Result:</label>
+                                                    <label for="txtContainmentResult" class="col-lg-3 control-label">S24 - Containment Result</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="containmentResult" placeholder="Containment Result">
+                                                        <asp:TextBox CssClass="form-control" ID="txtContainmentResult" placeholder="Containment Result" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="screeningArea" class="col-lg-3 control-label">Screening Area:</label>
+                                                    <label for="lstScreeningArea" class="col-lg-3 control-label">Screening Area</label>
                                                     <div class="col-lg-8">
-                                                        <select multiple class="form-control" id="screeningArea">
-                                                            <option>Production</option>
-                                                            <option>FGI</option>
-                                                            <option>Remaining units with customers</option>
-                                                            <option>N/A</option>
-                                                            <option>Units in Field (with other customers)</option>
-                                                        </select>
+                                                        <asp:ListBox CssClass="form-control" ID="lstScreeningArea" SelectionMode="Multiple" runat="server">
+                                                            <asp:ListItem>Production</asp:ListItem>
+                                                            <asp:ListItem>FGI</asp:ListItem>
+                                                            <asp:ListItem>Remaining units with customers</asp:ListItem>
+                                                            <asp:ListItem>N/A</asp:ListItem>
+                                                            <asp:ListItem>Units in Field (with other customers)</asp:ListItem>
+                                                        </asp:ListBox>
                                                         <span class="help-block">Hold <em>shift</em> to select more than one option if necessary</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="S2TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
+                                                    <label for="chkS2TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
                                                     <div class="col-lg-8">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" id="S2TrackActionItem"> 
+                                                                <asp:CheckBox ID="chkS2TrackActionItem" runat="server" /> 
                                                             </label>
                                                         </div>
                                                     </div>
@@ -347,7 +380,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
-                                                <strong>S3 - Failure Analysis</strong>
+                                                <strong>S3 - Failure Analysis </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -356,21 +389,20 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="rootCause" class="col-lg-3 control-label">S31 - Failure Analysis:</label>
+                                                    <label for="lstRootCause" class="col-lg-3 control-label">S31 - Failure Analysis</label>
                                                     <div class="col-lg-8">
-                                                        <select class="form-control" id="failureAnalysis">
-                                                            <option selected>Please select failure analysis</option>
-                                                            <option>Visual</option>
-                                                            <option>Electrical</option>
-                                                            <option>Physical</option>
-                                                        </select>
+                                                        <asp:DropDownList CssClass="form-control" ID="lstFailureAnalysis" runat="server">
+                                                            <asp:ListItem>Please select failure analysis</asp:ListItem>
+                                                            <asp:ListItem>Visual</asp:ListItem>
+                                                            <asp:ListItem>Electrical</asp:ListItem>
+                                                            <asp:ListItem>Physical</asp:ListItem>
+                                                        </asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="failureResult" class="col-lg-3 control-label">S32 - Failure Analysis Results:</label>
+                                                    <label for="txtFailureResult" class="col-lg-3 control-label">S32 - Failure Analysis Results</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="3" id="failureResult" placeholder="Failure Analysis Results"></textarea>
-                                                        <span class="help-block">Max 1000 characters</span>
+                                                        <asp:TextBox CssClass="form-control" ID="txtFailureResult" placeholder="Failure Analysis Results" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -382,7 +414,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse7">
-                                                <strong>S4 - Root Cause</strong>
+                                                <strong>S4 - Root Cause </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -391,27 +423,27 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="man" class="col-lg-3 control-label">Man:</label>
+                                                    <label for="txtMan" class="col-lg-3 control-label">Man</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="man" placeholder="Man">
+                                                        <asp:TextBox CssClass="form-control" ID="txtMan" placeholder="Man" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="method" class="col-lg-3 control-label">Method:</label>
+                                                    <label for="txtMethod" class="col-lg-3 control-label">Method</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="method" placeholder="Method">
+                                                        <asp:TextBox CssClass="form-control" ID="txtMethod" placeholder="Method" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="material" class="col-lg-3 control-label">Material:</label>
+                                                    <label for="txtMaterial" class="col-lg-3 control-label">Material</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="material" placeholder="Material">
+                                                        <asp:TextBox CssClass="form-control" ID="txtMaterial" placeholder="Material" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="machine" class="col-lg-3 control-label">Machine:</label>
+                                                    <label for="txtMachine" class="col-lg-3 control-label">Machine</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="machine" placeholder="Machine">
+                                                        <asp:TextBox CssClass="form-control" ID="txtMachine" placeholder="Machine" runat="server" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -423,7 +455,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse8">
-                                                <strong>S5 - Corrective Action</strong>
+                                                <strong>S5 - Corrective Action </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -432,29 +464,29 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="correctiveAction" class="col-lg-3 control-label">S51 - Corrective Action:</label>
+                                                    <label for="txtCorrectiveAction" class="col-lg-3 control-label">S51 - Corrective Action</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="2" id="correctiveAction" placeholder="Corrective Action"></textarea>
+                                                        <asp:TextBox CssClass="form-control" ID="txtCorrectiveAction" placeholder="Corrective Action" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="implementationDate" class="col-lg-3 control-label">S52 - Implementation Date:</label>
+                                                    <label for="cldS5ImplementationDate" class="col-lg-3 control-label">S52 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="S5implementationDate" placeholder="Implementation Date">
+                                                        <asp:Calendar ID="cldS5ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="responsiblePerson" class="col-lg-3 control-label">S53 - Responsible Person:</label>
+                                                    <label for="txtS5ResponsiblePerson" class="col-lg-3 control-label">S53 - Responsible Person</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="responsiblePerson2" placeholder="Responsible Person">
+                                                        <asp:TextBox CssClass="form-control" ID="txtS5ResponsiblePerson" placeholder="Responsible Person" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="S5TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
+                                                    <label for="chkS5TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
                                                     <div class="col-lg-8">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" id="S5TrackActionItem"> 
+                                                                <asp:CheckBox ID="chkS5TrackActionItem" runat="server" /> 
                                                             </label>
                                                         </div>
                                                     </div>
@@ -468,7 +500,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse9">
-                                                <strong>S6 - Permanent Corrective Action</strong>
+                                                <strong>S6 - Permanent Corrective Action </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -477,29 +509,29 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="permanentCA" class="col-lg-3 control-label">S61 - Permanent Corrective Action:</label>
+                                                    <label for="txtPermanentCA" class="col-lg-3 control-label">S61 - Permanent Corrective Action</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="2" id="permanentCA" placeholder="Permanent Corrective Action"></textarea>
+                                                        <asp:TextBox CssClass="form-control" ID="txtPermanentCA" placeholder="Permanent Corrective Action" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="implementationDate" class="col-lg-3 control-label">S62 - Implementation Date:</label>
+                                                    <label for="cldS6ImplementationDate" class="col-lg-3 control-label">S62 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="S6implementationDate" placeholder="Implementation Date">
+                                                        <asp:Calendar ID="cldS6ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="responsiblePerson" class="col-lg-3 control-label">S63 - Responsible Person:</label>
+                                                    <label for="txtS6ResponsiblePerson" class="col-lg-3 control-label">S63 - Responsible Person</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="responsiblePerson3" placeholder="Responsible Person">
+                                                        <asp:TextBox CssClass="form-control" ID="txtS6ResponsiblePerson" placeholder="Responsible Person" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="S6TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
+                                                    <label for="chkS6TrackActionItem" class="col-lg-3 control-label">Track Action Item?</label>
                                                     <div class="col-lg-8">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" id="S6TrackActionItem"> 
+                                                                <asp:CheckBox ID="chkS6TrackActionItem" runat="server" /> 
                                                             </label>
                                                         </div>
                                                     </div>
@@ -513,7 +545,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse10">
-                                                <strong>S7 - Verify Effectiveness of Corrective Actions Results</strong>
+                                                <strong>S7 - Verify Effectiveness of Corrective Actions Results </strong>(Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -522,39 +554,39 @@
                                         <div class="panel-body">
                                             <form class="form-horizontal pad10" action="#" method="post">
                                                 <div class="form-group">
-                                                    <label for="verifyCA" class="col-lg-3 control-label">S71 - Verify Effectiveness of Corrective Actions:</label>
+                                                    <label for="txtVerifyCA" class="col-lg-3 control-label">S71 - Verify Effectiveness of Corrective Actions</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="2" id="verifyCA" placeholder="Verify Effectiveness of Corrective Actions"></textarea>
+                                                        <asp:TextBox CssClass="form-control" ID="txtVerifyCA" placeholder="Verify Effectiveness of Corrective Actions" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="implementationDate" class="col-lg-3 control-label">S72 - Implementation Date (Start of Monitoring):</label>
+                                                    <label for="cldS7ImplementationDate" class="col-lg-3 control-label">S72 - Implementation Date (Start of Monitoring)</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="S7implementationDate" placeholder="Implementation Date">
+                                                        <asp:Calendar ID="cldS7ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="responsiblePerson" class="col-lg-3 control-label">S73 - Responsible Person:</label>
+                                                    <label for="txtS7ResponsiblePerson" class="col-lg-3 control-label">S73 - Responsible Person</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="responsiblePerson4" placeholder="Responsible Person">
+                                                        <asp:TextBox CssClass="form-control" ID="txtS7ResponsiblePerson" placeholder="Responsible Person" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="verifier" class="col-lg-3 control-label">S74 - Verifier:</label>
+                                                    <label for="txtVerifier" class="col-lg-3 control-label">S74 - Verifier</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="verifier" placeholder="Verifier">
+                                                        <asp:TextBox CssClass="form-control" ID="txtVerifier" placeholder="Verifier" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="verifierEmail" class="col-lg-3 control-label">S75 - Verifier Email:</label>
+                                                    <label for="txtVerifierEmail" class="col-lg-3 control-label">S75 - Verifier Email</label>
                                                     <div class="col-lg-8">
-                                                        <input type="text" class="form-control" id="verifierEmail" placeholder="Verifier Email">
+                                                        <asp:TextBox CssClass="form-control" ID="txtVerifierEmail" placeholder="Verifier Email" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="verifyCAresults" class="col-lg-3 control-label">S76 - Verify Effectiveness of Corrective Actions Result:</label>
+                                                    <label for="txtVerifyCAresults" class="col-lg-3 control-label">S76 - Verify Effectiveness of Corrective Actions Result</label>
                                                     <div class="col-lg-8">
-                                                        <textarea class="form-control" rows="2" id="verifyCAresult" placeholder="Verify Effectiveness of Corrective Actions Result"></textarea>
+                                                        <asp:TextBox CssClass="form-control" ID="txtVerifyCAresult" placeholder="Verify Effectiveness of Corrective Actions Result" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -564,17 +596,29 @@
 
                                 <form class="form-horizontal pad10" action="#" method="post">
                                     <div class="form-group">
-                                        <label for="uploadFile" class="col-lg-3 control-label">Upload Attachment(s):</label>
+                                        <label for="lstDefectModes" class="col-lg-3 control-label">Defect Modes</label>
                                         <div class="col-lg-8">
-                                            <input type="file" class="filestyle" data-icon="false">
+                                            <asp:DropDownList CssClass="form-control" ID="lstDefectModes" runat="server">
+                                                <asp:ListItem>Please select defect modes</asp:ListItem>
+                                                <asp:ListItem>A</asp:ListItem>
+                                                <asp:ListItem>B</asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="8Dapproval" class="col-lg-3 control-label">Require 8D Approval?</label>
+                                        <label for="uploadFile" class="col-lg-3 control-label">Upload Attachment(s)</label>
+                                        <div class="col-lg-8">
+                                            <asp:FileUpload ID="uploadFile" AllowMultiple="true" runat="server" />
+                                            <span class="help-block">Maximum file size: 15MB</span>
+                                            <asp:Button CssClass="btn btn-primary" ID="btnUploadFile" Text="Upload" runat="server" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="chk8Dapproval" class="col-lg-3 control-label">Require 8D Approval?</label>
                                         <div class="col-lg-8">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" data-toggle="modal" data-target="#8Dapproval">
+                                                    <asp:CheckBox ID="chk8Dapproval" data-toggle="modal" data-target="#8Dapproval" runat="server" />
                                                 </label>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="8Dapproval" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -616,19 +660,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="MOR" class="col-lg-3 control-label">MOR Calculated?</label>
+                                        <label for="chkMOR" class="col-lg-3 control-label">MOR Calculated?</label>
                                         <div class="col-lg-8">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" id="MOR"> 
+                                                    <asp:CheckBox ID="chkMOR" runat="server" /> 
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-3">
-                                            <button class="btn btn-primary">Save</button>
-                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" runat="server" Text="Save" />
+                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" Text="Submit" />
                                         </div>
                                     </div>
                                 </form>

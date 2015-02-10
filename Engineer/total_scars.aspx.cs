@@ -17,6 +17,5 @@ public partial class Engineer_total_scars : System.Web.UI.Page
         lstFilter.Items.Add(new ListItem("Escalation Level"));
         lstFilter.Items.Add(new ListItem("Days Till Next Escalation"));
 
-
     }
 }

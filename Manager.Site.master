@@ -69,6 +69,7 @@
                         </li>
                         <li <% if (GetPageName.Value == "pending_open_items") Response.Write("class=\"nav-active\"");%>><a href="pending_open_items.aspx"><i class="fa fa-edit"></i>&nbsp;Track Open Action Items</a></li>
                         <li <% if (GetPageName.Value == "scar_record") Response.Write("class=\"nav-active\"");%>><a href="scar_record.aspx"><i class="fa fa-dashboard"></i>&nbsp;Total SCARS</a></li>
+                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-dashboard"></i>&nbsp;Change Password</a></li>
 
                     </ul>
                 </div>

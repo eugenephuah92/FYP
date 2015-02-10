@@ -341,14 +341,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <asp:Button ID="downloadAttachmentBtn" CssClass="btn btn-success" runat="server" Text="Download"/>
+                                                    <asp:Button ID="btnDownloadAttachment" CssClass="btn btn-success" runat="server" Text="Download"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-lg-offset-3">
-                                        <asp:Button ID="removeAttachmentBtn" CssClass="btn btn-danger" runat="server" Text="Remove File"/>
-                                        <asp:Button ID="uploadAttachmentBtn" CssClass="btn btn-primary" runat="server" Text="Upload File"/>
+                                        <asp:Button ID="btnRemoveAttachment" CssClass="btn btn-danger" runat="server" Text="Remove File"/>
+                                        <asp:Button ID="btnUploadAttachment" CssClass="btn btn-primary" runat="server" Text="Upload File"/>
                                     </div> 
                                 </div>
                                 <div class="form-group">
@@ -356,26 +356,26 @@
                                     <div class="col-lg-8">
                                         <div class="radio">
                                             <label>
-                                                <asp:RadioButton ID="approvalRadioBtn" runat="server" Text="Approve" GroupName="approvalRequest" />
+                                                <asp:RadioButton ID="rdbApprovalRadio" runat="server" Text="Approve" GroupName="approvalRequest" />
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                               <asp:RadioButton ID="rejectRadioBtn" runat="server" Text="Reject" GroupName="approvalRequest" />
+                                               <asp:RadioButton ID="rdbRejectRadio" runat="server" Text="Reject" GroupName="approvalRequest" />
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="comment" class="col-lg-3 control-label">Comment:</label>
+                                    <label for="txtComment" class="col-lg-3 control-label">Comment:</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox id="comment" CssClass="form-control" Rows="3" TextMode="MultiLine" runat="server" />
+                                        <asp:TextBox ID="txtComment" CssClass="form-control" Rows="3" TextMode="MultiLine" runat="server" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-3">
                                         <br />
-                                        <asp:Button ID="submitBtn" CssClass="btn btn-success" Text="Submit" runat="server" />
+                                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" Text="Submit" runat="server" />
                                     </div>
                                 </div>
                             </form>   

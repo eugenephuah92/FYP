@@ -18,6 +18,7 @@
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">  
                                         <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
                                     </asp:DropDownList>
+
                             	</div>
                                 <div class="col-md-3"  style="padding-top:10pt">
                                     <div class="input-group">
@@ -42,7 +43,7 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6"  style="padding-top:10pt">
-                                                        <asp:DropDownList CssClass="form-control" ID="lstFilter2" runat="server">  
+                                                        <asp:DropDownList CssClass="form-control" ID="test" runat="server">  
                                                             <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
                                                         </asp:DropDownList>
                             	                    </div>
