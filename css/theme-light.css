@@ -1,0 +1,158 @@
+/*
+Theme - Light
+This CSS can only contains colors
+*/
+.topbar{
+    background-color:#ccc;
+    color:#242424;
+}
+
+
+.useraccount{
+    background-color:#fff;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.useraccount .uthumb{
+    border:1px solid rgba(0, 0, 0, 0.90);
+}
+
+
+.useraccount .name, .useraccount a.name{
+    color:#242424;
+}
+
+.left-panel{
+    background-color:#eee;
+    border-right: 2px solid #ccc;
+}
+
+.panel-close{
+    background-color:#ccc;
+}
+
+
+.panel-close:hover{
+    background-color:#2E9AFE;
+    color:#fff;
+}
+
+
+.panel-close i{
+    color:#333;
+}
+
+
+
+.panel-close i:hover{
+    color:#fff;
+}
+
+.nav-vertical > li > a {
+    color: #333;
+}
+
+.nav-vertical > li > a:hover,
+.nav-vertical > li > a:active,
+.nav-vertical > li > a:focus {
+    background-color: #2E9AFE;
+    color: #fff;
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-parent > a:focus {
+    background-color: none;
+    color: #8F939E;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.nav-vertical > li.nav-parent > a:hover,
+.nav-vertical > li.nav-parent > a:active {
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+
+.nav-vertical > li.nav-active > a {
+    background-color: #fff;
+    color: #1d2939;
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-active > a:hover {
+
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+
+
+.nav-vertical > li.nav-active > a:focus {
+    color: #1d2939;
+}
+
+
+.nav-vertical > li.active > a,
+.nav-vertical > li.active > a:hover,
+.nav-vertical > li.active > a:focus {
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+.nav-vertical > li.active > a {
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-active.active > a {
+
+    background-color: #fff;
+    color: #242424;
+}
+
+.nav-vertical > li.nav-active.active > a:hover {
+
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+
+.nav-vertical .children > li > a {
+    color: #333;
+}
+
+.nav-vertical .children > li > a:hover,
+.nav-vertical .children > li > a:active,
+.nav-vertical .children > li > a:focus {
+    color: #2E9AFE;
+}
+
+
+
+.nav-vertical .children > li.active > a {
+    color: #2E9AFE;
+}
+
+
+.nav-vertical .search input{
+    background-color:#eee;
+    color:#333;
+    border:1px solid #ccc;
+}
+
+
+.nav-vertical .search input:hover{
+    background-color:#fff;
+    color:#000;
+}

@@ -1,0 +1,545 @@
+html, body {
+    height: 100%;
+}
+
+.branding{
+    width:150px;
+    padding:5px 15px;
+}
+
+
+.mt{margin-top:10px;}
+.mb{margin-bottom:10px;}
+.ml{margin-left:10px;}
+.mr{margin-right:10px;}
+
+.mts{margin-top:6px;}
+
+.mt100{
+    margin-top:100px;
+}
+
+.mt50{
+    margin-top:50px;
+}
+
+.pad10{
+    padding:10px;
+}
+.bg-green{
+    background-color:#398439;
+}
+
+.bg-grey{
+    background-color: #eeeeee;
+}
+
+.topbar{
+    width:100%;
+    height:45px;
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+.topbar .systemname{
+    line-height: 40px;
+}
+
+.login .tb{
+    padding: 10px;
+    font-size: 18px;
+    height: auto;
+    border-radius: 0px;
+}
+
+.login .input-group-addon{
+    border-radius: 0px;
+}
+
+/*removes padding and margin*/
+.textboxnopad{
+
+}
+.nopad{
+    padding:0px;
+    margin:0px;
+}
+
+/*
+User Account
+*/
+.navaccount{
+    padding-top:5px;
+    margin-right:10px;
+    width:auto;
+    min-width:100px;
+    max-width:300px;
+    overflow-x:hidden;
+}
+
+.navaccount img{
+    padding-left:5px;
+    margin-right:5px;
+}
+
+.navaccount a{
+    position:relative;
+    float:left;
+    padding:10px 0px!important;
+    font-size:15px;
+}
+
+/*For using form-groups in top nav*/
+.navform{
+    margin-top:10px;
+    margin-right:5px;
+    margin-bottom:0px; /*overrides 15px bootstrap*/
+}
+
+/*topnav clock*/
+.navclock{
+    width:110px;
+    margin-top:15px;
+    color:#fff;
+}
+
+.navclock .fa{
+    float:left;
+    font-size:20px;
+    padding-top:3px;
+    padding-right: 5px;
+}
+
+.useraccount{
+    width:100%;
+    height:auto;
+    min-height:50px;
+    color:#fff;
+}
+
+.useraccountinner{
+    padding:20px;
+}
+
+/*contianers*/
+.useraccount .uthumb-cont{
+    float:left;
+    width:60px;
+    min-height: 100%;
+    margin-right: 10px;
+}
+
+.useraccount .user-details{
+    min-height: 100%;
+    width: auto;
+    float:left;
+}
+
+.useraccount .uthumb{
+    width:60px;
+    height:60px;
+}
+
+.useraccount .name, .useraccount a.name{
+    line-height: 30px;
+}
+/*
+ panel
+Wrapping left and right panel
+*/
+.main{
+    width:100%;
+    min-height:100%;
+    padding:0px;
+    margin:0px;
+}
+
+body{
+
+    padding:0px;
+    margin:0px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+ol.example li:hover{
+    cursor: move;
+}
+
+ol.example li{
+    position: relative;
+    cursor: move;
+    background-color:#eee;
+    border:1px solid #ccc;
+    padding:5px;
+    margin-bottom:5px;
+}
+
+ol.example li.placeholder {
+    position: relative;
+    background-color:#F5F6CE;
+    border:1px solid #F7FE2E;
+    /** More li styles **/
+}
+ol.example li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
+
+/*
+Left Panel
+*/
+
+.left-panel{
+    width:20%;
+    height:100%;
+    position: absolute;
+    left:0px;
+    overflow: hidden;
+}
+
+.left-panel-inner{
+    padding:10px;
+}
+
+.panel-close{
+    width:15px;
+    height:100px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    position:fixed;
+    top:250px;
+    left:20%;
+    z-index:999;
+    font-size:10px;
+}
+
+.panel-close i{
+    position: absolute;
+    top:45%;
+}
+
+/*
+Right Panel
+*/
+
+.right-panel{
+    width:80%;
+    float:right;
+    padding-bottom: 50px;
+}
+
+@media(max-width:767px){
+
+    .right-panel{
+        width:100%;
+        float:right;
+    }
+}
+@media(min-width:768px){
+
+    .right-panel{
+        width:100%;
+        float:right;
+    }
+}
+@media(min-width:992px){
+    .right-panel{
+        width:80%;
+        float:right;
+    }
+}
+@media(min-width:1200px){
+    .right-panel{
+        width:80%;
+        float:right;
+    }
+}
+
+.right-panel-inner{
+    padding:10px;
+}
+
+/*
+Nav Vertical
+*/
+
+.nav-vertical {
+    margin-bottom: 30px;
+}
+
+.nav-vertical > li > a {
+    padding: 7px 10px;
+}
+
+
+
+
+.nav-vertical li .fa,
+.nav-vertical li .glyphicon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 16px;
+    text-align: center;
+}
+
+.nav-vertical > li > a > .badge {
+    margin-top: 2px;
+}
+
+.nav-vertical .nav-parent .subm{
+   float:right;
+}
+
+.nav-vertical .children {
+    list-style: none;
+    margin: 5px 0;
+    display: none;
+    padding: 0;
+}
+
+.nav-vertical .children > li > a {
+    font-size: 13px;
+    display: block;
+    padding: 5px 0 5px 27px;
+    -moz-transition: all 0.2s ease-out 0s;
+    -webkit-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+
+.nav-vertical .children > li > a > span {
+    margin-top: 2px;
+}
+
+.nav-vertical .children > li > a:hover,
+.nav-vertical .children > li > a:active,
+.nav-vertical .children > li > a:focus {
+    text-decoration: none;
+}
+
+.nav-vertical .children > li .fa {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-right: 5px;
+    text-align: left;
+    width: auto;
+    vertical-align: baseline;
+}
+
+
+.nav-vertical .children ul {
+    margin-left: 12px;
+    border: 0;
+}
+
+.nav-vertical li.search{
+    margin-bottom: 10px;
+}
+
+.nav-vertical .search input{
+    padding:5px;
+    width:100%;
+    font-size:13px;
+}
+
+/*
+Bootstrap modifications
+*/
+
+.panel-heading, .panel-body, .panel-footer {
+    padding: 5px 10px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.panel{
+    -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.08);
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.08);
+}
+
+.navbar{
+    margin-bottom:0px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+
+.navbar-toggle{
+    float:left;
+}
+
+
+/*
+Footer
+*/
+
+footer{
+    position: fixed;
+    bottom:0px;
+    width:100%;
+    height:35px;
+}
+
+.footer-inner{
+    padding:10px;
+    padding-left:20px;
+}
+
+.login-footer{
+    opacity: 0.6;
+    height:90px!important;
+}
+
+/*
+Notification center
+*/
+#notification-center{
+    font-size:18px;
+    z-index: 999;
+    position:fixed;
+    bottom:5px;
+    right:15px;
+}
+
+
+#notification-center .badge{
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: -7px;
+    padding: 2px 3px;
+}
+
+
+#notification-center .new-notification{
+    opacity: 0.9;
+    width:320px;
+    height:auto;
+    min-height:20px;
+    position:fixed;
+    bottom:35px;
+    right:15px;
+    font-size:12px;
+    z-index:999;
+    display:none;
+}
+
+#notification-center .new-notification:hover{
+    opacity: 1;
+}
+
+#notification-center .new-notification li{
+    margin:10px;
+    list-style: none;
+    position:relative;
+}
+
+#notification-center .new-notification li a.main{
+    float:left;
+    width:80%;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding:10px;
+}
+
+#notification-center .new-notification li a.main:hover{
+    text-decoration: none;
+}
+
+
+#notification-center .time{
+    display: block;
+    text-decoration: none;
+    font-size:10px;
+}
+
+
+#notification-center .new-notification li a.notification-close{
+    float:left;
+    position: absolute;
+    width:21%;
+    height:100%;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+
+
+#notification-center .new-notification li a.notification-close span.close-txt{
+    position:absolute;
+    top:35%;
+    width:100%;
+    text-align:center;
+}
+
+#notification-center-panel{
+    display:none;
+    position:fixed;
+    bottom:35px;
+    right:0px;
+    width:300px;
+    height:auto;
+    min-height:50px;
+    max-height:300px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    z-index:998;
+}
+
+#notification-center-panel ul{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+}
+
+#notification-center-panel ul li{
+    position:relative;
+}
+
+#notification-center-panel ul li a.main{
+    display:block;
+    width:100%;
+    height:auto;
+    padding:10px;
+    font-size:12px;
+    text-decoration: none;
+}
+
+#notification-center-panel ul li a.close{
+    opacity: 1;
+    font-size:11px;
+    float:right;
+    position: absolute;
+    right:10px;
+    top:5px;
+    padding:3px;
+}
+
+/*
+Bootstrap ovveride
+*/

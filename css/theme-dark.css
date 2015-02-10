@@ -1,0 +1,247 @@
+/*
+Theme - Light
+This CSS can only contains colors
+*/
+.topbar{
+    background-color:#242424;
+    color:#eee;
+}
+
+
+.useraccount{
+    background-color:rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #474c50;
+}
+
+
+.useraccount .uthumb{
+    border:1px solid rgba(0, 0, 0, 0.90);
+}
+
+
+.useraccount .name, .useraccount a.name{
+    color:#fff;
+}
+
+.left-panel{
+    background-color:rgba(0, 0, 0, 0.80);
+    border-right: 2px solid rgba(0,0,0,0.85);
+}
+
+.panel-close{
+    background-color:rgba(0,0,0,0.85);
+}
+
+
+.panel-close:hover{
+    background-color:#2E9AFE;
+    color:#fff;
+}
+
+
+.panel-close i{
+    color:#fff;
+}
+
+
+
+.panel-close i:hover{
+    color:#1d2939;
+}
+
+
+.nav-vertical > li > a {
+    color: #ccc;
+}
+
+
+.nav-vertical > li > a:hover,
+.nav-vertical > li > a:active,
+.nav-vertical > li > a:focus {
+    background-color: #2E9AFE;
+    color: #fff;
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-parent > a:focus {
+    background-color: none;
+    color: #8F939E;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.nav-vertical > li.nav-parent > a:hover,
+.nav-vertical > li.nav-parent > a:active {
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+
+.nav-vertical > li.nav-active > a {
+    background-color: #fff;
+    color: #1d2939;
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-active > a:hover {
+
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+.nav-vertical > li.active > a,
+.nav-vertical > li.active > a:hover,
+.nav-vertical > li.active > a:focus {
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+.nav-vertical > li.active > a {
+    -moz-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+
+.nav-vertical > li.nav-active.active > a {
+
+    background-color: #fff;
+    color: #242424;
+}
+
+.nav-vertical > li.nav-active.active > a:hover {
+
+    background-color: #2E9AFE;
+    color: #fff;
+}
+
+
+
+.nav-vertical > li.nav-active > a:focus {
+    color: #1d2939;
+}
+
+.nav-vertical .children > li > a {
+    color: #ccc;
+}
+
+.nav-vertical .children > li > a:hover,
+.nav-vertical .children > li > a:active,
+.nav-vertical .children > li > a:focus {
+    color: #2E9AFE;
+}
+
+
+.nav-vertical .children > li.active > a {
+    color: #2E9AFE;
+}
+
+
+.nav-vertical .search input{
+    background-color:#242424;
+    color:#999999;
+    border:1px solid rgba(0,0,0,0.9);
+}
+
+
+.nav-vertical .search input:hover{
+    background-color:#242424;
+    color:#fff;
+}
+
+footer{
+    background-color:#eee;
+    color:#333333;
+}
+
+/*
+Notification center
+*/
+#notification-center a{
+    color:#000;
+}
+
+
+#notification-center a:hover{
+    color:#357ebd;
+}
+
+
+#notification-center #notification-panel-btn .open{
+    background-color:#fff;
+}
+
+#notification-center .badge{
+    background-color: #CC0000;
+    color: #fff;
+}
+
+#notification-center .new-notification li{
+    -webkit-box-shadow: 1px 1px 11px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:    1px 1px 11px 0px rgba(0, 0, 0, 0.5);
+    box-shadow:         1px 1px 11px 0px rgba(0, 0, 0, 0.5);
+}
+
+#notification-center .new-notification li a.main{
+    background-color:#e1edf7;
+    border:1px solid #005A92;
+}
+
+
+
+#notification-center .time{
+    color:#B6B6B6;
+}
+
+
+#notification-center .new-notification li a.notification-close{
+    background-color:#92C8F5;
+    border:1px solid #005A92;
+    border-left:none;
+}
+
+#notification-center .new-notification li a.notification-close:hover{
+    background-color:#379AEA;
+    color:#fff;
+
+}
+
+#notification-center-panel{
+    background-color:#fff;
+    border:1px solid #ccc;
+    -webkit-box-shadow: 0px -3px 9px 0px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow:    0px -3px 9px 0px rgba(0, 0, 0, 0.13);
+    box-shadow:         0px -3px 9px 0px rgba(0, 0, 0, 0.13);
+}
+
+#notification-center-panel ul{
+    color:#242424;
+}
+
+#notification-center-panel ul li{
+    border-bottom:1px solid #ccc;
+}
+
+#notification-center-panel ul li a.main{
+    color:#242424;
+}
+
+#notification-center-panel ul li a.close{
+    background-color:#005A92;
+    color:#fff;
+}
+
+#notification-center-panel ul li a.close:hover{
+    background-color:#0097F5;
+}
+
+#notification-center-panel ul li.highlight{
+    background-color:#FFFDD3;
+}
