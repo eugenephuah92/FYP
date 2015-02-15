@@ -25,7 +25,7 @@
                                         <span class="input-group-btn">
                                             <asp:LinkButton CssClass="btn btn-default" ID="btnSearch" runat="server">
                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                                    alskdjaslkdjaslkdjlaskdjlkasjd
+                                                    
                                             </asp:LinkButton>
                                         </span>
                                     </div>
