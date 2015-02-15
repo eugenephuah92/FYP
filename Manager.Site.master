@@ -61,10 +61,21 @@
                     <ul class="nav nav-pills nav-stacked nav-vertical ">
 
                         <li <% if (GetPageName.Value == "home") Response.Write("class=\"nav-active\"");%>><a href="home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                        <li <% if (GetPageName.Value == "8Drequest" || GetPageName.Value == "8Dapproval") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i> 8D Powerpoint Management<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "8Drequest" || GetPageName.Value == "8Dapproval") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i> 8D Powerpoint<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                     	        <li><a href="8Drequest.aspx">Pending 8D Requests</a></li>
                                 <li><a href="8Dapproval.aspx">8D Approval</a></li>
+                            </ul>
+                        </li>
+                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-edit"></i> Reports<i class="fa fa-sort-down subm"></i></a>
+                            <ul class="children">
+                    	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>
+                                <li><a href="reports_Q2.aspx">2nd Quadrant Report (Q2)</a></li>
+                                <li><a href="reports_Q3.aspx">3rd Quadrant Report (Q3)</a></li>
+                                <li><a href="reports_Q4.aspx">4th Quadrant Report (Q4)</a></li>
+                                <li><a href="reports_CAPA.aspx">Corrective Action / Preventive Action</a></li>
+                                <li><a href="reports_TAT_frequency.aspx">Frequency of Cases of TAT Triggering</a></li>
+                                <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
                             </ul>
                         </li>
                         <li <% if (GetPageName.Value == "pending_open_items") Response.Write("class=\"nav-active\"");%>><a href="pending_open_items.aspx"><i class="fa fa-edit"></i>&nbsp;Track Open Action Items</a></li>

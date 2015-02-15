@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/reports.aspx.cs" Inherits="Engineer_reports" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/reports_TAT_frequency.aspx.cs" Inherits="Manager_reports_TAT_frequency" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div class="right-panel">
@@ -7,25 +7,24 @@
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    Reports
+                    Frequency of cases of TAT Triggering
                 </div>
                 <div class="panel-body">
-                	<div class="col-md-4">
+                	<div class="col-md-5">
                 	<p style="padding-top:10pt"> | <a href="#">Show 10 records</a> | <a href="#">Show 50 records</a> | 
                     </div>
                     	
                             <div class="row">
-                                <div class="col-md-3" style="padding-top:10pt">
-                                    <asp:DropDownList CssClass="form-control" ID="lstReport" runat="server" >
-                                          <asp:ListItem Selected="True">Please Select Report Type</asp:ListItem>
+                                <div class="col-md-4" style="padding-top:10pt">
+                                    <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server" >
+                                          <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-md-1" style="padding-top:10pt">
-                                    <asp:Button ID="btnGenerateReport" CssClass="btn btn-primary" Text="Generate" OnClick="onClick_btnGenerate" runat="server" />
-                            
+                                    <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Search" runat="server" />
                             	</div>
                             </div>
-                    
+                            
                     
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
@@ -33,7 +32,10 @@
   									<table class="table">
                                     	<thead>
                                         	<tr>
-
+                                                <th>Frequency</th>
+                                                <th>Escalation Level 1</th>
+                                                <th>Escalation Level 2</th>
+                                                <th>Month</th>
                                           	</tr>
                                         </thead>
     									<tbody>

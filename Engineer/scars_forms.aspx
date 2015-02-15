@@ -164,9 +164,7 @@
                                     <label for="lstDefectType" class="col-lg-3 control-label">Defect Type</label>
                                     <div class="col-lg-8">
                                         <asp:DropDownList CssClass="form-control" ID="lstDefectType" runat="server">
-                                            <asp:ListItem>Please select defect type</asp:ListItem>
-                                            <asp:ListItem>Performance</asp:ListItem>
-                                            <asp:ListItem>Non-Performance</asp:ListItem>
+                                            <asp:ListItem Selected="True">Please select defect type</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <br /><br />
@@ -204,9 +202,10 @@
                 </div><!--End of Section 1-->
                 <br />
                 <h4>SCAR Response Form</h4>
+                <!-- GET BACK TO THIS LATER 
                 <asp:LinkButton CssClass="btn btn-default" ID="btnExpand" Text="Expand all" runat="server" />
                 <asp:LinkButton CssClass="btn btn-default" ID="btnCollapse" Text="Collapse all" runat="server" />
-                <!-- GET BACK TO THIS LATER               
+                              
                 <script type="text/javascript">
                     $('.closeall').click(function () {
                         $('.panel-collapse.in')
@@ -217,8 +216,9 @@
                           .collapse('show');
                     });
                 </script>
-                -->
+ 
                 <br /><br />
+                -->
                 <!--Section 2-->
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -236,16 +236,7 @@
                                         <label for="lstRootCause" class="col-lg-3 control-label">Root Cause Option</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstRootCause" runat="server">
-                                                <asp:ListItem>Please select root cause</asp:ListItem>
-                                                <asp:ListItem>Production - Assembly</asp:ListItem>
-                                                <asp:ListItem>Production - Machine</asp:ListItem>
-                                                <asp:ListItem>Production - Micro</asp:ListItem>
-                                                <asp:ListItem>Production - Micro (CM)</asp:ListItem>
-                                                <asp:ListItem>Production - MTA</asp:ListItem>
-                                                <asp:ListItem>Production - MTA (CM)</asp:ListItem>
-                                                <asp:ListItem>Production - Planning</asp:ListItem>
-                                                <asp:ListItem>Production - Process</asp:ListItem>
-                                                <asp:ListItem>Production - Test</asp:ListItem>
+                                                <asp:ListItem Selected="True">Please select root cause</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -351,13 +342,7 @@
                                                 <div class="form-group">
                                                     <label for="lstScreeningArea" class="col-lg-3 control-label">Screening Area</label>
                                                     <div class="col-lg-8">
-                                                        <asp:ListBox CssClass="form-control" ID="lstScreeningArea" SelectionMode="Multiple" runat="server">
-                                                            <asp:ListItem>Production</asp:ListItem>
-                                                            <asp:ListItem>FGI</asp:ListItem>
-                                                            <asp:ListItem>Remaining units with customers</asp:ListItem>
-                                                            <asp:ListItem>N/A</asp:ListItem>
-                                                            <asp:ListItem>Units in Field (with other customers)</asp:ListItem>
-                                                        </asp:ListBox>
+                                                        <asp:ListBox CssClass="form-control" ID="lstScreeningArea" SelectionMode="Multiple" runat="server" />
                                                         <span class="help-block">Hold <em>shift</em> to select more than one option if necessary</span>
                                                     </div>
                                                 </div>
@@ -392,10 +377,7 @@
                                                     <label for="lstRootCause" class="col-lg-3 control-label">S31 - Failure Analysis</label>
                                                     <div class="col-lg-8">
                                                         <asp:DropDownList CssClass="form-control" ID="lstFailureAnalysis" runat="server">
-                                                            <asp:ListItem>Please select failure analysis</asp:ListItem>
-                                                            <asp:ListItem>Visual</asp:ListItem>
-                                                            <asp:ListItem>Electrical</asp:ListItem>
-                                                            <asp:ListItem>Physical</asp:ListItem>
+                                                            <asp:ListItem Selected="True">Please select failure analysis</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
@@ -599,9 +581,7 @@
                                         <label for="lstDefectModes" class="col-lg-3 control-label">Defect Modes</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstDefectModes" runat="server">
-                                                <asp:ListItem>Please select defect modes</asp:ListItem>
-                                                <asp:ListItem>A</asp:ListItem>
-                                                <asp:ListItem>B</asp:ListItem>
+                                                <asp:ListItem Selected="True">Please select defect modes</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>

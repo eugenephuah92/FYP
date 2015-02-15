@@ -16,7 +16,7 @@
                             <tr>
                                 <th>SCAR ID</th>
                                 <th>QE Name (Sender)</th>
-                                <th>Sent Time</th>
+                                <th>Sent Date</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -24,20 +24,29 @@
                             <tr>
                                 <td>100001</td>
                                 <td>Shazmeen Zainudin</td>
-                                <td>12.06pm</td>
-                                <td><a class="btn btn-success" href="8Dapproval.html">View SCAR</a></td>
+                                <td>
+                                    <div><strong>Date: </strong>23/02/2014</div>
+                                    <div><strong>Time: </strong>12.06pm</div>
+                                </td>
+                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
                             </tr>
                             <tr>
                                 <td>100002</td>
                                 <td>Hairul Azam</td>
-                                <td>9:10am</td>
-                                <td><a class="btn btn-success">View SCAR</a></td>
+                                <td>
+                                    <div><strong>Date: </strong>12/06/2014</div>
+                                    <div><strong>Time: </strong>9.10am</div>
+                                </td>
+                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
                             </tr>
                             <tr>
                                 <td>100003</td>
                                 <td>SharmilaDevi Marimuthu</td>
-                                <td>10:53am</td>
-                                <td><a class="btn btn-success">View SCAR</a></td>
+                                <td>
+                                    <div><strong>Date: </strong>10/11/2014</div>
+                                    <div><strong>Time: </strong>10.50am</div>
+                                </td>
+                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
                             </tr>
                             </tbody>
                         </table>
