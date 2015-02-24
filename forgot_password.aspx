@@ -38,7 +38,7 @@
             <img src="Images/jabil.jpg" class="center-block img-responsive">
         </div>
         <p class="lead text-center">
-            Auto SCAR & TAT System
+            Auto SCAR & TAT System Testing new line
         <div class="form-group clearfix">
                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <asp:TextBox ID="txtEmail" CssClass="form-control tb" placeholder="Email Address" runat="server" />
