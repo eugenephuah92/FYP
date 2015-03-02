@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/theme-light.css" rel="stylesheet" type="text/css">
+    <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/select2.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript">
@@ -74,6 +74,7 @@
                             </ul>
                         </li>
                         <li <% if (GetPageName.Value == "total_scars") Response.Write("class=\"nav-active\"");%>><a href="total_scars.aspx"><i class="fa fa-dashboard"></i>&nbsp;Total SCARS</a></li>
+                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-dashboard"></i>&nbsp;SCAR Log</a></li>
                         <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-dashboard"></i>&nbsp;View Corrective / Preventive Actions</a></li>
                         <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-dashboard"></i>&nbsp;View Defect Modes</a></li>
                         <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-dashboard"></i>&nbsp;Change Password</a></li>

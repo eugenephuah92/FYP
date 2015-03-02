@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/theme-light.css" rel="stylesheet" type="text/css">
+    <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/select2.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript">
@@ -65,6 +65,7 @@
                             <ul class="children">
                     	        <li><a href="8Drequest.aspx">Pending 8D Requests</a></li>
                                 <li><a href="8Dapproval.aspx">8D Approval</a></li>
+                                <li><a href="scar_log.aspx">SCAR Log</a></li>
                             </ul>
                         </li>
                         <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-edit"></i> Reports<i class="fa fa-sort-down subm"></i></a>

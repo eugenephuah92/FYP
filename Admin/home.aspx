@@ -16,11 +16,22 @@
                                 	<!-- Table -->
   									<table class="table table-hover">                                    	
     									<tbody>
-                                        	
-                                          	<tr>
-                                            	<td style="padding-left:45pt"><a href="total_scars.html" style="text-decoration:none">Total SCAR</a></td>
+                                            <tr>
+                                            	<td style="padding-left:45pt"><a href="new_scars.aspx" style="text-decoration:none">New SCAR</a></td>
+                                                <td><span class="badge">2</span></td>
+                                          	</tr>
+                                            <tr>
+                                            	<td style="padding-left:45pt"><a href="pending_scars.aspx" style="text-decoration:none">Pending SCAR</a></td>
+                                                <td><span class="badge">1</span></td>
+                                          	</tr>                  
+                                            <tr>
+                                            	<td style="padding-left:45pt"><a href="closed_scars.aspx" style="text-decoration:none">Closed SCAR</a></td>
+                                                <td><span class="badge">2</span></td>
+                                          	</tr>    
+                                            <tr>
+                                            	<td style="padding-left:45pt"><a href="total_scars.aspx" style="text-decoration:none">Total SCAR</a></td>
                                                 <td><span class="badge">5</span></td>
-                                          	</tr>                                   
+                                          	</tr>     
                                         </tbody>
   									</table>
                                 </div>
