@@ -41,7 +41,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <br />
                                         <asp:Button CssClass="btn btn-success" ID="btnChangePassword" runat="server" Text="Change Password" />
                                     </div>
                                 </div>
@@ -50,5 +49,5 @@
                     </div>
                 </div><!--/.col-md-12-->
             </div>
-        </div>
+</div>
 </asp:Content>

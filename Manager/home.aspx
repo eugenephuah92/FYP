@@ -5,7 +5,6 @@
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Summary
@@ -16,13 +15,9 @@
                                 	<!-- Table -->
   									<table class="table table-hover">                                    	
     									<tbody>
-                                          	<tr>
-                                            	<td style="padding-left:45pt"><a href="scar_record.aspx" style="text-decoration:none">View Total SCARS</a></td>
-                                                <td><span class="badge">5</span></td>
-                                          	</tr>
                                             <tr>
                                             	<td style="padding-left:45pt"><a href="new_scars.aspx" style="text-decoration:none">New SCAR</a></td>
-                                                <td><span class="badge">5</span></td>
+                                                <td><span class="badge">2</span></td>
                                           	</tr>
                                             <tr>
                                             	<td style="padding-left:45pt"><a href="pending_scars.aspx" style="text-decoration:none">Pending SCAR</a></td>
@@ -31,6 +26,10 @@
                                             <tr>
                                             	<td style="padding-left:45pt"><a href="closed_scars.aspx" style="text-decoration:none">Closed SCAR</a></td>
                                                 <td><span class="badge">2</span></td>
+                                          	</tr>
+                                            <tr>
+                                            	<td style="padding-left:45pt"><a href="scar_record.aspx" style="text-decoration:none">Total SCAR</a></td>
+                                                <td><span class="badge">5</span></td>
                                           	</tr>           
                                             <tr>
                                             	<td style="padding-left:45pt"><a href="8Drequest.aspx" style="text-decoration:none">Pending 8D Approval Requests</a></td>

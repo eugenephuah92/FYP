@@ -5,7 +5,6 @@
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Assign QE to QEL, QM
@@ -15,7 +14,7 @@
                     	<div class="form-group">
                                 <div class="col-lg-12" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
-  									<table class="table">
+  									<table class="table table-hover">
                                     	<thead>
                                         	<tr>
                                                 <th style="padding-left:30pt">Quality Engineer (QE)</th>
@@ -134,20 +133,15 @@
                                 </div>
                             </div>                          
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" style="text-align:center">
                                     <button class="btn btn-primary">Save</button>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
-
                     </form>
                 </div>
-
             </div>
-
         </div><!--/.col-md-12-->
-
-
     </div>
 </div>
 </asp:Content>

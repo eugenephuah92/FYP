@@ -333,7 +333,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel">Preview of 8D.pptx</h4>
+                                                    <h4 class="modal-title">Preview of 8D.pptx</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -342,10 +342,11 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <asp:Button ID="btnDownloadAttachment" CssClass="btn btn-success" runat="server" Text="Download"/>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><!--End of Modal-->
                                     <div class="col-lg-8 col-lg-offset-3">
                                         <asp:Button ID="btnRemoveAttachment" CssClass="btn btn-danger" runat="server" Text="Remove File"/>
                                         <asp:Button ID="btnUploadAttachment" CssClass="btn btn-primary" runat="server" Text="Upload File"/>
@@ -381,7 +382,7 @@
                             </form>   
                         </div>
                     </div>
-            </div>
-        </div><!--/.col-md-12-->
-    </div>
+        </div>
+    </div><!--/.col-md-12-->
+</div>
 </asp:Content>

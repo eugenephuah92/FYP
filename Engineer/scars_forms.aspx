@@ -1,7 +1,7 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Home" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/scars_forms.aspx.cs" Inherits="Engineer_scars_forms" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - SCAR Forms" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/scars_forms.aspx.cs" Inherits="Engineer_scars_forms" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <div class="right-panel">
+<div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
             <h4>SCAR Request Form</h4>
@@ -11,11 +11,11 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                                <strong>Section 1</strong>
+                                Section 1
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse in">
+                    <div id="collapse1" class="panel-collapse collapse">
                         <div class="panel-body" style="padding-top:10pt">
                             <form class="form-horizontal pad10" action="#" method="post">
                                 <div class="form-group">
@@ -164,7 +164,7 @@
                                     <label for="lstDefectType" class="col-lg-3 control-label">Defect Type</label>
                                     <div class="col-lg-8">
                                         <asp:DropDownList CssClass="form-control" ID="lstDefectType" runat="server">
-                                            <asp:ListItem Selected="True">Please select defect type</asp:ListItem>
+                                            <asp:ListItem Selected="True">Please Select Defect Type</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <br /><br />
@@ -191,7 +191,7 @@
                                     </div>
                                     <br /><br />
                                 </div>
-                                <div class="form-group" style="padding-bottom:20pt">
+                                <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-3">
                                         <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" runat="server" Text="Save" />
                                     </div>
@@ -224,7 +224,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
-                                <strong>Section 2</strong>
+                                Section 2
                             </a>
                         </h4>
                     </div>
@@ -236,7 +236,7 @@
                                         <label for="lstRootCause" class="col-lg-3 control-label">Root Cause Option</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstRootCause" runat="server">
-                                                <asp:ListItem Selected="True">Please select root cause</asp:ListItem>
+                                                <asp:ListItem Selected="True">Please Select Root Cause</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse3">
-                                                <strong>S0 - Overall Summary </strong>(Max 1000 characters)
+                                                S0 - Overall Summary (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -269,7 +269,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                                                <strong>S1 - Problem Verification </strong>(Max 1000 characters)
+                                                S1 - Problem Verification (Max 1000 characters)
                                             </a>
                                                 <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -307,7 +307,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse5">
-                                                <strong>S2 - Containment Action </strong>(Max 1000 characters)
+                                                S2 - Containment Action (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -324,7 +324,7 @@
                                                 <div class="form-group">
                                                     <label for="cldS2ImplementationDate" class="col-lg-3 control-label">S22 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <asp:Calendar ID="cldS2ImplementationDate" runat="server" />
+                                                        <input type="date" class="form-control" ID="cldS2ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -342,7 +342,14 @@
                                                 <div class="form-group">
                                                     <label for="lstScreeningArea" class="col-lg-3 control-label">Screening Area</label>
                                                     <div class="col-lg-8">
-                                                        <asp:ListBox CssClass="form-control" ID="lstScreeningArea" SelectionMode="Multiple" runat="server" />
+                                                        <asp:ListBox CssClass="form-control" ID="lstScreeningArea" SelectionMode="Multiple" runat="server">
+                                                            <asp:ListItem>Production</asp:ListItem>
+                                                            <asp:ListItem>FGI</asp:ListItem>
+                                                            <asp:ListItem>Remaining units with customers</asp:ListItem>
+                                                            <asp:ListItem>N/A</asp:ListItem>
+                                                            <asp:ListItem>Units in Field (with other customers)</asp:ListItem>
+                                                        </asp:ListBox>
+                                                
                                                         <span class="help-block">Hold <em>shift</em> to select more than one option if necessary</span>
                                                     </div>
                                                 </div>
@@ -365,7 +372,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
-                                                <strong>S3 - Failure Analysis </strong>(Max 1000 characters)
+                                                S3 - Failure Analysis (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -377,7 +384,7 @@
                                                     <label for="lstRootCause" class="col-lg-3 control-label">S31 - Failure Analysis</label>
                                                     <div class="col-lg-8">
                                                         <asp:DropDownList CssClass="form-control" ID="lstFailureAnalysis" runat="server">
-                                                            <asp:ListItem Selected="True">Please select failure analysis</asp:ListItem>
+                                                            <asp:ListItem Selected="True">Please Select Failure Analysis</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
@@ -396,7 +403,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse7">
-                                                <strong>S4 - Root Cause </strong>(Max 1000 characters)
+                                                S4 - Root Cause (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -437,7 +444,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse8">
-                                                <strong>S5 - Corrective Action </strong>(Max 1000 characters)
+                                                S5 - Corrective Action (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -454,7 +461,7 @@
                                                 <div class="form-group">
                                                     <label for="cldS5ImplementationDate" class="col-lg-3 control-label">S52 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <asp:Calendar ID="cldS5ImplementationDate" runat="server" />
+                                                        <input type="date" class="form-control" ID="cldS5ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -482,7 +489,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse9">
-                                                <strong>S6 - Permanent Corrective Action </strong>(Max 1000 characters)
+                                                S6 - Permanent Corrective Action (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -499,7 +506,7 @@
                                                 <div class="form-group">
                                                     <label for="cldS6ImplementationDate" class="col-lg-3 control-label">S62 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <asp:Calendar ID="cldS6ImplementationDate" runat="server" />
+                                                        <input type="date" class="form-control" ID="cldS6ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -527,7 +534,7 @@
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse10">
-                                                <strong>S7 - Verify Effectiveness of Corrective Actions Results </strong>(Max 1000 characters)
+                                                S7 - Verify Effectiveness of Corrective Actions Results (Max 1000 characters)
                                             </a>
                                             <i class="indicator glyphicon glyphicon-chevron-down pull-right"></i>
                                         </h4>
@@ -544,7 +551,7 @@
                                                 <div class="form-group">
                                                     <label for="cldS7ImplementationDate" class="col-lg-3 control-label">S72 - Implementation Date (Start of Monitoring)</label>
                                                     <div class="col-lg-8">
-                                                        <asp:Calendar ID="cldS7ImplementationDate" runat="server" />
+                                                        <input type="date" class="form-control" ID="cldS7ImplementationDate" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -578,10 +585,10 @@
 
                                 <form class="form-horizontal pad10" action="#" method="post">
                                     <div class="form-group">
-                                        <label for="lstDefectModes" class="col-lg-3 control-label">Defect Modes</label>
+                                        <label for="lstDefectMode" class="col-lg-3 control-label">Defect Mode</label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList CssClass="form-control" ID="lstDefectModes" runat="server">
-                                                <asp:ListItem Selected="True">Please select defect modes</asp:ListItem>
+                                            <asp:DropDownList CssClass="form-control" ID="lstDefectMode" runat="server">
+                                                <asp:ListItem Selected="True">Please Select Defect Mode</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -606,32 +613,33 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">Select Respective WCM and QM</h4>
+                                                                <h4 class="modal-title">Select Respective WCM and QM</h4>
                                                             </div>
-                                                            <div class="modal-body">
+                                                            <div class="modal-body" style="padding-top:30pt">
                                                                 <div class="form-group">
-                                                                    <label for="WCM" class="col-lg-4 control-label"><strong>Work Cell Manager:</strong></label>
+                                                                    <label for="txtWCM" class="col-lg-4 control-label"><strong>Work Cell Manager</strong></label>
                                                                     <div class="col-lg-7">
-                                                                        <select class="form-control" id="WCM">
-                                                                            <option selected>Please select respective WCM</option>
-                                                                            <option>Eugene Phuah</option>
-                                                                            <option>Lee Boon Chung</option>
-                                                                        </select>
+                                                                        <asp:DropDownList ID="lstWCM" CssClass="form-control" runat="server">
+                                                                            <asp:ListItem>Please Select Respective WCM</asp:ListItem>
+                                                                            <asp:ListItem>Eugene Phuah</asp:ListItem>
+                                                                            <asp:ListItem>Lee Boon Chung</asp:ListItem>
+                                                                        </asp:DropDownList>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="QM" class="col-lg-4 control-label"><strong>Quality Manager:</strong></label>
+                                                                    <label for="txtQM" class="col-lg-4 control-label"><strong>Quality Manager</strong></label>
                                                                     <div class="col-lg-7">
-                                                                        <select class="form-control" id="QM">
-                                                                            <option selected>Please select respective QM</option>
-                                                                            <option>Wee Ai Leng</option>
-                                                                            <option>Evon Tan</option>
-                                                                        </select>
+                                                                        <asp:DropDownList ID="lstQM" CssClass="form-control" runat="server">
+                                                                            <asp:ListItem>Please Select Respective QM</asp:ListItem>
+                                                                            <asp:ListItem>Evon Tan</asp:ListItem>
+                                                                            <asp:ListItem>Wee Ai Leng</asp:ListItem>
+                                                                        </asp:DropDownList>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success">Submit</button>
+                                                                <asp:Button ID="btnSave" CssClass="btn btn-primary" Text="Save" runat="server" />
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -662,8 +670,6 @@
                 </div><!--End of Section 2-->
             </div>
         </div><!--/.col-md-12-->
-
-
     </div>
 </div>
 </asp:Content>

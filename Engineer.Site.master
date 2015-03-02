@@ -61,8 +61,8 @@
                     <ul class="nav nav-pills nav-stacked nav-vertical ">
 
                         <li <% if (GetPageName.Value == "home") Response.Write("class=\"nav-active\"");%>><a href="home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                        <li <% if (GetPageName.Value == "scars_forms") Response.Write("class=\"nav-active\"");%>><a href="scars_forms.aspx"><i class="fa fa-file"></i>&nbsp;SCARS Response &amp; Request Forms</a></li>
-                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-edit"></i> Reports<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "scars_forms") Response.Write("class=\"nav-active\"");%>><a href="scars_forms.aspx"><i class="fa fa-edit"></i>&nbsp;SCAR Request &amp; Response Forms</a></li>
+                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-link"></i> Reports<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                     	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>
                                 <li><a href="reports_Q2.aspx">2nd Quadrant Report (Q2)</a></li>
@@ -73,11 +73,11 @@
                                 <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "total_scars") Response.Write("class=\"nav-active\"");%>><a href="total_scars.aspx"><i class="fa fa-dashboard"></i>&nbsp;Total SCARS</a></li>
-                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-dashboard"></i>&nbsp;SCAR Log</a></li>
-                        <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-dashboard"></i>&nbsp;View Corrective / Preventive Actions</a></li>
-                        <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-dashboard"></i>&nbsp;View Defect Modes</a></li>
-                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-dashboard"></i>&nbsp;Change Password</a></li>
+                        <li <% if (GetPageName.Value == "total_scars") Response.Write("class=\"nav-active\"");%>><a href="total_scars.aspx"><i class="fa fa-file"></i>&nbsp;Total SCAR</a></li>
+                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-file"></i>&nbsp;SCAR Log</a></li>
+                        <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-file"></i>&nbsp;View Corrective / Preventive Actions</a></li>
+                        <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-file"></i>&nbsp;View Defect Modes</a></li>
+                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                     </ul>
                 </div>
 

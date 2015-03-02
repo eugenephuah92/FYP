@@ -8,7 +8,7 @@
                 <!--Section 1-->
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        SCAR Details for #100001
+                        SCAR Details for S-ABCDE-181988
                     </div>
                         <div class="panel-body">
                             <table class="table table-condensed">
@@ -20,7 +20,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Car No:</th>
-                                        <td>P-SOQAP-133772</td>
+                                        <td>S-ABCDE-181988</td>
                                     </tr>
                                     <tr>
                                         <th>Car Revision:</th>
@@ -322,12 +322,14 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <p style="text-align:center;"><asp:Button ID="btnReopenSCAR" runat="server" CssClass="btn btn-success" Text="Reopen SCAR"/></p>
-                            <br />
-                               
+                            <div class="form-group">
+                                <div class="col-lg-10" style="text-align:center">
+                                    <asp:Button ID="btnReopenSCAR" runat="server" CssClass="btn btn-success" Text="Reopen SCAR"/>
+                                </div>
+                            </div>                               
                         </div>
-                    </div>
-            </div>
-        </div><!--/.col-md-12-->
-    </div>
+                </div>
+        </div>
+    </div><!--/.col-md-12-->
+</div>
 </asp:Content>

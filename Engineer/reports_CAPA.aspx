@@ -1,28 +1,27 @@
 ﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/reports_CAPA.aspx.cs" Inherits="Engineer_reports_CAPA" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <div class="right-panel">
+<div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    Reports - Corrective Action / Preventive Action
+                    Report - Corrective Action / Preventive Action
                 </div>
                 <div class="panel-body">
                 	<div class="col-md-6">
-                	<p style="padding-top:10pt"> | <a href="#">Show 10 records</a> | <a href="#">Show 50 records</a> | 
-                    </div>
-                    	
+                	    <p style="padding-top:10pt"> | <a href="#">Show 10 records</a> | <a href="#">Show 50 records</a> | 
+                    </div>                 	
                             <div class="row">
                                 <div class="col-md-3" style="padding-top:10pt">
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server" >
-                                          <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
+                                        <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-md-1" style="padding-top:10pt">
                                     <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Search" runat="server" />
                             	</div>
+
                                 <!-- Advanced Search -->
                                 <div class="panel-group" id="accordion" role="tablist">
                                     <div class="col-md-6 pull-right">
@@ -72,8 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                    
+                        </p>                    
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
@@ -89,24 +87,25 @@
                                         </thead>
     									<tbody>
                                         	<tr>
-                                                <td></td>
+                                                <td>E5071C</td>
+                                                <td>Carnelian</td>
+                                                <td>CTD</td>
+                                                <td>ABC</td>
+                                                <td>P-SOQANP-140916</td>
                                         	</tr>                   
                                         </tbody>
   									</table>
                                 </div>
                             </div>                          
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-10" style="text-align:center">
                                     <asp:button ID="btnExport" CssClass="btn btn-success" Text="Export" runat="server" />
                                     <asp:button ID="btnPrint" CssClass="btn btn-success" Text="Print" runat="server" />
                                 </div>
                             </div>
-
                 </div>
-
             </div>
-
         </div><!--/.col-md-12-->
-        </div>
-        </div>
+    </div>
+</div>
 </asp:Content>

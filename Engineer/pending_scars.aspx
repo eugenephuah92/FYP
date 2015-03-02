@@ -1,22 +1,21 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/pending_scars.aspx.cs" Inherits="Engineer_pending_scars" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/total_scars.aspx.cs" Inherits="Engineer_total_scars" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <div class="right-panel">
+<div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Pending SCAR
                 </div>
                 <div class="panel-body">
                 	<div class="col-md-6">
-                	<p style="padding-top:10pt"> | <asp:HyperLink runat="server" ID="show10records" Text="Show 10 records" Target="_self" NavigateUrl="#" /> | <asp:HyperLink runat="server" ID="HyperLink1" Text="Show 50 records" Target="_self" NavigateUrl="#" /> | 
+                	    <p style="padding-top:10pt"> | <asp:HyperLink runat="server" ID="show10records" Text="Show 10 records" Target="_self" NavigateUrl="#" /> | <asp:HyperLink runat="server" ID="HyperLink1" Text="Show 50 records" Target="_self" NavigateUrl="#" /> | 
                     </div>
                             <div class="row">
                                 <div class="col-md-3"  style="padding-top:10pt">
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">  
-                                        <asp:ListItem Selected="True">Please select...</asp:ListItem>
+                                        <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
                                     </asp:DropDownList>
                             	</div>
                                 <div class="col-md-3"  style="padding-top:10pt">
@@ -24,7 +23,7 @@
                                         <asp:TextBox CssClass="form-control" ID="searchTxt" runat="server" placeholder="Search For..." />
                                         <span class="input-group-btn">
                                             <asp:LinkButton CssClass="btn btn-default" ID="btnSearch" runat="server">
-                                                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                             </asp:LinkButton>
                                         </span>
                                     </div>
@@ -35,7 +34,7 @@
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:25pt; padding-right:30pt; padding-top:15pt; padding-bottom:15pt">
                                 	<!-- Table -->
-  									<table class="table">
+  									<table class="table table-hover">
                                     	<thead>
                                         	<tr>
                                                 <th>CAR Number</th>
@@ -86,5 +85,4 @@
         </div> <!--/.col-md-12-->
     </div>
 </div>
-
 </asp:Content>

@@ -2,16 +2,14 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Home Page for engineers: Displays summary -->
-    <div class="right-panel">
+<div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Summary
                 </div>
-                    <div class="panel-body">
-                        
+                    <div class="panel-body">                        
                             <div class="form-group">
                                 <div class="col-lg-11" style="padding-left:100pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
@@ -37,7 +35,6 @@
   									</table>
                                 </div>
                             </div> 
-                    
                     </div>
             </div>
         </div><!--/.col-md-12-->

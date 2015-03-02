@@ -1,16 +1,15 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Request" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/8Drequest.aspx.cs" Inherits="Manager_8Drequest" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval Request" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/8Drequest.aspx.cs" Inherits="Manager_8Drequest" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <!-- 8D Request Page for managers: Displays existing 8D requests from Engineers-->
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     8D Approval Requests
                 </div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -68,13 +67,10 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>         
+                        </nav>         
                     </div>
-
             </div>
         </div><!--/.col-md-12-->
-
-
     </div>
 </div>
 </asp:Content>

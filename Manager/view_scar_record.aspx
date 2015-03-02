@@ -8,7 +8,7 @@
                 <!--Section 1-->
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        SCAR Details for #100001
+                        SCAR Details for P-SOQAP-133772
                     </div>
                         <div class="panel-body">
                             <table class="table table-condensed">
@@ -326,7 +326,7 @@
                                
                         </div>
                     </div>
-            </div>
-        </div><!--/.col-md-12-->
-    </div>
+        </div>
+    </div><!--/.col-md-12-->
+</div>
 </asp:Content>

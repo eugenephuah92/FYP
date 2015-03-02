@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Add New Escalation / Reminder
+                            Add New Defect Modes
                         </div>
                         <div class="panel-body" style="padding-top:10pt">
                             <form class="form-horizontal pad10" action="#" method="post">
@@ -72,5 +72,5 @@
                     </div>
                 </div><!--/.col-md-12-->
             </div>
-        </div>
+</div>
 </asp:Content>

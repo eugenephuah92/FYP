@@ -5,28 +5,27 @@
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Manual Escalation
                 </div>
                 <div class="panel-body">
                 	<div class="col-md-6">
-                	<p style="padding-top:10pt"> | <a href="#">Show 10 records</a> | <a href="#">Show 50 records</a> | 
+                	    <p style="padding-top:10pt"> | <a href="#">Show 10 records</a> | <a href="#">Show 50 records</a> | 
                     </div>
                     	<form action="#" method="post">
                             <div class="row">
-                                <div class="col-md-3"  style="padding-top:10pt"> 
+                                <div class="col-md-3" style="padding-top:10pt"> 
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">
                                         <asp:ListItem>Please Select Filter</asp:ListItem>
                                     </asp:DropDownList> 
                             	</div>
-                                <div class="col-md-3"  style="padding-top:10pt">
+                                <div class="col-md-3" style="padding-top:10pt">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control" ID="txtSearch" placeholder="Search For" runat="server" />
                                         <span class="input-group-btn">
                                             <asp:LinkButton CssClass="btn btn-default" ID="btnSearch" runat="server">
-                                                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                             </asp:LinkButton>
                                         </span>
                                     </div>
@@ -81,13 +80,13 @@
                                 </div>
                             </div>
                         </form>
-                    </p>
+                        </p>
                     
                     <form class="form-horizontal pad10" action="#" method="post">
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
-  									<table class="table">
+  									<table class="table table-hover">
                                     	<thead>
                                         	<tr>
                                                 <th style="padding-left:30pt">CAR Number</th>
@@ -100,32 +99,32 @@
                                         	<tr>
                                                 <td style="padding-left:30pt">P-SOQANP-140916</td>
                                                 <td style="padding-left:30pt">
-                                                	<a href="#" data-toggle="modal" data-target="#myModalName" aria-labelledby="myModalLabelName" aria-hidden="true" style="text-decoration:none; color:#000;">Doe</a>
+                                                	<a href="#" data-toggle="modal" data-target="#myModalName" aria-labelledby="myModalLabelName" aria-hidden="true">Doe</a>
                                                     
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="myModalName" tabindex="-1" role="dialog" aria-labelledby="myModalLabelName" aria-hidden="true" style="padding-top:100pt">
-                                                      <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                          <div class="modal-header" style="padding-top:15pt">
-                                                          	<strong>Assign New Quality Engineer</strong>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <br>
-                                                          </div>
-                                                          <div class="modal-body" style="padding-top:30pt">
-                                                            <div class="form-group">
-                                                                
-                                                                <label for="lstQE" class="col-lg-4 control-label" style="padding-top:20pt">New QE</label>
-                                                                <div class="col-lg-6" style="padding-top:15pt">
-                                                                    <asp:DropDownList ID="lstQE" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem>Please Select QE</asp:ListItem>
-                                                                    </asp:DropDownList>
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Assign New Quality Engineer</h4>
                                                                 </div>
-                                                          	</div>
-                                                          </div>
-                                                          <div class="modal-footer">
-                                                              <asp:button ID="btnChangeQE" CssClass="btn btn-success" Text="Change QE" runat="server" /> 
-                                                          </div>
+                                                                <div class="modal-body" style="padding-top:30pt">
+                                                                    <div class="form-group">
+                                                                        <label for="lstQE" class="col-lg-4 control-label">New Quality Engineer</label>
+                                                                        <div class="col-lg-7">
+                                                                            <asp:DropDownList ID="lstQE" runat="server" CssClass="form-control">
+                                                                                <asp:ListItem>Please Select QE</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <asp:Button ID="btnChangeQE" CssClass="btn btn-primary" Text="Save Change" runat="server" />
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                      </div>
                                                     </div>
                                                 </td>
                                                 <td style="padding-left:30pt">
@@ -133,62 +132,59 @@
                                                     
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top:100pt">
-                                                      <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                          <div class="modal-header" style="padding-top:15pt">
-                                                          	<strong>Set New Escalation Level</strong>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> <br>
-                                                          </div>
-                                                          <div class="modal-body" style="padding-top:30pt">
-                                                            <div class="form-group">
-                                                                
-                                                                <label for="lstEscalationLevel" class="col-lg-4 control-label" style="padding-top:20pt">Next Escalation Level</label>
-                                                                <div class="col-lg-6" style="padding-top:15pt">
-                                                                    <asp:DropDownList ID="lstEscalationLevel" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem>Please Select Escalation Level</asp:ListItem>
-                                                                    </asp:DropDownList>
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                          	        <h4 class="modal-title">New Escalation Level</h4>                        
                                                                 </div>
-                                                          	</div>
-                                                          </div>
-                                                          <div class="modal-footer">
-                                                            <asp:button ID="btnChangeEscLevel" CssClass="btn btn-success" Text="Change Escalation Level" runat="server" /> 
-                                                          </div>
+                                                                <div class="modal-body" style="padding-top:30pt">
+                                                                    <div class="form-group">                                                            
+                                                                        <label for="lstEscalationLevel" class="col-lg-4 control-label">New Escalation Level</label>
+                                                                        <div class="col-lg-7">
+                                                                            <asp:DropDownList ID="lstEscalationLevel" runat="server" CssClass="form-control">
+                                                                                <asp:ListItem>Please Select Escalation Level</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </div>
+                                                          	        </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <asp:button ID="btnChangeEscLevel" CssClass="btn btn-primary" Text="Save Change" runat="server" /> 
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                      </div>
                                                     </div>
                                                 </td>
                                                 <td style="padding-left:30pt">4</td>
                                           	</tr>
-                            </tbody>
-                            </table>
-                                          	
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                      	
                     </form>
                     <nav style="padding-right:30pt">
-                                <ul class="pagination pull-right">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>         
+                        <ul class="pagination pull-right">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                            </li>
+                        </ul>
+                    </nav>         
                 </div>
-
             </div>
-
         </div><!--/.col-md-12-->
-
-
     </div>
 </div>
 </asp:Content>

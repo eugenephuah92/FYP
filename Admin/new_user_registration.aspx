@@ -34,7 +34,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <br />
                                         <asp:Button CssClass="btn btn-success" ID="btnCreateNewUser" runat="server" Text="Create New User" />
                                     </div>
                                 </div>
@@ -43,5 +42,5 @@
                     </div>
                 </div><!--/.col-md-12-->
             </div>
-        </div>
+</div>
 </asp:Content>

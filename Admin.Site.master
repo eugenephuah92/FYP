@@ -61,7 +61,7 @@
                     <ul class="nav nav-pills nav-stacked nav-vertical ">
 
                         <li <% if (GetPageName.Value == "home") Response.Write("class=\"nav-active\"");%>><a href="home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                        <li <% if (GetPageName.Value == "add_new_escalation_reminder" || GetPageName.Value == "assign_qe_to_qel_qm" || GetPageName.Value == "manual_escalation") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i> TAT Triggering &amp; Escalation<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "add_new_escalation_reminder" || GetPageName.Value == "assign_qe_to_qel_qm" || GetPageName.Value == "manual_escalation") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>&nbsp;TAT Triggering &amp; Escalation<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                                 <li><a href="#"  class="nav-parent">Manage Triggering &amp; Escalation Levels <i class="fa fa-sort-down subm"></i></a>
                                     <ul class="children">
@@ -73,27 +73,27 @@
                                 <li><a href="manual_escalation.aspx">Manual Escalation</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "add_new_defect_modes" || GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>Defect Modes<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "add_new_defect_modes" || GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>&nbsp;Defect Modes<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                                 <li><a href="add_new_defect_modes.aspx">Add New Defect Modes</a></li>
                                 <li><a href="view_defect_modes.aspx">View Defect Modes</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "add_new_corrective_action" || GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>Corrective / Preventive Actions<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "add_new_corrective_action" || GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>&nbsp;Corrective / Preventive Actions<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                                 <li><a href="add_new_corrective_action.aspx">Add New Corrective Action</a></li>
                                 <li><a href="view_corrective_action.aspx">View Corrective Action</a></li>
                             </ul>
                         </li>
                         <li <% if (GetPageName.Value == "admin_form_elements") Response.Write("class=\"nav-active\"");%>><a href="admin_form_elements.aspx"><i class="fa fa-edit"></i>&nbsp;Manage SCAR Form Elements</a></li>
-                        <li <% if (GetPageName.Value == "change_password" || GetPageName.Value == "new_user_registration" || GetPageName.Value == "manage_user_accounts") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>Account Management<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "change_password" || GetPageName.Value == "new_user_registration" || GetPageName.Value == "manage_user_accounts") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-edit"></i>&nbsp;Account Management<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                                 <li><a href="change_password.aspx">Change Password</a></li>
                                 <li><a href="new_user_registration.aspx">New User Registration</a></li>
                                 <li><a href="manage_user_accounts.aspx">Manage User Accounts</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-home"></i>&nbsp;SCAR Log</a></li>
+                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-file"></i>&nbsp;SCAR Log</a></li>
                     </ul>
                 </div>
 

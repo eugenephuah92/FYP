@@ -68,7 +68,7 @@
                                 <li><a href="scar_log.aspx">SCAR Log</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-edit"></i> Reports<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-link"></i> Reports<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                     	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>
                                 <li><a href="reports_Q2.aspx">2nd Quadrant Report (Q2)</a></li>
@@ -79,9 +79,9 @@
                                 <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "pending_open_items") Response.Write("class=\"nav-active\"");%>><a href="pending_open_items.aspx"><i class="fa fa-edit"></i>&nbsp;Track Open Action Items</a></li>
-                        <li <% if (GetPageName.Value == "scar_record") Response.Write("class=\"nav-active\"");%>><a href="scar_record.aspx"><i class="fa fa-dashboard"></i>&nbsp;Total SCARS</a></li>
-                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-dashboard"></i>&nbsp;Change Password</a></li>
+                        <li <% if (GetPageName.Value == "pending_open_items") Response.Write("class=\"nav-active\"");%>><a href="pending_open_items.aspx"><i class="fa fa-file"></i>&nbsp;Track Open Action Items</a></li>
+                        <li <% if (GetPageName.Value == "scar_record") Response.Write("class=\"nav-active\"");%>><a href="scar_record.aspx"><i class="fa fa-file"></i>&nbsp;Total SCAR</a></li>
+                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
 
                     </ul>
                 </div>

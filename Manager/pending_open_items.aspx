@@ -5,12 +5,11 @@
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Pending Open Action Items
                 </div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                         <table class="table">
                             <thead>
                             <tr>
@@ -97,7 +96,7 @@
                         </table>
                         <div class="form-group" style="text-align:center">
                             <div>
-                                <asp:Button CssClass="btn btn-primary" Text="Export" runat="server" />
+                                <asp:Button CssClass="btn btn-success" Text="Export" runat="server" />
                                 <asp:Button CssClass="btn btn-success" Text="Print" runat="server" />
                             </div>
                         </div>
@@ -123,8 +122,6 @@
                     </div>
             </div>
         </div><!--/.col-md-12-->
-
-
     </div>
 </div>
 </asp:Content>
