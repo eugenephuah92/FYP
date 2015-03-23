@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - View Corrective / Preventive Actions" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" CodeFile="~/Engineer/view_corrective_action.aspx.cs" Inherits="Engineer_view_corrective_actions" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - View Corrective / Preventive Actions" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_view_corrective_actions" Codebehind="~/Engineer/view_corrective_action.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">

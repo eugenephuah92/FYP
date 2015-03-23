@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - View SCAR Record" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/view_scar_record.aspx.cs" Inherits="Manager_view_scar_record" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - View SCAR Record" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_view_scar_record" Codebehind="~/Manager/view_scar_record.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- View individual SCAR Record for managers: Displays details from a particular SCAR Record-->

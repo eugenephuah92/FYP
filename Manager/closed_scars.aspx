@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Closed SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/closed_scars.aspx.cs" Inherits="Manager_closed_scars" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Closed SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_closed_scars" Codebehind="~/Manager/closed_scars.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">

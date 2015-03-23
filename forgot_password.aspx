@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="forgot_password.aspx.cs" Inherits="forgot_password" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="forgot_password" Codebehind="forgot_password.aspx.cs" %>
 
 <!DOCTYPE html>
 <html>

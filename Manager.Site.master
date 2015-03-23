@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Manager.Site.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="Manager_SiteMaster" Codebehind="Manager.Site.master.cs" %>
 <%@ Register TagPrefix="apress" TagName="navbar" Src="~/navbar.ascx" %>
 
 <!-- Site Master page for Manager -->

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval Request" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/8Drequest.aspx.cs" Inherits="Manager_8Drequest" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval Request" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_8Drequest" Codebehind="~/Manager/8Drequest.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <!-- 8D Request Page for managers: Displays existing 8D requests from Engineers-->

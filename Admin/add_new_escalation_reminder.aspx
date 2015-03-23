@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Escalation / Reminder" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/add_new_escalation_reminder.aspx.cs" Inherits="Admin_add_new_escalation_reminder" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Escalation / Reminder" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_add_new_escalation_reminder" Codebehind="~/Admin/add_new_escalation_reminder.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Add New Escalation / Reminder Page for admin: Allows admin to create a new escalation level and reminder -->

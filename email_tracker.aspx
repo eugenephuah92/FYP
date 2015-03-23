@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Admin.Site.master" AutoEventWireup="true" CodeFile="email_tracker.aspx.cs" Inherits="email_tracker" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Admin.Site.master" AutoEventWireup="true" Inherits="email_tracker" Codebehind="email_tracker.aspx.cs" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="right-panel">

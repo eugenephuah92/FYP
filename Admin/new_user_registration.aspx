@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - New User Registration" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/new_user_registration.aspx.cs" Inherits="Admin_new_user_registration" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - New User Registration" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_new_user_registration" Codebehind="~/Admin/new_user_registration.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- New User Registration for admin: Allows Admin to create new users -->

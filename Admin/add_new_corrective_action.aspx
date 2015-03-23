@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Corrective Action" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/add_new_corrective_action.aspx.cs" Inherits="Admin_add_new_corrective_action" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Corrective Action" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_add_new_corrective_action" Codebehind="~/Admin/add_new_corrective_action.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Add New Corrective Action Page for admin: Allows Admin to add new corrective action -->

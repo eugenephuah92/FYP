@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Manage User Account" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/manage_user_accounts.aspx.cs" Inherits="Admin_manage_user_accounts" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Manage User Account" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_manage_user_accounts" Codebehind="~/Admin/manage_user_accounts.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">

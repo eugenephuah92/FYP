@@ -5498,6 +5498,18 @@
             <param name="headers">The headers to add.</param>
             <param name="response">The <see cref="T:System.Net.HttpListenerResponse"/> instance to set the appropriate values to.</param>
         </member>
+        <member name="M:DotNetOpenAuth.Messaging.MessagingUtilities.CopyTo(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Copies the contents of one stream to another.
+            </summary>
+            <param name="copyFrom">The stream to copy from, at the position where copying should begin.</param>
+            <param name="copyTo">The stream to copy to, at the position where bytes should be written.</param>
+            <returns>The total number of bytes copied.</returns>
+            <remarks>
+            Copying begins at the streams' current positions.
+            The positions are NOT reset after copying is complete.
+            </remarks>
+        </member>
         <member name="M:DotNetOpenAuth.Messaging.MessagingUtilities.CopyUpTo(System.IO.Stream,System.IO.Stream,System.Int32)">
             <summary>
             Copies the contents of one stream to another.

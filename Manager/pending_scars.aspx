@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/pending_scars.aspx.cs" Inherits="Manager_pending_scars" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_pending_scars" Codebehind="~/Manager/pending_scars.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Change Password" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/change_password.aspx.cs" Inherits="Admin_change_password" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Change Password" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_change_password" Codebehind="~/Admin/change_password.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Change Password for admin: Allows Admin to own change account password -->

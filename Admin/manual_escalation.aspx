@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Manual Escalation" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/manual_escalation.aspx.cs" Inherits="Admin_manual_escalation" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Manual Escalation" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_manual_escalation" Codebehind="~/Admin/manual_escalation.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Manual Escalation Page for admin: Allows admin to manually escalate a particular SCAR issue -->

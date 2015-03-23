@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending Open Items" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/pending_open_items.aspx.cs" Inherits="Manager_pending_open_items" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending Open Items" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_pending_open_items" Codebehind="~/Manager/pending_open_items.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Pending Open Items Page for managers: Displays the pending open items for tracking -->

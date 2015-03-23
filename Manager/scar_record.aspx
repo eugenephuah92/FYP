@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Total SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/scar_record.aspx.cs" Inherits="Manager_scar_record" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Total SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_scar_record" Codebehind="~/Manager/scar_record.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- SCAR Records Page for managers: Displays all SCAR Records based on criteria -->

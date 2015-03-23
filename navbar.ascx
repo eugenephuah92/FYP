@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="navbar.ascx.cs" Inherits="navbar" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="navbar" Codebehind="navbar.ascx.cs" %>
 
 <!-- Top Navigational Bar -->    
     <nav class="navbar navbar-default" role="navigation">

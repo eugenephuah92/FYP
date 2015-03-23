@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" CodeFile="~/Manager/8DApproval.aspx.cs" Inherits="Manager_8Dapproval" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_8Dapproval" Codebehind="~/Manager/8DApproval.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <!-- 8D Approval Page for managers: Allow Managers to view SCAR record, download attachments, approve or reject requests -->
