@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Change Password
+                            Change Passwor
                         </div>
                         <div class="panel-body" style="padding-top:10pt">
                             <form class="form-horizontal pad10" action="#" method="post">
