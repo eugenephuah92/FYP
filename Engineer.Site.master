@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="Engineer_SiteMaster" Codebehind="Engineer.Site.master.cs" %>
+<%@ Register TagPrefix="apress" TagName="navbar" Src="~/navbar.ascx" %>
+
+<!-- Site Master page for Engineer -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %></title>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/select2.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+        function format(icon) {
+            var originalOption = icon.element;
+            return '<i class="fa ' + $(originalOption).data('icon') + '"></i> ' + icon.text;
+        }
+
+        $(function () {
+            $('.select2').select2({
+                formatResult: format
+            });
+        });
+    </script>
+
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body class="clearfix">
+
+    <form id="Form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <%--Framework scripts--%>
+            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="Scripts/jquery-1.11.0.min.js" />
+            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="Scripts/bootstrap.min.js" />
+            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="Scripts/app.js" />
+            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="Scripts/select2.min.js" />
+            <%--Site scripts--%>
+            
+        </Scripts>
+    </asp:ScriptManager>
+
+    <!-- Top Navigational Bar -->
+    <apress:navbar id="navbar" runat="server" />
+
+    <!-- Arrow to close the panel -->
+    <a href="#" class="panel-close hidden-xs hidden-sm"><i class="fa fa-arrow-left"></i></a>
+
+    <div class="main">
+        <!-- Sidebar -->
+        <asp:HiddenField ID="GetPageName" runat="server" />
+        <div class="left-panel hidden-xs hidden-sm clearfix">
+
+                <div class="left-panel-inner">
+                    <ul class="nav nav-pills nav-stacked nav-vertical ">
+
+                        <li <% if (GetPageName.Value == "home") Response.Write("class=\"nav-active\"");%>><a href="home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                        <li <% if (GetPageName.Value == "scars_forms") Response.Write("class=\"nav-active\"");%>><a href="scars_forms.aspx"><i class="fa fa-edit"></i>&nbsp;SCAR Request &amp; Response Forms</a></li>
+                        <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-link"></i> Reports<i class="fa fa-sort-down subm"></i></a>
+                            <ul class="children">
+                    	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>
+                                <li><a href="reports_Q2.aspx">2nd Quadrant Report (Q2)</a></li>
+                                <li><a href="reports_Q3.aspx">3rd Quadrant Report (Q3)</a></li>
+                                <li><a href="reports_Q4.aspx">4th Quadrant Report (Q4)</a></li>
+                                <li><a href="reports_CAPA.aspx">Corrective Action / Preventive Action</a></li>
+                                <li><a href="reports_TAT_frequency.aspx">Frequency of Cases of TAT Triggering</a></li>
+                                <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
+                            </ul>
+                        </li>
+                        <li <% if (GetPageName.Value == "total_scars") Response.Write("class=\"nav-active\"");%>><a href="total_scars.aspx"><i class="fa fa-file"></i>&nbsp;Total SCAR</a></li>
+                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-file"></i>&nbsp;SCAR Log</a></li>
+                        <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-file"></i>&nbsp;View Corrective / Preventive Actions</a></li>
+                        <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-file"></i>&nbsp;View Defect Modes</a></li>
+                        <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
+                    </ul>
+                </div>
+
+        </div>
+        <!-- Main Content -->
+        <div id="body">
+            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+            <section class="content-wrapper main-content clear-fix">
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </section>
+        </div>
+    </div>
+    </form>
+
+</body>
+    
+</html>

@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Jabil", "..\..\WebSites\Jabil\", "{F293B244-802D-4137-B20E-60342514179F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/Jabil"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\WebSites\Jabil\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Jabil\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Jabil"
+		Release.AspNetCompiler.PhysicalPath = "..\..\WebSites\Jabil\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Jabil\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "20771"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FYP", "http://localhost:28599", "{4C3E6BC9-D613-4AD1-9423-FC8DC3C2F075}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_28599"
+		Debug.AspNetCompiler.PhysicalPath = "..\FYP\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_28599\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_28599"
+		Release.AspNetCompiler.PhysicalPath = "..\FYP\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_28599\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\FYP\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F293B244-802D-4137-B20E-60342514179F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F293B244-802D-4137-B20E-60342514179F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3E6BC9-D613-4AD1-9423-FC8DC3C2F075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3E6BC9-D613-4AD1-9423-FC8DC3C2F075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
