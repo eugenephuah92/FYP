@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Admin.Site.master" AutoEventWireup="true" Inherits="email_tracker" Codebehind="email_tracker.aspx.cs" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Admin.Site.master" AutoEventWireup="true" CodeFile="email_tracker.aspx.cs" Inherits="email_tracker" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="right-panel">
@@ -11,8 +11,8 @@
                     <div class="panel-body">	
                         <div class="form-group">
                             <div class="col-lg-11">
-                                 <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="10000" />
-                                    <asp:Label ID="test" runat="server"/>
+                                 
+                                    <asp:Label ID="test" runat="server"/><br />
                                     <asp:Label ID="anotherLabel" runat="server"/>
                                     <asp:GridView ID="gvEmails" runat="server" OnRowDataBound="OnRowDataBound" DataKeyNames="MessageNumber"
                                     AutoGenerateColumns="false" CssClass="table-hover">

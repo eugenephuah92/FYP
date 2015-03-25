@@ -9,7 +9,8 @@ using OpenPop.Pop3;
 using OpenPop.Mime;
 using System.IO;
 using System.Threading;
-
+using System.Data.SqlClient;
+using System.Configuration;
 public partial class email_tracker : Page
 {
     protected List<Email> Emails
@@ -17,10 +18,10 @@ public partial class email_tracker : Page
         get { return (List<Email>)ViewState["Emails"]; }
         set { ViewState["Emails"] = value; }
     }
-    protected void Timer1_Tick(object sender, EventArgs e)
+    /*protected void Timer1_Tick(object sender, EventArgs e)
     {
         Read_Emails();
-    }
+    }*/
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -103,7 +104,7 @@ public partial class email_tracker : Page
         //test.Text = storeAttach[0];
         //test.Text += storeAttach[1];
         //test.Text = storeTitle[0];
-        
+
 
         string scarRequest = "Supplier Corrective Action Request";
         string scarNotification = "Supplier Corrective Action";
@@ -159,13 +160,15 @@ public partial class email_tracker : Page
                 {
                     //test.Text += tokens[jj];
                 }
-              
+
                 string carNo = tokens[0];
                 string revision = tokens[1];
                 string engineerName = tokens[2];
             }
         }
+        store_textfile_data(storeAttach);
         Session.Abandon();
+
     }
     protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -177,5 +180,91 @@ public partial class email_tracker : Page
             rptAttachments.DataBind();
         }
     }
-   
+
+    protected void store_textfile_data(string[] storeAttach)
+    {
+        SqlConnection con;
+        SqlDataReader reader;
+        con = new SqlConnection();
+        string DatabaseName = "AutoSCARConnectionString";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+
+        string emailbody = storeAttach[0];
+        bool checkString = false;
+        string[] tokensbody = emailbody.Split('\n');
+        string [] notepad_data = new string [25];
+        int count_data = 0;
+        for (int jj = 5; jj < 40; jj++)
+        {
+            if (tokensbody[jj].Contains(":"))
+            {
+                string[] element_data = tokensbody[jj].Split(':');
+                char last_char = tokensbody[jj][tokensbody[jj].Length - 2];
+                if (last_char == ' ')
+                {
+                    notepad_data[count_data] += "NA";
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+                else
+                {
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+                
+            }
+            else
+            {
+
+                if (System.Text.RegularExpressions.Regex.IsMatch(tokensbody[jj], @"\d\w"))
+                {
+                    count_data--;
+                    notepad_data[count_data] += tokensbody[jj];
+                    count_data++;
+                   
+                }
+            }
+        }
+
+          con.Open();
+        SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, car_no, 
+car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
+supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity,
+defect_type, non_conformity_reported, reject_reason, expected_date_close) VALUES (@scar_stage, @scar_type, @scar_status, @car_no, @car_revision, @car_type, @pre_alert,
+@related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description,
+@business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close)", con);
+
+        DateTime issued_date = Convert.ToDateTime(notepad_data[10]);
+        DateTime expected_date_close = Convert.ToDateTime(notepad_data[22]);
+        addSite.Parameters.AddWithValue("@scar_stage", "New SCAR");
+        addSite.Parameters.AddWithValue("@scar_type", "SCAR Type 2");
+        addSite.Parameters.AddWithValue("@scar_status", "Pending");
+        addSite.Parameters.AddWithValue("@car_no", notepad_data[0]);
+        addSite.Parameters.AddWithValue("@car_revision", notepad_data[1]);
+        addSite.Parameters.AddWithValue("@car_type", notepad_data[2]);
+        addSite.Parameters.AddWithValue("@pre_alert", notepad_data[3]);
+        addSite.Parameters.AddWithValue("@related_car_no", notepad_data[4]);
+        addSite.Parameters.AddWithValue("@related_car_ref", notepad_data[5]);
+        addSite.Parameters.AddWithValue("@originator", notepad_data[6]);
+        addSite.Parameters.AddWithValue("@recurrence", notepad_data[7]);
+        addSite.Parameters.AddWithValue("@supplier_contact", notepad_data[8]);
+        addSite.Parameters.AddWithValue("@supplier_email", notepad_data[9]);
+        addSite.Parameters.AddWithValue("@issued_date", issued_date);
+        addSite.Parameters.AddWithValue("@originator_dept", notepad_data[11]);
+        addSite.Parameters.AddWithValue("@originator_contact", notepad_data[12]);
+        addSite.Parameters.AddWithValue("@part_no", notepad_data[13]);
+        addSite.Parameters.AddWithValue("@part_description", notepad_data[14]);
+        addSite.Parameters.AddWithValue("@business_unit", notepad_data[15]);
+        addSite.Parameters.AddWithValue("@dept_pl", notepad_data[16]);
+        addSite.Parameters.AddWithValue("@commodity", notepad_data[17]);
+        addSite.Parameters.AddWithValue("@defect_quantity", Convert.ToInt16(notepad_data[18]));
+        addSite.Parameters.AddWithValue("@defect_type", notepad_data[19]);
+        addSite.Parameters.AddWithValue("@non_conformity_reported", notepad_data[20]);
+        addSite.Parameters.AddWithValue("@reject_reason", notepad_data[21]);
+        addSite.Parameters.AddWithValue("@expected_date_close", expected_date_close);
+            
+        addSite.ExecuteNonQuery();
+        con.Close();
+    }
+
 }
