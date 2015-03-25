@@ -21,6 +21,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtCarNo;
     
     /// <summary>
+    /// vldCarNo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldCarNo;
+    
+    /// <summary>
     /// txtCarRev control.
     /// </summary>
     /// <remarks>
@@ -28,6 +37,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtCarRev;
+    
+    /// <summary>
+    /// vldCarRev control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldCarRev;
     
     /// <summary>
     /// txtCarType control.
@@ -39,22 +57,31 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtCarType;
     
     /// <summary>
-    /// rdbPreAlertYes control.
+    /// vldCarType control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.RadioButton rdbPreAlertYes;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldCarType;
     
     /// <summary>
-    /// rdbPreAlertNo control.
+    /// rdbPreAlert control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.RadioButton rdbPreAlertNo;
+    protected global::System.Web.UI.WebControls.RadioButtonList rdbPreAlert;
+    
+    /// <summary>
+    /// vldPreAlert control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPreAlert;
     
     /// <summary>
     /// txtRelatedCarNo control.
@@ -66,6 +93,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtRelatedCarNo;
     
     /// <summary>
+    /// vldRelatedCarNo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldRelatedCarNo;
+    
+    /// <summary>
     /// txtRelatedCarRev control.
     /// </summary>
     /// <remarks>
@@ -73,6 +109,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtRelatedCarRev;
+    
+    /// <summary>
+    /// vldRelatedCarRev control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldRelatedCarRev;
     
     /// <summary>
     /// txtOriginator control.
@@ -84,6 +129,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtOriginator;
     
     /// <summary>
+    /// vldOriginator control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldOriginator;
+    
+    /// <summary>
     /// txtRecurrence control.
     /// </summary>
     /// <remarks>
@@ -91,6 +145,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtRecurrence;
+    
+    /// <summary>
+    /// vldRecurrence control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldRecurrence;
     
     /// <summary>
     /// txtSupplierContact control.
@@ -102,6 +165,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtSupplierContact;
     
     /// <summary>
+    /// vldSupplierContact control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldSupplierContact;
+    
+    /// <summary>
     /// txtSupplierEmail control.
     /// </summary>
     /// <remarks>
@@ -109,6 +181,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtSupplierEmail;
+    
+    /// <summary>
+    /// vldSupplierEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator vldSupplierEmail;
     
     /// <summary>
     /// cldIssuedDate control.
@@ -120,6 +201,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldIssuedDate;
     
     /// <summary>
+    /// vldcldIssuedDate control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldcldIssuedDate;
+    
+    /// <summary>
     /// txtOriginatorDept control.
     /// </summary>
     /// <remarks>
@@ -127,6 +217,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtOriginatorDept;
+    
+    /// <summary>
+    /// vldOriginatorDept control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldOriginatorDept;
     
     /// <summary>
     /// txtOriginatorContact control.
@@ -138,6 +237,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtOriginatorContact;
     
     /// <summary>
+    /// vldOriginatorContact control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldOriginatorContact;
+    
+    /// <summary>
     /// txtPartNo control.
     /// </summary>
     /// <remarks>
@@ -145,6 +253,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtPartNo;
+    
+    /// <summary>
+    /// vldPartNo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPartNo;
     
     /// <summary>
     /// txtPartDesc control.
@@ -156,6 +273,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtPartDesc;
     
     /// <summary>
+    /// vldPartDesc control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPartDesc;
+    
+    /// <summary>
     /// txtBusinessUnit control.
     /// </summary>
     /// <remarks>
@@ -163,6 +289,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtBusinessUnit;
+    
+    /// <summary>
+    /// vldBusinessUnit control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldBusinessUnit;
     
     /// <summary>
     /// txtDeptPL control.
@@ -174,6 +309,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtDeptPL;
     
     /// <summary>
+    /// vldDeptPL control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldDeptPL;
+    
+    /// <summary>
     /// txtCommodity control.
     /// </summary>
     /// <remarks>
@@ -181,6 +325,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtCommodity;
+    
+    /// <summary>
+    /// vldCommodity control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldCommodity;
     
     /// <summary>
     /// txtDefectQty control.
@@ -192,6 +345,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtDefectQty;
     
     /// <summary>
+    /// vldDefectQty control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldDefectQty;
+    
+    /// <summary>
     /// lstDefectType control.
     /// </summary>
     /// <remarks>
@@ -199,6 +361,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList lstDefectType;
+    
+    /// <summary>
+    /// vldDefectType control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldDefectType;
     
     /// <summary>
     /// txtNonConformity control.
@@ -210,6 +381,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtNonConformity;
     
     /// <summary>
+    /// vldNonConformity control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldNonConformity;
+    
+    /// <summary>
     /// txtRejectReason control.
     /// </summary>
     /// <remarks>
@@ -219,6 +399,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.TextBox txtRejectReason;
     
     /// <summary>
+    /// vldRejectReason control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldRejectReason;
+    
+    /// <summary>
     /// cldDateClose control.
     /// </summary>
     /// <remarks>
@@ -226,6 +415,15 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldDateClose;
+    
+    /// <summary>
+    /// vldDateClose control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldDateClose;
     
     /// <summary>
     /// btnSaveSec1 control.

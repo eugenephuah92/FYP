@@ -189,7 +189,7 @@ public partial class email_tracker : Page
         string DatabaseName = "AutoSCARConnectionString";
         con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
 
-        string emailbody = storeAttach[0];
+        string emailbody = storeAttach[1];
         bool checkString = false;
         string[] tokensbody = emailbody.Split('\n');
         string [] notepad_data = new string [25];

@@ -476,114 +476,133 @@
   <ItemGroup>
     <Compile Include="Admin.Site.master.cs">
       <DependentUpon>Admin.Site.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin.Site.master.designer.cs">
       <DependentUpon>Admin.Site.master</DependentUpon>
     </Compile>
     <Compile Include="Admin\add_new_corrective_action.aspx.cs">
       <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_new_corrective_action.aspx.designer.cs">
       <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\add_new_defect_modes.aspx.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_new_defect_modes.aspx.designer.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\add_new_escalation_reminder.aspx.cs">
       <DependentUpon>add_new_escalation_reminder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_new_escalation_reminder.aspx.designer.cs">
       <DependentUpon>add_new_escalation_reminder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\admin_form_elements.aspx.cs">
       <DependentUpon>admin_form_elements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\admin_form_elements.aspx.designer.cs">
       <DependentUpon>admin_form_elements.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\assign_qe_to_qel_qm.aspx.cs">
       <DependentUpon>assign_qe_to_qel_qm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\assign_qe_to_qel_qm.aspx.designer.cs">
       <DependentUpon>assign_qe_to_qel_qm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\change_password.aspx.designer.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\closed_scars.aspx.cs">
       <DependentUpon>closed_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\closed_scars.aspx.designer.cs">
       <DependentUpon>closed_scars.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\manage_user_accounts.aspx.cs">
       <DependentUpon>manage_user_accounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\manage_user_accounts.aspx.designer.cs">
       <DependentUpon>manage_user_accounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\manual_escalation.aspx.cs">
       <DependentUpon>manual_escalation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\manual_escalation.aspx.designer.cs">
       <DependentUpon>manual_escalation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\new_scars.aspx.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\new_scars.aspx.designer.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\new_user_registration.aspx.cs">
       <DependentUpon>new_user_registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\new_user_registration.aspx.designer.cs">
       <DependentUpon>new_user_registration.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\pending_scars.aspx.cs">
       <DependentUpon>pending_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\pending_scars.aspx.designer.cs">
       <DependentUpon>pending_scars.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\scar_log.aspx.cs">
       <DependentUpon>scar_log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\scar_log.aspx.designer.cs">
       <DependentUpon>scar_log.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\total_scars.aspx.cs">
       <DependentUpon>total_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\total_scars.aspx.designer.cs">
       <DependentUpon>total_scars.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\view_corrective_action.aspx.cs">
       <DependentUpon>view_corrective_action.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\view_corrective_action.aspx.designer.cs">
       <DependentUpon>view_corrective_action.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\view_defect_modes.aspx.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\view_defect_modes.aspx.designer.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\view_scar_record.aspx.cs">
       <DependentUpon>view_scar_record.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\view_scar_record.aspx.designer.cs">
       <DependentUpon>view_scar_record.aspx</DependentUpon>
@@ -708,133 +727,177 @@
     <Compile Include="Old_App_Code\Email.cs" />
     <Compile Include="email_tracker.aspx.cs">
       <DependentUpon>email_tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer.Site.master.cs">
       <DependentUpon>Engineer.Site.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\closed_scars.aspx.cs">
       <DependentUpon>closed_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\new_scars.aspx.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\pending_scars.aspx.cs">
       <DependentUpon>pending_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports.aspx.cs">
       <DependentUpon>reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_CAPA.aspx.cs">
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_Q1.aspx.cs">
       <DependentUpon>reports_Q1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_Q2.aspx.cs">
       <DependentUpon>reports_Q2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_Q3.aspx.cs">
       <DependentUpon>reports_Q3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_Q4.aspx.cs">
       <DependentUpon>reports_Q4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_TAT_duration.aspx.cs">
       <DependentUpon>reports_TAT_duration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\reports_TAT_frequency.aspx.cs">
       <DependentUpon>reports_TAT_frequency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\scars_forms.aspx.cs">
       <DependentUpon>scars_forms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\scar_log.aspx.cs">
       <DependentUpon>scar_log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\total_scars.aspx.cs">
       <DependentUpon>total_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\view_corrective_action.aspx.cs">
       <DependentUpon>view_corrective_action.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\view_defect_modes.aspx.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="forgot_password.aspx.cs">
       <DependentUpon>forgot_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager.Site.master.cs">
       <DependentUpon>Manager.Site.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\8Dapproval.aspx.cs">
       <DependentUpon>8Dapproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\8Drequest.aspx.cs">
       <DependentUpon>8Drequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\closed_scars.aspx.cs">
       <DependentUpon>closed_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\new_scars.aspx.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\pending_open_items.aspx.cs">
       <DependentUpon>pending_open_items.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\pending_scars.aspx.cs">
       <DependentUpon>pending_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports.aspx.cs">
       <DependentUpon>reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_CAPA.aspx.cs">
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_Q1.aspx.cs">
       <DependentUpon>reports_Q1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_Q2.aspx.cs">
       <DependentUpon>reports_Q2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_Q3.aspx.cs">
       <DependentUpon>reports_Q3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_Q4.aspx.cs">
       <DependentUpon>reports_Q4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_TAT_duration.aspx.cs">
       <DependentUpon>reports_TAT_duration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_TAT_frequency.aspx.cs">
       <DependentUpon>reports_TAT_frequency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\scar_log.aspx.cs">
       <DependentUpon>scar_log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\scar_record.aspx.cs">
       <DependentUpon>scar_record.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\view_scar_record.aspx.cs">
       <DependentUpon>view_scar_record.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="navbar.ascx.cs">
       <DependentUpon>navbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Old_App_Code\SCAR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1031,7 +1094,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>15121</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

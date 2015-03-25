@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - SCAR Forms" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_scars_forms" Codebehind="~/Engineer/scars_forms.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - SCAR Forms" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_scars_forms" Codebehind="~/Engineer/scars_forms.aspx.cs"  EnableEventValidation="false"%>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">
@@ -15,13 +15,14 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
+                    <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body" style="padding-top:10pt">
                             <form class="form-horizontal pad10" action="#" method="post">
                                 <div class="form-group">
                                     <label for="txtCarNo" class="col-lg-3 control-label">Car No</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarNo" placeholder="Car No" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldCarNo" ErrorMessage="You must enter the Car Number" runat="server" ControlToValidate="txtCarNo" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -29,6 +30,7 @@
                                     <label for="txtCarRev" class="col-lg-3 control-label">Car Revision</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarRev" placeholder="Car Revision" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldCarRev" ErrorMessage="You must enter the Car Revision" runat="server" ControlToValidate="txtCarRev" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -36,6 +38,7 @@
                                     <label for="txtCarType" class="col-lg-3 control-label">Car Type</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarType" placeholder="Car Type" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldCarType" ErrorMessage="You must enter the Car Type" runat="server" ControlToValidate="txtCarType" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -44,14 +47,14 @@
                                     <div class="col-lg-8">
                                         <div class="radio">
                                             <label>
-                                                <asp:RadioButton ID="rdbPreAlertYes" Text="Yes" GroupName="AlertRadio" runat="server" />  
+                                                <asp:RadioButtonList ID="rdbPreAlert" runat="server">  
+                                                    <asp:ListItem Value ="Yes">Yes</asp:ListItem>
+                                                    <asp:ListItem Value ="No">No</asp:ListItem>
+                                                </asp:RadioButtonList>
+                                            <asp:RequiredFieldValidator ID="vldPreAlert" ErrorMessage="You must select the Pre-Alert" runat="server" ControlToValidate="rdbPreAlert" ForeColor="red"/>
                                             </label>
                                         </div>
-                                        <div class="radio">
-                                            <label>
-                                                <asp:RadioButton ID="rdbPreAlertNo" Text="No" GroupName="AlertRadio" runat="server" />
-                                            </label>
-                                        </div>
+
                                     </div>
                                     <br /><br /><br />
                                 </div>
@@ -59,6 +62,7 @@
                                     <label for="txtRelatedCarNo" class="col-lg-3 control-label">Related Car No</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtRelatedCarNo" placeholder="Related Car No" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldRelatedCarNo" ErrorMessage="You must enter the Related Car Number" runat="server" ControlToValidate="txtRelatedCarNo" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -66,6 +70,7 @@
                                     <label for="txtRelatedCarRev" class="col-lg-3 control-label">Related Car Rev</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtRelatedCarRev" placeholder="Related Car Rev" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldRelatedCarRev" ErrorMessage="You must enter the Related Car Revision" runat="server" ControlToValidate="txtCarType" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -73,6 +78,7 @@
                                     <label for="txtOriginator" class="col-lg-3 control-label">Originator</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtOriginator" placeholder="Originator" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldOriginator" ErrorMessage="You must enter the Originator" runat="server" ControlToValidate="txtOriginator" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -80,6 +86,7 @@
                                     <label for="txtRecurrence" class="col-lg-3 control-label">Recurrence (Ref.No.)</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtRecurrence" placeholder="Recurrence (Ref.No.)" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldRecurrence" ErrorMessage="You must enter the Recurrence (Ref.No.)" runat="server" ControlToValidate="txtRecurrence" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -87,6 +94,7 @@
                                     <label for="txtSupplierContact" class="col-lg-3 control-label">Supplier Contact</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtSupplierContact" placeholder="SupplierContact" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldSupplierContact" ErrorMessage="You must enter the Supplier Contact" runat="server" ControlToValidate="txtSupplierContact" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -94,6 +102,7 @@
                                     <label for="txtSupplierEmail" class="col-lg-3 control-label">Supplier Email</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtSupplierEmail" placeholder="Supplier Email" runat="server" />
+                                        <asp:RegularExpressionValidator ID="vldSupplierEmail" ErrorMessage="This email is missing the @ symbol" runat="server" ValidationExpression=".+@.+" ControlToValidate="txtSupplierEmail" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -101,6 +110,7 @@
                                     <label for="cldIssuedDate" class="col-lg-3 control-label">Issued Date</label>
                                     <div class="col-lg-8">
 				                        <input type="date" class="form-control" ID="cldIssuedDate" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldcldIssuedDate" ErrorMessage="You must select the Issued Date" runat="server" ControlToValidate="cldIssuedDate" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -108,6 +118,7 @@
                                     <label for="txtOriginatorDept" class="col-lg-3 control-label">Originator Department</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtOriginatorDept" placeholder="Originator Department" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldOriginatorDept" ErrorMessage="You must enter the Originator Department" runat="server" ControlToValidate="txtOriginatorDept" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -115,6 +126,7 @@
                                     <label for="txtOriginatorContact" class="col-lg-3 control-label">Originator Contact</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtOriginatorContact" placeholder="Originator Contact" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldOriginatorContact" ErrorMessage="You must enter the Originator Contact" runat="server" ControlToValidate="txtOriginatorContact" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -122,6 +134,7 @@
                                     <label for="txtPartNo" class="col-lg-3 control-label">Part No</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtPartNo" placeholder="Part No." runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldPartNo" ErrorMessage="You must enter the  Part Number" runat="server" ControlToValidate="txtPartNo" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -129,6 +142,7 @@
                                     <label for="txtPartDesc" class="col-lg-3 control-label">Part Description</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtPartDesc" placeholder="Part Description" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldPartDesc" ErrorMessage="You must enter the Part Description" runat="server" ControlToValidate="txtPartDesc" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -136,6 +150,7 @@
                                     <label for="txtBusinessUnit" class="col-lg-3 control-label">Business Unit</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtBusinessUnit" placeholder="Business Unit" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldBusinessUnit" ErrorMessage="You must enter the Business Unit" runat="server" ControlToValidate="txtBusinessUnit" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -143,6 +158,7 @@
                                     <label for="txtDeptPL" class="col-lg-3 control-label">Dept / PL</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtDeptPL" placeholder="Dept / PL" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldDeptPL" ErrorMessage="You must enter the Dept/PL" runat="server" ControlToValidate="txtDeptPL" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -150,13 +166,15 @@
                                     <label for="txtCommodity" class="col-lg-3 control-label">Commodity</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCommodity" placeholder="Commodity" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldCommodity" ErrorMessage="You must enter the Commodity" runat="server" ControlToValidate="txtCommodity" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
                                 <div class="form-group">
                                     <label for="txtDefectQty" class="col-lg-3 control-label">Defect Quantity</label>
                                     <div class="col-lg-8">
-                                        <asp:TextBox CssClass="form-control" ID="txtDefectQty" placeholder="Defect Quantity" runat="server" />
+                                        <asp:TextBox CssClass="form-control" ID="txtDefectQty" placeholder="Defect Quantity" runat="server" TextMode="Number"/>
+                                        <asp:RequiredFieldValidator ID="vldDefectQty" ErrorMessage="You must enter the Defect Quantity" runat="server" ControlToValidate="txtDefectQty" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -166,6 +184,7 @@
                                         <asp:DropDownList CssClass="form-control" ID="lstDefectType" runat="server">
                                             <asp:ListItem Selected="True">Please Select Defect Type</asp:ListItem>
                                         </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="vldDefectType" ErrorMessage="You must select the Defect Type" runat="server" ControlToValidate="lstDefectType" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -173,6 +192,7 @@
                                     <label for="txtNonConformity" class="col-lg-3 control-label">Non-Conformity Reported</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtNonConformity" placeholder="Non-Conformity Reported" TextMode="MultiLine" Rows="2" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldNonConformity" ErrorMessage="You must enter the Non-Conformity Reported" runat="server" ControlToValidate="txtNonConformity" ForeColor="red"/>
                                     </div>
                                     <br /><br /><br />
                                 </div>
@@ -180,6 +200,7 @@
                                     <label for="txtRejectReason" class="col-lg-3 control-label">Reject Reason for Previous Revision</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtRejectReason" placeholder="Reject Reason for Previous Revision" TextMode="MultiLine" Rows="2" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldRejectReason" ErrorMessage="You must enter the Reject Reason" runat="server" ControlToValidate="txtRejectReason" ForeColor="red"/>
                                     </div>
                                     <br /><br /><br />
                                 </div>
@@ -187,13 +208,14 @@
                                     <label for="cldDateClose" class="col-lg-3 control-label">Expected Date Close</label>
                                     <div class="col-lg-8">
                                         <input type="date" class="form-control" ID="cldDateClose" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldDateClose" ErrorMessage="You must select the Expected Date Close" runat="server" ControlToValidate="cldDateClose" ForeColor="red"/>
                                         <br />
                                     </div>
                                     <br /><br />
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-3">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" runat="server" Text="Save" />
+                                        <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" onClick="Save_Section_1" runat="server" Text="Save" />
                                     </div>
                                 </div>
                             </form>
