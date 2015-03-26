@@ -43,5 +43,11 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         scar_details.Non_conformity_reported = txtNonConformity.Text;
         scar_details.Reject_reason = txtRejectReason.Text;
         scar_details.Expected_date_close = cldDateClose.Value;
+        Insert_Into_Database(scar_details);
+    }
+
+    protected void Insert_Into_Database(SCAR scar_details)
+    {
+         txtCarNo.Text = scar_details.Car_type;
     }
 }
