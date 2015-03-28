@@ -488,10 +488,10 @@
     <Compile Include="Admin\add_new_corrective_action.aspx.designer.cs">
       <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\add_new_defect_modes.aspx.cs">
+    <None Include="Admin\add_new_defect_modes.aspx.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    </None>
     <Compile Include="Admin\add_new_defect_modes.aspx.designer.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
     </Compile>
@@ -593,10 +593,10 @@
     <Compile Include="Admin\view_corrective_action.aspx.designer.cs">
       <DependentUpon>view_corrective_action.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\view_defect_modes.aspx.cs">
+    <None Include="Admin\view_defect_modes.aspx.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    </None>
     <Compile Include="Admin\view_defect_modes.aspx.designer.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
     </Compile>

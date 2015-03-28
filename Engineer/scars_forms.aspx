@@ -4,7 +4,7 @@
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
-            <h4>SCAR Request Form</h4>
+            <h4>SCAR Request Form </h4><asp:Label runat="server" ID="ProcessedMessage"/>
             <div class="panel-group" id="accordion1">
                 <!--Section 1-->
                 <div class="panel panel-info">
@@ -22,7 +22,7 @@
                                     <label for="txtCarNo" class="col-lg-3 control-label">Car No</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarNo" placeholder="Car No" runat="server" />
-                                        <asp:RequiredFieldValidator ID="vldCarNo" ErrorMessage="You must enter the Car Number" runat="server" ControlToValidate="txtCarNo" ForeColor="red"/>
+                                        <asp:RequiredFieldValidator ID="vldCarNo" ErrorMessage="You must enter the Car Number or N/A if none" runat="server" ControlToValidate="txtCarNo" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -30,7 +30,7 @@
                                     <label for="txtCarRev" class="col-lg-3 control-label">Car Revision</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarRev" placeholder="Car Revision" runat="server" />
-                                        <asp:RequiredFieldValidator ID="vldCarRev" ErrorMessage="You must enter the Car Revision" runat="server" ControlToValidate="txtCarRev" ForeColor="red"/>
+                                        <asp:RequiredFieldValidator ID="vldCarRev" ErrorMessage="You must enter the Car Revision or N/A if none" runat="server" ControlToValidate="txtCarRev" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -38,7 +38,7 @@
                                     <label for="txtCarType" class="col-lg-3 control-label">Car Type</label>
                                     <div class="col-lg-8">
                                         <asp:TextBox CssClass="form-control" ID="txtCarType" placeholder="Car Type" runat="server" />
-                                        <asp:RequiredFieldValidator ID="vldCarType" ErrorMessage="You must enter the Car Type" runat="server" ControlToValidate="txtCarType" ForeColor="red"/>
+                                        <asp:RequiredFieldValidator ID="vldCarType" ErrorMessage="You must enter the Car Type or N/A if none" runat="server" ControlToValidate="txtCarType" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>

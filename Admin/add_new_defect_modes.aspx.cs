@@ -24,7 +24,6 @@ public partial class Admin_add_new_defect_modes : System.Web.UI.Page
         {
             SqlCommand select = new SqlCommand("SELECT defectGroupID, defectGroup FROM DefectGroup", conn);
             conn.Open();
-
             lstNewDefectGroup.DataSource = select.ExecuteReader();
             lstNewDefectGroup.DataTextField = "defectGroup";
             lstNewDefectGroup.DataBind();
