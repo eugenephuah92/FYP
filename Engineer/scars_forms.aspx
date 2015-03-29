@@ -216,6 +216,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-3">
                                         <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" onClick="Save_Section_1" runat="server" Text="Save" />
+                                        <asp:Button CssClass="btn btn-success" ID="btnSubmitSec1" onClick="Submit_Section_1" runat="server" Text="Submit" />
                                     </div>
                                 </div>
                             </form>
