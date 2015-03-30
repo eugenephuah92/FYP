@@ -898,6 +898,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Old_App_Code\SCAR.cs" />
+    <Compile Include="Old_App_Code\SCAR_Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

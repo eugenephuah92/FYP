@@ -12,11 +12,37 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        ddlDefectType();
+        ddlRootCauseOption();
+    }
+
+    protected void ddlDefectType()
+    {
+        if (!IsPostBack)
         {
             lstDefectType.Items.Add("Performance");
             lstDefectType.Items.Add("Non-Performance");
         }    
+    }
+
+    protected void ddlRootCauseOption()
+    { 
+        if (!IsPostBack)
+        {
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                
+                SqlCommand select = new SqlCommand("SELECT id, root_cause FROM dbo.Root_Cause_Option", conn);
+                conn.Open();
+                
+                lstRootCause.DataSource = select.ExecuteReader();
+                lstRootCause.DataTextField = "root_cause";
+                lstRootCause.DataBind();
+                lstRootCause.Items.Insert(0, new ListItem("Please Select Root Cause", "0"));
+            }
+        }
     }
 
     /* SCAR Request Section */
@@ -467,5 +493,13 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
 
 
     /* SCAR Response Section */
+    protected void Save_Response(object sender, EventArgs e)
+    {
 
+    }
+
+    protected void Submit_Response(object sender, EventArgs e)
+    {
+
+    }
 }

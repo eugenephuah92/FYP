@@ -259,7 +259,6 @@
                                         <label for="lstRootCause" class="col-lg-3 control-label">Root Cause Option</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstRootCause" runat="server">
-                                                <asp:ListItem Selected="True">Please Select Root Cause</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -408,6 +407,9 @@
                                                     <div class="col-lg-8">
                                                         <asp:DropDownList CssClass="form-control" ID="lstFailureAnalysis" runat="server">
                                                             <asp:ListItem Selected="True">Please Select Failure Analysis</asp:ListItem>
+                                                            <asp:ListItem>Visual</asp:ListItem>
+                                                            <asp:ListItem>Electrical</asp:ListItem>
+                                                            <asp:ListItem>Physical</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
@@ -682,8 +684,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-3">
-                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" runat="server" Text="Save" />
-                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" Text="Submit" />
+                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClick="Save_Response" runat="server" Text="Save" />
+                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClick="Submit_Response" Text="Submit" />
                                         </div>
                                     </div>
                                 </form>
