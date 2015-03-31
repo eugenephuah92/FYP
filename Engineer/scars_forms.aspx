@@ -5,6 +5,7 @@
     <div class="right-panel-inner">
         <div class="col-md-12">
             <h4>SCAR Request Form </h4><asp:Label runat="server" ID="ProcessedMessage"/>
+            <asp:Label runat="server" ID="Label1"/>
             <div class="panel-group" id="accordion1">
                 <!--Section 1-->
                 <div class="panel panel-info">
@@ -275,11 +276,13 @@
                                     </div>
                                     <div id="collapse3" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <form class="form-horizontal pad10" action="#" method="post">
+                                            <form class="form-horizontal pad10" action="#" method="post" name="Response">
                                                 <div class="form-group">
                                                     <label for="txtOverallSummary" class="col-lg-3 control-label">S0 - Overall Summary</label>
                                                     <div class="col-lg-8">
-                                                        <asp:TextBox CssClass="form-control" ID="txtOverallSummary" placeholder="Overall Summary" TextMode="MultiLine" Rows="3" runat="server" />
+                                                        <div id="counterOverallSummary">
+                                                        </div>
+                                                       <asp:TextBox CssClass="form-control" ID="txtOverallSummary" placeholder="Overall Summary"  TextMode="MultiLine" Rows="3" runat="server"/>
                                                     </div>
                                                 </div>
                                             </form>
@@ -302,6 +305,8 @@
                                                 <div class="form-group">
                                                     <label for="txtProbVerification" class="col-lg-3 control-label">S1 - Problem Verification</label>
                                                     <div class="col-lg-8">
+                                                        <div id="counterProbVerification">
+                                                        </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtProbVerification" placeholder="Problem Verification" TextMode="MultiLine" Rows="3" runat="server" />
                                                     </div>
                                                 </div>
@@ -340,6 +345,8 @@
                                                 <div class="form-group">
                                                     <label for="txtContainmentAction" class="col-lg-3 control-label">S21 - Containment Action</label>
                                                     <div class="col-lg-8">
+                                                        <div id="counterContainmentAction">
+                                                        </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtContainmentAction" placeholder="Containment Action" runat="server" />
                                                     </div>
                                                 </div>
@@ -697,4 +704,42 @@
         </div><!--/.col-md-12-->
     </div>
 </div>
+
+ <!-- Characters count function -->
+<script type="text/javascript">
+    $(function () {
+        //Specifying the Character Count control explicitly
+        $("[id*=txtOverallSummary]").MaxLength(
+        {
+            MaxLength: 1000,
+            CharacterCountControl: $('#counterOverallSummary')
+        });
+
+        $("[id*=txtProbVerification]").MaxLength(
+        {
+            MaxLength: 1000,
+            CharacterCountControl: $('#counterProbVerification')
+        });
+
+
+    });
+
+    $(document).ready(function () {
+        var count = 0;
+        var focusCount = 0;
+        $(document.getElementById("txtProbVerification")).focus(function () {
+
+            focusCount = $(this).val().length;
+            count = 0; $(document.getElementById("txtProbVerification").each(function () {
+                count += $(this).val().length;
+            });
+            count -= focusCount;
+        });
+        $(document.getElementById("txtProbVerification").keyup(function () {
+            focusCount = $(this).val().length;
+            $('#counterContainmentAction').text(160 - (count + focusCount));
+        });
+    });
+</script>
+
 </asp:Content>

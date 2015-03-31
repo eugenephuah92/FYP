@@ -447,6 +447,7 @@
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery.fixedheadertable.min.js" />
+    <Content Include="Scripts\MaxLength.min.js" />
     <Content Include="Scripts\notification.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />

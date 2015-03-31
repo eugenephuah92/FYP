@@ -28,7 +28,6 @@
             });
         });
     </script>
-
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body class="clearfix">
@@ -40,7 +39,8 @@
             <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="Scripts/jquery-1.11.0.min.js" />
             <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="Scripts/bootstrap.min.js" />
             <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="Scripts/app.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="Scripts/select2.min.js" />
+            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/MaxLength.min.js" />
+            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/select2.min.js" />
             <%--Site scripts--%>
             
         </Scripts>
