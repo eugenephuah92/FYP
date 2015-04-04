@@ -45,7 +45,7 @@ namespace FYP_WebApp.Old_App_Code
         private string s61_permanent_corrective_action;
         private string s62_implementation_date;
         private string s63_responsible_person;
-        private string s6_track_action_item;
+        private bool s6_track_action_item;
 
         // S7 - Verify Effectiveness of Corrective Action Results
         private string s71_verify_effectiveness_of_corrective_actions;
@@ -57,8 +57,12 @@ namespace FYP_WebApp.Old_App_Code
 
         // Others
         private string defect_mode;
-        private bool require_8D_approval;
         private bool MOR_calculated;
+
+        // 8D Approval
+        private bool require_8D_approval;
+        private string work_cell_manager;
+        private string quality_manager;
 
         public string Root_cause_option
         {
@@ -333,7 +337,7 @@ namespace FYP_WebApp.Old_App_Code
             }
         }
 
-        public string S6_track_action_item
+        public bool S6_track_action_item
         {
             get
             {
@@ -450,6 +454,30 @@ namespace FYP_WebApp.Old_App_Code
             set
             {
                 MOR_calculated = value;
+            }
+        }
+
+        public string Work_cell_manager
+        {
+            get
+            {
+                return work_cell_manager;
+            }
+            set
+            {
+                work_cell_manager = value;
+            }
+        }
+
+        public string Quality_manager
+        {
+            get
+            {
+                return quality_manager;
+            }
+            set
+            {
+                quality_manager = value;
             }
         }
     }

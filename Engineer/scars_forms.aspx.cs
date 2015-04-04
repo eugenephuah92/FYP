@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FYP_WebApp.Old_App_Code;
+using System.IO;
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
@@ -513,7 +515,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         return compare_data;
     }
-
+    /* End of Section 1 */
 
     /* SCAR Response Section */
     protected void Save_Response(object sender, EventArgs e)
@@ -522,7 +524,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         bool checkEmptyFields = true;
        
         /* Validation on text fields */
-        if (!string.IsNullOrEmpty(lstRootCause.Text)) // Car Number
+        if (!string.IsNullOrEmpty(lstRootCause.Text)) // Root Cause
         {
             scar_response_details.Root_cause_option = lstRootCause.Text;
         }
@@ -530,7 +532,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(txtOverallSummary.Text)) // Car Number
+        if (!string.IsNullOrEmpty(txtOverallSummary.Text)) // Overall Summary
         {
             scar_response_details.Overall_summary = txtOverallSummary.Text;
         }
@@ -538,7 +540,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(txtProbVerification.Text)) // Car Number
+        if (!string.IsNullOrEmpty(txtProbVerification.Text)) // Problem Verification
         {
             scar_response_details.Problem_verification = txtProbVerification.Text;
         }
@@ -546,6 +548,265 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
+        if (!string.IsNullOrEmpty(rdbProbVerificationStatus.Text)) // Problem Verification Status
+        {
+            scar_response_details.Problem_verification_status = rdbProbVerificationStatus.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
+        /* Section 2 */
+        if (!string.IsNullOrEmpty(txtContainmentAction.Text)) // Containment Action
+        {
+            scar_response_details.S21_containment_action = txtContainmentAction.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(cldS2ImplementationDate.Value)) // Containment Action Implementation Date
+        {
+            scar_response_details.S22_implementation_date = cldS2ImplementationDate.Value;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtS2ResponsiblePerson.Text)) // Containment Action Responsible Person
+        {
+            scar_response_details.S23_responsible_person = txtS2ResponsiblePerson.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtContainmentResult.Text)) // Containment Action Result
+        {
+            scar_response_details.S24_containment_result = txtContainmentResult.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(lstScreeningArea.Text)) // Screening Area
+        {
+            scar_response_details.Screening_area = lstScreeningArea.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
+        scar_response_details.S2_track_action_item = chkS2TrackActionItem.Checked; // Track Action Item for Containment Action
+        /* End of Section 2 */
+
+        /* Section 3 */
+
+        if (!string.IsNullOrEmpty(lstFailureAnalysis.Text)) // Failure Analysis
+        {
+            scar_response_details.S31_failure_analysis = lstFailureAnalysis.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtFailureResult.Text)) // Failure Analysis Result
+        {
+            scar_response_details.S32_failure_analysis_results = txtFailureResult.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        /* End of Section 3 */
+
+        /* Section 4 */
+
+        if (!string.IsNullOrEmpty(txtMan.Text)) // Man
+        {
+            scar_response_details.Man = txtMan.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtMachine.Text)) // Machine
+        {
+            scar_response_details.Machine = txtMachine.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtMethod.Text)) // Method
+        {
+            scar_response_details.Method = txtMethod.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtMaterial.Text)) // Material
+        {
+            scar_response_details.Material = txtMaterial.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        /* End of Section 4 */
+
+        /* Section 5 */
+
+        if (!string.IsNullOrEmpty(txtCorrectiveAction.Text)) // Corrective Action
+        {
+            scar_response_details.S51_corrective_action = txtCorrectiveAction.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(cldS5ImplementationDate.Value)) // Corrective Action Implementation Date
+        {
+            scar_response_details.S52_implementation_date = cldS5ImplementationDate.Value;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtS5ResponsiblePerson.Text)) // Corrective Action Responsible Person
+        {
+            scar_response_details.S53_responsible_person = txtS5ResponsiblePerson.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
+        scar_response_details.S5_track_action_item = chkS5TrackActionItem.Checked; // Corrective Action Track Action Item
+        /* End of Section 5 */
+
+        /* Section 6 */
+
+        if (!string.IsNullOrEmpty(txtPermanentCA.Text)) // Permanent Corrective Action
+        {
+            scar_response_details.S61_permanent_corrective_action = txtPermanentCA.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(cldS6ImplementationDate.Value)) // Permanent Corrective Action Implementation Date
+        {
+            scar_response_details.S62_implementation_date = cldS6ImplementationDate.Value;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtS6ResponsiblePerson.Text)) // Permanent Corrective Action Responsible Person
+        {
+            scar_response_details.S63_responsible_person = txtS6ResponsiblePerson.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
+        scar_response_details.S6_track_action_item = chkS6TrackActionItem.Checked; // Permanent Corrective Action Track Action Item
+
+        /* End of Section 6 */
+
+        /* Section 7 */
+
+        if (!string.IsNullOrEmpty(txtVerifyCA.Text)) // Verify Effectiveness of Corrective Action
+        {
+            scar_response_details.S71_verify_effectiveness_of_corrective_actions = txtVerifyCA.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(cldS7ImplementationDate.Value)) // Verify Effectiveness of Corrective Action Implementation Date
+        {
+            scar_response_details.S72_implementation_date = cldS7ImplementationDate.Value;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtS7ResponsiblePerson.Text)) // Verify Effectiveness of Corrective Action Responsible Person
+        {
+            scar_response_details.S73_responsible_person = txtS7ResponsiblePerson.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtVerifier.Text)) // Verify Effectiveness of Corrective Action Verifier
+        {
+            scar_response_details.S74_verifier = txtVerifier.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtVerifierEmail.Text)) // Verify Effectiveness of Corrective Action Verifier Email
+        {
+            scar_response_details.S75_verifier_email = txtVerifierEmail.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(txtVerifyCAResult.Text)) // Verify Effectiveness of Corrective Action Result
+        {
+            scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results = txtVerifyCAResult.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        /* End of Section 7 */
+
+        if (!string.IsNullOrEmpty(lstDefectMode.Text)) // Defect Mode
+        {
+            scar_response_details.Defect_mode = lstDefectMode.Text;
+        }
+        else
+        {
+            scar_response_details.Defect_mode = "N/A";
+        }
+
+        //scar_response_details.Require_8D_approval = chk8Dapproval.Checked; // Require 8D Approval
+        scar_response_details.MOR_Calculated = chkMOR.Checked; // MOR Calculated
+       
+    }
+
+    protected void Save_8D_Request(object sender, EventArgs e)
+    {
+        SCAR_Response scar_response_details = new SCAR_Response();
+        bool checkEmptyFields = true;
+        /* 8D Approval Section */
+        if (!string.IsNullOrEmpty(lstWCM.Text)) // Work Cell Manager
+        {
+            scar_response_details.Work_cell_manager = lstWCM.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(lstQM.Text)) // Man
+        {
+            scar_response_details.Quality_manager = lstQM.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
     }
 
     protected void Submit_Response(object sender, EventArgs e)
