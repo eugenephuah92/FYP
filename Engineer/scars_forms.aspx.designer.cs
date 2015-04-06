@@ -1011,15 +1011,6 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.FileUpload uploadFile;
     
     /// <summary>
-    /// btnUploadFile control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnUploadFile;
-    
-    /// <summary>
     /// chk8Dapproval control.
     /// </summary>
     /// <remarks>
@@ -1047,13 +1038,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.DropDownList lstQM;
     
     /// <summary>
-    /// btnSave control.
+    /// btnRequestApproval control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSave;
+    protected global::System.Web.UI.WebControls.Button btnRequestApproval;
     
     /// <summary>
     /// chkMOR control.
