@@ -210,13 +210,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator vldSupplierEmail;
     
     /// <summary>
-    /// cldIssuedDate control.
+    /// txtIssuedDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldIssuedDate;
+    protected global::System.Web.UI.WebControls.TextBox txtIssuedDate;
     
     /// <summary>
     /// vldcldIssuedDate control.
@@ -426,13 +426,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldRejectReason;
     
     /// <summary>
-    /// cldDateClose control.
+    /// txtDateClose control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldDateClose;
+    protected global::System.Web.UI.WebControls.TextBox txtDateClose;
     
     /// <summary>
     /// vldDateClose control.

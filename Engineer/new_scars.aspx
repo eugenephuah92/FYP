@@ -48,7 +48,7 @@
                                         </thead>
     									<tbody>
                                         	<tr>
-                                                <td><a href="scars_forms.aspx">P-SOQANP-140916</a></td>
+                                                <td><a href="scars_forms.aspx?scar_id=24">P-SOQANP-140916</a></td>
                                                 <td style="padding-left:30pt">INSUFF SOLDER</td>
                                                 <td style="padding-left:30pt">Insufficient amount of solder on a lead, pad or terminal</td>
                                                 <td style="padding-left:30pt">22/10/2014</td>

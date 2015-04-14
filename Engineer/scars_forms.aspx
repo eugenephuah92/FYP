@@ -111,8 +111,8 @@
                                 <div class="form-group">
                                     <label for="cldIssuedDate" class="col-lg-3 control-label">Issued Date</label>
                                     <div class="col-lg-8">
-				                        <input type="date" class="form-control" ID="cldIssuedDate" runat="server" />
-                                        <asp:RequiredFieldValidator ID="vldcldIssuedDate" ErrorMessage="You must select the Issued Date" runat="server" ControlToValidate="cldIssuedDate" ValidationGroup="SCAR_Request" ForeColor="red"/>
+                                        <asp:TextBox CssClass="form-control" ID="txtIssuedDate" TextMode="Date" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldcldIssuedDate" ErrorMessage="You must select the Issued Date" runat="server" ControlToValidate="txtIssuedDate" ValidationGroup="SCAR_Request" ForeColor="red"/>
                                     </div>
                                     <br /><br />
                                 </div>
@@ -184,7 +184,7 @@
                                     <label for="lstDefectType" class="col-lg-3 control-label">Defect Type</label>
                                     <div class="col-lg-8">
                                         <asp:DropDownList CssClass="form-control" ID="lstDefectType" runat="server">
-                                            <asp:ListItem Selected="True">Please Select Defect Type</asp:ListItem>
+                                            <asp:ListItem>Please Select Defect Type</asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="vldDefectType" ErrorMessage="You must select the Defect Type" runat="server" ControlToValidate="lstDefectType" ValidationGroup="SCAR_Request" ForeColor="red"/>
                                     </div>
@@ -209,8 +209,8 @@
                                 <div class="form-group">
                                     <label for="cldDateClose" class="col-lg-3 control-label">Expected Date Close</label>
                                     <div class="col-lg-8">
-                                        <input type="date" class="form-control" ID="cldDateClose" runat="server" />
-                                        <asp:RequiredFieldValidator ID="vldDateClose" ErrorMessage="You must select the Expected Date Close" runat="server" ControlToValidate="cldDateClose" ValidationGroup="SCAR_Request" ForeColor="red"/>
+                                        <asp:TextBox CssClass="form-control" ID="txtDateClose" TextMode="Date" runat="server" />
+                                        <asp:RequiredFieldValidator ID="vldDateClose" ErrorMessage="You must select the Expected Date Close" runat="server" ControlToValidate="txtDateClose" ValidationGroup="SCAR_Request" ForeColor="red"/>
                                         <br />
                                     </div>
                                     <br /><br />
@@ -711,7 +711,7 @@
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                 <h4 class="modal-title">Select Respective WCM and QM</h4>
                                                             </div>
-                                                            <div class="modal-body" style="padding-top:30pt">
+                                                            <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="txtWCM" class="col-lg-4 control-label"><strong>Work Cell Manager</strong></label>
                                                                     <div class="col-lg-7">
@@ -732,6 +732,8 @@
                                                                         </asp:DropDownList>
                                                                     </div>
                                                                 </div>
+                                                                <br />
+                                                                <br />
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <asp:Button ID="btnRequestApproval" CssClass="btn btn-primary" OnClick="Click_Request_Approval" Text="Request Approval" runat="server" />
@@ -755,8 +757,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-3">
-                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate()" OnClick="Save_Response" runat="server" Text="Save" />
-                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" OnClick="Submit_Response" Text="Submit" />
+                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate()" OnClick="Save_Response" runat="server" Text="Save to Database" />
+                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" OnClick="Submit_Response" Text="Send to Client" />
                                         </div>
                                     </div>
                               

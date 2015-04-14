@@ -472,7 +472,9 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.Site.master.cs">
@@ -898,6 +900,8 @@
       <DependentUpon>navbar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Old_App_Code\EmailContent.cs" />
+    <Compile Include="Old_App_Code\Employee.cs" />
     <Compile Include="Old_App_Code\SCAR.cs" />
     <Compile Include="Old_App_Code\SCAR_Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

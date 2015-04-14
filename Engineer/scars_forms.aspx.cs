@@ -17,7 +17,16 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     {
         ddlDefectType();
         ddlRootCauseOption();
+        ddlWCMApproval();
+        ddlQMApproval();
 
+        string tempID = Request.QueryString["scar_id"];
+
+        if(!String.IsNullOrEmpty(tempID))
+        {
+            Read_Existing_Records(tempID);
+        }
+       
     }
 
     protected void ddlDefectType()
@@ -43,8 +52,122 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 
                 lstRootCause.DataSource = select.ExecuteReader();
                 lstRootCause.DataTextField = "root_cause";
+                lstRootCause.DataValueField = "id";
                 lstRootCause.DataBind();
                 lstRootCause.Items.Insert(0, new ListItem("Please Select Root Cause", "0"));
+            }
+        }
+    }
+
+    protected void ddlWCMApproval()
+    {
+        if (!IsPostBack)
+        {
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+
+                SqlCommand selectWCM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
+                conn.Open();
+                selectWCM.Parameters.AddWithValue("employee_position", "Work Cell Manager");
+
+                lstWCM.DataSource = selectWCM.ExecuteReader();
+                lstWCM.DataTextField = "employee_name";
+                lstWCM.DataValueField = "employee_ID";
+                lstWCM.DataBind();
+            }
+        }
+    }
+
+    protected void ddlQMApproval()
+    {
+        
+        if (!IsPostBack)
+        {
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+
+                SqlCommand selectQM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
+                conn.Open();
+                selectQM.Parameters.AddWithValue("employee_position", "Quality Manager");
+
+                lstQM.DataSource = selectQM.ExecuteReader();
+                lstQM.DataTextField = "employee_name";
+                lstQM.DataValueField = "employee_ID";
+                lstQM.DataBind();
+            }
+        }
+    }
+
+    protected void Read_Existing_Records(string scar_id)
+    {
+        btnSaveSec1.Enabled = false;
+        btnSubmitSec1.Enabled = false;
+        if (!IsPostBack)
+        {
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand select = new SqlCommand("SELECT id, car_no, car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity, defect_type, non_conformity_reported, reject_reason, expected_date_close FROM dbo.SCAR_Request WHERE id = @scar_id", conn);
+                select.Parameters.AddWithValue("scar_id", scar_id);
+                SqlDataReader reader;
+                reader = select.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    txtCarNo.Text += Convert.ToString(reader["car_no"]);
+                    txtCarNo.ReadOnly = true;
+                    txtCarRev.Text += Convert.ToString(reader["car_revision"]);
+                    txtCarRev.ReadOnly = true;
+                    txtCarType.Text += Convert.ToString(reader["car_type"]);
+                    txtCarType.ReadOnly = true;
+                    rdbPreAlert.SelectedValue += Convert.ToString(reader["pre_alert"]);
+                    rdbPreAlert.Enabled = false;
+                    txtRelatedCarNo.Text += Convert.ToString(reader["related_car_no"]);
+                    txtRelatedCarNo.ReadOnly = true;
+                    txtRelatedCarRev.Text += Convert.ToString(reader["related_car_ref"]);
+                    txtRelatedCarRev.ReadOnly = true;
+                    txtOriginator.Text += Convert.ToString(reader["originator"]);
+                    txtOriginator.ReadOnly = true;
+                    txtRecurrence.Text += Convert.ToString(reader["recurrence"]);
+                    txtRecurrence.ReadOnly = true;
+                    txtSupplierContact.Text += Convert.ToString(reader["supplier_contact"]);
+                    txtSupplierContact.ReadOnly = true;
+                    txtSupplierEmail.Text += Convert.ToString(reader["supplier_email"]);
+                    txtSupplierEmail.ReadOnly = true;
+                    txtIssuedDate.Text = Convert.ToDateTime(reader["issued_date"]).ToString("yyyy-MM-dd");
+                    txtIssuedDate.ReadOnly = true;
+                    txtOriginatorDept.Text += Convert.ToString(reader["originator_dept"]);
+                    txtOriginatorDept.ReadOnly = true;
+                    txtOriginatorContact.Text += Convert.ToString(reader["originator_contact"]);
+                    txtOriginatorContact.ReadOnly = true;
+                    txtPartNo.Text += Convert.ToString(reader["part_no"]);
+                    txtPartNo.ReadOnly = true;
+                    txtPartDesc.Text += Convert.ToString(reader["part_description"]);
+                    txtPartDesc.ReadOnly = true;
+                    txtBusinessUnit.Text += Convert.ToString(reader["business_unit"]);
+                    txtBusinessUnit.ReadOnly = true;
+                    txtDeptPL.Text += Convert.ToString(reader["dept_pl"]);
+                    txtDeptPL.ReadOnly = true;
+                    txtCommodity.Text += Convert.ToString(reader["commodity"]);
+                    txtCommodity.ReadOnly = true;
+                    txtDefectQty.Text += reader["defect_quantity"];
+                    txtDefectQty.ReadOnly = true;
+                    lstDefectType.SelectedValue = Convert.ToString(reader["defect_type"]);
+                    lstDefectType.Enabled = false;
+                    txtNonConformity.Text += Convert.ToString(reader["non_conformity_reported"]);
+                    txtNonConformity.ReadOnly = true;
+                    txtRejectReason.Text += Convert.ToString(reader["reject_reason"]);
+                    txtRejectReason.ReadOnly = true;
+                    txtDateClose.Text = Convert.ToDateTime(reader["expected_date_close"]).ToString("yyyy-MM-dd");
+                    txtDateClose.ReadOnly = true;
+
+                }
             }
         }
     }
@@ -147,9 +270,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldIssuedDate.Value)) // Issued Date
+        if (!string.IsNullOrEmpty(txtIssuedDate.Text)) // Issued Date
         {
-            scar_details.Issued_date = cldIssuedDate.Value;
+            scar_details.Issued_date = txtIssuedDate.Text;
         }
         else
         {
@@ -243,9 +366,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldDateClose.Value)) // Expected Date Close
+        if (!string.IsNullOrEmpty(txtDateClose.Text)) // Expected Date Close
         {
-            scar_details.Expected_date_close = cldDateClose.Value;
+            scar_details.Expected_date_close = txtDateClose.Text;
         }
         else
         {
@@ -1007,13 +1130,13 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                 {
                     string temp_SCAR_ID = Request.QueryString["scar_id"];
 
-                    SqlCommand select = new SqlCommand("SELECT scar_id FROM dbo.SCAR_Response", con);
+                    SqlCommand select = new SqlCommand("SELECT scar_id, status FROM dbo.SCAR_Response", con);
                     SqlDataReader reader;
                     bool process_submit = false;
                     reader = select.ExecuteReader();
                     while (reader.Read())
                     {
-                        if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"] == "save")
+                        if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save"))
                         {
                             SqlCommand update_response = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Response SET root_cause_option = @root_cause_option, 
 s0_overall_summary = @overall_summary, s1_problem_verification = @problem_verification, problem_verification_status = @problem_verification_status,
@@ -1162,13 +1285,13 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
             {
                 string temp_SCAR_ID = Request.QueryString["scar_id"];
 
-                SqlCommand select = new SqlCommand("SELECT scar_id FROM dbo.SCAR_Response", con);
+                SqlCommand select = new SqlCommand("SELECT scar_id, status FROM dbo.SCAR_Response", con);
                 SqlDataReader reader;
                 bool process_submit = false;
                 reader = select.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"] == "save")
+                    if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save"))
                     {
                         SqlCommand update_response = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Response SET root_cause_option = @root_cause_option, 
 s0_overall_summary = @overall_summary, s1_problem_verification = @problem_verification, problem_verification_status = @problem_verification_status,
@@ -1252,7 +1375,7 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         con.Open();
 
         string temp_SCAR_ID = Request.QueryString["scar_id"];
-        SqlCommand select = new SqlCommand("SELECT scar_id FROM SCAR_Response", con);
+        SqlCommand select = new SqlCommand("SELECT scar_id, status FROM SCAR_Response", con);
         SqlDataReader reader;
         bool compare_data = true;
         reader = select.ExecuteReader();
@@ -1260,14 +1383,14 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         {
             if (response_clicked_button == 0)
             {
-                if(temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"] == "save")
+                if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save"))
                 {
                     compare_data = false;
                 }
             }
             else if (response_clicked_button == 1)
             {
-                if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"] == "save" || reader["status"] == "submit")
+                if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save") || reader["status"].Equals("submit"))
                 {
                     compare_data = false;
                 }
@@ -1278,6 +1401,89 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
 
     protected void Click_Request_Approval(object sender, EventArgs e)
     {
+        // Establish Connection to Database
+        SqlConnection con;
+        con = new SqlConnection();
+        string DatabaseName = "AutoSCARConnectionString";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        con.Open();
 
+        string tempID = Request.QueryString["scar_id"];
+
+        Employee WCM_details = new Employee();
+        Employee QM_details = new Employee();
+        EmailContent email_details = new EmailContent();
+
+        WCM_details.Employee_name = lstWCM.SelectedItem.Text;
+        WCM_details.Employee_ID = lstWCM.SelectedItem.Value;
+        QM_details.Employee_name = lstQM.SelectedItem.Text;
+        QM_details.Employee_ID = lstQM.SelectedItem.Value;
+
+        SqlCommand select = new SqlCommand("SELECT employee_ID, employee_name, employee_email, employee_position FROM Employee", con);
+        SqlDataReader reader;
+        reader = select.ExecuteReader();
+        while (reader.Read())
+        {
+            if(WCM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && WCM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
+            {
+                WCM_details.Employee_email = Convert.ToString(reader["employee_email"]);
+                WCM_details.Employee_position = Convert.ToString(reader["employee_position"]);
+            }
+
+            if (QM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && QM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
+            {
+                QM_details.Employee_email = Convert.ToString(reader["employee_email"]);
+                QM_details.Employee_position = Convert.ToString(reader["employee_position"]);
+            }
+        }
+
+        bool insert_WCM_email_data = false;
+        bool insert_QM_email_data = false;
+
+        try
+        {
+            // SQL command to insert data into database
+            if(WCM_details.Employee_position.CompareTo("Work Cell Manager") == 0)
+            {
+                SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
+VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
+
+                addWCM.Parameters.AddWithValue("@recipient_email_address", WCM_details.Employee_email);
+                addWCM.Parameters.AddWithValue("@recipient_name", WCM_details.Employee_name);
+                addWCM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
+                addWCM.Parameters.AddWithValue("@email_content", email_details.Email_content);
+
+                addWCM.ExecuteNonQuery();
+                insert_WCM_email_data = true;
+            }
+            else if (QM_details.Employee_position.CompareTo("Quality Manager") == 0)
+            {
+                SqlCommand addQM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
+VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
+
+                addQM.Parameters.AddWithValue("@recipient_email_address", QM_details.Employee_email);
+                addQM.Parameters.AddWithValue("@recipient_name", QM_details.Employee_name);
+                addQM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
+                addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
+
+                addQM.ExecuteNonQuery();
+                insert_QM_email_data = true;
+            }
+            
+            if(insert_QM_email_data && insert_WCM_email_data)
+            {
+                ProcessedMessage.Text = "8D Approval Request has been successfully sent!";
+                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+            }      
+        }
+        catch (Exception err)
+        {
+            ProcessedMessage.Text = "8D Approval Request cannot be sent! Please try again!";
+            ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+        }
+        finally
+        {
+            con.Close();
+        }
     }
 }
