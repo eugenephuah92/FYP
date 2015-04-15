@@ -19,14 +19,18 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         ddlRootCauseOption();
         ddlWCMApproval();
         ddlQMApproval();
-
-        string tempID = Request.QueryString["scar_id"];
-
-        if(!String.IsNullOrEmpty(tempID))
-        {
-            Read_Existing_Records(tempID);
-        }
        
+        string tempSCARID = Request.QueryString["scar_id"];
+        string tempResponseID = Request.QueryString["response_id"];
+
+        if(!String.IsNullOrEmpty(tempSCARID))
+        {
+            Read_Existing_Request_Records(tempSCARID);
+        }
+        if (!String.IsNullOrEmpty(tempResponseID))
+        {
+            Read_Existing_Response_Records(tempResponseID);
+        }
     }
 
     protected void ddlDefectType()
@@ -102,7 +106,8 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
     }
 
-    protected void Read_Existing_Records(string scar_id)
+    /* Populate Request Form based on existing data */
+    protected void Read_Existing_Request_Records(string scar_id)
     {
         btnSaveSec1.Enabled = false;
         btnSubmitSec1.Enabled = false;
@@ -172,19 +177,133 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
     }
 
+    /* Populate Response Form based on existing data */
+    protected void Read_Existing_Response_Records(string response_id)
+    {
+        if (!IsPostBack)
+        {
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand select = new SqlCommand("SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id FROM dbo.SCAR_Response WHERE id = @response_id", conn);
+                select.Parameters.AddWithValue("response_id", response_id);
+                SqlDataReader reader;
+                reader = select.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    lstRootCause.SelectedValue = Convert.ToString(reader["root_cause_option"]);
+                    txtOverallSummary.Text += Convert.ToString(reader["s0_overall_summary"]);
+                    txtProbVerification.Text += Convert.ToString(reader["s1_problem_verification"]);
+                    rdbProbVerificationStatus.SelectedValue += Convert.ToString(reader["problem_verification_status"]);
+                    txtContainmentAction.Text += Convert.ToString(reader["s21_containment_action"]);
+                    txtS2ImplementationDate.Text = Convert.ToDateTime(reader["s22_implementation_date"]).ToString("yyyy-MM-dd");
+                    txtS2ResponsiblePerson.Text += Convert.ToString(reader["s23_responsible_person"]);
+                    txtContainmentResult.Text += Convert.ToString(reader["s24_containment_result"]);
+
+                    string tempScreeningArea = Convert.ToString(reader["screening_area"]);
+                    if(tempScreeningArea.Contains("Production"))
+                    {
+                        lstScreeningArea.Items[0].Selected = true;
+                    }
+                    if (tempScreeningArea.Contains("FGI"))
+                    {
+                        lstScreeningArea.Items[1].Selected = true;
+                    }
+                    if (tempScreeningArea.Contains("Remaining units with customers"))
+                    {
+                        lstScreeningArea.Items[2].Selected = true;
+                    }
+                    if (tempScreeningArea.Contains("N/A"))
+                    {
+                        lstScreeningArea.Items[3].Selected = true;
+                    }
+                    if (tempScreeningArea.Contains("Units in Field (with other customers)"))
+                    {
+                        lstScreeningArea.Items[4].Selected = true;
+                    }
+
+                    if (Convert.ToInt16(reader["track_containment_action"]) == 1)
+                    {
+                        chkS2TrackActionItem.Checked = true;
+                    }
+                    else
+                    {
+                        chkS2TrackActionItem.Checked = false;
+                    }
+
+                    lstFailureAnalysis.SelectedValue += Convert.ToString(reader["s31_failure_analysis"]);
+                    txtFailureResult.Text += Convert.ToString(reader["s32_failure_analysis_results"]);
+                    txtMan.Text += Convert.ToString(reader["s4_man"]);
+                    txtMethod.Text += Convert.ToString(reader["s4_method"]);
+                    txtMaterial.Text += Convert.ToString(reader["s4_material"]);
+                    txtMachine.Text += Convert.ToString(reader["s4_machine"]);
+                    txtCorrectiveAction.Text += Convert.ToString(reader["s51_corrective_action"]);
+                    txtS5ImplementationDate.Text += Convert.ToDateTime(reader["s52_implementation_date"]).ToString("yyyy-MM-dd");
+                    txtS5ResponsiblePerson.Text += Convert.ToString(reader["s53_responsible_person"]);
+
+                    if (Convert.ToInt16(reader["track_corrective_action"]) == 1)
+                    {
+                        chkS5TrackActionItem.Checked = true;
+                    }
+                    else
+                    {
+                        chkS5TrackActionItem.Checked = false;
+                    }
+
+                    txtPermanentCA.Text += Convert.ToString("s61_permanent_corrective_action");
+                    txtS6ImplementationDate.Text += Convert.ToDateTime(reader["s62_implementation_date"]).ToString("yyyy-MM-dd");
+                    txtS6ResponsiblePerson.Text += Convert.ToString(reader["s63_responsible_person"]);
+
+                    if (Convert.ToInt16(reader["track_permanent_corrective_action"]) == 1)
+                    {
+                        chkS6TrackActionItem.Checked = true;
+                    }
+                    else
+                    {
+                        chkS6TrackActionItem.Checked = false;
+                    }
+
+                    txtVerifyCA.Text += Convert.ToString(reader["s71_verify_corrective_action_effectiveness"]);
+                    txtS7ImplementationDate.Text += Convert.ToDateTime(reader["s72_implementation_date"]).ToString("yyyy-MM-dd");
+                    txtS7ResponsiblePerson.Text += Convert.ToString(reader["s73_responsible_person"]);
+                    txtVerifier.Text += Convert.ToString(reader["s74_verifier"]);
+                    txtVerifierEmail.Text += Convert.ToString(reader["s75_verifier_email"]);
+                    txtVerifyCAResult.Text += Convert.ToString(reader["s76_verify_corrective_action_result_effectiveness"]);
+                    lstDefectMode.SelectedValue += Convert.ToString(reader["defect_modes"]);
+
+                    if (Convert.ToInt16(reader["mor_calculated"]) == 1)
+                    {
+                        chkMOR.Checked = true;
+                    }
+                    else
+                    {
+                        chkMOR.Checked = false;
+                    }
+                }
+            }
+        }
+    }
+
     /* SCAR Request Section */
+
+    // SCAR Request Form Save Button
     protected void Save_Section_1(object sender, EventArgs e)
     {
         int save_button_click = 0;
         Read_From_Textbox(save_button_click);
     }
 
+    // SCAR Request Form Submit Button
     protected void Submit_Section_1(object sender, EventArgs e)
     {
         int submit_button_click = 1;
         Read_From_Textbox(submit_button_click); 
     }
 
+    // Read data from Request Form
     protected void Read_From_Textbox(int clicked_button)
     {
         SCAR scar_details = new SCAR();
@@ -413,10 +532,11 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         if (check_date_difference)
         {
-            if (clicked_button == 0)
+            if (clicked_button == 0) // Save button clicked
             {
                 if (Check_Duplicate_Data(scar_details, clicked_button) == true) // Checks for duplicate records
                 {
+                    // If no duplicate records
                     try
                     {
                         // SQL command to insert data into database
@@ -471,6 +591,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 }
                 else
                 {
+                    // If there is duplicate records
                     try
                     {
                         SqlCommand select = new SqlCommand("SELECT car_no, car_revision, issued_date, save_status FROM dbo.SCAR_Request", con);
@@ -530,13 +651,13 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                     }
                 }
             }
-            else if (clicked_button == 1)
+            else if (clicked_button == 1) // Submit button clicked
             {
                 if (Check_Duplicate_Data(scar_details, clicked_button) == true) // Checks for duplicate records
                 {
+                    // If there is no duplicate records
                     try
                     {
-                        
                         // SQL command to insert data into database
                         SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, car_no, 
             car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
@@ -589,6 +710,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 }
                 else 
                 {
+                    // If there is duplicate records
                     try
                     {
                         SqlCommand select = new SqlCommand("SELECT car_no, car_revision, issued_date, save_status FROM dbo.SCAR_Request", con);
@@ -664,13 +786,13 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         reader = select.ExecuteReader();
         while (reader.Read())
         {
-            if(clicked_button == 0)
+            if(clicked_button == 0) // If save button is clicked
             {
                 if (scar_details.Car_no.CompareTo(Convert.ToString(reader["car_no"])) == 0 && scar_details.Car_revision.CompareTo(Convert.ToString(reader["car_revision"])) == 0 && scar_details.Issued_date.CompareTo(Convert.ToString(reader["issued_date"])) == 0 && Convert.ToString(reader["save_status"])=="save")
                 { compare_data = false;
                 } 
             }
-            else if (clicked_button == 1)
+            else if (clicked_button == 1) // If submit button is clicked
             {
                 if (scar_details.Car_no.CompareTo(Convert.ToString(reader["car_no"])) == 0 && scar_details.Car_revision.CompareTo(Convert.ToString(reader["car_revision"])) == 0 && scar_details.Issued_date.CompareTo(Convert.ToString(reader["issued_date"])) == 0 && Convert.ToString(reader["save_status"]) == "submit" || Convert.ToString(reader["save_status"]) == "save")
                 { compare_data = false;}
@@ -681,44 +803,22 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     /* End of Section 1 */
 
     /* SCAR Response Section */
+
+    // SCAR Response Form Save button
     protected void Save_Response(object sender, EventArgs e)
     {
         int save_response_button_click = 0;
         Read_From_Form(save_response_button_click); 
     }
 
+    // SCAR Response Form Submit button
     protected void Submit_Response(object sender, EventArgs e)
     {
         int submit_response_button_click = 1;
         Read_From_Form(submit_response_button_click);
     }
 
-
-    protected void Save_8D_Request(object sender, EventArgs e)
-    {
-        SCAR_Response scar_response_details = new SCAR_Response();
-        bool checkEmptyFields = true;
-        /* 8D Approval Section */
-        if (!string.IsNullOrEmpty(lstWCM.Text)) // Work Cell Manager
-        {
-            scar_response_details.Work_cell_manager = lstWCM.Text;
-        }
-        else
-        {
-            checkEmptyFields = false;
-        }
-        if (!string.IsNullOrEmpty(lstQM.Text)) // Man
-        {
-            scar_response_details.Quality_manager = lstQM.Text;
-        }
-        else
-        {
-            checkEmptyFields = false;
-        }
-
-    }
-
-
+    // Read data from Response Form
     protected void Read_From_Form(int response_clicked_button)
     {
         SCAR_Response scar_response_details = new SCAR_Response();
@@ -767,9 +867,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldS2ImplementationDate.Value)) // Containment Action Implementation Date
+        if (!string.IsNullOrEmpty(txtS2ImplementationDate.Text)) // Containment Action Implementation Date
         {
-            scar_response_details.S22_implementation_date = cldS2ImplementationDate.Value;
+            scar_response_details.S22_implementation_date = txtS2ImplementationDate.Text;
         }
         else
         {
@@ -793,7 +893,15 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         if (!string.IsNullOrEmpty(lstScreeningArea.Text)) // Screening Area
         {
-            scar_response_details.Screening_area = lstScreeningArea.Text;
+            int size = lstScreeningArea.GetSelectedIndices().Count();
+            string[] screening_area = new string[size];
+            int count = 0;
+            foreach (int i in lstScreeningArea.GetSelectedIndices())
+            {
+                screening_area[count] = Convert.ToString(lstScreeningArea.Items[i]);
+                scar_response_details.Screening_area += screening_area[count];
+                count++;
+            }
         }
         else
         {
@@ -869,9 +977,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldS5ImplementationDate.Value)) // Corrective Action Implementation Date
+        if (!string.IsNullOrEmpty(txtS5ImplementationDate.Text)) // Corrective Action Implementation Date
         {
-            scar_response_details.S52_implementation_date = cldS5ImplementationDate.Value;
+            scar_response_details.S52_implementation_date = txtS5ImplementationDate.Text;
         }
         else
         {
@@ -899,9 +1007,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldS6ImplementationDate.Value)) // Permanent Corrective Action Implementation Date
+        if (!string.IsNullOrEmpty(txtS6ImplementationDate.Text)) // Permanent Corrective Action Implementation Date
         {
-            scar_response_details.S62_implementation_date = cldS6ImplementationDate.Value;
+            scar_response_details.S62_implementation_date = txtS6ImplementationDate.Text;
         }
         else
         {
@@ -930,9 +1038,9 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         {
             checkEmptyFields = false;
         }
-        if (!string.IsNullOrEmpty(cldS7ImplementationDate.Value)) // Verify Effectiveness of Corrective Action Implementation Date
+        if (!string.IsNullOrEmpty(txtS7ImplementationDate.Text)) // Verify Effectiveness of Corrective Action Implementation Date
         {
-            scar_response_details.S72_implementation_date = cldS7ImplementationDate.Value;
+            scar_response_details.S72_implementation_date = txtS7ImplementationDate.Text;
         }
         else
         {
@@ -964,7 +1072,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         if (!string.IsNullOrEmpty(txtVerifyCAResult.Text)) // Verify Effectiveness of Corrective Action Result
         {
-            scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results = txtVerifyCAResult.Text;
+            scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results = "N/A";
         }
         else
         {
@@ -990,6 +1098,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
     }
 
+    // Upload attachments
     protected void Upload_Files()
     {
         try
@@ -1047,6 +1156,8 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
 
         }
     }
+
+    // Insert data from Response form into database
     protected void Insert_Into_Response_Database(SCAR_Response scar_response_details, int response_clicked_button)
     {
         SqlConnection con;
@@ -1067,7 +1178,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
 s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, 
 s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, 
 s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, 
-s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifer_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id) 
+s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id) 
 VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_verification_status, @s21_containment_action, @s22_implementation_date, @s23_responsible_person, 
 @s24_containment_result, @screening_area, @track_containment_action, @s31_failure_analysis, @s32_failure_analysis_results, @s4_man, @s4_method, @s4_material, @s4_machine, 
 @s51_corrective_action, @s52_implementation_date, @s53_responsible_person, @track_corrective_action, @s61_permanent_corrective_action, @s62_implementation_date, 
@@ -1116,7 +1227,7 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                 }
                 catch (Exception err)
                 {
-                    ProcessedMessage.Text = "SCAR Response cannot be saved! Please try again!";
+                    ProcessedMessage.Text = "SCAR Response cannot be saved! Please try again!" + err.Message + err.StackTrace;
                     ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
                 }
                 finally
@@ -1363,9 +1474,10 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
             }  
         }
 
-        Upload_Files();
+        //Upload_Files();
     }
 
+    // Check for existing SCAR Response records
     protected bool Check_Duplicate_Response_Data(SCAR_Response scar_response_details, int response_clicked_button)
     {
         SqlConnection con;
@@ -1399,6 +1511,7 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         return compare_data;
     }
 
+    // Request 8D Approval from Managers
     protected void Click_Request_Approval(object sender, EventArgs e)
     {
         // Establish Connection to Database
@@ -1408,7 +1521,8 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         con.Open();
 
-        string tempID = Request.QueryString["scar_id"];
+        string tempSCARID = Request.QueryString["scar_id"];
+        string tempResponseID = Request.QueryString["response_id"];
 
         Employee WCM_details = new Employee();
         Employee QM_details = new Employee();
@@ -1427,13 +1541,11 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
             if(WCM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && WCM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
             {
                 WCM_details.Employee_email = Convert.ToString(reader["employee_email"]);
-                WCM_details.Employee_position = Convert.ToString(reader["employee_position"]);
             }
 
             if (QM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && QM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
             {
                 QM_details.Employee_email = Convert.ToString(reader["employee_email"]);
-                QM_details.Employee_position = Convert.ToString(reader["employee_position"]);
             }
         }
 
@@ -1443,8 +1555,6 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         try
         {
             // SQL command to insert data into database
-            if(WCM_details.Employee_position.CompareTo("Work Cell Manager") == 0)
-            {
                 SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
 VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
 
@@ -1454,10 +1564,7 @@ VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_conten
                 addWCM.Parameters.AddWithValue("@email_content", email_details.Email_content);
 
                 addWCM.ExecuteNonQuery();
-                insert_WCM_email_data = true;
-            }
-            else if (QM_details.Employee_position.CompareTo("Quality Manager") == 0)
-            {
+
                 SqlCommand addQM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
 VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
 
@@ -1467,9 +1574,25 @@ VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_conten
                 addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
 
                 addQM.ExecuteNonQuery();
-                insert_QM_email_data = true;
-            }
-            
+
+                SqlCommand addApproval = new SqlCommand(@"INSERT INTO dbo.8D_Approval (8d_approval_status_WCM, 8d_approval_status_QM, 8d_comment_WCM, 8d_comment_QM, 8d_sent_date, 8d_sent_time, 8d_reject_count_WCM, 8d_reject_count_QM, scar_id, response_id)
+VALUES (@8d_approval_status_WCM, @8d_approval_status_QM, @8d_comment_WCM, @8d_comment_QM, @8d_sent_date, @8d_sent_time, @8d_reject_count_WCM, @8d_reject_count_QM, @scar_id, @response_id)", con);
+
+                string currentTime = System.DateTime.Now.ToShortTimeString();
+                string currentDate = System.DateTime.Now.ToShortDateString();
+                
+                addApproval.Parameters.AddWithValue("@8d_approval_status_WCM", "pending");
+                addApproval.Parameters.AddWithValue("@8d_approval_status_QM", "pending");
+                addApproval.Parameters.AddWithValue("@8d_comment_WCM", "N/A");
+                addApproval.Parameters.AddWithValue("@8d_comment_QM", "N/A");
+                addApproval.Parameters.AddWithValue("@8d_sent_date", currentDate);
+                addApproval.Parameters.AddWithValue("@8d_sent_time", currentTime);
+                addApproval.Parameters.AddWithValue("@8d_reject_count_WCM", "pending");
+                addApproval.Parameters.AddWithValue("@8d_reject_count_QM", "pending");
+                addApproval.Parameters.AddWithValue("@scar_id", tempSCARID);
+                addApproval.Parameters.AddWithValue("@response_id", tempResponseID); 
+
+
             if(insert_QM_email_data && insert_WCM_email_data)
             {
                 ProcessedMessage.Text = "8D Approval Request has been successfully sent!";
@@ -1485,5 +1608,30 @@ VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_conten
         {
             con.Close();
         }
+    }
+
+    // Get Managers data for 8D Approval
+    protected void Save_8D_Request(object sender, EventArgs e)
+    {
+        SCAR_Response scar_response_details = new SCAR_Response();
+        bool checkEmptyFields = true;
+        /* 8D Approval Section */
+        if (!string.IsNullOrEmpty(lstWCM.Text)) // Work Cell Manager
+        {
+            scar_response_details.Work_cell_manager = lstWCM.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+        if (!string.IsNullOrEmpty(lstQM.Text)) // Man
+        {
+            scar_response_details.Quality_manager = lstQM.Text;
+        }
+        else
+        {
+            checkEmptyFields = false;
+        }
+
     }
 }

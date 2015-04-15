@@ -48,7 +48,7 @@
                                         </thead>
     									<tbody>
                                             <tr>
-                                            	<td>R-COPAB-123456</td>
+                                            	<td><a href="scars_forms.aspx?scar_id=24&response_id=1">P-SOQANP-140916</a></td>
                                                 <td style="padding-left:30pt">ARROWS ON PCB</td>
                                                 <td style="padding-left:30pt">Inspection arrows left on the board</td>
                                                 <td style="padding-left:30pt">05/11/2014</td>

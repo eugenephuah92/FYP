@@ -570,13 +570,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldContainmentAction;
     
     /// <summary>
-    /// cldS2ImplementationDate control.
+    /// txtS2ImplementationDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldS2ImplementationDate;
+    protected global::System.Web.UI.WebControls.TextBox txtS2ImplementationDate;
     
     /// <summary>
     /// vldS2ImplementationDate control.
@@ -777,13 +777,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldCorrectiveAction;
     
     /// <summary>
-    /// cldS5ImplementationDate control.
+    /// txtS5ImplementationDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldS5ImplementationDate;
+    protected global::System.Web.UI.WebControls.TextBox txtS5ImplementationDate;
     
     /// <summary>
     /// vldS5ImplementationDate control.
@@ -840,13 +840,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPermanentCA;
     
     /// <summary>
-    /// cldS6ImplementationDate control.
+    /// txtS6ImplementationDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldS6ImplementationDate;
+    protected global::System.Web.UI.WebControls.TextBox txtS6ImplementationDate;
     
     /// <summary>
     /// vldS6ImplementationDate control.
@@ -903,13 +903,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldVerifyCA;
     
     /// <summary>
-    /// cldS7ImplementationDate control.
+    /// txtS7ImplementationDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldS7ImplementationDate;
+    protected global::System.Web.UI.WebControls.TextBox txtS7ImplementationDate;
     
     /// <summary>
     /// vldS7ImplementationDate control.

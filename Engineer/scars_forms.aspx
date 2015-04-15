@@ -359,8 +359,8 @@
                                                 <div class="form-group">
                                                     <label for="cldS2ImplementationDate" class="col-lg-3 control-label">S22 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="date" class="form-control" ID="cldS2ImplementationDate" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS2ImplementationDate" ErrorMessage="You must select the Implementation Date" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="cldS2ImplementationDate" ForeColor="red"/>
+                                                        <asp:TextBox CssClass="form-control" ID="txtS2ImplementationDate" TextMode="Date" runat="server" />
+                                                        <asp:RequiredFieldValidator ID="vldS2ImplementationDate" ErrorMessage="You must select the Implementation Date" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS2ImplementationDate" ForeColor="red"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -527,8 +527,9 @@
                                                 <div class="form-group">
                                                     <label for="cldS5ImplementationDate" class="col-lg-3 control-label">S52 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="date" class="form-control" ID="cldS5ImplementationDate" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS5ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="cldS5ImplementationDate" ForeColor="red"/>
+                                                        <asp:TextBox CssClass="form-control" ID="txtS5ImplementationDate" TextMode="Date" runat="server" />
+                                                        
+                                                        <asp:RequiredFieldValidator ID="vldS5ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS5ImplementationDate" ForeColor="red"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -579,8 +580,9 @@
                                                 <div class="form-group">
                                                     <label for="cldS6ImplementationDate" class="col-lg-3 control-label">S62 - Implementation Date</label>
                                                     <div class="col-lg-8">
-                                                        <input type="date" class="form-control" ID="cldS6ImplementationDate" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS6ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="cldS6ImplementationDate" ForeColor="red"/>
+                                                        <asp:TextBox CssClass="form-control" ID="txtS6ImplementationDate" TextMode="Date" runat="server" />
+                                                        
+                                                        <asp:RequiredFieldValidator ID="vldS6ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS6ImplementationDate" ForeColor="red"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -631,8 +633,9 @@
                                                 <div class="form-group">
                                                     <label for="cldS7ImplementationDate" class="col-lg-3 control-label">S72 - Implementation Date (Start of Monitoring)</label>
                                                     <div class="col-lg-8">
-                                                        <input type="date" class="form-control" ID="cldS7ImplementationDate" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS7ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="cldS7ImplementationDate" ForeColor="red"/>
+                                                        <asp:TextBox CssClass="form-control" ID="txtS7ImplementationDate" TextMode="Date" runat="server" />
+                                                        
+                                                        <asp:RequiredFieldValidator ID="vldS7ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS7ImplementationDate" ForeColor="red"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -671,7 +674,7 @@
                                                         <div id="counterVerifyCAResult">
                                                             
                                                         </div>
-                                                        <asp:TextBox CssClass="form-control" ID="txtVerifyCAResult" placeholder="Verify Effectiveness of Corrective Actions Result" TextMode="MultiLine" Rows="3" runat="server" />
+                                                        <asp:TextBox ReadOnly="true" Text="N/A" CssClass="form-control" ID="txtVerifyCAResult" placeholder="Verify Effectiveness of Corrective Actions Result" TextMode="MultiLine" Rows="3" runat="server" />
                                                          <asp:RequiredFieldValidator ID="vldVerifyCAResult" ErrorMessage="You must enter the Verify Effectiveness of Corrective Actions Result!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtVerifyCAResult" ForeColor="red"/>
                                                     </div>
                                                 </div>
@@ -684,7 +687,8 @@
                                         <label for="lstDefectMode" class="col-lg-3 control-label">Defect Mode</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstDefectMode" runat="server">
-                                                <asp:ListItem Selected="True">Please Select Defect Mode</asp:ListItem>
+                                                <asp:ListItem>Please Select Defect Mode</asp:ListItem>
+                                                <asp:ListItem >Spoil</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -757,8 +761,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-3">
-                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate()" OnClick="Save_Response" runat="server" Text="Save to Database" />
-                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" OnClick="Submit_Response" Text="Send to Client" />
+                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate()" ValidationGroup="SCAR_Response" OnClick="Save_Response" runat="server" Text="Save to Database" />
+                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" ValidationGroup="SCAR_Response" OnClick="Submit_Response" Text="Send to Client" />
                                         </div>
                                     </div>
                               
