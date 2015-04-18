@@ -91,6 +91,7 @@
     <Content Include="Admin\view_corrective_action.aspx" />
     <Content Include="Admin\view_defect_modes.aspx" />
     <Content Include="Admin\view_scar_record.aspx" />
+    <Content Include="Admin\TAT.aspx" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.UI.Combined.dll" />
@@ -609,6 +610,13 @@
     </Compile>
     <Compile Include="Admin\view_scar_record.aspx.designer.cs">
       <DependentUpon>view_scar_record.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TAT.aspx.cs">
+      <DependentUpon>TAT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TAT.aspx.designer.cs">
+      <DependentUpon>TAT.aspx</DependentUpon>
     </Compile>
     <Compile Include="email_tracker.aspx.designer.cs">
       <DependentUpon>email_tracker.aspx</DependentUpon>
