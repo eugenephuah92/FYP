@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label for="txtOldPassword" class="col-lg-2 control-label">Old Password</label>
                                     <div class="col-lg-10">
-                                        <asp:TextBox CssClass="form-control" ID="txtNewDefectCode" runat="server" placeholder="Old Password" TextMode="Password" />
+                                        <asp:TextBox CssClass="form-control" ID="txtOldPassword" runat="server" placeholder="Old Password" TextMode="Password" />
                                     </div>
                                     <br /><br />
                                 </div>

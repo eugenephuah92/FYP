@@ -19,7 +19,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         ddlRootCauseOption();
         ddlWCMApproval();
         ddlQMApproval();
-       
+        
         string tempSCARID = Request.QueryString["scar_id"];
         string tempResponseID = Request.QueryString["response_id"];
 
@@ -290,21 +290,21 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     /* SCAR Request Section */
 
     // SCAR Request Form Save Button
-    protected void Save_Section_1(object sender, EventArgs e)
+    protected void Save_Request(object sender, EventArgs e)
     {
         int save_button_click = 0;
-        Read_From_Textbox(save_button_click);
+        Read_From_Section_1(save_button_click);
     }
 
     // SCAR Request Form Submit Button
-    protected void Submit_Section_1(object sender, EventArgs e)
+    protected void Submit_Request(object sender, EventArgs e)
     {
         int submit_button_click = 1;
-        Read_From_Textbox(submit_button_click); 
+        Read_From_Section_1(submit_button_click); 
     }
 
-    // Read data from Request Form
-    protected void Read_From_Textbox(int clicked_button)
+    // Read data from Request Form 
+    protected void Read_From_Section_1(int clicked_button)
     {
         SCAR scar_details = new SCAR();
         bool checkEmptyFields = true;
@@ -496,13 +496,13 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
 
         if(checkEmptyFields)
         {
-            Insert_Into_Database(scar_details, clicked_button); 
+            Insert_Request_Into_Database(scar_details, clicked_button); 
         }
              
     }
 
-    // Insert Data from SCAR Request Form into Database
-    protected void Insert_Into_Database(SCAR scar_details, int clicked_button)
+    // Insert Data from SCAR Request Form into Database 
+    protected void Insert_Request_Into_Database(SCAR scar_details, int clicked_button)
     {
         // Establish Connection to Database
         SqlConnection con;
@@ -808,18 +808,18 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     protected void Save_Response(object sender, EventArgs e)
     {
         int save_response_button_click = 0;
-        Read_From_Form(save_response_button_click); 
+        Read_From_Response_Form(save_response_button_click); 
     }
 
     // SCAR Response Form Submit button
     protected void Submit_Response(object sender, EventArgs e)
     {
         int submit_response_button_click = 1;
-        Read_From_Form(submit_response_button_click);
+        Read_From_Response_Form(submit_response_button_click);
     }
 
-    // Read data from Response Form
-    protected void Read_From_Form(int response_clicked_button)
+    // Read data from Response Form 
+    protected void Read_From_Response_Form(int response_clicked_button)
     {
         SCAR_Response scar_response_details = new SCAR_Response();
         bool checkEmptyFields = true;
@@ -1109,6 +1109,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 var extension = Path.GetExtension(postedFile.FileName);
                 string filename = Path.GetFileName(postedFile.FileName);
                 string contentType = postedFile.ContentType;
+                string tempResponseID = Request.QueryString["response_id"];
 
                 if (!disallowedExtensions.Contains(extension))
                 {
@@ -1116,19 +1117,21 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                     {
                         using (BinaryReader br = new BinaryReader(fs))
                         {
-                            byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                            uploadFile.PostedFile.SaveAs(Server.MapPath(@"~\Attachments\" + filename.Trim()));
+                            string path = @"~\Attachments\" + filename.Trim();
+                            //byte[] bytes = br.ReadBytes((Int32)fs.Length);
                             string DatabaseName = "AutoSCARConnectionString";
                             string constr = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
-                                string query = "insert into dbo.SCAR_attachments (file_name, file_type, data, scar_id)values (@Name, @ContentType, @Data, @id)";
+                                string query = "insert into dbo.SCAR_attachments (file_name, file_type, file_path, response_id)values (@Name, @ContentType, @File_path, @id)";
                                 using (SqlCommand cmd = new SqlCommand(query))
                                 {
                                     cmd.Connection = con;
                                     cmd.Parameters.AddWithValue("@Name", filename);
                                     cmd.Parameters.AddWithValue("@ContentType", contentType);
-                                    cmd.Parameters.AddWithValue("@Data", bytes);
-                                    cmd.Parameters.AddWithValue("@id", 1);
+                                    cmd.Parameters.AddWithValue("@File_path", path);
+                                    cmd.Parameters.AddWithValue("@id", tempResponseID);
                                     con.Open();
                                     cmd.ExecuteNonQuery();
                                     ProcessedMessage.Text = "Your files have been uploaded succesfully!";
@@ -1149,7 +1152,8 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         catch (Exception err)
         {
-
+            ProcessedMessage.Text = "Unable to upload files! Please Try Again!";
+            ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
         }
         finally
         {
@@ -1221,6 +1225,13 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                     addResponse.Parameters.AddWithValue("@scar_id", temp_SCAR_ID);
 
                     addResponse.ExecuteNonQuery();
+
+                    SqlCommand update_response = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Request SET scar_stage = @scar_stage WHERE id = @scar_id", con);
+
+                    update_response.Parameters.AddWithValue("@scar_id", temp_SCAR_ID);
+                    update_response.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+
+                    update_response.ExecuteNonQuery();
 
                     ProcessedMessage.Text = "SCAR Response has been saved!";
                     ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
@@ -1495,14 +1506,14 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         {
             if (response_clicked_button == 0)
             {
-                if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save"))
+                if (temp_SCAR_ID.CompareTo(Convert.ToString(reader["scar_id"])) == 0 && reader["status"].Equals("save"))
                 {
                     compare_data = false;
                 }
             }
             else if (response_clicked_button == 1)
             {
-                if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save") || reader["status"].Equals("submit"))
+                if (temp_SCAR_ID.CompareTo(Convert.ToString(reader["scar_id"])) == 0 && reader["status"].Equals("save") || reader["status"].Equals("submit"))
                 {
                     compare_data = false;
                 }
@@ -1548,24 +1559,22 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
                 QM_details.Employee_email = Convert.ToString(reader["employee_email"]);
             }
         }
-
-        bool insert_WCM_email_data = false;
-        bool insert_QM_email_data = false;
-
+        reader.Close();
+        
         try
         {
             // SQL command to insert data into database
-                SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
+                /*SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
 VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
 
                 addWCM.Parameters.AddWithValue("@recipient_email_address", WCM_details.Employee_email);
                 addWCM.Parameters.AddWithValue("@recipient_name", WCM_details.Employee_name);
                 addWCM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
                 addWCM.Parameters.AddWithValue("@email_content", email_details.Email_content);
-
+                
                 addWCM.ExecuteNonQuery();
 
-                SqlCommand addQM = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (recipient_email_address, recipient_name, email_subject, email_content)
+                SqlCommand addQM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
 VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
 
                 addQM.Parameters.AddWithValue("@recipient_email_address", QM_details.Employee_email);
@@ -1573,35 +1582,35 @@ VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_conten
                 addQM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
                 addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
 
-                addQM.ExecuteNonQuery();
+                addQM.ExecuteNonQuery();*/
 
-                SqlCommand addApproval = new SqlCommand(@"INSERT INTO dbo.8D_Approval (8d_approval_status_WCM, 8d_approval_status_QM, 8d_comment_WCM, 8d_comment_QM, 8d_sent_date, 8d_sent_time, 8d_reject_count_WCM, 8d_reject_count_QM, scar_id, response_id)
-VALUES (@8d_approval_status_WCM, @8d_approval_status_QM, @8d_comment_WCM, @8d_comment_QM, @8d_sent_date, @8d_sent_time, @8d_reject_count_WCM, @8d_reject_count_QM, @scar_id, @response_id)", con);
+                SqlCommand addApproval = new SqlCommand(@"INSERT INTO Approval_8D (approval_status_WCM, approval_status_QM, comment_WCM, comment_QM, sent_date, sent_time, reject_count_WCM, reject_count_QM, scar_id, response_id)
+VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @sent_date, @sent_time, @reject_count_WCM, @reject_count_QM, @scar_id, @response_id)", con);
 
+
+                
                 string currentTime = System.DateTime.Now.ToShortTimeString();
                 string currentDate = System.DateTime.Now.ToShortDateString();
+                DateTime tempCurrentDate = Convert.ToDateTime(currentDate);
                 
-                addApproval.Parameters.AddWithValue("@8d_approval_status_WCM", "pending");
-                addApproval.Parameters.AddWithValue("@8d_approval_status_QM", "pending");
-                addApproval.Parameters.AddWithValue("@8d_comment_WCM", "N/A");
-                addApproval.Parameters.AddWithValue("@8d_comment_QM", "N/A");
-                addApproval.Parameters.AddWithValue("@8d_sent_date", currentDate);
-                addApproval.Parameters.AddWithValue("@8d_sent_time", currentTime);
-                addApproval.Parameters.AddWithValue("@8d_reject_count_WCM", "pending");
-                addApproval.Parameters.AddWithValue("@8d_reject_count_QM", "pending");
+                addApproval.Parameters.AddWithValue("@approval_status_WCM", "pending");
+                addApproval.Parameters.AddWithValue("@approval_status_QM", "pending");
+                addApproval.Parameters.AddWithValue("@comment_WCM", "N/A");
+                addApproval.Parameters.AddWithValue("@comment_QM", "N/A");
+                addApproval.Parameters.AddWithValue("@sent_date", tempCurrentDate);
+                addApproval.Parameters.AddWithValue("@sent_time", currentTime);
+                addApproval.Parameters.AddWithValue("@reject_count_WCM", 0);
+                addApproval.Parameters.AddWithValue("@reject_count_QM", 0);
                 addApproval.Parameters.AddWithValue("@scar_id", tempSCARID);
-                addApproval.Parameters.AddWithValue("@response_id", tempResponseID); 
+                addApproval.Parameters.AddWithValue("@response_id", tempResponseID);
 
-
-            if(insert_QM_email_data && insert_WCM_email_data)
-            {
+                addApproval.ExecuteNonQuery();
                 ProcessedMessage.Text = "8D Approval Request has been successfully sent!";
-                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
-            }      
+                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue"); 
         }
         catch (Exception err)
         {
-            ProcessedMessage.Text = "8D Approval Request cannot be sent! Please try again!";
+            ProcessedMessage.Text = "8D Approval Request cannot be sent! Please try again!" + err.Message + err.StackTrace;
             ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
         }
         finally
@@ -1633,5 +1642,13 @@ VALUES (@8d_approval_status_WCM, @8d_approval_status_QM, @8d_comment_WCM, @8d_co
             checkEmptyFields = false;
         }
 
+    }
+
+    // Delete Attachments from Server File Manager
+    protected void AttachmentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        TableCell cell = AttachmentsGridView.Rows[e.RowIndex].Cells[2];
+        string FileToDelete = Server.MapPath(@"~\Text_Files\" + cell.Text);
+        File.Delete(FileToDelete);
     }
 }

@@ -9,50 +9,68 @@
 
 
 
-public partial class Engineer_change_password {
+public partial class Engineer_pending_scars {
     
     /// <summary>
-    /// txtEmail control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmail;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// txtOldPassword control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtOldPassword;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
-    /// txtNewPassword control.
+    /// lstFilter control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter;
     
     /// <summary>
-    /// txtConfirmNewPassword control.
+    /// searchTxt control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtConfirmNewPassword;
+    protected global::System.Web.UI.WebControls.TextBox searchTxt;
     
     /// <summary>
-    /// btnChangePassword control.
+    /// btnSearch control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnChangePassword;
+    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    
+    /// <summary>
+    /// lblNoRows control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
+    
+    /// <summary>
+    /// displayPendingSCAR control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView displayPendingSCAR;
 }

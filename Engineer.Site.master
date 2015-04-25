@@ -62,6 +62,7 @@
 
                         <li <% if (GetPageName.Value == "home") Response.Write("class=\"nav-active\"");%>><a href="home.aspx"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                         <li <% if (GetPageName.Value == "scars_forms") Response.Write("class=\"nav-active\"");%>><a href="scars_forms.aspx"><i class="fa fa-edit"></i>&nbsp;SCAR Request &amp; Response Forms</a></li>
+                        <li <% if (GetPageName.Value == "upload_SCAR_Request") Response.Write("class=\"nav-active\"");%>><a href="upload_SCAR_request.aspx"><i class="fa fa-edit"></i>&nbsp;Upload SCAR Request</a></li>
                         <li <% if (GetPageName.Value == "reports" || GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency") Response.Write("class=\"nav-active\"");%>><a href="reports.aspx" class="nav-parent"><i class="fa fa-link"></i> Reports<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                     	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>

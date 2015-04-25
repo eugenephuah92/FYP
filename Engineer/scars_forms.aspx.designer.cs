@@ -993,15 +993,6 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator vldVerifyCAResult;
     
     /// <summary>
-    /// lstDefectMode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstDefectMode;
-    
-    /// <summary>
     /// uploadFile control.
     /// </summary>
     /// <remarks>
@@ -1009,6 +1000,33 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.FileUpload uploadFile;
+    
+    /// <summary>
+    /// AttachmentsGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView AttachmentsGridView;
+    
+    /// <summary>
+    /// AttachmentsSqlDataSource control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.SqlDataSource AttachmentsSqlDataSource;
+    
+    /// <summary>
+    /// lstDefectMode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstDefectMode;
     
     /// <summary>
     /// chk8Dapproval control.
