@@ -262,6 +262,7 @@
     <Content Include="packages\EntityFramework.6.0.0\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.6.0.0\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.0.0\tools\migrate.exe" />
+    <Content Include="notification.aspx" />
     <None Include="packages\jQuery.1.10.2\Content\Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="packages\jQuery.1.10.2\Content\Scripts\jquery-1.10.2.js" />
     <Content Include="packages\jQuery.1.10.2\Content\Scripts\jquery-1.10.2.min.js" />
@@ -491,6 +492,13 @@
     </Compile>
     <Compile Include="Admin\add_new_corrective_action.aspx.designer.cs">
       <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notification.aspx.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="notification.aspx.designer.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
     </Compile>
     <None Include="Admin\add_new_defect_modes.aspx.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>

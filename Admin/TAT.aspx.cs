@@ -51,9 +51,9 @@ public partial class Admin_TAT : System.Web.UI.Page
             DataTable dt2 = this.GetTAT();
             DataTable dt3 = this.GetTATRef();
 
-            SCAR_Rec[] mTAT = new SCAR_Rec[dt.Rows.Count];
-            TAT_Rec[] rTAT = new TAT_Rec[dt2.Rows.Count];
-            TAT_Ref[] refTAT = new TAT_Ref[dt3.Rows.Count];
+            SCAR_Rec[] mTAT = new SCAR_Rec[dt.Rows.Count];  // Get the values from SCAR table
+            TAT_Rec[] rTAT = new TAT_Rec[dt2.Rows.Count];   // Get the values from TAT table
+            TAT_Ref[] refTAT = new TAT_Ref[dt3.Rows.Count]; // Get the values from TAT Reference table
 
             int x = 0, y = 0, z = 0;
             foreach(DataRow row in dt.Rows)
@@ -105,7 +105,7 @@ public partial class Admin_TAT : System.Web.UI.Page
                                     rTAT[j].escalation_level++;
                                     rTAT[j].escalation_count++;
                                 }
-
+                                
                                 string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
                                 using (SqlConnection connection = new SqlConnection(constr))
                                 {
@@ -119,6 +119,21 @@ public partial class Admin_TAT : System.Web.UI.Page
                                     connection.Open();
                                     cmd.ExecuteNonQuery();
                                 }
+                                using (SqlConnection connection = new SqlConnection(constr))
+                                {
+                                    connection.Open();
+                                    SqlCommand cmd = new SqlCommand("INSERT INTO Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.Connection = connection;
+                                    cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                    cmd.Parameters.AddWithValue("@NoticeTo", mTAT[i].supplier_contact);
+                                    cmd.Parameters.AddWithValue("@NoticeSubject", "SCAR Request " + mTAT[i].car_no + " has been created");
+                                    cmd.Parameters.AddWithValue("@NoticeBody", "");
+                                    cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                    cmd.Parameters.AddWithValue("@ReadStatus", false);
+                                    //connection.Open();
+                                    cmd.ExecuteNonQuery();
+                                }
                             }
                         }
                     }
@@ -128,7 +143,8 @@ public partial class Admin_TAT : System.Web.UI.Page
                         string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
                         using (SqlConnection connection = new SqlConnection(constr))
                         {
-                            SqlCommand cmd = new SqlCommand("INSERT INTO TAT (SCAR_ID, employee_ID, issued_date, escalation_level, trigger_date, escalation_count) VALUES (@SCAR_ID, @employee_ID, @issued_date, @escalation_level, @trigger_date, @escalation_count)");
+                            connection.Open();
+                            SqlCommand cmd = new SqlCommand("INSERT INTO TAT (SCAR_ID, employee_ID, issued_date, escalation_level, trigger_date, escalation_count) VALUES (@SCAR_ID, @employee_ID, @issued_date, @escalation_level, @trigger_date, @escalation_count);");
                             cmd.CommandType = CommandType.Text;
                             cmd.Connection = connection;
                             cmd.Parameters.AddWithValue("@SCAR_ID", mTAT[i].car_no);
@@ -137,12 +153,45 @@ public partial class Admin_TAT : System.Web.UI.Page
                             cmd.Parameters.AddWithValue("@escalation_level", 0);
                             cmd.Parameters.AddWithValue("@trigger_date", mTAT[i].issued_date.AddDays(refTAT[0].days_to_escalation));
                             cmd.Parameters.AddWithValue("@escalation_count", 0);
-                            connection.Open();
                             cmd.ExecuteNonQuery();
+                        }
+                        using (SqlConnection connection = new SqlConnection(constr))
+                        {
+                            connection.Open();
+                            SqlCommand cmd = new SqlCommand("INSERT INTO Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                            cmd.CommandType = CommandType.Text;
+                            cmd.Connection = connection;
+                            cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                            cmd.Parameters.AddWithValue("@NoticeTo", mTAT[i].supplier_contact);
+                            cmd.Parameters.AddWithValue("@NoticeSubject", "SCAR Request " + mTAT[i].car_no + " has been created");
+                            cmd.Parameters.AddWithValue("@NoticeBody", "");
+                            cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                            cmd.Parameters.AddWithValue("@ReadStatus", 0);
+                            //connection.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        
+                    }
+                }
+                else if(mTAT[i].scar_status == "Complete")
+                {
+                    for (int j = 0; j < y; j++)
+                    {
+                        if (mTAT[i].car_no == rTAT[j].SCAR_ID)
+                        {
+                            string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
+                            using (SqlConnection connection = new SqlConnection(constr))
+                            {
+                                SqlCommand cmd = new SqlCommand("DELETE FROM TAT WHERE SCAR_ID = @SCAR_ID");
+                                cmd.CommandType = CommandType.Text;
+                                cmd.Connection = connection;
+                                cmd.Parameters.AddWithValue("@SCAR_ID", rTAT[j].SCAR_ID);
+                                connection.Open();
+                                cmd.ExecuteNonQuery();
+                            }
                         }
                     }
                 }
-                
             }
 
             dt2 = this.GetTAT();
