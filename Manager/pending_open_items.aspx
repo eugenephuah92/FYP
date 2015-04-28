@@ -10,115 +10,57 @@
                     Pending Open Action Items
                 </div>
                     <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>SCAR ID</th>
-                                <th>S2 - Containment Action</th>
-                                <th>S5 - Corrective Action</th>
-                                <th>S6 - Permanent Corrective Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>100001</td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>10/04/2013</div>
-                                    <div><strong>Responsible Person: </strong>Wai Moh</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>05/12/2014</div>
-                                    <div><strong>Responsible Person: </strong>Wai Moh</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-remove"></span></div>
-                                    <div><strong>Implementation Date: </strong>N/A</div>
-                                    <div><strong>Responsible Person: </strong>N/A</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>100002</td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-remove"></span></div>
-                                    <div><strong>Implementation Date: </strong>N/A</div>
-                                    <div><strong>Responsible Person: </strong>N/A</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>13/01/2014</div>
-                                    <div><strong>Responsible Person: </strong>Kin Tat</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>28/09/2014</div>
-                                    <div><strong>Responsible Person: </strong>Kin Tat</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>100003</td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>22/06/2013</div>
-                                    <div><strong>Responsible Person: </strong>Wei Keong</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>12/02/2014</div>
-                                    <div><strong>Responsible Person: </strong>Wei Keong</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>01/12/2014</div>
-                                    <div><strong>Responsible Person: </strong>Wei Keong</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>100004</td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>04/03/2013</div>
-                                    <div><strong>Responsible Person: </strong>Azlan</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-remove"></span></div>
-                                    <div><strong>Implementation Date: </strong>N/A</div>
-                                    <div><strong>Responsible Person: </strong>N/A</div>
-                                </td>
-                                <td>
-                                    <div><span class="glyphicon glyphicon-ok"></span></div>
-                                    <div><strong>Implementation Date: </strong>05/04/2014</div>
-                                    <div><strong>Responsible Person: </strong>Azlan</div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
+                        <asp:GridView ID="displayPendingOpenItems" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                       <Columns>
+                                           <asp:BoundField HeaderText="CAR Number" DataField="CAR Number"  />
+                                           <asp:TemplateField HeaderText="S2 - Containment Action">
+                                            <ItemTemplate>
+                                               
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackContainmentAction" Checked='<%#Convert.ToBoolean(Eval("S2 Track Containment Action"))%>' />
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls21ContainmentAction" Text='<%#Eval("S21 Containment Action")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls22ImplementationDate" Text='<%#Eval("S22 Implementation Date")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls23ResponsiblePerson" Text='<%#Eval("S23 Responsible Person")%>'/>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="S5 - Corrective Action">
+                                            <ItemTemplate>
+                                               
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackCorrectiveAction" Checked='<%#Convert.ToBoolean(Eval("S5 Track Corrective Action"))%>' />
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls51CorrectiveAction" Text='<%#Eval("S51 Corrective Action")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls52ImplementationDate" Text='<%#Eval("S52 Implementation Date")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls53ResponsiblePerson" Text='<%#Eval("S53 Responsible Person")%>'/>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                           <asp:TemplateField HeaderText="S6 - Permanent Corrective Action">
+                                            <ItemTemplate>
+                                               
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackPermanentCorrectiveAction" Checked='<%#Convert.ToBoolean(Eval("S6 Track Permanent Corrective Action"))%>' />
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls61PermanentCorrectiveAction" Text='<%#Eval("S61 Permanent Corrective Action")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls62ImplementationDate" Text='<%#Eval("S62 Implementation Date")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lbls63ResponsiblePerson" Text='<%#Eval("S63 Responsible Person")%>'/>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                       </Columns>
+                                   
+                                       </asp:GridView>
+                        
                         <div class="form-group" style="text-align:center">
                             <div>
                                 <asp:Button CssClass="btn btn-success" Text="Export" runat="server" />
                                 <asp:Button CssClass="btn btn-success" Text="Print" runat="server" />
                             </div>
                         </div>
-                        <nav style="padding-right:30pt">
-                                <ul class="pagination pull-right">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>         
+                             
                     </div>
             </div>
         </div><!--/.col-md-12-->

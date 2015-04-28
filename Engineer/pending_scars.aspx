@@ -40,7 +40,7 @@
                                        <Columns>
                                            <asp:TemplateField HeaderText="CAR Number">
                                             <ItemTemplate>
-                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("scars_forms.aspx?scar_id={0}&response_id={1}", Eval("id"), Eval("Response ID")) %>'></asp:HyperLink>
+                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("scars_forms.aspx?scar_id={0}", Eval("id")) %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
                                            <asp:BoundField HeaderText="Defect Name" DataField="Defect Name"  />

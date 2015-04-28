@@ -21,15 +21,6 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.Label ProcessedMessage;
     
     /// <summary>
-    /// Label1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label Label1;
-    
-    /// <summary>
     /// txtCarNo control.
     /// </summary>
     /// <remarks>
@@ -1020,15 +1011,6 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.SqlDataSource AttachmentsSqlDataSource;
     
     /// <summary>
-    /// lstDefectMode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstDefectMode;
-    
-    /// <summary>
     /// chk8Dapproval control.
     /// </summary>
     /// <remarks>
@@ -1065,6 +1047,24 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.Button btnRequestApproval;
     
     /// <summary>
+    /// ApprovalGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView ApprovalGridView;
+    
+    /// <summary>
+    /// lstDefectMode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstDefectMode;
+    
+    /// <summary>
     /// chkMOR control.
     /// </summary>
     /// <remarks>
@@ -1072,6 +1072,24 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.CheckBox chkMOR;
+    
+    /// <summary>
+    /// lstCurrentStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstCurrentStatus;
+    
+    /// <summary>
+    /// btnChangeStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnChangeStatus;
     
     /// <summary>
     /// btnSave2 control.
@@ -1090,4 +1108,13 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnSubmit;
+    
+    /// <summary>
+    /// btnParse control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnParse;
 }

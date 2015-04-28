@@ -10,4 +10,22 @@
 
 
 public partial class Manager_pending_open_items {
+    
+    /// <summary>
+    /// lblNoRows control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
+    
+    /// <summary>
+    /// displayPendingOpenItems control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView displayPendingOpenItems;
 }

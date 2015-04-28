@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BSG.Core">
+      <HintPath>.\BSG.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Mail, Version=3.0.15017.1203, Culture=neutral, PublicKeyToken=6dc438ab78a525b3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\GitHub\FYP\Mail.dll</HintPath>

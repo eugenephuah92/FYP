@@ -10,64 +10,26 @@
                     8D Approval Requests
                 </div>
                     <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>SCAR ID</th>
-                                <th>QE Name (Sender)</th>
-                                <th>Sent Date</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>100001</td>
-                                <td>Shazmeen Zainudin</td>
-                                <td>
-                                    <div><strong>Date: </strong>23/02/2014</div>
-                                    <div><strong>Time: </strong>12.06pm</div>
-                                </td>
-                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
-                            </tr>
-                            <tr>
-                                <td>100002</td>
-                                <td>Hairul Azam</td>
-                                <td>
-                                    <div><strong>Date: </strong>12/06/2014</div>
-                                    <div><strong>Time: </strong>9.10am</div>
-                                </td>
-                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
-                            </tr>
-                            <tr>
-                                <td>100003</td>
-                                <td>SharmilaDevi Marimuthu</td>
-                                <td>
-                                    <div><strong>Date: </strong>10/11/2014</div>
-                                    <div><strong>Time: </strong>10.50am</div>
-                                </td>
-                                <td><a class="btn btn-success" href="8Dapproval.aspx">View SCAR</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <nav style="padding-right:30pt">
-                                <ul class="pagination pull-right">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                        </nav>         
+                        <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
+                        <asp:GridView ID="display8DRequests" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                       <Columns>
+                                           <asp:BoundField HeaderText="SCAR ID" DataField="CAR Number"  />
+                                           <asp:BoundField HeaderText="Assigned QE (Sender)" DataField="Assigned QE"  />
+                                           <asp:TemplateField HeaderText="Sent Date">
+                                            <ItemTemplate>
+                                               <asp:Label runat="server" ID="lblSentDate" Text='<%#Eval("Sent Date")%>'/>
+                                               <br />
+                                               <asp:Label runat="server" ID="lblSentTime" Text='<%#Eval("Sent Time")%>'/>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                           <asp:TemplateField HeaderText="Action">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="linkSCAR" runat="server" Text="View SCAR" NavigateUrl='<%# String.Format("8Dapproval.aspx?scar_id={0}", Eval("id")) %>' />
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                       </Columns>
+                                   
+                      </asp:GridView>  
                     </div>
             </div>
         </div><!--/.col-md-12-->

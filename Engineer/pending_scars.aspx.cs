@@ -31,7 +31,6 @@ public partial class Engineer_pending_scars : System.Web.UI.Page
 
         string DatabaseName = "AutoSCARConnectionString";
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
-        string tempSCARID = null;
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
@@ -57,7 +56,6 @@ public partial class Engineer_pending_scars : System.Web.UI.Page
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
 
-                tempSCARID = rdr["id"].ToString();
             }
             
         }
@@ -94,21 +92,6 @@ public partial class Engineer_pending_scars : System.Web.UI.Page
             }
         }
 
-        int k = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT id FROM dbo.SCAR_Response WHERE scar_id = @scar_id", conn);
-            select.Parameters.AddWithValue("@scar_id", tempSCARID);
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[k]["Response ID"] = rdr["id"].ToString();
-                k++;
-            }
-        }
-        
         displayPendingSCAR.DataSource = dt;
         displayPendingSCAR.DataBind();
 

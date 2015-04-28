@@ -10,26 +10,47 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
+using Jabil;
 
 public partial class Engineer_scars_forms : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         ddlDefectType();
         ddlRootCauseOption();
         ddlWCMApproval();
         ddlQMApproval();
-        
-        string tempSCARID = Request.QueryString["scar_id"];
-        string tempResponseID = Request.QueryString["response_id"];
 
+        string tempSCARID = Request.QueryString["scar_id"];
+        
         if(!String.IsNullOrEmpty(tempSCARID))
         {
+            Display_Approval_GridView();
             Read_Existing_Request_Records(tempSCARID);
-        }
-        if (!String.IsNullOrEmpty(tempResponseID))
-        {
-            Read_Existing_Response_Records(tempResponseID);
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand select = new SqlCommand("SELECT id, scar_stage FROM dbo.SCAR_Request WHERE id = @tempSCARID AND scar_stage = @scarStage", conn);
+                select.Parameters.AddWithValue("tempSCARID", tempSCARID);
+                select.Parameters.AddWithValue("scarStage", "Pending SCAR");
+                SqlDataReader reader;
+                reader = select.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    Read_Existing_Response_Records(tempSCARID);
+                }
+                else
+                {
+                    //uploadFile.Enabled = false;
+                    //chk8Dapproval.Enabled = false;
+                    btnSubmit.Enabled = false;
+                }
+            }
+
         }
     }
 
@@ -56,7 +77,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 
                 lstRootCause.DataSource = select.ExecuteReader();
                 lstRootCause.DataTextField = "root_cause";
-                lstRootCause.DataValueField = "id";
+                lstRootCause.DataValueField = "root_cause";
                 lstRootCause.DataBind();
                 lstRootCause.Items.Insert(0, new ListItem("Please Select Root Cause", "0"));
             }
@@ -80,6 +101,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 lstWCM.DataTextField = "employee_name";
                 lstWCM.DataValueField = "employee_ID";
                 lstWCM.DataBind();
+                lstWCM.Items.Insert(0, new ListItem("Please Select WCM", "0"));
             }
         }
     }
@@ -102,6 +124,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 lstQM.DataTextField = "employee_name";
                 lstQM.DataValueField = "employee_ID";
                 lstQM.DataBind();
+                lstQM.Items.Insert(0, new ListItem("Please Select QM", "0"));
             }
         }
     }
@@ -178,7 +201,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     }
 
     /* Populate Response Form based on existing data */
-    protected void Read_Existing_Response_Records(string response_id)
+    protected void Read_Existing_Response_Records(string scar_id)
     {
         if (!IsPostBack)
         {
@@ -187,8 +210,8 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(connect))
             {
                 conn.Open();
-                SqlCommand select = new SqlCommand("SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id FROM dbo.SCAR_Response WHERE id = @response_id", conn);
-                select.Parameters.AddWithValue("response_id", response_id);
+                SqlCommand select = new SqlCommand("SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id FROM dbo.SCAR_Response WHERE scar_id = @scar_id", conn);
+                select.Parameters.AddWithValue("scar_id", scar_id);
                 SqlDataReader reader;
                 reader = select.ExecuteReader();
 
@@ -1109,7 +1132,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                 var extension = Path.GetExtension(postedFile.FileName);
                 string filename = Path.GetFileName(postedFile.FileName);
                 string contentType = postedFile.ContentType;
-                string tempResponseID = Request.QueryString["response_id"];
+                string tempSCARID = Request.QueryString["scar_id"];
 
                 if (!disallowedExtensions.Contains(extension))
                 {
@@ -1124,20 +1147,18 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                             string constr = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
-                                string query = "insert into dbo.SCAR_attachments (file_name, file_type, file_path, response_id)values (@Name, @ContentType, @File_path, @id)";
-                                using (SqlCommand cmd = new SqlCommand(query))
-                                {
-                                    cmd.Connection = con;
-                                    cmd.Parameters.AddWithValue("@Name", filename);
-                                    cmd.Parameters.AddWithValue("@ContentType", contentType);
-                                    cmd.Parameters.AddWithValue("@File_path", path);
-                                    cmd.Parameters.AddWithValue("@id", tempResponseID);
-                                    con.Open();
-                                    cmd.ExecuteNonQuery();
-                                    ProcessedMessage.Text = "Your files have been uploaded succesfully!";
-                                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
-                                    con.Close();
-                                }
+                                con.Open();
+                                SqlCommand insert = new SqlCommand(@"INSERT INTO SCAR_attachments (file_name, file_type, file_path, scar_id) VALUES 
+(@Name, @ContentType, @File_path, @id)", con);
+                                insert.Parameters.AddWithValue("@Name", filename);
+                                insert.Parameters.AddWithValue("@ContentType", contentType);
+                                insert.Parameters.AddWithValue("@File_path", path);
+                                insert.Parameters.AddWithValue("@id", 2);  
+                                insert.ExecuteNonQuery();
+                                ProcessedMessage.Text = "Your files have been uploaded succesfully!";
+                                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                                con.Close();
+                                
                             }
                         }
                     }
@@ -1152,7 +1173,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
         catch (Exception err)
         {
-            ProcessedMessage.Text = "Unable to upload files! Please Try Again!";
+            ProcessedMessage.Text = "Unable to upload files! Please Try Again!" + err.Message;
             ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
         }
         finally
@@ -1218,7 +1239,7 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                     addResponse.Parameters.AddWithValue("@s73_responsible_person", scar_response_details.S73_responsible_person);
                     addResponse.Parameters.AddWithValue("@s74_verifier", scar_response_details.S74_verifier);
                     addResponse.Parameters.AddWithValue("@s75_verifier_email", scar_response_details.S75_verifier_email);
-                    addResponse.Parameters.AddWithValue("@s76_verify_corrective_action_result_effectiveness", scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results);
+                    //addResponse.Parameters.AddWithValue("@s76_verify_corrective_action_result_effectiveness", scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results);
                     addResponse.Parameters.AddWithValue("@defect_modes", scar_response_details.Defect_mode);
                     addResponse.Parameters.AddWithValue("@mor_calculated", scar_response_details.MOR_Calculated);
                     addResponse.Parameters.AddWithValue("@status", "save");
@@ -1226,15 +1247,25 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
 
                     addResponse.ExecuteNonQuery();
 
-                    SqlCommand update_response = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Request SET scar_stage = @scar_stage WHERE id = @scar_id", con);
+                    try
+                    {
+                        SqlCommand update_response = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage WHERE id = @scar_id", con);
 
-                    update_response.Parameters.AddWithValue("@scar_id", temp_SCAR_ID);
-                    update_response.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+                        update_response.Parameters.AddWithValue("@scar_id", temp_SCAR_ID);
+                        update_response.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
 
-                    update_response.ExecuteNonQuery();
+                        update_response.ExecuteNonQuery();
 
-                    ProcessedMessage.Text = "SCAR Response has been saved!";
-                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                        ProcessedMessage.Text = "SCAR Response has been saved!";
+                        ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                    }
+                    catch(Exception er)
+                    {
+                        
+                    }
+
+                    
+
                 }
                 catch (Exception err)
                 {
@@ -1244,6 +1275,8 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                 finally
                 {
                     con.Close();
+                    Upload_Files();
+                    Click_Request_Approval(null, null);
                 }
             }
             else
@@ -1260,7 +1293,7 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
                     {
                         if (temp_SCAR_ID.CompareTo(reader["scar_id"]) == 0 && reader["status"].Equals("save"))
                         {
-                            SqlCommand update_response = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Response SET root_cause_option = @root_cause_option, 
+                            SqlCommand update_response = new SqlCommand(@"UPDATE dbo.SCAR_Response SET root_cause_option = @root_cause_option, 
 s0_overall_summary = @overall_summary, s1_problem_verification = @problem_verification, problem_verification_status = @problem_verification_status,
 s21_containment_action = @s21_containment_action, s22_implementation_date = @s22_implementation_date, s23_responsible_person = @s23_responsible_person, 
 s24_containment_result = @s24_containment_result, screening_area = @screening_area, track_containment_action = @track_containment_action, 
@@ -1533,7 +1566,6 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         con.Open();
 
         string tempSCARID = Request.QueryString["scar_id"];
-        string tempResponseID = Request.QueryString["response_id"];
 
         Employee WCM_details = new Employee();
         Employee QM_details = new Employee();
@@ -1564,7 +1596,7 @@ mor_calculated = @mor_calculated, status = @status WHERE scar_id = @scar_id", co
         try
         {
             // SQL command to insert data into database
-                /*SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
+                SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
 VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
 
                 addWCM.Parameters.AddWithValue("@recipient_email_address", WCM_details.Employee_email);
@@ -1582,10 +1614,10 @@ VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_conten
                 addQM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
                 addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
 
-                addQM.ExecuteNonQuery();*/
+                addQM.ExecuteNonQuery();
 
-                SqlCommand addApproval = new SqlCommand(@"INSERT INTO Approval_8D (approval_status_WCM, approval_status_QM, comment_WCM, comment_QM, sent_date, sent_time, reject_count_WCM, reject_count_QM, scar_id, response_id)
-VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @sent_date, @sent_time, @reject_count_WCM, @reject_count_QM, @scar_id, @response_id)", con);
+                SqlCommand addApproval = new SqlCommand(@"INSERT INTO Approval_8D (approval_status_WCM, approval_status_QM, comment_WCM, comment_QM, sent_date, sent_time, reject_count_WCM, reject_count_QM, scar_id)
+VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @sent_date, @sent_time, @reject_count_WCM, @reject_count_QM, @scar_id)", con);
 
 
                 
@@ -1602,7 +1634,6 @@ VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @s
                 addApproval.Parameters.AddWithValue("@reject_count_WCM", 0);
                 addApproval.Parameters.AddWithValue("@reject_count_QM", 0);
                 addApproval.Parameters.AddWithValue("@scar_id", tempSCARID);
-                addApproval.Parameters.AddWithValue("@response_id", tempResponseID);
 
                 addApproval.ExecuteNonQuery();
                 ProcessedMessage.Text = "8D Approval Request has been successfully sent!";
@@ -1618,31 +1649,7 @@ VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @s
             con.Close();
         }
     }
-
-    // Get Managers data for 8D Approval
-    protected void Save_8D_Request(object sender, EventArgs e)
-    {
-        SCAR_Response scar_response_details = new SCAR_Response();
-        bool checkEmptyFields = true;
-        /* 8D Approval Section */
-        if (!string.IsNullOrEmpty(lstWCM.Text)) // Work Cell Manager
-        {
-            scar_response_details.Work_cell_manager = lstWCM.Text;
-        }
-        else
-        {
-            checkEmptyFields = false;
-        }
-        if (!string.IsNullOrEmpty(lstQM.Text)) // Man
-        {
-            scar_response_details.Quality_manager = lstQM.Text;
-        }
-        else
-        {
-            checkEmptyFields = false;
-        }
-
-    }
+  
 
     // Delete Attachments from Server File Manager
     protected void AttachmentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1651,4 +1658,318 @@ VALUES (@approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @s
         string FileToDelete = Server.MapPath(@"~\Text_Files\" + cell.Text);
         File.Delete(FileToDelete);
     }
+
+
+    // Parse Data into Notepad
+    protected void Parse_Data_Into_Notepad(object sender, EventArgs e)
+    {
+        string scar_type = null;
+        SCAR scar_details = new SCAR();
+        SCAR_Response scar_response_details = new SCAR_Response();
+        string DatabaseName = "AutoSCARConnectionString";
+        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        using (SqlConnection conn = new SqlConnection(connect))
+        {
+            conn.Open();
+            SqlCommand selectRequest = new SqlCommand("SELECT id, car_no, car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity, defect_type, non_conformity_reported, reject_reason, expected_date_close FROM dbo.SCAR_Request WHERE id = @scar_id", conn);
+            selectRequest.Parameters.AddWithValue("scar_id", 2);
+            SqlDataReader reader;
+            reader = selectRequest.ExecuteReader();
+
+            while (reader.Read())
+            {
+                scar_details.Car_no = Convert.ToString(reader["car_no"]);
+                scar_details.Car_revision = Convert.ToString(reader["car_revision"]);
+                scar_details.Car_type = Convert.ToString(reader["car_type"]);
+                scar_details.Pre_alert = Convert.ToString(reader["pre_alert"]);
+                scar_details.Related_car_no = Convert.ToString(reader["related_car_no"]);
+                scar_details.Related_car_rev = Convert.ToString(reader["related_car_ref"]);
+                scar_details.Originator = Convert.ToString(reader["originator"]);
+                scar_details.Recurrence = Convert.ToString(reader["recurrence"]);
+                scar_details.Supplier_contact = Convert.ToString(reader["supplier_contact"]);
+                scar_details.Supplier_email = Convert.ToString(reader["supplier_email"]);
+                scar_details.Issued_date = Convert.ToDateTime(reader["issued_date"]).ToString("yyyy-MM-dd");
+                scar_details.Originator_department = Convert.ToString(reader["originator_dept"]);
+                scar_details.Originator_contact = Convert.ToString(reader["originator_contact"]);
+                scar_details.Part_no = Convert.ToString(reader["part_no"]);
+                scar_details.Part_description = Convert.ToString(reader["part_description"]);
+                scar_details.Business_unit = Convert.ToString(reader["business_unit"]);
+                scar_details.Dept_pl = Convert.ToString(reader["dept_pl"]);
+                scar_details.Commodity = Convert.ToString(reader["commodity"]);
+                scar_details.Defect_quantity = Convert.ToInt16(reader["defect_quantity"]);
+                scar_details.Defect_type = Convert.ToString(reader["defect_type"]);
+                scar_details.Non_conformity_reported= Convert.ToString(reader["non_conformity_reported"]);
+                scar_details.Reject_reason = Convert.ToString(reader["reject_reason"]);
+                scar_details.Expected_date_close = Convert.ToDateTime(reader["expected_date_close"]).ToString("yyyy-MM-dd");
+            }
+            reader.Close();
+
+            SqlCommand selectResponse = new SqlCommand("SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id FROM dbo.SCAR_Response WHERE scar_id = @scar_id", conn);
+            selectResponse.Parameters.AddWithValue("scar_id", 2);
+            reader = selectResponse.ExecuteReader();
+
+            while (reader.Read())
+            {
+                scar_response_details.Root_cause_option = Convert.ToString(reader["root_cause_option"]);
+                scar_response_details.Overall_summary = Convert.ToString(reader["s0_overall_summary"]);
+                scar_response_details.Problem_verification = Convert.ToString(reader["s1_problem_verification"]);
+                scar_response_details.Problem_verification_status = Convert.ToString(reader["problem_verification_status"]);
+                scar_response_details.S21_containment_action = Convert.ToString(reader["s21_containment_action"]);
+                scar_response_details.S22_implementation_date = Convert.ToDateTime(reader["s22_implementation_date"]).ToString("yyyy-MM-dd");
+                scar_response_details.S23_responsible_person = Convert.ToString(reader["s23_responsible_person"]);
+                scar_response_details.S24_containment_result = Convert.ToString(reader["s24_containment_result"]);
+                scar_response_details.Screening_area = Convert.ToString(reader["screening_area"]);
+                scar_response_details.S31_failure_analysis = Convert.ToString(reader["s31_failure_analysis"]);
+                scar_response_details.S32_failure_analysis_results = Convert.ToString(reader["s32_failure_analysis_results"]);
+                scar_response_details.Man = Convert.ToString(reader["s4_man"]);
+                scar_response_details.Method = Convert.ToString(reader["s4_method"]);
+                scar_response_details.Material = Convert.ToString(reader["s4_material"]);
+                scar_response_details.Machine = Convert.ToString(reader["s4_machine"]);
+                scar_response_details.S51_corrective_action = Convert.ToString(reader["s51_corrective_action"]);
+                scar_response_details.S52_implementation_date = Convert.ToDateTime(reader["s52_implementation_date"]).ToString("yyyy-MM-dd");
+                scar_response_details.S53_responsible_person = Convert.ToString(reader["s53_responsible_person"]);
+                scar_response_details.S61_permanent_corrective_action = Convert.ToString("s61_permanent_corrective_action");
+                scar_response_details.S62_implementation_date = Convert.ToDateTime(reader["s62_implementation_date"]).ToString("yyyy-MM-dd");
+                scar_response_details.S63_responsible_person = Convert.ToString(reader["s63_responsible_person"]);
+                scar_response_details.S71_verify_effectiveness_of_corrective_actions = Convert.ToString(reader["s71_verify_corrective_action_effectiveness"]);
+                scar_response_details.S72_implementation_date = Convert.ToDateTime(reader["s72_implementation_date"]).ToString("yyyy-MM-dd");
+                scar_response_details.S73_responsible_person = Convert.ToString(reader["s73_responsible_person"]);
+                scar_response_details.S74_verifier = Convert.ToString(reader["s74_verifier"]);
+                scar_response_details.S75_verifier_email = Convert.ToString(reader["s75_verifier_email"]);
+
+                if (scar_type.Equals("SCAR Type 4"))
+                {
+                    scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results = Convert.ToString(reader["s76_verify_corrective_action_result_effectiveness"]);
+                } 
+            }
+        }
+
+        string path = Server.MapPath(@"~\Text_Files\test.txt");
+        using (System.IO.StreamWriter file = new System.IO.StreamWriter(path))
+        {
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("EMG CARE Supplier Corrective Action Request (SCAR)");
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("Section1: (For Reference Only)");
+            file.WriteLine("==================================================================");
+            file.WriteLine("Car No: " + scar_details.Car_no);
+            file.WriteLine("Car Revision " + scar_details.Car_revision);
+            file.WriteLine("Car Type: " + scar_details.Car_type);
+            file.WriteLine("Pre Alert: " + scar_details.Pre_alert);
+            file.WriteLine("Related CAR No: " + scar_details.Related_car_no);
+            file.WriteLine("Related CAR Rev: " + scar_details.Related_car_rev);
+            file.WriteLine("Originator: " + scar_details.Originator);
+            file.WriteLine("Recurrence (Ref.No): " + scar_details.Recurrence);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("Supplier Contact: " + scar_details.Supplier_contact);
+            file.WriteLine("Supplier Email: " + scar_details.Supplier_email);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("Part No: " + scar_details.Part_no);
+            file.WriteLine("Part Description: " + scar_details.Part_description);
+            file.WriteLine("Business Unit: " + scar_details.Business_unit);
+            file.WriteLine("Dept/PL: " + scar_details.Dept_pl);
+            file.WriteLine("Commodity: " + scar_details.Commodity);
+            file.WriteLine("Defect Quantity: " + scar_details.Defect_quantity);
+            file.WriteLine("Defect Type: " + scar_details.Defect_type);
+            file.WriteLine("Non-Conformity Reported: " + scar_details.Non_conformity_reported);
+            file.WriteLine("");
+            file.WriteLine("Reject Reason for Previous Revision: " + scar_details.Reject_reason);
+            file.WriteLine("");
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("Expected Date Close: " + scar_details.Expected_date_close);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Section2");
+            file.WriteLine("==================================================================");
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("=========================");
+            file.WriteLine("==*Root Cause Category*==");
+            file.WriteLine("=========================");
+            file.WriteLine(scar_response_details.Root_cause_option);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("====================");
+            file.WriteLine("*S0-Overall Summary*");
+            file.WriteLine("====================");
+            file.WriteLine("**S0-Overall Summary = " + scar_response_details.Overall_summary);
+            file.WriteLine("");
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("=========================");
+            file.WriteLine("*S1-Problem Verification*");
+            file.WriteLine("=========================");
+            file.WriteLine("**S1-Problem Verification = " + scar_response_details.Problem_verification);
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("==*Status*==");
+            file.WriteLine(scar_response_details.Problem_verification_status);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("=======================");
+            file.WriteLine("*S2-Containment Action*");
+            file.WriteLine("=======================");
+            file.WriteLine("**S21-Containment Action = " + scar_response_details.S21_containment_action);
+            file.WriteLine("");
+            file.WriteLine("**S22-Implementation Date = " + scar_response_details.S22_implementation_date);
+            file.WriteLine("");
+            file.WriteLine("**S23-Responsible Person = " + scar_response_details.S23_responsible_person);
+            file.WriteLine("");
+            file.WriteLine("**S24-Containment Result = " + scar_response_details.S24_containment_result);
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("==*Screening Area*==");
+            file.WriteLine(scar_response_details.Screening_area);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("=====================");
+            file.WriteLine("*S3-Failure Analysis*");
+            file.WriteLine("=====================");
+            file.WriteLine("**S31-Failure Analysis = " + scar_response_details.S31_failure_analysis);
+            file.WriteLine("");
+            file.WriteLine("**S32-Failure Analysis Results = " + scar_response_details.S32_failure_analysis_results);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("===============");
+            file.WriteLine("*S4-Root Cause*");
+            file.WriteLine("===============");
+            file.WriteLine("**S4 =");
+            file.WriteLine("Man = " + scar_response_details.Man);
+            file.WriteLine("");
+            file.WriteLine("Method = " + scar_response_details.Method);
+            file.WriteLine("");
+            file.WriteLine("Material = " + scar_response_details.Material);
+            file.WriteLine("");
+            file.WriteLine("Machine = " + scar_response_details.Machine);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("======================");
+            file.WriteLine("*S5-Corrective Action*");
+            file.WriteLine("======================");
+            file.WriteLine("**S51-Corrective Action = " + scar_response_details.S51_corrective_action);
+            file.WriteLine("");
+            file.WriteLine("**S52-Implementation Date = " + scar_response_details.S52_implementation_date);
+            file.WriteLine("");
+            file.WriteLine("**S53-Responsible Person = " + scar_response_details.S53_responsible_person);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("================================");
+            file.WriteLine("*S6-Permanent Corrective Action*");
+            file.WriteLine("================================");
+            file.WriteLine("**S61-Permanent Corrective Action = " + scar_response_details.S61_permanent_corrective_action);
+            file.WriteLine("");
+            file.WriteLine("**S62-Implementation Date = " + scar_response_details.S62_implementation_date);
+            file.WriteLine("");
+            file.WriteLine("**S63-Responsible Person = " + scar_response_details.S63_responsible_person);
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("===============================================");
+            file.WriteLine("*S7-Verify Effectiveness of Corrective Actions*");
+            file.WriteLine("===============================================");
+            file.WriteLine("**S71-Verify Effectiveness of Corrective Actions = " + scar_response_details.S71_verify_effectiveness_of_corrective_actions);
+            file.WriteLine("");
+            file.WriteLine("**S72-Implementation Date(Start of Monitoring) = " + scar_response_details.S72_implementation_date);
+            file.WriteLine("");
+            file.WriteLine("**S73-Responsible Person = " + scar_response_details.S73_responsible_person);
+            file.WriteLine("");
+            file.WriteLine("**S74-Verifier = " + scar_response_details.S74_verifier);
+            file.WriteLine("");
+            file.WriteLine("**S75-Verifier Email = " + scar_response_details.S75_verifier_email);
+            if (scar_type.Equals("SCAR Type 4"))
+            {
+                file.WriteLine("");
+                file.WriteLine("**S76-Verify Effectiveness of Corrective Actions Result = " + scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results);
+            } 
+            file.WriteLine("------------------------------------------------------------------");
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("==================================================================");
+        }
+    }
+
+    // Change SCAR Status
+    protected void Change_SCAR_Status(object sender, EventArgs e)
+    {
+        string scar_id = Request.QueryString["scar_id"];
+        if(!String.IsNullOrEmpty(scar_id))
+        {
+            string SCAR_Status = lstCurrentStatus.SelectedItem.Value;
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand update = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_status = @scar_status WHERE id = @scar_id", conn);
+                    update.Parameters.AddWithValue("@scar_id", scar_id);
+                    update.Parameters.AddWithValue("@scar_status", SCAR_Status);
+                    update.ExecuteNonQuery();
+                    ProcessedMessage.Text = "SCAR Status has been updated to !" + SCAR_Status;
+                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                }
+                catch (Exception err)
+                {
+                    ProcessedMessage.Text = "SCAR Status cannot be changed! Please try again!";
+                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                } 
+            }
+        }
+        
+    }
+
+    // Display Approval Status
+    protected void Display_Approval_GridView()
+    {
+        string scar_id = Request.QueryString["scar_id"];
+
+        if(!String.IsNullOrEmpty(scar_id))
+        {
+            SqlDataReader rdr;
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("WCM Approval Status");
+            dt.Columns.Add("WCM Comment");
+            dt.Columns.Add("QM Approval Status");
+            dt.Columns.Add("QM Comment");
+
+            DataRow dr;
+
+            string DatabaseName = "AutoSCARConnectionString";
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand select = new SqlCommand(@"SELECT approval_status_WCM, approval_status_QM, comment_WCM, comment_QM 
+FROM dbo.Approval_8D WHERE scar_id = @scar_id", conn);
+                select.Parameters.AddWithValue("@scar_id", scar_id);
+                rdr = select.ExecuteReader();
+                while (rdr.Read())
+                {
+                    dr = dt.NewRow();
+
+                    dr["WCM Approval Status"] = rdr["approval_status_WCM"].ToString();
+                    dr["QM Approval Status"] = rdr["approval_status_QM"].ToString();
+                    dr["WCM Comment"] = rdr["comment_WCM"].ToString();
+                    dr["QM Comment"] = rdr["comment_QM"].ToString();
+
+                    dt.Rows.Add(dr);
+                    dt.AcceptChanges();
+
+                }
+            }
+            ApprovalGridView.DataSource = dt;
+            ApprovalGridView.DataBind();
+        }
+        
+    }
+
 }
