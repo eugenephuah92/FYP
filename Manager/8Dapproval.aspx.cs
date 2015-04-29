@@ -11,9 +11,10 @@ using System.Configuration;
 using System.IO;
 public partial class Manager_8Dapproval : System.Web.UI.Page
 {
+    string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
-        string DatabaseName = "AutoSCARConnectionString";
+        
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         string scar_id = Request.QueryString["scar_id"];
         if (!String.IsNullOrEmpty(scar_id))
@@ -204,7 +205,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                             uploadFile.PostedFile.SaveAs(Server.MapPath(@"~\Attachments\" + filename.Trim()));
                             string path = @"~\Attachments\" + filename.Trim();
                             //byte[] bytes = br.ReadBytes((Int32)fs.Length);
-                            string DatabaseName = "AutoSCARConnectionString";
+                            
                             string constr = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
@@ -252,7 +253,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
         {
             string approvalStatus = rdbApproval.SelectedItem.Value;
             string comment = txtComment.Text;
-            string DatabaseName = "AutoSCARConnectionString";
+            
             string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
             int tempRejectCountWCM = 0;
 

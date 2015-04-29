@@ -11,10 +11,11 @@ using System.Configuration;
 
 public partial class Engineer_home : System.Web.UI.Page
 {
+    string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataReader rdr;
-        string DatabaseName = "AutoSCARConnectionString";
+        
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
 
         int newSCAR = 0;

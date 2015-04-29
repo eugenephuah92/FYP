@@ -364,7 +364,7 @@
                                             
                                         DeleteCommand="Delete from dbo.SCAR_Request where id = 
                                             @id" 
-                                        ConnectionString="<%$ ConnectionStrings:AutoSCARConnectionString %>">
+                                        ConnectionString="<%$ ConnectionStrings:JabilDatabase %>">
                                         <DeleteParameters>
                                             <asp:Parameter Name="scar_id" />
                                             

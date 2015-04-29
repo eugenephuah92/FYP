@@ -10,6 +10,7 @@ using System.Web.Configuration;
 using System.Configuration;
 public partial class Manager_pending_open_items : System.Web.UI.Page
 {
+    string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataReader rdr;
@@ -30,7 +31,7 @@ public partial class Manager_pending_open_items : System.Web.UI.Page
         dt.Columns.Add("S63 Responsible Person");
         dt.Columns.Add("S6 Track Permanent Corrective Action");
         DataRow dr;
-        string DatabaseName = "AutoSCARConnectionString";
+        
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {

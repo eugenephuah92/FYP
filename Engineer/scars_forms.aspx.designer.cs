@@ -993,6 +993,15 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.FileUpload uploadFile;
     
     /// <summary>
+    /// btnUpload control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnUpload;
+    
+    /// <summary>
     /// AttachmentsGridView control.
     /// </summary>
     /// <remarks>
@@ -1108,13 +1117,4 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnSubmit;
-    
-    /// <summary>
-    /// btnParse control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnParse;
 }

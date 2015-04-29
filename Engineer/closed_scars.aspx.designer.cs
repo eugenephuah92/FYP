@@ -9,68 +9,68 @@
 
 
 
-public partial class Engineer_upload_scar_request {
+public partial class Engineer_closed_scars {
     
     /// <summary>
-    /// uploadSCARType2 control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.FileUpload uploadSCARType2;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// lblSCARType2 control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblSCARType2;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
-    /// uploadSCARType4 control.
+    /// lstFilter control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.FileUpload uploadSCARType4;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter;
     
     /// <summary>
-    /// lblSCARType4 control.
+    /// searchTxt control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblSCARType4;
+    protected global::System.Web.UI.WebControls.TextBox searchTxt;
     
     /// <summary>
-    /// btnUpload control.
+    /// btnSearch control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnUpload;
+    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
     
     /// <summary>
-    /// btnReset control.
+    /// lblNoRows control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnReset;
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
     
     /// <summary>
-    /// btnSend control.
+    /// displayClosedSCAR control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSend;
+    protected global::System.Web.UI.WebControls.GridView displayClosedSCAR;
 }

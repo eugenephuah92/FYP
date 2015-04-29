@@ -10,6 +10,7 @@ using System.Web.Configuration;
 using System.Configuration;
 public partial class Manager_8Drequest : System.Web.UI.Page
 {
+    string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataReader rdr;
@@ -23,7 +24,7 @@ public partial class Manager_8Drequest : System.Web.UI.Page
         dt.Columns.Add("Sent Time");
 
         DataRow dr;
-        string DatabaseName = "AutoSCARConnectionString";
+        
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {

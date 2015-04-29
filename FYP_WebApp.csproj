@@ -133,11 +133,11 @@
     <Content Include="css\theme-light.css" />
     <Content Include="css\theme-red.css" />
     <Content Include="email_tracker.aspx" />
+    <Content Include="Engineer\closed_scars.aspx" />
     <Content Include="Engineer\new_scars.aspx" />
     <Content Include="Engineer\pending_scars.aspx" />
     <Content Include="Engineer\upload_SCAR_request.aspx" />
     <Content Include="Engineer\change_password.aspx" />
-    <Content Include="Engineer\closed_scars.aspx" />
     <Content Include="Engineer\home.aspx" />
     <Content Include="Engineer\reports.aspx" />
     <Content Include="Engineer\reports_CAPA.aspx" />
@@ -620,6 +620,13 @@
     <Compile Include="Engineer.Site.master.designer.cs">
       <DependentUpon>Engineer.Site.master</DependentUpon>
     </Compile>
+    <Compile Include="Engineer\closed_scars.aspx.cs">
+      <DependentUpon>closed_scars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Engineer\closed_scars.aspx.designer.cs">
+      <DependentUpon>closed_scars.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Engineer\new_scars.aspx.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -763,10 +770,6 @@
     </Compile>
     <Compile Include="Engineer\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Engineer\closed_scars.aspx.cs">
-      <DependentUpon>closed_scars.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\home.aspx.cs">

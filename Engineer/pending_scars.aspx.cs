@@ -11,6 +11,7 @@ using System.Configuration;
 
 public partial class Engineer_pending_scars : System.Web.UI.Page
 {
+    string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataReader rdr;
@@ -29,7 +30,7 @@ public partial class Engineer_pending_scars : System.Web.UI.Page
         
         DataRow dr;
 
-        string DatabaseName = "AutoSCARConnectionString";
+        
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {
