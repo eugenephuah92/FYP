@@ -36,11 +36,11 @@ public partial class Manager_pending_open_items : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand(@"SELECT SCAR_Request.car_no, SCAR_Response.s21_containment_action, SCAR_Response.s22_implementation_date, 
+            SqlCommand select = new SqlCommand(@"SELECT SCAR_Request.scar_no, SCAR_Response.s21_containment_action, SCAR_Response.s22_implementation_date, 
 SCAR_Response.s23_responsible_person, SCAR_Response.screening_area, SCAR_Response.track_containment_action, SCAR_Response.s51_corrective_action, 
 SCAR_Response.s52_implementation_date, SCAR_Response.s53_responsible_person, SCAR_Response.track_corrective_action, SCAR_Response.s61_permanent_corrective_action,
 SCAR_Response.s62_implementation_date, SCAR_Response.s63_responsible_person, SCAR_Response.track_permanent_corrective_action FROM dbo.SCAR_Request INNER JOIN 
-SCAR_Response ON SCAR_Request.ID = SCAR_Response.scar_id", conn);
+dbo. SCAR_Response ON SCAR_Request.scar_no = SCAR_Response.scar_no", conn);
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
             {
@@ -51,7 +51,7 @@ SCAR_Response ON SCAR_Request.ID = SCAR_Response.scar_id", conn);
             {
                 dr = dt.NewRow();
 
-                dr["CAR Number"] = rdr["car_no"].ToString();
+                dr["CAR Number"] = rdr["scar_no"].ToString();
                 dr["S21 Containment Action"] = "Containment Action: " + rdr["s21_containment_action"].ToString();
                 dr["S22 Implementation Date"] = "Implementation Date: " + Convert.ToDateTime(rdr["s22_implementation_date"]).ToString("yyyy-MM-dd");
                 dr["S23 Responsible Person"] = "Responsible Person: " + rdr["s23_responsible_person"].ToString();

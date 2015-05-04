@@ -8,6 +8,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Summary
+                    <asp:Label ID="test" runat="server" />
                 </div>
                     <div class="panel-body">                        
                             <div class="form-group">

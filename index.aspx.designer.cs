@@ -30,13 +30,31 @@ public partial class Index {
     protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// txtUsername control.
+    /// lblInvalid control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtUsername;
+    protected global::System.Web.UI.WebControls.Label lblInvalid;
+    
+    /// <summary>
+    /// txtEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtEmail;
+    
+    /// <summary>
+    /// vldEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmail;
     
     /// <summary>
     /// txtPassword control.
@@ -46,6 +64,15 @@ public partial class Index {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtPassword;
+    
+    /// <summary>
+    /// vldPassword control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPassword;
     
     /// <summary>
     /// btnSubmit control.

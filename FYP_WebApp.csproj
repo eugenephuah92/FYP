@@ -176,6 +176,7 @@
     <Content Include="Images\Q2.jpg" />
     <Content Include="Images\Q3.jpg" />
     <Content Include="Images\Q4.jpg" />
+    <Content Include="Logout.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Jabil.sln" />
     <Content Include="Mail.dll" />
@@ -451,6 +452,7 @@
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery.fixedheadertable.min.js" />
+    <Content Include="Scripts\jquery.uploadify.js" />
     <Content Include="Scripts\MaxLength.min.js" />
     <Content Include="Scripts\notification.js" />
     <Content Include="Scripts\select2.min.js" />
@@ -693,6 +695,13 @@
     <Compile Include="forgot_password.aspx.designer.cs">
       <DependentUpon>forgot_password.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
@@ -922,6 +931,7 @@
     </Compile>
     <Compile Include="Old_App_Code\EmailContent.cs" />
     <Compile Include="Old_App_Code\Employee.cs" />
+    <Compile Include="Old_App_Code\JabilSession.cs" />
     <Compile Include="Old_App_Code\SCAR.cs" />
     <Compile Include="Old_App_Code\SCAR_Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

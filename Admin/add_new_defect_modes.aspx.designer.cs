@@ -12,15 +12,6 @@
 public partial class Admin_add_new_defect_modes {
     
     /// <summary>
-    /// txtNewDefectName control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtNewDefectName;
-    
-    /// <summary>
     /// txtNewDefectCode control.
     /// </summary>
     /// <remarks>
@@ -28,6 +19,24 @@ public partial class Admin_add_new_defect_modes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtNewDefectCode;
+    
+    /// <summary>
+    /// RequiredFieldValidatorDefectCode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectCode;
+    
+    /// <summary>
+    /// CompareValidatorDefectCode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CompareValidator CompareValidatorDefectCode;
     
     /// <summary>
     /// txtNewIPCCode control.
@@ -39,13 +48,49 @@ public partial class Admin_add_new_defect_modes {
     protected global::System.Web.UI.WebControls.TextBox txtNewIPCCode;
     
     /// <summary>
-    /// lstNewDefectType control.
+    /// RegularExpressionValidatorIPCCode control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstNewDefectType;
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorIPCCode;
+    
+    /// <summary>
+    /// txtNewDefectName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtNewDefectName;
+    
+    /// <summary>
+    /// RequiredFieldValidatorDefectName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectName;
+    
+    /// <summary>
+    /// lstNewDefectGroup control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstNewDefectGroup;
+    
+    /// <summary>
+    /// RequiredFieldValidatorDefectGroup control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectGroup;
     
     /// <summary>
     /// lstNewDefectCategory control.
@@ -57,13 +102,31 @@ public partial class Admin_add_new_defect_modes {
     protected global::System.Web.UI.WebControls.DropDownList lstNewDefectCategory;
     
     /// <summary>
-    /// TextBox1 control.
+    /// RequiredFieldValidatorDefectCategory control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox TextBox1;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectCategory;
+    
+    /// <summary>
+    /// txtNewDefectDescription control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtNewDefectDescription;
+    
+    /// <summary>
+    /// RequiredFieldValidatorDefectDesc control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectDesc;
     
     /// <summary>
     /// btnSubmit control.

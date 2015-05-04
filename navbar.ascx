@@ -23,13 +23,13 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <li class="navaccount clearfix">
-                        <a href="#">Hi, Joey</a>
+                        <a href="#">Hi, <asp:Label ID="lbl_employee_name" runat="server"/></a>
                     </li>
 
 
                     <li>
                         <div class="form-group navform">
-                            <a href="#" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
+                            <a href="../Logout.aspx" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
                         </div>
                     </li>
 

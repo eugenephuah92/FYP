@@ -17,8 +17,6 @@ public partial class Engineer_new_scars : System.Web.UI.Page
         SqlDataReader rdr;
 
         DataTable dt = new DataTable();
-
-        dt.Columns.Add("id");
         dt.Columns.Add("CAR Number");
         dt.Columns.Add("Defect Name");
         dt.Columns.Add("Description");
@@ -35,7 +33,7 @@ public partial class Engineer_new_scars : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT id, scar_type, car_no, issued_date FROM dbo.SCAR_Request WHERE scar_stage = @scar_stage", conn);
+            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date FROM dbo.SCAR_Request WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "New SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
@@ -47,8 +45,7 @@ public partial class Engineer_new_scars : System.Web.UI.Page
             {
                 dr = dt.NewRow();
 
-                dr["id"] = rdr["id"].ToString();
-                dr["CAR Number"] = rdr["car_no"].ToString();
+                dr["CAR Number"] = rdr["scar_no"].ToString();
             
                 dr["SCAR Type"] = rdr["scar_type"].ToString();
                 DateTime issued_date = (DateTime)rdr["issued_date"];

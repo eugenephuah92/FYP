@@ -9,50 +9,41 @@
 
 
 
-public partial class Engineer_home {
+public partial class Logout {
     
     /// <summary>
-    /// test control.
+    /// Form1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label test;
+    protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
     
     /// <summary>
-    /// lblNewSCAR control.
+    /// ScriptManager1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNewSCAR;
+    protected global::System.Web.UI.ScriptManager ScriptManager1;
     
     /// <summary>
-    /// lblPendingSCAR control.
+    /// lblLogOut control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblPendingSCAR;
+    protected global::System.Web.UI.WebControls.Label lblLogOut;
     
     /// <summary>
-    /// lblClosedSCAR control.
+    /// linkReturnIndex control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblClosedSCAR;
-    
-    /// <summary>
-    /// lblTotalSCAR control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblTotalSCAR;
+    protected global::System.Web.UI.WebControls.HyperLink linkReturnIndex;
 }

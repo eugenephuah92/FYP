@@ -12,6 +12,7 @@
                 	<div class="col-md-6">
                 	    <p style="padding-top:10pt"> | <asp:LinkButton ID="display10records" runat="server" Text="Show 10 Records" OnClick="Show_10_Records"/> | <asp:LinkButton ID="display50records" runat="server" Text="Show 50 Records" OnClick="Show_50_Records"/> |
                     </div>
+                   
                             <div class="row">
                                 <div class="col-md-3"  style="padding-top:10pt">
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">  
@@ -39,7 +40,7 @@
                                        <Columns>
                                            <asp:TemplateField HeaderText="CAR Number">
                                             <ItemTemplate>
-                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# Eval("id","scars_forms.aspx?scar_id={0}") %>'></asp:HyperLink>
+                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# Eval("CAR Number","scars_forms.aspx?scar_no={0}") %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
                                            <asp:BoundField HeaderText="Defect Name" DataField="Defect Name"  />

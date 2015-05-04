@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Index" Codebehind="index.aspx.cs" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Logout" Codebehind="Logout.aspx.cs" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Auto SCAR &amp; TAT - Log In</title>
+    <title>Auto SCAR &amp; TAT - Log Out</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -39,27 +39,13 @@
         </div>
         <p class="lead text-center">
             Auto SCAR & TAT System
-            <br />
-            <asp:Label runat="server" Font-Size="Medium" ID="lblInvalid" ForeColor="Red" />
         <div class="form-group clearfix">
-                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <asp:TextBox ID="txtEmail" CssClass="form-control tb" placeholder="Email Address" TextMode="Email" runat="server" />
-                    
+                <div class="input-group col-md-12 col-md-offset-2">
+                    <asp:Label ID="lblLogOut" Font-Size="Large" runat="server" ForeColor="Red" Text="You are logged out of the system!"/><br />
+                    <asp:HyperLink ID="linkReturnIndex" Font-Size="Larger" runat="server" NavigateURL="~/Index.aspx" Text="Return to Login Page"/>
                 </div>
-            <asp:RequiredFieldValidator ID="vldEmail" ErrorMessage="You must enter the Email Address!" runat="server" ValidationGroup="Login" ControlToValidate="txtEmail" ForeColor="red"/>
         </div>
-        <div class="form-group clearfix">
-                <div class="input-group"> <span class="input-group-addon"><i class="fa fa-lock"></i>&nbsp;</span>
-                    <asp:TextBox ID="txtPassword" CssClass="form-control tb" placeholder="Password" runat="server" TextMode="Password" />      
-                    
-                </div>
-            <asp:RequiredFieldValidator ID="vldPassword" ErrorMessage="You must enter the Password!" runat="server" ValidationGroup="Login" ControlToValidate="txtPassword" ForeColor="red"/>
-        </div>
-        <div class="form-group clearfix">
-            
-            <p class="small text-muted pull-left"><a href="forgot_password.aspx"><i class="fa fa-lock"></i>&nbsp; Forgot Password?</a></p>
-            <asp:Button ID="btnSubmit" CssClass="btn btn-success pull-right" Text="Log In" ValidationGroup="Login" ValidateRequestMode="Enabled" CausesValidation="true" OnClick="Click_Login" runat="server" /> 
-        </div>
+        
 
     </div><!--/.col-md-4-->
     </form>

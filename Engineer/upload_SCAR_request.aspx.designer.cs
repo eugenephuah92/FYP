@@ -30,6 +30,15 @@ public partial class Engineer_upload_scar_request {
     protected global::System.Web.UI.WebControls.Label lblSCARType2;
     
     /// <summary>
+    /// lblShowType2Names control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblShowType2Names;
+    
+    /// <summary>
     /// uploadSCARType4 control.
     /// </summary>
     /// <remarks>
@@ -46,6 +55,15 @@ public partial class Engineer_upload_scar_request {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblSCARType4;
+    
+    /// <summary>
+    /// lblShowType4Names control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblShowType4Names;
     
     /// <summary>
     /// btnUpload control.

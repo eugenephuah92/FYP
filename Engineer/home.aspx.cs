@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Configuration;
+using Jabil_Session;
 
 public partial class Engineer_home : System.Web.UI.Page
 {
@@ -15,9 +16,8 @@ public partial class Engineer_home : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         SqlDataReader rdr;
-        
-        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
 
+        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
         int newSCAR = 0;
         int closedSCAR = 0;
         int pendingSCAR = 0;

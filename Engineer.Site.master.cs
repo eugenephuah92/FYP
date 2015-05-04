@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using Jabil_Session;
 
 public partial class Engineer_SiteMaster : MasterPage
 {
@@ -69,5 +70,15 @@ public partial class Engineer_SiteMaster : MasterPage
         // Gets the file name of the current page without the extension    
         string pageName = Path.GetFileNameWithoutExtension(Request.Path);
         GetPageName.Value = pageName;
+
+        string checkPrivilege = JabilSession.Current.privilege;
+        if (checkPrivilege == null)
+        {
+            Response.Redirect("../Logout.aspx");
+        }
+        if(!JabilSession.Current.privilege.Equals("Engineer"))
+        {
+            Response.Redirect("../Logout.aspx");
+        }
     }
 }

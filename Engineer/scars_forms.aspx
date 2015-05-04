@@ -257,14 +257,13 @@
                     <div id="collapse2" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="panel-group" id="accordion2">
-                                
                                     <div class="form-group">
                                         <label for="lstRootCause" class="col-lg-3 control-label">Root Cause Option</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstRootCause" runat="server">
 
                                             </asp:DropDownList>
-                                            <asp:RequiredFieldValidator ID="vldRootCause" ErrorMessage="You must select a Root Cause!" InitialValue="0" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="lstRootCause" ForeColor="red"/>
+                                            <asp:Label ID="lblRootCause" runat="server" />
                                         </div>
                                         <br /><br />
                                     </div>
@@ -286,7 +285,7 @@
                                                         <div id="counterOverallSummary">
                                                         </div>
                                                        <asp:TextBox CssClass="form-control" ID="txtOverallSummary" placeholder="Overall Summary"  TextMode="MultiLine" Rows="3" runat="server"/>
-                                                        <asp:RequiredFieldValidator ID="vldOverallSummary" ErrorMessage="You must enter the Overall Summary or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtOverallSummary" ForeColor="red"/>
+                                                        <asp:Label ID="lblOverallSummary" runat="server" />
                                                     </div>
                                                 </div>
                                         </div>
@@ -311,7 +310,7 @@
                                                         <div id="counterProbVerification">
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtProbVerification" placeholder="Problem Verification" TextMode="MultiLine" Rows="3" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldProbVerification" ErrorMessage="You must enter the Problem Verification or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtProbVerification" ForeColor="red"/>
+                                                        <asp:Label ID="lblProbVerification" runat="server" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -323,7 +322,7 @@
                                                                     <asp:ListItem Value ="Valid">Valid</asp:ListItem>
                                                                     <asp:ListItem Value ="Invalid">Invalid</asp:ListItem>
                                                                 </asp:RadioButtonList>
-                                                                <asp:RequiredFieldValidator ID="vldProbVerificationStatus" ErrorMessage="You must select the Problem Verification Status or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="rdbProbVerificationStatus" ForeColor="red"/>
+                                                                <asp:Label ID="lblProbVerificationStatus" runat="server" />
                                                             </label>
                                                             </div>
                                                         
@@ -352,14 +351,16 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtContainmentAction" name="testGroup" placeholder="Containment Action" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldContainmentAction" ErrorMessage="You must enter the Containment Action or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtContainmentAction" ForeColor="red"/>
+                                                        <asp:Label ID="lblContainmentAction" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cldS2ImplementationDate" class="col-lg-3 control-label">S22 - Implementation Date</label>
                                                     <div class="col-lg-8">
                                                         <asp:TextBox CssClass="form-control" ID="txtS2ImplementationDate" TextMode="Date" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS2ImplementationDate" ErrorMessage="You must select the Implementation Date" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS2ImplementationDate" ForeColor="red"/>
+                                                        <asp:Label ID="lblS2ImplementationDate" runat="server" />
+                                                    <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -369,7 +370,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtS2ResponsiblePerson" placeholder="Responsible Person" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS2ResponsiblePerson" ErrorMessage="You must enter the Responsible Person or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS2ResponsiblePerson" ForeColor="red"/>
+                                                        <asp:Label ID="lblS2ResponsiblePerson" runat="server" />
+                                                       <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -379,7 +381,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtContainmentResult" placeholder="Containment Result" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldContainmentResult" ErrorMessage="You must enter the Containment Result or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtContainmentResult" ForeColor="red"/>
+                                                        <asp:Label ID="lblContainmentResult" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -392,7 +395,7 @@
                                                             <asp:ListItem>N/A</asp:ListItem>
                                                             <asp:ListItem>Units in Field (with other customers)</asp:ListItem>
                                                         </asp:ListBox>
-                                                        <asp:RequiredFieldValidator ID="vldScreeningArea" ErrorMessage="You must select the Screening Area!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="lstScreeningArea" ForeColor="red"/>
+                                                        <asp:Label ID="lblScreeningArea" runat="server" />
                                                         <span class="help-block">Hold <em>shift</em> to select more than one option if necessary</span>
                                                     </div>
                                                 </div>
@@ -427,7 +430,8 @@
                                                         <asp:DropDownList CssClass="form-control" ID="lstFailureAnalysis" runat="server">
 
                                                         </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="vldFailureAnalysis" ErrorMessage="You must select the Failure Analysis!" runat="server" InitialValue="0" ValidationGroup="SCAR_Response" ControlToValidate="lstFailureAnalysis" ForeColor="red"/>
+                                                        <asp:Label ID="lblFailureAnalysis" runat="server" />
+                                                       <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -437,7 +441,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtFailureResult" placeholder="Failure Analysis Results" TextMode="MultiLine" Rows="3" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldFailureAnalysisResult" ErrorMessage="You must enter the Failure Analysis Result or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtFailureResult" ForeColor="red"/>
+                                                        <asp:Label ID="lblFailureResult" runat="server" />
+                                                        
                                                     </div>
                                                 </div>
                                         </div>
@@ -462,7 +467,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtMan" placeholder="Man" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldMan" ErrorMessage="You must enter the Man for Root Cause or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtMan" ForeColor="red"/>
+                                                        <asp:Label ID="lblMan" runat="server" />
+                                                       <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -472,7 +478,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtMethod" placeholder="Method" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldMethod" ErrorMessage="You must enter the Method for Root Cause or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtMethod" ForeColor="red"/>
+                                                        <asp:Label ID="lblMethod" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -482,7 +489,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtMaterial" placeholder="Material" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldMaterial" ErrorMessage="You must enter the Material for Root Cause or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtMaterial" ForeColor="red"/>
+                                                        <asp:Label ID="lblMaterial" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -492,7 +500,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtMachine" placeholder="Machine" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldMachine" ErrorMessage="You must enter the Machine for Root Cause or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtMachine" ForeColor="red"/>
+                                                        <asp:Label ID="lblMachine" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                         </div>
@@ -517,15 +526,16 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtCorrectiveAction" placeholder="Corrective Action" TextMode="MultiLine" Rows="3" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldCorrectiveAction" ErrorMessage="You must enter the Corrective Action or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtCorrectiveAction" ForeColor="red"/>
+                                                        <asp:Label ID="lblCorrectiveAction" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cldS5ImplementationDate" class="col-lg-3 control-label">S52 - Implementation Date</label>
                                                     <div class="col-lg-8">
                                                         <asp:TextBox CssClass="form-control" ID="txtS5ImplementationDate" TextMode="Date" runat="server" />
-                                                        
-                                                        <asp:RequiredFieldValidator ID="vldS5ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS5ImplementationDate" ForeColor="red"/>
+                                                        <asp:Label ID="lblS5ImplementationDate" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -535,7 +545,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtS5ResponsiblePerson" placeholder="Responsible Person" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS5ResponsiblePerson" ErrorMessage="You must enter the Responsible Person or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS5ResponsiblePerson" ForeColor="red"/>
+                                                        <asp:Label ID="lblS5ResponsiblePerson" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -570,16 +581,16 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtPermanentCA" placeholder="Permanent Corrective Action" TextMode="MultiLine" Rows="3" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldPermanentCA" ErrorMessage="You must enter the Permanent Corrective Action or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtPermanentCA" ForeColor="red"/>
+                                                       <asp:Label ID="lblPermanentCA" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cldS6ImplementationDate" class="col-lg-3 control-label">S62 - Implementation Date</label>
                                                     <div class="col-lg-8">
                                                         <asp:TextBox CssClass="form-control" ID="txtS6ImplementationDate" TextMode="Date" runat="server" />
-                                                        
-                                                        <asp:RequiredFieldValidator ID="vldS6ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS6ImplementationDate" ForeColor="red"/>
-                                                    </div>
+                                                        <asp:Label ID="lblS6ImplementationDate" runat="server" />
+                                                        <br />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="txtS6ResponsiblePerson" class="col-lg-3 control-label">S63 - Responsible Person</label>
@@ -588,7 +599,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtS6ResponsiblePerson" placeholder="Responsible Person" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldS6ResponsiblePerson" ErrorMessage="You must enter the Responsible Person or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS6ResponsiblePerson" ForeColor="red"/>
+                                                        <asp:Label ID="lblS6ResponsiblePerson" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -623,15 +635,16 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtVerifyCA" placeholder="Verify Effectiveness of Corrective Actions" TextMode="MultiLine" Rows="3" runat="server" />
-                                                        <asp:RequiredFieldValidator ID="vldVerifyCA" ErrorMessage="You must Verify Effectiveness of Corrective Actions or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtVerifyCA" ForeColor="red"/>
+                                                        <asp:Label ID="lblVerifyCA" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cldS7ImplementationDate" class="col-lg-3 control-label">S72 - Implementation Date (Start of Monitoring)</label>
                                                     <div class="col-lg-8">
                                                         <asp:TextBox CssClass="form-control" ID="txtS7ImplementationDate" TextMode="Date" runat="server" />
-                                                        
-                                                        <asp:RequiredFieldValidator ID="vldS7ImplementationDate" ErrorMessage="You must select the Implementation Date!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS7ImplementationDate" ForeColor="red"/>
+                                                        <asp:Label ID="lblS7ImplementationDate" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -641,7 +654,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtS7ResponsiblePerson" placeholder="Responsible Person" runat="server" />
-                                                         <asp:RequiredFieldValidator ID="vldS7ResponsiblePerson" ErrorMessage="You must enter the Responsible Person or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtS7ResponsiblePerson" ForeColor="red"/>
+                                                        <asp:Label ID="lblS7ResponsiblePerson" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -651,7 +665,8 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtVerifier" placeholder="Verifier" runat="server" />
-                                                         <asp:RequiredFieldValidator ID="vldVerifier" ErrorMessage="You must enter the Verifier or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtVerifier" ForeColor="red"/>
+                                                         <asp:Label ID="lblVerifier" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -661,17 +676,19 @@
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtVerifierEmail" placeholder="Verifier Email" runat="server" />
-                                                         <asp:RequiredFieldValidator ID="vldVerifierEmail" ErrorMessage="You must enter the Verifier Email or N/A if none!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtVerifierEmail" ForeColor="red"/>
+                                                         <asp:Label ID="lblVerifierEmail" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="txtVerifyCAresults" class="col-lg-3 control-label">S76 - Verify Effectiveness of Corrective Actions Result</label>
+                                                    <label id="lblfortxtVerifyCAResults" runat="server" for="txtVerifyCAresults" class="col-lg-3 control-label">S76 - Verify Effectiveness of Corrective Actions Result</label>
                                                     <div class="col-lg-8">
                                                         <div id="counterVerifyCAResult">
                                                             
                                                         </div>
                                                         <asp:TextBox CssClass="form-control" ID="txtVerifyCAResult" placeholder="Verify Effectiveness of Corrective Actions Result" TextMode="MultiLine" Rows="3" runat="server" />
-                                                         <asp:RequiredFieldValidator ID="vldVerifyCAResult" ErrorMessage="You must enter the Verify Effectiveness of Corrective Actions Result!" runat="server" ValidationGroup="SCAR_Response" ControlToValidate="txtVerifyCAResult" ForeColor="red"/>
+                                                         <asp:Label ID="lblVerifyCAResult" runat="server" />
+                                                        <br />
                                                     </div>
                                                 </div>
                                         </div>
@@ -693,10 +710,13 @@
                                         <div class="form-group">
                                         <label for="uploadFile" class="col-lg-3 control-label">Upload Attachment(s)</label>
                                         <div class="col-lg-8">
-                                            <asp:FileUpload ID="uploadFile" AllowMultiple="true" runat="server" />
+                                            <asp:FileUpload ID="uploadFile" AllowMultiple="true" runat="server" onchange="showFiles()" />
                                             <span class="help-block">Maximum file size: 15MB / 5 file(s)</span>
+                                            <asp:Label ID="showFileNames" runat="server"/>
                                             <asp:Button ID="btnUpload" CssClass="btn btn-primary" OnClick="Upload_Files" Text="Upload Files" runat="server" />
+                                            
                                         </div>
+                                            
                                     </div>
                                         
                                 <div class="form-group">
@@ -705,7 +725,7 @@
                                         AutoGenerateColumns="False"
                                         AutoGenerateDeleteButton="True" 
                                         OnRowDeleting="AttachmentsGridView_RowDeleting"
-                                        DataKeyNames="scar_id, file_name" BorderColor="#CCCCCC" Width="100%"
+                                        DataKeyNames="scar_no, file_name" BorderColor="#CCCCCC" Width="100%"
             BorderStyle="Solid" BorderWidth="1px">
                                         <HeaderStyle Height="30px" BackColor="#01385B" ForeColor="White" Font-Size="15px" BorderColor="#CCCCCC"
                 BorderStyle="Solid" BorderWidth="1px" />
@@ -721,14 +741,14 @@
                                         </Columns>
                                     </asp:GridView>
                                     <asp:SqlDataSource ID="AttachmentsSqlDataSource" runat="server"
-                                        SelectCommand="SELECT scar_id, file_name
+                                        SelectCommand="SELECT scar_no, file_name
                                             FROM dbo.SCAR_attachments "
                                             
-                                        DeleteCommand="Delete from dbo.SCAR_attachments where scar_id = 
-                                            @scar_id AND file_name = @file_name"
+                                        DeleteCommand="Delete from dbo.SCAR_attachments where scar_no = 
+                                            @scar_no AND file_name = @file_name"
                                         ConnectionString="<%$ ConnectionStrings:JabilDatabase %>">
                                         <DeleteParameters>
-                                            <asp:Parameter Name="scar_id" />
+                                            <asp:Parameter Name="scar_no" />
                                             
                                         </DeleteParameters>
                                     </asp:SqlDataSource>
@@ -808,6 +828,7 @@
                                                 <asp:ListItem>Please Select Defect Mode</asp:ListItem>
                                                 <asp:ListItem Value="Spoil">Spoil</asp:ListItem>
                                             </asp:DropDownList>
+                                            <asp:Label ID="lblDefectMode" runat="server" />
                                         </div>
                                     </div>
                                 <br /><br />
@@ -841,7 +862,6 @@
                                             <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" ValidationGroup="SCAR_Response" OnClick="Submit_Response" Text="Send to Client" />
                                         </div>
                                     </div>
-                              
                             </div>
                             
                         </div>
@@ -1014,5 +1034,44 @@
         return true;
     }
     </script>
+ 
+
+    <script type="text/javascript">
+        function showFiles() {
+            var x = document.getElementById("<%=uploadFile.ClientID%>");
+         var txt = "";
+         if ('files' in x) {
+             if (x.files.length == 0) {
+                 txt = "Select one or more files.";
+             } else {
+                 for (var i = 0; i < x.files.length; i++) {
+                     txt += "<strong>" + (i + 1) + " .</strong>";
+                     var file = x.files[i];
+                     if ('name' in file) {
+                         txt += file.name + "<br>";
+                     }
+                 }
+             }
+         }
+         else {
+             if (x.value == "") {
+                 txt += "Select one or more files.";
+             } else {
+                 txt += "The files property is not supported by your browser!";
+                 txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+             }
+         }
+         document.getElementById("<%=showFileNames.ClientID %>").innerHTML = txt;
+     }
+
+
+        function ShowMessage(scar_no, message) {
+            alert(message);
+            if (scar_no != 0)
+            {
+                window.location.href = 'scars_forms.aspx?scar_no=' + scar_no;
+            }
+        }
+</script>
 
 </asp:Content>

@@ -11,6 +11,7 @@
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="css/uploadify.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
@@ -28,24 +29,35 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function bodyUnload()
+        {
+            if (clicked == false)//browser is closed
+            {
+                location.href="../Logout.aspx";
+            }
+        }
+
+    </script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
-<body class="clearfix">
+<body class="clearfix" onunload="bodyUnload();" Onclick="clicked=true;">
 
     <form id="Form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Scripts>
-            <%--Framework scripts--%>
-            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="Scripts/jquery-1.11.0.min.js" />
-            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="Scripts/bootstrap.min.js" />
-            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="Scripts/app.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/MaxLength.min.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/select2.min.js" />
+            <%--Framework scripts--%> 
+            <asp:ScriptReference Path="Scripts/jquery-1.11.0.min.js" />
+            <asp:ScriptReference Path="Scripts/bootstrap.min.js" />
+            <asp:ScriptReference Path="Scripts/app.js" />
+            <asp:ScriptReference Path="Scripts/MaxLength.min.js" />
+            <asp:ScriptReference Path="Scripts/select2.min.js" />
+           
+
             <%--Site scripts--%>
             
         </Scripts>
     </asp:ScriptManager>
-
     <!-- Top Navigational Bar -->
     <apress:navbar id="navbar" runat="server" />
 

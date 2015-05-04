@@ -17,7 +17,6 @@ public partial class Manager_8Drequest : System.Web.UI.Page
 
         DataTable dt = new DataTable();
 
-        dt.Columns.Add("id");
         dt.Columns.Add("CAR Number");
         dt.Columns.Add("Assigned QE");
         dt.Columns.Add("Sent Date");
@@ -29,8 +28,8 @@ public partial class Manager_8Drequest : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand(@"SELECT SCAR_Request.id, SCAR_Request.car_no, SCAR_Request.supplier_contact, Approval_8D.sent_date, 
-Approval_8D.sent_time FROM SCAR_Request INNER JOIN Approval_8D ON SCAR_Request.ID = Approval_8D.scar_id", conn);
+            SqlCommand select = new SqlCommand(@"SELECT SCAR_Request.scar_no, SCAR_Request.supplier_contact, Approval_8D.sent_date, 
+Approval_8D.sent_time FROM dbo.SCAR_Request INNER JOIN dbo.Approval_8D ON dbo.SCAR_Request.scar_no = dbo.Approval_8D.scar_no", conn);
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
             {
@@ -41,8 +40,7 @@ Approval_8D.sent_time FROM SCAR_Request INNER JOIN Approval_8D ON SCAR_Request.I
             {
                 dr = dt.NewRow();
 
-                dr["id"] = rdr["id"].ToString();
-                dr["CAR Number"] = rdr["car_no"].ToString();
+                dr["CAR Number"] = rdr["scar_no"].ToString();
                 dr["Assigned QE"] = rdr["supplier_contact"].ToString();
                 dr["Sent Date"] = "Date: " + Convert.ToDateTime(rdr["sent_date"]).ToString("yyyy-MM-dd");
                 dr["Sent Time"] = "Time: " + rdr["sent_time"].ToString();

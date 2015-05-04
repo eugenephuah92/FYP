@@ -12,22 +12,13 @@
 public partial class Admin_view_defect_modes {
     
     /// <summary>
-    /// show10records control.
+    /// lstPageSize control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink show10records;
-    
-    /// <summary>
-    /// HyperLink1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
     
     /// <summary>
     /// lstFilter control.
@@ -111,74 +102,20 @@ public partial class Admin_view_defect_modes {
     protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
     
     /// <summary>
-    /// btnRemove control.
+    /// GridView1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnRemove;
+    protected global::System.Web.UI.WebControls.GridView GridView1;
     
     /// <summary>
-    /// txtDefectCode control.
+    /// SqlDataSource1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefectCode;
-    
-    /// <summary>
-    /// txtIPCCode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtIPCCode;
-    
-    /// <summary>
-    /// txtDefectName control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefectName;
-    
-    /// <summary>
-    /// lstDefectType control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstDefectType;
-    
-    /// <summary>
-    /// lstDefectCategory control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstDefectCategory;
-    
-    /// <summary>
-    /// txtDefectDescription control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefectDescription;
-    
-    /// <summary>
-    /// btnSave control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSave;
+    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
 }

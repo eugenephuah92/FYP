@@ -16,27 +16,29 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
     {
         
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
-        string scar_id = Request.QueryString["scar_id"];
-        if (!String.IsNullOrEmpty(scar_id))
+        string scar_no = Request.QueryString["scar_no"];
+        if (!String.IsNullOrEmpty(scar_no))
         {
-            Read_Request(connect, scar_id);
-            Read_Response(connect, scar_id); 
+            Read_Request(connect, scar_no);
+            Read_Response(connect, scar_no); 
         }
         
     }
-    protected void Read_Request(string connect, string scar_id)
+    protected void Read_Request(string connect, string scar_no)
     {
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT id, car_no, car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity, defect_type, non_conformity_reported, reject_reason, expected_date_close FROM dbo.SCAR_Request WHERE id = @scar_id", conn);
-            select.Parameters.AddWithValue("scar_id", scar_id);
+            SqlCommand select = new SqlCommand(@"SELECT scar_no, car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, 
+supplier_contact,supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity, 
+defect_type, non_conformity_reported, reject_reason, expected_date_close FROM dbo.SCAR_Request WHERE scar_no = @scar_no", conn);
+            select.Parameters.AddWithValue("scar_no", scar_no);
             SqlDataReader reader;
             reader = select.ExecuteReader();
 
             while (reader.Read())
             {
-                lblCarNo.Text += Convert.ToString(reader["car_no"]);
+                lblCarNo.Text += Convert.ToString(reader["scar_no"]);
                 lblCarRev.Text += Convert.ToString(reader["car_revision"]);
                 lblCarType.Text += Convert.ToString(reader["car_type"]);
                 lblPreAlert.Text += Convert.ToString(reader["pre_alert"]);
@@ -64,13 +66,18 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
         }
     }
     
-    protected void Read_Response(string connect, string scar_id)
+    protected void Read_Response(string connect, string scar_no)
     {
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, scar_id FROM dbo.SCAR_Response WHERE scar_id = @scar_id", conn);
-            select.Parameters.AddWithValue("scar_id", scar_id);
+            SqlCommand select = new SqlCommand(@"SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, s21_containment_action,
+s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, 
+s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, 
+s62_implementation_date, s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, 
+s73_responsible_person, s74_verifier, s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, status, 
+scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
+            select.Parameters.AddWithValue("scar_no", scar_no);
             SqlDataReader reader;
             reader = select.ExecuteReader();
 
@@ -194,7 +201,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                 var extension = Path.GetExtension(postedFile.FileName);
                 string filename = Path.GetFileName(postedFile.FileName);
                 string contentType = postedFile.ContentType;
-                string tempSCARID = Request.QueryString["scar_id"];
+                string scar_no = Request.QueryString["scar_no"];
 
                 if (!disallowedExtensions.Contains(extension))
                 {
@@ -209,14 +216,14 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                             string constr = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
                             using (SqlConnection con = new SqlConnection(constr))
                             {
-                                string query = "insert into dbo.SCAR_attachments (file_name, file_type, file_path, scar_id)values (@Name, @ContentType, @File_path, @id)";
+                                string query = "insert into dbo.SCAR_attachments (file_name, file_type, file_path, scar_no)values (@Name, @ContentType, @File_path, @scar_no)";
                                 using (SqlCommand cmd = new SqlCommand(query))
                                 {
                                     cmd.Connection = con;
                                     cmd.Parameters.AddWithValue("@Name", filename);
                                     cmd.Parameters.AddWithValue("@ContentType", contentType);
                                     cmd.Parameters.AddWithValue("@File_path", path);
-                                    cmd.Parameters.AddWithValue("@id", tempSCARID);
+                                    cmd.Parameters.AddWithValue("@scar_no", scar_no);
                                     con.Open();
                                     cmd.ExecuteNonQuery();
                                     ProcessedMessage.Text = "Your files have been uploaded succesfully!";
@@ -248,8 +255,8 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
 
     protected void Submit_Approval_Form(object sender, EventArgs e)
     {
-        string scar_id = Request.QueryString["scar_id"];
-        if (!String.IsNullOrEmpty(scar_id))
+        string scar_no = Request.QueryString["scar_no"];
+        if (!String.IsNullOrEmpty(scar_no))
         {
             string approvalStatus = rdbApproval.SelectedItem.Value;
             string comment = txtComment.Text;
@@ -264,8 +271,8 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                     using (SqlConnection conn = new SqlConnection(connect))
                     {
                         conn.Open();
-                        SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_id = @scar_id", conn);
-                        update.Parameters.AddWithValue("@scar_id", scar_id);
+                        SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
+                        update.Parameters.AddWithValue("@scar_no", scar_no);
                         update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
                         update.Parameters.AddWithValue("@comment_WCM", comment);
                         update.ExecuteNonQuery();
@@ -287,8 +294,8 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                     using (SqlConnection conn = new SqlConnection(connect))
                     {
                         conn.Open();
-                        SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D WHERE scar_id = @scar_id", conn);
-                        select.Parameters.AddWithValue("@scar_id", scar_id);
+                        SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                        select.Parameters.AddWithValue("@scar_no", scar_no);
                         SqlDataReader reader = select.ExecuteReader();
                         while (reader.Read())
                         {
@@ -297,8 +304,8 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                         reader.Close();
 
                         SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM, 
-reject_count_WCM = @reject_count_WCM WHERE scar_id = @scar_id", conn);
-                        update.Parameters.AddWithValue("@scar_id", scar_id);
+reject_count_WCM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
+                        update.Parameters.AddWithValue("@scar_no", scar_no);
                         update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
                         update.Parameters.AddWithValue("@comment_WCM", comment);
                         update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);

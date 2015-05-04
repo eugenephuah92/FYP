@@ -6,7 +6,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-
+using Jabil_Session;
 public partial class Admin_SiteMaster : MasterPage
 {
     private const string AntiXsrfTokenKey = "__AntiXsrfToken";
@@ -69,5 +69,15 @@ public partial class Admin_SiteMaster : MasterPage
         // Gets the file name of the current page without the extension    
         string pageName = Path.GetFileNameWithoutExtension(Request.Path);
         GetPageName.Value = pageName;
+
+        string checkPrivilege = JabilSession.Current.privilege;
+        if (checkPrivilege == null)
+        {
+            Response.Redirect("../Logout.aspx");
+        }
+        if (!JabilSession.Current.privilege.Equals("Admin"))
+        {
+            Response.Redirect("../Logout.aspx");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Defect Modes" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" CodeFile="~/Admin/add_new_defect_modes.aspx.cs" Inherits="Admin_add_new_defect_modes" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Add New Defect Modes" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Codebehind="~/Admin/add_new_defect_modes.aspx.cs" Inherits="Admin_add_new_defect_modes" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Add New Defect Mode Page for admin: Allows Admin to add new defect modes -->
