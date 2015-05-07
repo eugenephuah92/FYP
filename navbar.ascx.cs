@@ -10,7 +10,10 @@ public partial class navbar : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string employee_name = JabilSession.Current.employee_name;
+        if(!IsPostBack)
+        {
+string employee_name = JabilSession.Current.employee_name;
         lbl_employee_name.Text += employee_name;
+        }     
     }
 }

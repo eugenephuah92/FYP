@@ -31,6 +31,8 @@ namespace FYP_WebApp.Old_App_Code
         private string non_conformity_reported;
         private string reject_reason;
         private string expected_date_close;
+        private string file_name;
+        private string file_path;
 
         // Accessors and Mutators for the SCAR details
         public string Car_no
@@ -284,6 +286,30 @@ namespace FYP_WebApp.Old_App_Code
             set
             {
                 expected_date_close = value;
+            }
+        }
+
+        public string File_name
+        {
+            get
+            {
+                return file_name;
+            }
+            set
+            {
+                file_name = value;
+            }
+        }
+        
+        public string File_path
+        {
+            get
+            {
+                return file_path;
+            }
+            set
+            {
+                file_path = value;
             }
         }
     }

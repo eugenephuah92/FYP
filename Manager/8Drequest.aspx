@@ -24,7 +24,7 @@
                                             </asp:TemplateField>
                                            <asp:TemplateField HeaderText="Action">
                                             <ItemTemplate>
-                                                <asp:HyperLink ID="linkSCAR" runat="server" Text="View SCAR" NavigateUrl='<%# String.Format("8Dapproval.aspx?scar_id={0}", Eval("CAR Number")) %>' />
+                                                <asp:HyperLink ID="linkSCAR" runat="server" Text="View SCAR" NavigateUrl='<%# String.Format("8Dapproval.aspx?scar_no={0}", Eval("CAR Number")) %>' />
                                             </ItemTemplate>
                                             </asp:TemplateField>
                                        </Columns>

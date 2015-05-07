@@ -34,7 +34,7 @@ public partial class Engineer_closed_scars : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date FROM dbo.SCAR_Request WHERE scar_stage = @scar_stage", conn);
+            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date FROM dbo.SCAR_History WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "Closed SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)

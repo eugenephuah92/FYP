@@ -40,13 +40,14 @@ public partial class Engineer_home : System.Web.UI.Page
                 {
                     pendingSCAR++;
                 }
-                else if (rdr["scar_stage"].ToString().Equals("Closed SCAR"))
-                {
-                    closedSCAR++;
-                }
                 totalSCAR++;
             }
+            rdr.Close();
 
+            SqlCommand selectClosed = new SqlCommand("SELECT COUNT(*) FROM dbo.SCAR_History", conn);
+            int count = Convert.ToInt16(selectClosed.ExecuteScalar());
+            closedSCAR = count;
+            totalSCAR += closedSCAR;
         }
 
         lblNewSCAR.Text = Convert.ToString(newSCAR);

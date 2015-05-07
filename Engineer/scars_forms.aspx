@@ -220,7 +220,6 @@
                                         <asp:Button CssClass="btn btn-success" ID="btnSubmitSec1" onClick="Submit_Request" ValidationGroup="SCAR_Request" runat="server" Text="Submit" />
                                     </div>
                                 </div>
-                            
                         </div>
                     </div>
                 </div><!--End of Section 1-->
@@ -714,7 +713,7 @@
                                             <span class="help-block">Maximum file size: 15MB / 5 file(s)</span>
                                             <asp:Label ID="showFileNames" runat="server"/>
                                             <asp:Button ID="btnUpload" CssClass="btn btn-primary" OnClick="Upload_Files" Text="Upload Files" runat="server" />
-                                            
+                                            <br />
                                         </div>
                                             
                                     </div>
@@ -742,7 +741,7 @@
                                     </asp:GridView>
                                     <asp:SqlDataSource ID="AttachmentsSqlDataSource" runat="server"
                                         SelectCommand="SELECT scar_no, file_name
-                                            FROM dbo.SCAR_attachments "
+                                            FROM dbo.SCAR_attachments WHERE scar_no = @scar_no"
                                             
                                         DeleteCommand="Delete from dbo.SCAR_attachments where scar_no = 
                                             @scar_no AND file_name = @file_name"
@@ -751,6 +750,9 @@
                                             <asp:Parameter Name="scar_no" />
                                             
                                         </DeleteParameters>
+                                        <SelectParameters>
+                                            <asp:QueryStringParameter Name="scar_no" DbType="String" QueryStringField="scar_no" />
+                                        </SelectParameters>
                                     </asp:SqlDataSource>
                                 </div>
                                     <div class="form-group">
@@ -863,9 +865,8 @@
                                         </div>
                                     </div>
                             </div>
-                            
                         </div>
-                    </div>
+                   </div>
                 </div><!--End of Section 2-->
            
             </form>
@@ -1067,7 +1068,7 @@
 
         function ShowMessage(scar_no, message) {
             alert(message);
-            if (scar_no != 0)
+           if (scar_no != 0)
             {
                 window.location.href = 'scars_forms.aspx?scar_no=' + scar_no;
             }

@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Configuration;
 using System.IO;
+using Jabil_Session;
 public partial class Manager_8Dapproval : System.Web.UI.Page
 {
     string DatabaseName = "JabilDatabase";
@@ -23,6 +24,71 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
             Read_Response(connect, scar_no); 
         }
         
+    }
+
+    protected void Upload_Files(object sender, EventArgs e)
+    {
+        if (uploadFile.HasFile)
+        {
+            string scar_no = Request.QueryString["scar_no"];
+            try
+            {
+                foreach (HttpPostedFile postedFile in uploadFile.PostedFiles)
+                {
+                    var disallowedExtensions = new[] { ".txt", ".msi" };
+                    var extension = Path.GetExtension(postedFile.FileName);
+                    string filename = Path.GetFileName(postedFile.FileName);
+                    string contentType = postedFile.ContentType;
+
+
+                    if (!disallowedExtensions.Contains(extension))
+                    {
+                        using (Stream fs = postedFile.InputStream)
+                        {
+                            using (BinaryReader br = new BinaryReader(fs))
+                            {
+                                uploadFile.PostedFile.SaveAs(Server.MapPath(@"~\Attachments\" + filename.Trim()));
+                                string path = @"~\Attachments\" + filename.Trim();
+                                //byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                                string constr = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+                                using (SqlConnection con = new SqlConnection(constr))
+                                {
+                                    con.Open();
+                                    SqlCommand insert = new SqlCommand(@"INSERT INTO SCAR_attachments (file_name, file_type, file_path, scar_no) VALUES 
+(@Name, @ContentType, @File_path, @id)", con);
+                                    insert.Parameters.AddWithValue("@Name", filename);
+                                    insert.Parameters.AddWithValue("@ContentType", contentType);
+                                    insert.Parameters.AddWithValue("@File_path", path);
+                                    insert.Parameters.AddWithValue("@id", scar_no);
+                                    insert.ExecuteNonQuery();
+                                    string message = "Your files have been uploaded succesfully!";
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                                    con.Close();
+
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string message = ".exe and .msi files are not allowed! Please Try Again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+
+                    }
+                }
+
+            }
+            catch (Exception err)
+            {
+                string message = "Unable to upload files! Please Try Again!";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+            }
+            finally
+            {
+
+            }
+        }
+
     }
     protected void Read_Request(string connect, string scar_no)
     {
@@ -264,6 +330,8 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
             string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
             int tempRejectCountWCM = 0;
 
+            string position = JabilSession.Current.employee_position;
+
             if(approvalStatus.Equals("Approve"))
             {
                 try
@@ -271,12 +339,22 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     using (SqlConnection conn = new SqlConnection(connect))
                     {
                         conn.Open();
-                        SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
-                        update.Parameters.AddWithValue("@scar_no", scar_no);
-                        update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                        update.Parameters.AddWithValue("@comment_WCM", comment);
-                        update.ExecuteNonQuery();
-
+                        if(position.Equals("Work Cell Manager"))
+                        {
+                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
+                            update.Parameters.AddWithValue("@scar_no", scar_no);
+                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                            update.Parameters.AddWithValue("@comment_WCM", comment);
+                            update.ExecuteNonQuery();
+                        }
+                        else if(position.Equals("Quality Manager"))
+                        {
+                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM WHERE scar_no = @scar_no", conn);
+                            update.Parameters.AddWithValue("@scar_no", scar_no);
+                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                            update.Parameters.AddWithValue("@comment_WCM", comment);
+                            update.ExecuteNonQuery();
+                        }
                         ProcessedMessage.Text = "8D Approval Submitted!";
                         ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
                     }
@@ -294,22 +372,45 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     using (SqlConnection conn = new SqlConnection(connect))
                     {
                         conn.Open();
-                        SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
-                        select.Parameters.AddWithValue("@scar_no", scar_no);
-                        SqlDataReader reader = select.ExecuteReader();
-                        while (reader.Read())
+                        if(position.Equals("Work Cell Manager"))
                         {
-                            tempRejectCountWCM = Convert.ToInt16(reader["reject_count_WCM"]);
-                        }
-                        reader.Close();
+                            SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                            select.Parameters.AddWithValue("@scar_no", scar_no);
+                            SqlDataReader reader = select.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                tempRejectCountWCM = Convert.ToInt16(reader["reject_count_WCM"]);
+                            }
+                            reader.Close();
 
-                        SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM, 
+                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM, 
 reject_count_WCM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
-                        update.Parameters.AddWithValue("@scar_no", scar_no);
-                        update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                        update.Parameters.AddWithValue("@comment_WCM", comment);
-                        update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
-                        update.ExecuteNonQuery();
+                            update.Parameters.AddWithValue("@scar_no", scar_no);
+                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                            update.Parameters.AddWithValue("@comment_WCM", comment);
+                            update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
+                            update.ExecuteNonQuery();
+                        }
+                        else if(position.Equals("Quality Manager"))
+                        {
+                            SqlCommand select = new SqlCommand(@"SELECT reject_count_QM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                            select.Parameters.AddWithValue("@scar_no", scar_no);
+                            SqlDataReader reader = select.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                tempRejectCountWCM = Convert.ToInt16(reader["reject_count_QM"]);
+                            }
+                            reader.Close();
+
+                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM, 
+reject_count_QM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
+                            update.Parameters.AddWithValue("@scar_no", scar_no);
+                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                            update.Parameters.AddWithValue("@comment_WCM", comment);
+                            update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
+                            update.ExecuteNonQuery();
+                        }
+                        
 
                         ProcessedMessage.Text = "8D Approval Submitted!";
                         ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
