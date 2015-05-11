@@ -117,7 +117,7 @@
                                                    </div>
                                                 </td>
                                             	<td style="padding-left:30pt">
-                                                	<div class="col-lg-7" style="padding-top:8pt;; padding-bottom:8pt">
+                                                	<div class="col-lg-7" style="padding-top:8pt; padding-bottom:8pt">
                                                     	<select class="form-control" id="QM3">
                                                         	<option selected>QM</option>
                                                             <option>Gorilla</option>

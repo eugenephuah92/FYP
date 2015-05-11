@@ -17,6 +17,7 @@ namespace FYP_WebApp
     {
         struct Notice
         {
+            public string hash;
             public string NoticeFrom;
             public string NoticeTo;
             public string NoticeSubject;
@@ -37,11 +38,12 @@ namespace FYP_WebApp
                 foreach (DataRow row in dt.Rows)
                 {
                     html = new StringBuilder(); // building a HTML string
-                    note[x].NoticeFrom = row["NoticeFrom"].ToString();
-                    note[x].NoticeTo = row["NoticeTo"].ToString();
-                    note[x].NoticeSubject = row["NoticeSubject"].ToString();
-                    note[x].NoticeBody = row["NoticeBody"].ToString();
-                    note[x].NoticeTimestamp = row["NoticeTimestamp"].ToString();
+                    note[x].hash = row["hash"].ToString();
+                    note[x].NoticeFrom = row["Notice_From"].ToString();
+                    note[x].NoticeTo = row["Notice_To"].ToString();
+                    note[x].NoticeSubject = row["Notice_Subject"].ToString();
+                    note[x].NoticeBody = row["Notice_Body"].ToString();
+                    note[x].NoticeTimestamp = row["Notice_Timestamp"].ToString();
                     
                     html.Append("<tr>");
                     html.Append("<td>" + note[x].NoticeFrom + "</td>");
@@ -54,7 +56,7 @@ namespace FYP_WebApp
                     Button btnRead1 = new Button();
                     btnRead1.ID = "btnRead" + x;
                     btnRead1.Text = "I have read the message";
-                    btnRead1.CommandArgument = note[x].NoticeSubject;
+                    btnRead1.CommandArgument = note[x].hash;
                     btnRead1.Click += myBtnHandler;
                     Placeholder1.Controls.Add(btnRead1);
                     html.Append("</td>");
@@ -63,10 +65,6 @@ namespace FYP_WebApp
                 }
                 html.Append("</table>");
                 Placeholder1.Controls.Add(new Literal { Text = html.ToString() });
-
-                GridView2.DataSource = dt;
-                GridView2.DataBind();
-
                 
            
         }
@@ -76,7 +74,7 @@ namespace FYP_WebApp
             string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp FROM Notice WHERE ReadStatus = 'false'"))
+                using (SqlCommand cmd = new SqlCommand("SELECT hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp FROM Notice WHERE Read_Status = 'false'"))
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -96,14 +94,14 @@ namespace FYP_WebApp
         protected void myBtnHandler(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-
+            
             string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                SqlCommand cmd = new SqlCommand("UPDATE Notice SET ReadStatus = 'true' WHERE NoticeSubject = @NoticeSubject");
+                SqlCommand cmd = new SqlCommand("UPDATE Notice SET Read_Status = 'true' WHERE hash = @hash");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@NoticeSubject", btn.CommandArgument);
+                cmd.Parameters.AddWithValue("@hash", btn.CommandArgument);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }

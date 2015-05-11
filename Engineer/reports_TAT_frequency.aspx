@@ -15,35 +15,29 @@
                             <div class="row">
                                 <div class="col-md-4" style="padding-top:10pt">
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server" >
-                                        <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
+                                        <asp:ListItem Selected="True">Please Select Month</asp:ListItem>
+                                        <asp:ListItem Value ="1" Text="January">January</asp:ListItem>
+                                        <asp:ListItem Value ="2">February</asp:ListItem>
+                                        <asp:ListItem Value ="3">March</asp:ListItem>
+                                        <asp:ListItem Value ="4">April</asp:ListItem>
+                                        <asp:ListItem Value ="5">May</asp:ListItem>
+                                        <asp:ListItem Value ="6">June</asp:ListItem>
+                                        <asp:ListItem Value ="7">July</asp:ListItem>
+                                        <asp:ListItem Value ="8">August</asp:ListItem>
+                                        <asp:ListItem Value ="9">September</asp:ListItem>
+                                        <asp:ListItem Value ="10">October</asp:ListItem>
+                                        <asp:ListItem Value ="11">November</asp:ListItem>
+                                        <asp:ListItem Value ="12">December</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-md-1" style="padding-top:10pt">
-                                    <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Search" runat="server" />
+                                    <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Search" runat="server" OnClick="btnSearch_Click"/>
                             	</div>
                             </div>
                                                 
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
-                                	<!-- Table -->
-  									<table class="table">
-                                    	<thead>
-                                        	<tr>
-                                                <th>Month</th>
-                                                <th>Frequency</th>
-                                                <th>Escalation Level 1</th>
-                                                <th>Escalation Level 2</th>
-                                          	</tr>
-                                        </thead>
-    									<tbody>
-                                        	<tr>
-                                                <td>January</td>
-                                                <td>5</td>
-                                                <td>3</td>
-                                                <td>4</td>
-                                        	</tr>                   
-                                        </tbody>
-  									</table>
+                                	<asp:PlaceHolder ID="Placeholder1" runat="server"></asp:PlaceHolder>
                                 </div>
                             </div>                          
                             <div class="form-group">
@@ -52,7 +46,6 @@
                                     <asp:button ID="btnPrint" CssClass="btn btn-success" Text="Print" runat="server" />
                                 </div>
                             </div>
-                        </p>
                 </div>
             </div>
         </div><!--/.col-md-12-->

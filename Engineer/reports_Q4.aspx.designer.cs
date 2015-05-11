@@ -9,50 +9,41 @@
 
 
 
-public partial class Engineer_reports_TAT_frequency {
+public partial class Engineer_reports_Q4 {
     
     /// <summary>
-    /// lstFilter control.
+    /// lblStartDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter;
+    protected global::System.Web.UI.WebControls.Label lblStartDate;
     
     /// <summary>
-    /// btnSearch control.
+    /// cldStartDate1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSearch;
+    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldStartDate1;
     
     /// <summary>
-    /// Placeholder1 control.
+    /// btnGenerateQ4 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.PlaceHolder Placeholder1;
+    protected global::System.Web.UI.WebControls.Button btnGenerateQ4;
     
     /// <summary>
-    /// btnExport control.
+    /// Chart_Q4 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnExport;
-    
-    /// <summary>
-    /// btnPrint control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnPrint;
+    protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_Q4;
 }

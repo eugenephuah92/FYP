@@ -10,9 +10,21 @@ using System.Web.UI.WebControls;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 public partial class Admin_TAT : System.Web.UI.Page
 {
+    struct TAT_Relationship
+    {
+        public string eid;
+        public string ename;
+        public string email;
+        public string qm_name;
+        public string qm_email;
+        public string wcm_name;
+        public string wcm_email;
+    };
+    
     struct SCAR_Rec
     {
         public string car_no;
@@ -36,7 +48,6 @@ public partial class Admin_TAT : System.Web.UI.Page
         public int escalation_level;
         public string escalation_level_desc;
         public int days_to_escalation;
-        public bool notify_QE;
         public bool notify_QM;
         public bool notify_WCM;
     };
@@ -50,12 +61,14 @@ public partial class Admin_TAT : System.Web.UI.Page
             DataTable dt = this.GetSCAR();
             DataTable dt2 = this.GetTAT();
             DataTable dt3 = this.GetTATRef();
+            DataTable dt4 = this.GetTATRelationship();
 
             SCAR_Rec[] mTAT = new SCAR_Rec[dt.Rows.Count];  // Get the values from SCAR table
             TAT_Rec[] rTAT = new TAT_Rec[dt2.Rows.Count];   // Get the values from TAT table
             TAT_Ref[] refTAT = new TAT_Ref[dt3.Rows.Count]; // Get the values from TAT Reference table
+            TAT_Relationship[] relTAT = new TAT_Relationship[dt4.Rows.Count]; // Get the value from TAT Relationship table
 
-            int x = 0, y = 0, z = 0;
+            int x = 0, y = 0, z = 0, r = 0;
             foreach(DataRow row in dt.Rows)
             {
                 mTAT[x].car_no = row["car_no"].ToString();
@@ -81,10 +94,21 @@ public partial class Admin_TAT : System.Web.UI.Page
                 refTAT[z].escalation_level = int.Parse(row["escalation_level"].ToString());
                 refTAT[z].escalation_level_desc = row["escalation_level_desc"].ToString();
                 refTAT[z].days_to_escalation = int.Parse(row["days_to_escalation"].ToString());
-                refTAT[z].notify_QE = bool.Parse(row["notify_QE"].ToString());
                 refTAT[z].notify_QM = bool.Parse(row["notify_QM"].ToString());
                 refTAT[z].notify_WCM = bool.Parse(row["notify_WCM"].ToString());
                 z++;
+            }
+
+            foreach (DataRow row in dt4.Rows)
+            {
+                relTAT[r].eid = row["employee_ID"].ToString();
+                relTAT[r].ename = row["employee_name"].ToString();
+                relTAT[r].email = row["employee_email"].ToString();
+                relTAT[r].qm_name = row["qm_name"].ToString();
+                relTAT[r].qm_email = row["qm_email"].ToString();
+                relTAT[r].wcm_name = row["wcm_name"].ToString();
+                relTAT[r].wcm_email = row["wcm_email"].ToString();
+                r++;
             }
 
             bool new_record = true;
@@ -103,10 +127,15 @@ public partial class Admin_TAT : System.Web.UI.Page
                                 if (rTAT[j].escalation_level < 6)
                                 {
                                     rTAT[j].escalation_level++;
-                                    rTAT[j].escalation_count++;
+                                    if(refTAT[rTAT[j].escalation_level].escalation_level_desc.Contains("Escalation"))
+                                    {
+                                        rTAT[j].escalation_count++;
+                                    }
+                                    
                                 }
                                 
                                 string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
+                                // Update the TAT entry in the database with the next triggering date
                                 using (SqlConnection connection = new SqlConnection(constr))
                                 {
                                     SqlCommand cmd = new SqlCommand("UPDATE TAT SET escalation_level = @escalation_level, trigger_date = @trigger_date, escalation_count = @escalation_count WHERE SCAR_ID = @SCAR_ID");
@@ -119,25 +148,74 @@ public partial class Admin_TAT : System.Web.UI.Page
                                     connection.Open();
                                     cmd.ExecuteNonQuery();
                                 }
-                                using (SqlConnection connection = new SqlConnection(constr))
+                                for (int k = 0; k < r; k++)
                                 {
-                                    connection.Open();
-                                    SqlCommand cmd = new SqlCommand("INSERT INTO Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
-                                    cmd.CommandType = CommandType.Text;
-                                    cmd.Connection = connection;
-                                    cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
-                                    cmd.Parameters.AddWithValue("@NoticeTo", mTAT[i].supplier_contact);
-                                    cmd.Parameters.AddWithValue("@NoticeSubject", "SCAR Request " + mTAT[i].car_no + " has been created");
-                                    cmd.Parameters.AddWithValue("@NoticeBody", "");
-                                    cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
-                                    cmd.Parameters.AddWithValue("@ReadStatus", false);
-                                    //connection.Open();
-                                    cmd.ExecuteNonQuery();
-                                }
+                                    if(relTAT[k].ename == mTAT[i].supplier_contact)
+                                    {
+                                        // Create a new notification
+                                        using (SqlConnection connection = new SqlConnection(constr))
+                                        {
+                                            SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                            cmd.CommandType = CommandType.Text;
+                                            cmd.Connection = connection;
+                                            cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(relTAT[k].ename + mTAT[i].car_no + refTAT[rTAT[j].escalation_level].escalation_level_desc));
+                                            cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                            cmd.Parameters.AddWithValue("@NoticeTo", relTAT[k].ename);
+                                            cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[rTAT[j].escalation_level].escalation_level_desc);
+                                            cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " has been created");
+                                            cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                            cmd.Parameters.AddWithValue("@ReadStatus", false);
+                                            connection.Open();
+                                            cmd.ExecuteNonQuery();
+                                        }
+
+                                        if(refTAT[rTAT[j].escalation_level].notify_QM)
+                                        {
+                                            // Create a new notification
+                                            using (SqlConnection connection = new SqlConnection(constr))
+                                            {
+                                                SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                                cmd.CommandType = CommandType.Text;
+                                                cmd.Connection = connection;
+                                                cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(relTAT[k].qm_name + mTAT[i].car_no + refTAT[rTAT[j].escalation_level].escalation_level_desc));
+                                                cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                                cmd.Parameters.AddWithValue("@NoticeTo", relTAT[k].qm_name);
+                                                cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[rTAT[j].escalation_level].escalation_level_desc);
+                                                cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " is not complete");
+                                                cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                                cmd.Parameters.AddWithValue("@ReadStatus", false);
+                                                connection.Open();
+                                                cmd.ExecuteNonQuery();
+                                            }
+                                        }
+
+                                        if (refTAT[rTAT[j].escalation_level].notify_WCM)
+                                        {
+                                            // Create a new notification
+                                            using (SqlConnection connection = new SqlConnection(constr))
+                                            {
+                                                SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                                cmd.CommandType = CommandType.Text;
+                                                cmd.Connection = connection;
+                                                cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(relTAT[k].wcm_name + mTAT[i].car_no + refTAT[rTAT[j].escalation_level].escalation_level_desc));
+                                                cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                                cmd.Parameters.AddWithValue("@NoticeTo", relTAT[k].wcm_name);
+                                                cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[rTAT[j].escalation_level].escalation_level_desc);
+                                                cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " is not complete");
+                                                cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                                cmd.Parameters.AddWithValue("@ReadStatus", false);
+                                                connection.Open();
+                                                cmd.ExecuteNonQuery();
+                                            }
+                                        }
+
+                                    }
+                                }                                    
                             }
                         }
                     }
 
+                    // Create new TAT record for new SCAR Request
                     if (new_record)
                     {
                         string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
@@ -155,22 +233,61 @@ public partial class Admin_TAT : System.Web.UI.Page
                             cmd.Parameters.AddWithValue("@escalation_count", 0);
                             cmd.ExecuteNonQuery();
                         }
+                        // Send notification to QE
                         using (SqlConnection connection = new SqlConnection(constr))
                         {
-                            connection.Open();
-                            SqlCommand cmd = new SqlCommand("INSERT INTO Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                            SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
                             cmd.CommandType = CommandType.Text;
                             cmd.Connection = connection;
+                            cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(mTAT[i].supplier_contact + mTAT[i].car_no + refTAT[0].escalation_level_desc));
                             cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
                             cmd.Parameters.AddWithValue("@NoticeTo", mTAT[i].supplier_contact);
-                            cmd.Parameters.AddWithValue("@NoticeSubject", "SCAR Request " + mTAT[i].car_no + " has been created");
-                            cmd.Parameters.AddWithValue("@NoticeBody", "");
+                            cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[0].escalation_level_desc);
+                            cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " has been created");
                             cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
                             cmd.Parameters.AddWithValue("@ReadStatus", 0);
-                            //connection.Open();
+                            connection.Open();
                             cmd.ExecuteNonQuery();
                         }
-                        
+                        for (int k = 0; k < r; k++)
+                        {
+                            if (relTAT[k].ename == mTAT[i].supplier_contact)
+                            {
+                                // Send notification to QM
+                                using (SqlConnection connection = new SqlConnection(constr))
+                                {
+                                    SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.Connection = connection;
+                                    cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(relTAT[k].qm_name + mTAT[i].car_no + refTAT[0].escalation_level_desc));
+                                    cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                    cmd.Parameters.AddWithValue("@NoticeTo", relTAT[k].qm_name);
+                                    cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[0].escalation_level_desc);
+                                    cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " has been created");
+                                    cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                    cmd.Parameters.AddWithValue("@ReadStatus", 0);
+                                    connection.Open();
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                // Send notification to WCM
+                                using (SqlConnection connection = new SqlConnection(constr))
+                                {
+                                    SqlCommand cmd = new SqlCommand("INSERT INTO Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) VALUES (@hash, @NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus);");
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.Connection = connection;
+                                    cmd.Parameters.AddWithValue("@hash", CalculateMD5Hash(relTAT[k].wcm_name + mTAT[i].car_no + refTAT[0].escalation_level_desc));
+                                    cmd.Parameters.AddWithValue("@NoticeFrom", "TAT Reporting Services");
+                                    cmd.Parameters.AddWithValue("@NoticeTo", relTAT[k].wcm_name);
+                                    cmd.Parameters.AddWithValue("@NoticeSubject", mTAT[i].car_no + " " + refTAT[0].escalation_level_desc);
+                                    cmd.Parameters.AddWithValue("@NoticeBody", "SCAR Request " + mTAT[i].car_no + " has been created");
+                                    cmd.Parameters.AddWithValue("@NoticeTimestamp", DateTime.Now.Date);
+                                    cmd.Parameters.AddWithValue("@ReadStatus", 0);
+                                    connection.Open();
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
                     }
                 }
                 else if(mTAT[i].scar_status == "Complete")
@@ -200,7 +317,27 @@ public partial class Admin_TAT : System.Web.UI.Page
         }
     }
 
+    private DataTable GetTATRelationship()
+    {
+        string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT employee_ID, employee_name, employee_email, qm_name, qm_email, wcm_name, wcm_email FROM TAT_Relationship"))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
 
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+    }
 
     private DataTable GetTAT()
     {
@@ -229,7 +366,7 @@ public partial class Admin_TAT : System.Web.UI.Page
         string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT escalation_level, escalation_level_desc, days_to_escalation, notify_QE, notify_QM, notify_WCM FROM TAT_Reference"))
+            using (SqlCommand cmd = new SqlCommand("SELECT escalation_level, escalation_level_desc, days_to_escalation, notify_QM, notify_WCM FROM TAT_Reference"))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())
                 {
@@ -266,5 +403,21 @@ public partial class Admin_TAT : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    public string CalculateMD5Hash(string input)
+    {
+        // step 1, calculate MD5 hash from input
+        MD5 md5 = System.Security.Cryptography.MD5.Create();
+        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+        byte[] hash = md5.ComputeHash(inputBytes);
+
+        // step 2, convert byte array to hex string
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("X2"));
+        }
+        return sb.ToString();
     }
 }

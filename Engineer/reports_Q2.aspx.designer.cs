@@ -12,20 +12,65 @@
 public partial class Engineer_reports_Q2 {
     
     /// <summary>
-    /// btnExport control.
+    /// lblStartDate control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnExport;
+    protected global::System.Web.UI.WebControls.Label lblStartDate;
     
     /// <summary>
-    /// btnPrint control.
+    /// cldStartDate1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnPrint;
+    protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl cldStartDate1;
+    
+    /// <summary>
+    /// btnGenerateQ2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnGenerateQ2;
+    
+    /// <summary>
+    /// UpdatePanel1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+    
+    /// <summary>
+    /// Chart_Q2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_Q2;
+    
+    /// <summary>
+    /// btnExport_Q2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnExport_Q2;
+    
+    /// <summary>
+    /// btnPrint_Q2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnPrint_Q2;
 }
