@@ -36,19 +36,17 @@
                                 <div class="col-lg-12" style="padding-left:25pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
                                    <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
-                                   <asp:GridView ID="displayNewSCAR" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                   <asp:GridView ID="displayNewSCAR" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" AllowSorting="true" OnSorting="SCARGridView_Sorting" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
                                        <Columns>
-                                           <asp:TemplateField HeaderText="CAR Number">
+                                           <asp:TemplateField HeaderText="CAR Number" SortExpression="CAR Number">
                                             <ItemTemplate>
                                            <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# Eval("CAR Number","scars_forms.aspx?scar_no={0}") %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
-                                           <asp:BoundField HeaderText="Defect Name" DataField="Defect Name"  />
-                                           <asp:BoundField HeaderText="Description" DataField="Description"  />
-                                           <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type"  />
-                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"  />
-                                           <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"  />
-                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"  />
+                                           <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
+                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
+                                           <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"/>
+                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"/>
                                        </Columns>
                                    
                                        </asp:GridView>

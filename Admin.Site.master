@@ -79,10 +79,16 @@
                                 <li><a href="view_defect_modes.aspx">View Defect Modes</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "add_new_corrective_action" || GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>&nbsp;Corrective / Preventive Actions<i class="fa fa-sort-down subm"></i></a>
+                        <li <% if (GetPageName.Value == "reports_Q1" || GetPageName.Value == "reports_Q2" || GetPageName.Value == "reports_Q3" || GetPageName.Value == "reports_Q4" || GetPageName.Value == "reports_CAPA" || GetPageName.Value == "reports_TAT_duration" || GetPageName.Value == "reports_TAT_frequency" || GetPageName.Value == "reports_export_SCAR") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i>&nbsp;Reports<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
-                                <li><a href="add_new_corrective_action.aspx">Add New Corrective Action</a></li>
-                                <li><a href="view_corrective_action.aspx">View Corrective Action</a></li>
+                    	        <li><a href="reports_Q1.aspx">1st Quadrant Report (Q1)</a></li>
+                                <li><a href="reports_Q2.aspx">2nd Quadrant Report (Q2)</a></li>
+                                <li><a href="reports_Q3.aspx">3rd Quadrant Report (Q3)</a></li>
+                                <li><a href="reports_Q4.aspx">4th Quadrant Report (Q4)</a></li>
+                                <li><a href="reports_CAPA.aspx">Corrective Action / Preventive Action</a></li>
+                                <li><a href="reports_TAT_frequency.aspx">Frequency of Cases of TAT Triggering</a></li>
+                                <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
+                                <li><a href="reports_export_SCAR.aspx">Export SCAR Table</a></li>
                             </ul>
                         </li>
                         <li <% if (GetPageName.Value == "admin_form_elements") Response.Write("class=\"nav-active\"");%>><a href="admin_form_elements.aspx"><i class="fa fa-edit"></i>&nbsp;Manage SCAR Form Elements</a></li>

@@ -8,7 +8,6 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Summary
-                    <asp:Label ID="test" runat="server" />
                 </div>
                     <div class="panel-body">                        
                             <div class="form-group">
@@ -28,10 +27,6 @@
                                                 <td style="padding-left:45pt"><a href="closed_scars.aspx" style="text-decoration:none">Closed SCAR</a></td>
                                                 <td><span class="badge"><asp:Label ID="lblClosedSCAR" runat="server"/></span></td>
                                             </tr>    
-                                            <tr>
-                                                <td style="padding-left:45pt"><a href="total_scars.aspx" style="text-decoration:none">Total SCAR</a></td>
-                                                <td><span class="badge"><asp:Label ID="lblTotalSCAR" runat="server"/></span></td>
-                                      	    </tr>  
                                         </tbody>
   									</table>
                                 </div>

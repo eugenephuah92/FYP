@@ -1,6 +1,13 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - View Defect Modes" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Codebehind="~/Admin/view_defect_modes.aspx.cs" Inherits="Admin_view_defect_modes" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - View Defect Modes" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_view_defect_modes" CodeBehind="~/Admin/view_defect_modes.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <style type="text/css">
+        .cssPager td {
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+    </style>
+
     <div class="right-panel">
         <div class="right-panel-inner">
             <div class="col-md-12">
@@ -10,13 +17,12 @@
                     </div>
                     <div class="panel-body">
                         <!-- Record per page -->
-                        <div class="col-md-6">
-                            <p style="padding-top: 10pt">
-                                Records per page :
-                                <asp:DropDownList ID="lstPageSize" Font-Size="Medium" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageSizeChanged">
-                                    <asp:ListItem Text="5" Value="5" />
+                        <div class="col-md-6" style="padding-top: 10pt">
+                            Records per page :
+                                <asp:DropDownList ID="lstPageSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageSizeChanged" Font-Size="Medium">
                                     <asp:ListItem Text="10" Value="10" Selected="True" />
-                                    <asp:ListItem Text="15" Value="15" />
+                                    <asp:ListItem Text="20" Value="20" />
+                                    <asp:ListItem Text="50" Value="50" />
                                 </asp:DropDownList>
                         </div>
                         <div class="row">
@@ -83,78 +89,86 @@
                                 </div>
                             </div>
                         </div>
+                        <br />
                         <!-- Defect Modes Gridview -->
-                        <asp:GridView ID="GridView1" CssClass="table" runat="server" AutoGenerateColumns="False" DataKeyNames="defectID" DataSourceID="SqlDataSource1" OnRowDataBound="Gridview1_DeleteConfirm" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" BackColor="White" GridLines="None">
+                        <asp:GridView ID="GridViewDFM" CssClass="table" runat="server" AutoGenerateColumns="false" DataKeyNames="defect_ID" DataSourceID="SqlDataSource1" OnRowDataBound="GridviewDFM_DeleteConfirm" OnRowUpdating="GridViewDFM_RowUpdating" AllowPaging="True" BorderColor="#cccccc">
                             <Columns>
-                                <asp:TemplateField HeaderText="Defect Code" SortExpression="defectCode" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="No.">
+                                    <ItemTemplate>
+                                        <asp:Label ID="txtRowNum" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Defect Code" SortExpression="defect_code" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtDefectCode" runat="server" Text='<%# Bind("defectCode") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtDefectCode" CssClass="form-control" runat="server" Text='<%# Bind("defect_code") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectCode" runat="server"
                                             ErrorMessage="* Defect Code is a required field" ForeColor="Red" ControlToValidate="txtDefectCode" Display="Dynamic"></asp:RequiredFieldValidator>
-                                        <asp:CompareValidator ID="CompareValidatorDefectCode" runat="server" Operator="DataTypeCheck" Type="Integer" 
+                                        <asp:CompareValidator ID="CompareValidatorDefectCode" runat="server" Operator="DataTypeCheck" Type="Integer"
                                             ErrorMessage="* Defect Code ONLY accept whole numbers (0 - 9)" ForeColor="Red" ControlToValidate="txtDefectCode" Display="Dynamic"></asp:CompareValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtDefectCode" runat="server" Text='<%# Bind("defectCode") %>'></asp:Label>
+                                        <asp:Label ID="txtDefectCode" runat="server" Text='<%# Bind("defect_code") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="IPC Code" SortExpression="ipcCode" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="IPC Code" SortExpression="IPC_code" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtIPCcode" runat="server" Text='<%# Bind("ipcCode") %>'></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorIPCCode" runat="server" 
-                                            ErrorMessage="* IPC Code ONLY accept numbering format (Eg: 1.1)" ForeColor="Red" ControlToValidate="txtIPCcode" ValidationExpression="^[0-9]+(\.[0-9]{1,2})+(\.[0-9]{1,2})?$"></asp:RegularExpressionValidator>                       
+                                        <asp:TextBox ID="txtIPCcode" CssClass="form-control" runat="server" Text='<%# Bind("IPC_code") %>'></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorIPCCode" runat="server"
+                                            ErrorMessage="* IPC Code ONLY accept numbering format (Eg: 1.1.1)" ForeColor="Red" ControlToValidate="txtIPCcode" ValidationExpression="^[0-9]+(\.[0-9]{1,2})+(\.[0-9]{1,2})?$"></asp:RegularExpressionValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtIPCcode" runat="server" Text='<%# Bind("ipcCode") %>'></asp:Label>
+                                        <asp:Label ID="txtIPCcode" runat="server" Text='<%# Bind("IPC_code") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Defect Name" SortExpression="defectName" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="Defect Name" SortExpression="defect_name" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtDefectName" runat="server" Text='<%# Bind("defectName") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtDefectName" CssClass="form-control" runat="server" Text='<%# Bind("defect_name") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectName" runat="server"
                                             ErrorMessage="* Defect Name is a required field" ForeColor="Red" ControlToValidate="txtDefectName"></asp:RequiredFieldValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtDefectName" runat="server" Text='<%# Bind("defectName") %>'></asp:Label>
+                                        <asp:Label ID="txtDefectName" runat="server" Text='<%# Bind("defect_name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Defect Group" SortExpression="defectGroup" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="Defect Group" SortExpression="defect_group" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:DropDownList ID="lstDefectGroup" runat="server" SelectedValue='<%# Bind("defectGroup") %>' DataSourceID="SqlDataSource2" DataTextField="defectGroup"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:JabilDatabase %>" 
-                                            SelectCommand="SELECT [defectGroupID], [defectGroup] FROM [DefectGroup]"></asp:SqlDataSource>
+                                        <asp:DropDownList ID="lstDefectGroup" CssClass="form-control" runat="server" SelectedValue='<%# Bind("defect_group") %>' DataSourceID="SqlDataSource2" DataTextField="defect_group"></asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:JabilDatabase %>"
+                                            SelectCommand="SELECT [defect_group_ID], [defect_group] FROM [Defect_Group]"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectGroup" runat="server"
                                             ErrorMessage="* Defect Group is a required field" ForeColor="Red" ControlToValidate="lstDefectGroup"></asp:RequiredFieldValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtDefectGroup" runat="server" Text='<%# Bind("defectGroup") %>'></asp:Label>
+                                        <asp:Label ID="txtDefectGroup" runat="server" Text='<%# Bind("defect_group") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Defect Category" SortExpression="defectCategory" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="Defect Category" SortExpression="defect_category" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:DropDownList ID="lstDefectCategory" runat="server" SelectedValue='<%# Bind("defectCategory") %>' DataSourceID="SqlDataSource3" DataTextField="defectCategory"></asp:DropDownList>
-                                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:JabilDatabase %>" 
-                                            SelectCommand="SELECT [defectCategoryID], [defectCategory] FROM [DefectCategory]"></asp:SqlDataSource>
+                                        <asp:DropDownList ID="lstDefectCategory" CssClass="form-control" runat="server" SelectedValue='<%# Bind("defect_category") %>' DataSourceID="SqlDataSource3" DataTextField="defect_category"></asp:DropDownList>
+                                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:JabilDatabase %>"
+                                            SelectCommand="SELECT [defect_category_ID], [defect_category] FROM [Defect_Category]"></asp:SqlDataSource>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectCategory" runat="server"
                                             ErrorMessage="* Defect Category is a required field" ForeColor="Red" ControlToValidate="lstDefectCategory"></asp:RequiredFieldValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtDefectCategory" runat="server" Text='<%# Bind("defectCategory") %>'></asp:Label>
+                                        <asp:Label ID="txtDefectCategory" runat="server" Text='<%# Bind("defect_category") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Defect Description" SortExpression="defectDescription" ControlStyle-Width="100%">
+                                <asp:TemplateField HeaderText="Defect Description" SortExpression="defect_description" ControlStyle-Width="100%">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="txtDefectDesc" runat="server" Text='<%# Bind("defectDescription") %>'></asp:TextBox>
+                                        <asp:TextBox ID="txtDefectDesc" CssClass="form-control" runat="server" Text='<%# Bind("defect_description") %>'></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectDesc" runat="server"
                                             ErrorMessage="* Defect Description is a required field" ForeColor="Red" ControlToValidate="txtDefectDesc"></asp:RequiredFieldValidator>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="txtDefectDesc" runat="server" Text='<%# Bind("defectDescription") %>'></asp:Label>
+                                        <asp:Label ID="txtDefectDesc" runat="server" Text='<%# Bind("defect_description") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:CommandField HeaderText="Action" ShowDeleteButton="True" ShowEditButton="True" ButtonType="Button">
+                                <asp:CommandField ShowEditButton="True" ButtonType="Button">
                                     <ControlStyle CssClass="btn btn-primary" />
-                                    <ItemStyle Wrap="False" />
+                                </asp:CommandField>
+                                <asp:CommandField ShowDeleteButton="True" ButtonType="Button">
+                                    <ControlStyle CssClass="btn btn-danger" />
                                 </asp:CommandField>
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#333333" />
@@ -168,30 +182,22 @@
                             <SortedDescendingHeaderStyle BackColor="#275353" />
                         </asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:JabilDatabase %>"
-                            SelectCommand="SELECT [defectID], [defectCode], [ipcCode], [defectName], [defectGroup], [defectCategory], [defectDescription] FROM [DefectModes] ORDER BY [defectCode]"
-                            DeleteCommand="DELETE FROM [DefectModes] WHERE [defectID] = @defectID"
-                            UpdateCommand="UPDATE [DefectModes] SET [defectCode] = @defectCode, [ipcCode] = @ipcCode, [defectName] = @defectName, [defectGroup] = @defectGroup, [defectCategory] = @defectCategory, [defectDescription] = @defectDescription WHERE [defectID] = @defectID">
+                            SelectCommand="SELECT [defect_ID], [defect_code], [IPC_code], [defect_name], [defect_group], [defect_category], [defect_description] FROM [Defect_Modes] ORDER BY [defect_code]"
+                            DeleteCommand="DELETE FROM [Defect_Modes] WHERE [defect_ID] = @defect_ID"
+                            UpdateCommand="UPDATE [Defect_Modes] SET [defect_code] = @defect_code, [IPC_code] = @IPC_code, [defect_name] = @defect_name, [defect_group] = @defect_group, [defect_category] = @defect_category, [defect_description] = @defect_description WHERE [defect_ID] = @defect_ID">
                             <DeleteParameters>
-                                <asp:Parameter Name="defectID" Type="Int32" />
+                                <asp:Parameter Name="defect_ID" Type="Int32" />
                             </DeleteParameters>
                             <UpdateParameters>
-                                <asp:Parameter Name="defectCode" Type="Decimal" />
-                                <asp:Parameter Name="ipcCode" Type="String" />
-                                <asp:Parameter Name="defectName" Type="String" />
-                                <asp:Parameter Name="defectGroup" Type="String" />
-                                <asp:Parameter Name="defectCategory" Type="String" />
-                                <asp:Parameter Name="defectDescription" Type="String" />
-                                <asp:Parameter Name="defectID" Type="Int32" />
+                                <asp:Parameter Name="defect_code" Type="Decimal" />
+                                <asp:Parameter Name="IPC_code" Type="String" />
+                                <asp:Parameter Name="defect_name" Type="String" />
+                                <asp:Parameter Name="defect_group" Type="String" />
+                                <asp:Parameter Name="defect_category" Type="String" />
+                                <asp:Parameter Name="defect_description" Type="String" />
+                                <asp:Parameter Name="defect_ID" Type="Int32" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
-                           
-                        <style type="text/css">
-                            .cssPager td {
-                                padding-left: 4px;
-                                padding-right: 4px;
-                            }
-                        </style>
-
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - SCAR Log" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_scar_log" Codebehind="~/Engineer/scar_log.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - SCAR Log" Language="C#" MasterPageFile="~/Engineer.Site.Master" EnableEventValidation="false" AutoEventWireup="true" Inherits="Engineer_scar_log" Codebehind="~/Engineer/scar_log.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">
@@ -10,7 +10,7 @@
                 </div>
                 <div class="panel-body">
                 	<div class="col-md-6">
-                	    <p style="padding-top:10pt"> | <asp:HyperLink runat="server" ID="show10records" Text="Show 10 records" Target="_self" NavigateUrl="#" /> | <asp:HyperLink runat="server" ID="HyperLink1" Text="Show 50 records" Target="_self" NavigateUrl="#" /> | 
+                	    <p style="padding-top:10pt"> | <asp:LinkButton ID="display10records" runat="server" Text="Show 10 Records" OnClick="Show_10_Records"/> | <asp:LinkButton ID="display50records" runat="server" Text="Show 50 Records" OnClick="Show_50_Records"/> |
                     </div>
                             <div class="row">
                                 <div class="col-md-3"  style="padding-top:10pt">
@@ -83,108 +83,29 @@
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:25pt; padding-right:30pt; padding-top:15pt; padding-bottom:15pt">
                                 	<!-- Table -->
-  									<table class="table table-hover">
-                                    	<thead>
-                                        	<tr>
-                                                <th>CAR Number</th>
-                                                <th style="padding-left:30pt">Stage</th>
-                                                <th style="padding-left:30pt">Disapprove Frequency</th>
-                                                <th style="padding-left:30pt">Creation Date</th>
-                                                <th style="padding-left:30pt">Completion Date</th>
-                                          	</tr>
-                                        </thead>
-    									<tbody>
-                                        	<tr>
-                                                <td>P-SOQANP-140916</td>
-                                                <td style="padding-left:30pt">SCAR Type 4 Pending Approval</td>
-                                                <td style="padding-left:30pt">
-                                                    <a href="#" data-toggle="modal" data-target="#myModalName" aria-labelledby="myModalLabelName" aria-hidden="true">0</a>
-                                                    
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="myModalName" tabindex="-1" role="dialog" aria-labelledby="myModalLabelName" aria-hidden="true" style="padding-top:100pt">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                          	        <h4 class="modal-title">Disapprove Frequency</h4>                                                                  
-                                                                </div>
-                                                                <div class="modal-body" style="padding-top:30pt">
-                                                                    <div class="form-group">
-                                                                        <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Manager</th>
-                                                                                    <th>Status</th>
-                                                                                    <th>Comments</th>
-                                                                                    <th>Date</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>Alan (QM)</td>
-                                                                                    <td>Disapprove</td>
-                                                                                    <td>Incomplete data</td>
-                                                                                    <td>22/11/2014</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>George (WCM)</td>
-                                                                                    <td>Approve</td>
-                                                                                    <td>-</td>
-                                                                                    <td>22/11/2014</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                          	        </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <asp:button ID="btnChangeQE" CssClass="btn btn-primary" Text="Save Change" runat="server" />
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td style="padding-left:30pt">22/10/2014</td>
-                                                <td style="padding-left:30pt">Ongoing</td>
-                                          	</tr>
-                                          	<tr>
-                                            	<td>P-SOBDP-142945</td>
-                                                <td style="padding-left:30pt">SCAR Issue Completed</td>
-                                                <td style="padding-left:30pt">2</td>
-                                                <td style="padding-left:30pt">22/10/2014</td>
-                                                <td style="padding-left:30pt">25/10/2014</td>
-                                          	</tr>
-                                          	<tr>
-                                            	<td>Q-COBDP-142633</td>
-                                                <td style="padding-left:30pt">SCAR Type 2 Pending Approval</td>
-                                                <td style="padding-left:30pt">1</td>
-                                                <td style="padding-left:30pt">24/10/2014</td>
-                                                <td style="padding-left:30pt">Ongoing</td>
-                                          	</tr>                                            
-                                        </tbody>
-  									</table>
+                                    <asp:UpdatePanel ID="updatePanelSCARLog" runat="server" UpdateMode="Always">
+                                     <ContentTemplate>
+                                   <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
+                                   <asp:GridView ID="displaySCARLog" BorderWidth="2" HeaderStyle-ForeColor="Black" AllowSorting="true" OnSorting="SCARLogGridView_Sorting" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                       <Columns>
+                                           <asp:TemplateField HeaderText="CAR Number" SortExpression="CAR Number">
+                                            <ItemTemplate>
+                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("scars_forms.aspx?scar_no={0}", Eval("CAR Number")) %>'></asp:HyperLink>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                           <asp:BoundField HeaderText="Status" DataField="Status" SortExpression="Status"/>
+                                           <asp:BoundField HeaderText="Disapprove Frequency" DataField="Disapprove Frequency" SortExpression="Disapprove Frequency"/>
+                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
+                                           <asp:BoundField HeaderText="Completion Date" DataField="Completion Date"/>
+                                       </Columns>
+                                         
+                                       </asp:GridView>
+                                    </ContentTemplate>
+  								</asp:UpdatePanel>	
+  									
                                 </div>
                             </div> 
                     </form>
-                    <nav style="padding-right:30pt">
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div> <!--/.col-md-12-->

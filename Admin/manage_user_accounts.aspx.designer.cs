@@ -12,22 +12,22 @@
 public partial class Admin_manage_user_accounts {
     
     /// <summary>
-    /// show10records control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink show10records;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
     /// lstFilter control.
@@ -111,56 +111,20 @@ public partial class Admin_manage_user_accounts {
     protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
     
     /// <summary>
-    /// btnRemove control.
+    /// lblNoRows control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnRemove;
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
     
     /// <summary>
-    /// txtEmployeeName control.
+    /// displayUsers control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmployeeName;
-    
-    /// <summary>
-    /// txtEmployeeEmail control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmployeeEmail;
-    
-    /// <summary>
-    /// txtEmployeePosition control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmployeePosition;
-    
-    /// <summary>
-    /// txtEmployeePassword control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmployeePassword;
-    
-    /// <summary>
-    /// btnSave control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSave;
+    protected global::System.Web.UI.WebControls.GridView displayUsers;
 }

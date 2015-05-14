@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - New SCARS" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_new_scars" Codebehind="~/Manager/new_scars.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - New SCARS" EnableEventValidation="false" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_new_scars" Codebehind="~/Manager/new_scars.aspx.cs"%>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">
@@ -10,8 +10,9 @@
                 </div>
                 <div class="panel-body">
                 	<div class="col-md-6">
-                	    <p style="padding-top:10pt"> | <asp:HyperLink runat="server" ID="show10records" Text="Show 10 records" Target="_self" NavigateUrl="#" /> | <asp:HyperLink runat="server" ID="HyperLink1" Text="Show 50 records" Target="_self" NavigateUrl="#" /> | 
+                	    <p style="padding-top:10pt"> | <asp:LinkButton ID="display10records" runat="server" Text="Show 10 Records" OnClick="Show_10_Records"/> | <asp:LinkButton ID="display50records" runat="server" Text="Show 50 Records" OnClick="Show_50_Records"/> |
                     </div>
+                   
                             <div class="row">
                                 <div class="col-md-3"  style="padding-top:10pt">
                                     <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">  
@@ -34,65 +35,30 @@
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:25pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
-  									<table class="table table-hover">
-                                    	<thead>
-                                        	<tr>
-                                                <th>CAR Number</th>
-                                                <th style="padding-left:30pt">Defect Name</th>
-                                                <th style="padding-left:30pt">Description</th>
-                                                <th style="padding-left:30pt">Creation Date</th>
-                                                <th style="padding-left:30pt">SCAR Type</th>
-                                                <th style="padding-left:30pt">Level of Escalation</th>
-                                                <th style="padding-left:30pt">Days Till Next Escalation</th>
-                                          	</tr>
-                                        </thead>
-    									<tbody>
-                                        	<tr>
-                                                <td><a href="../Engineer/scars_forms.aspx">P-SOQANP-140916</a></td>
-                                                <td style="padding-left:30pt">INSUFF SOLDER</td>
-                                                <td style="padding-left:30pt">Insufficient amount of solder on a lead, pad or terminal</td>
-                                                <td style="padding-left:30pt">22/10/2014</td>
-                                                <td style="padding-left:30pt">2</td>
-                                                <td style="padding-left:30pt">1</td>
-                                                <td style="padding-left:30pt">4</td>
-                                          	</tr>
-                                          	<tr>
-                                            	<td>Q-COBDP-142633</td>
-                                                <td style="padding-left:30pt">FRACTURED SOLDER</td>
-                                                <td style="padding-left:30pt">Stressed solder torn away through the PCB</td>
-                                                <td style="padding-left:30pt">24/10/2014</td>
-                                                <td style="padding-left:30pt">2</td>
-                                            	<td style="padding-left:30pt">1</td>
-                                                <td style="padding-left:30pt">6</td>
-                                          	</tr>
-                                        </tbody>
-  									</table>
+                                   <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
+                                   <asp:GridView ID="displayNewSCAR" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" AllowSorting="true" OnSorting="SCARGridView_Sorting" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                       <Columns>
+                                           <asp:TemplateField HeaderText="CAR Number" SortExpression="CAR Number">
+                                            <ItemTemplate>
+                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# Eval("CAR Number","view_scar_record.aspx?scar_no={0}") %>'></asp:HyperLink>
+                                            </ItemTemplate>
+                                            </asp:TemplateField>
+                                           <asp:BoundField HeaderText="Defect Mode" DataField="Defect Mode" SortExpression="Defect Mode"/>
+                                           <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
+                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
+                                           <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"/>
+                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"/>
+                                       </Columns>
+                                   
+                                       </asp:GridView>
+  									
                                 </div>
                             </div> 
                     </form>
-                    <nav style="padding-right:30pt">
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    
                 </div>
             </div>
         </div><!--/.col-md-12-->
     </div>
 </div>
 </asp:Content>
-

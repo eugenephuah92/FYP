@@ -21,7 +21,8 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
         if (!String.IsNullOrEmpty(scar_no))
         {
             Read_Request(connect, scar_no);
-            Read_Response(connect, scar_no); 
+            Read_Response(connect, scar_no);
+            Display_Attachments_Grid_View(scar_no);
         }
         
     }
@@ -104,34 +105,34 @@ defect_type, non_conformity_reported, reject_reason, expected_date_close FROM db
 
             while (reader.Read())
             {
-                lblCarNo.Text += Convert.ToString(reader["scar_no"]);
-                lblCarRev.Text += Convert.ToString(reader["car_revision"]);
-                lblCarType.Text += Convert.ToString(reader["car_type"]);
-                lblPreAlert.Text += Convert.ToString(reader["pre_alert"]);
-                lblRelatedCarNo.Text += Convert.ToString(reader["related_car_no"]);
-                lblRelatedCarRev.Text += Convert.ToString(reader["related_car_ref"]);
-                lblOriginator.Text += Convert.ToString(reader["originator"]);
-                lblRecurrence.Text += Convert.ToString(reader["recurrence"]);
-                lblSupplierContact.Text += Convert.ToString(reader["supplier_contact"]);
-                lblSupplierEmail.Text += Convert.ToString(reader["supplier_email"]);
+                lblCarNo.Text = Convert.ToString(reader["scar_no"]);
+                lblCarRev.Text = Convert.ToString(reader["car_revision"]);
+                lblCarType.Text = Convert.ToString(reader["car_type"]);
+                lblPreAlert.Text = Convert.ToString(reader["pre_alert"]);
+                lblRelatedCarNo.Text = Convert.ToString(reader["related_car_no"]);
+                lblRelatedCarRev.Text = Convert.ToString(reader["related_car_ref"]);
+                lblOriginator.Text = Convert.ToString(reader["originator"]);
+                lblRecurrence.Text = Convert.ToString(reader["recurrence"]);
+                lblSupplierContact.Text = Convert.ToString(reader["supplier_contact"]);
+                lblSupplierEmail.Text = Convert.ToString(reader["supplier_email"]);
                 lblIssuedDate.Text = Convert.ToDateTime(reader["issued_date"]).ToString("yyyy-MM-dd");
-                lblOriginatorDept.Text += Convert.ToString(reader["originator_dept"]);
-                lblOriginatorContact.Text += Convert.ToString(reader["originator_contact"]);
-                lblPartNo.Text += Convert.ToString(reader["part_no"]);
-                lblPartDescription.Text += Convert.ToString(reader["part_description"]);
-                lblBusinessUnit.Text += Convert.ToString(reader["business_unit"]);
-                lblDeptPL.Text += Convert.ToString(reader["dept_pl"]);
-                lblCommodity.Text += Convert.ToString(reader["commodity"]);
-                lblDefectQuantity.Text += reader["defect_quantity"];
-                lblDefectType.Text += Convert.ToString(reader["defect_type"]);
+                lblOriginatorDept.Text = Convert.ToString(reader["originator_dept"]);
+                lblOriginatorContact.Text = Convert.ToString(reader["originator_contact"]);
+                lblPartNo.Text = Convert.ToString(reader["part_no"]);
+                lblPartDescription.Text = Convert.ToString(reader["part_description"]);
+                lblBusinessUnit.Text = Convert.ToString(reader["business_unit"]);
+                lblDeptPL.Text = Convert.ToString(reader["dept_pl"]);
+                lblCommodity.Text = Convert.ToString(reader["commodity"]);
+                lblDefectQuantity.Text = Convert.ToString(reader["defect_quantity"]);
+                lblDefectType.Text = Convert.ToString(reader["defect_type"]);
                 lblNonConformityReported.Text += Convert.ToString(reader["non_conformity_reported"]);
-                lblRejectReason.Text += Convert.ToString(reader["reject_reason"]);
+                lblRejectReason.Text = Convert.ToString(reader["reject_reason"]);
                 lblExpectedDateClose.Text = Convert.ToDateTime(reader["expected_date_close"]).ToString("yyyy-MM-dd");
 
             }
         }
     }
-    
+
     protected void Read_Response(string connect, string scar_no)
     {
         using (SqlConnection conn = new SqlConnection(connect))
@@ -149,14 +150,14 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
 
             while (reader.Read())
             {
-                lblRootCause.Text += Convert.ToString(reader["root_cause_option"]);
-                lblOverallSummary.Text += Convert.ToString(reader["s0_overall_summary"]);
-                lblProbVerification.Text += Convert.ToString(reader["s1_problem_verification"]);
-                lblProbVerificationStatus.Text += Convert.ToString(reader["problem_verification_status"]);
-                lblContainmentAction.Text += Convert.ToString(reader["s21_containment_action"]);
+                lblRootCause.Text = Convert.ToString(reader["root_cause_option"]);
+                lblOverallSummary.Text = Convert.ToString(reader["s0_overall_summary"]);
+                lblProbVerification.Text = Convert.ToString(reader["s1_problem_verification"]);
+                lblProbVerificationStatus.Text = Convert.ToString(reader["problem_verification_status"]);
+                lblContainmentAction.Text = Convert.ToString(reader["s21_containment_action"]);
                 lblS2ImplementationDate.Text = Convert.ToDateTime(reader["s22_implementation_date"]).ToString("yyyy-MM-dd");
-                lblS2ResponsiblePerson.Text += Convert.ToString(reader["s23_responsible_person"]);
-                lblContainmentResult.Text += Convert.ToString(reader["s24_containment_result"]);
+                lblS2ResponsiblePerson.Text = Convert.ToString(reader["s23_responsible_person"]);
+                lblContainmentResult.Text = Convert.ToString(reader["s24_containment_result"]);
 
                 string tempScreeningArea = Convert.ToString(reader["screening_area"]);
                 if (tempScreeningArea.Contains("Production"))
@@ -189,15 +190,15 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     chkS2TrackActionItem.Checked = false;
                 }
 
-                lblFailureAnalysis.Text += Convert.ToString(reader["s31_failure_analysis"]);
-                lblFailureResult.Text += Convert.ToString(reader["s32_failure_analysis_results"]);
-                lblMan.Text += Convert.ToString(reader["s4_man"]);
-                lblMethod.Text += Convert.ToString(reader["s4_method"]);
-                lblMaterial.Text += Convert.ToString(reader["s4_material"]);
-                lblMachine.Text += Convert.ToString(reader["s4_machine"]);
-                lblCorrectiveAction.Text += Convert.ToString(reader["s51_corrective_action"]);
-                lblS5ImplementationDate.Text += Convert.ToDateTime(reader["s52_implementation_date"]).ToString("yyyy-MM-dd");
-                lblS5ResponsiblePerson.Text += Convert.ToString(reader["s53_responsible_person"]);
+                lblFailureAnalysis.Text = Convert.ToString(reader["s31_failure_analysis"]);
+                lblFailureResult.Text = Convert.ToString(reader["s32_failure_analysis_results"]);
+                lblMan.Text = Convert.ToString(reader["s4_man"]);
+                lblMethod.Text = Convert.ToString(reader["s4_method"]);
+                lblMaterial.Text = Convert.ToString(reader["s4_material"]);
+                lblMachine.Text = Convert.ToString(reader["s4_machine"]);
+                lblCorrectiveAction.Text = Convert.ToString(reader["s51_corrective_action"]);
+                lblS5ImplementationDate.Text = Convert.ToDateTime(reader["s52_implementation_date"]).ToString("yyyy-MM-dd");
+                lblS5ResponsiblePerson.Text = Convert.ToString(reader["s53_responsible_person"]);
 
                 if (Convert.ToInt16(reader["track_corrective_action"]) == 1)
                 {
@@ -208,9 +209,9 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     chkS5TrackActionItem.Checked = false;
                 }
 
-                lblPermanentCA.Text += Convert.ToString("s61_permanent_corrective_action");
-                lblS6ImplementationDate.Text += Convert.ToDateTime(reader["s62_implementation_date"]).ToString("yyyy-MM-dd");
-                lblS6ResponsiblePerson.Text += Convert.ToString(reader["s63_responsible_person"]);
+                lblPermanentCA.Text = Convert.ToString(reader["s61_permanent_corrective_action"]);
+                lblS6ImplementationDate.Text = Convert.ToDateTime(reader["s62_implementation_date"]).ToString("yyyy-MM-dd");
+                lblS6ResponsiblePerson.Text = Convert.ToString(reader["s63_responsible_person"]);
 
                 if (Convert.ToInt16(reader["track_permanent_corrective_action"]) == 1)
                 {
@@ -221,13 +222,13 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     chkS6TrackActionItem.Checked = false;
                 }
 
-                lblVerifyCA.Text += Convert.ToString(reader["s71_verify_corrective_action_effectiveness"]);
-                lblS7ImplementationDate.Text += Convert.ToDateTime(reader["s72_implementation_date"]).ToString("yyyy-MM-dd");
-                lblS7ResponsiblePerson.Text += Convert.ToString(reader["s73_responsible_person"]);
-                lblVerifier.Text += Convert.ToString(reader["s74_verifier"]);
-                lblVerifierEmail.Text += Convert.ToString(reader["s75_verifier_email"]);
-                lblVerifyCAResult.Text += Convert.ToString(reader["s76_verify_corrective_action_result_effectiveness"]);
-                /*lblDefectMode.SelectedValue += Convert.ToString(reader["defect_modes"]);
+                lblVerifyCA.Text = Convert.ToString(reader["s71_verify_corrective_action_effectiveness"]);
+                lblS7ImplementationDate.Text = Convert.ToDateTime(reader["s72_implementation_date"]).ToString("yyyy-MM-dd");
+                lblS7ResponsiblePerson.Text = Convert.ToString(reader["s73_responsible_person"]);
+                lblVerifier.Text = Convert.ToString(reader["s74_verifier"]);
+                lblVerifierEmail.Text = Convert.ToString(reader["s75_verifier_email"]);
+                lblVerifyCAResult.Text = Convert.ToString(reader["s76_verify_corrective_action_result_effectiveness"]);
+                lblDefectMode.Text = Convert.ToString(reader["defect_modes"]);
 
                 if (Convert.ToInt16(reader["mor_calculated"]) == 1)
                 {
@@ -236,16 +237,29 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                 else
                 {
                     chkMOR.Checked = false;
-                }*/
+                }
             }
         }
     }
 
     protected void AttachmentsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        TableCell cell = AttachmentsGridView.Rows[e.RowIndex].Cells[2];
+        TableCell cell = AttachmentsGridView.Rows[e.RowIndex].Cells[1];
+        string scar_no = Request.QueryString["scar_no"];
+        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        using (SqlConnection conn = new SqlConnection(connect))
+        {
+            conn.Open();
+            SqlCommand delete = new SqlCommand("Delete from dbo.SCAR_attachments where scar_no = @scar_no AND file_name = @file_name", conn);
+            delete.Parameters.AddWithValue("@scar_no", scar_no);
+            delete.Parameters.AddWithValue("@file_name", cell.Text);
+            delete.ExecuteNonQuery();
+        }
+
         string FileToDelete = Server.MapPath(@"~\Attachments\" + cell.Text);
         File.Delete(FileToDelete);
+        string message = cell.Text + " has been deleted!";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
     }
 
     protected void DownloadFile(object sender, EventArgs e)
@@ -255,6 +269,26 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
         Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
         Response.WriteFile(filePath);
         Response.End();
+    }
+
+    protected void Display_Attachments_Grid_View(string scar_no)
+    {
+        if (!IsPostBack)
+        {
+            SqlDataSource AttachmentsDataSource = new SqlDataSource();
+            AttachmentsDataSource.ID = "AttachmentsDataSource";
+            this.Page.Controls.Add(AttachmentsDataSource);
+            AttachmentsDataSource.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            AttachmentsDataSource.SelectCommand = "SELECT scar_no, file_name, file_path FROM dbo.SCAR_attachments WHERE scar_no = @scar_no";
+
+
+            AttachmentsDataSource.SelectParameters.Add(new Parameter("scar_no", System.TypeCode.String, scar_no));
+            AttachmentsGridView.DataSource = AttachmentsDataSource;
+            AttachmentsGridView.DataBind();
+
+
+        }
+
     }
 
     protected void Upload_Files()
@@ -374,41 +408,91 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                         conn.Open();
                         if(position.Equals("Work Cell Manager"))
                         {
-                            SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                            bool records_exist = false;
+                            SqlCommand select = new SqlCommand(@"SELECT reject_count_WCM FROM dbo.Approval_8D_Reject_Count WHERE scar_no = @scar_no", conn);
                             select.Parameters.AddWithValue("@scar_no", scar_no);
                             SqlDataReader reader = select.ExecuteReader();
-                            while (reader.Read())
+                            if(reader.HasRows)
                             {
-                                tempRejectCountWCM = Convert.ToInt16(reader["reject_count_WCM"]);
+                                records_exist = true;
                             }
-                            reader.Close();
 
-                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM, 
-reject_count_WCM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
-                            update.Parameters.AddWithValue("@scar_no", scar_no);
-                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                            update.Parameters.AddWithValue("@comment_WCM", comment);
-                            update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
-                            update.ExecuteNonQuery();
+                            if(records_exist)
+                            {
+                                while (reader.Read())
+                                {
+                                    tempRejectCountWCM = Convert.ToInt16(reader["reject_count_WCM"]);
+                                }
+                                reader.Close();
+
+                                SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
+                                updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                                updateStatus.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                                updateStatus.Parameters.AddWithValue("@comment_WCM", comment);
+                                updateStatus.ExecuteNonQuery();
+
+                                SqlCommand updateCount = new SqlCommand(@"UPDATE dbo.Approval_8D_Reject_Count SET reject_count_WCM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
+                                updateCount.Parameters.AddWithValue("@scar_no", scar_no);
+                                updateCount.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
+                                updateCount.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                SqlCommand insertStatus = new SqlCommand(@"INSERT INTO dbo.Approval_8D (approval_status_WCM, comment_WCM) VALUES (@approval_status_WCM, @comment_WCM) WHERE scar_no = @scar_no", conn);
+                                insertStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                                insertStatus.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                                insertStatus.Parameters.AddWithValue("@comment_WCM", comment);
+                                insertStatus.ExecuteNonQuery();
+
+                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_WCM) VALUES (@reject_count_WCM) WHERE scar_no = @scar_no", conn);
+                                insertCount.Parameters.AddWithValue("@scar_no", scar_no);
+                                insertCount.Parameters.AddWithValue("@reject_count_WCM", 1);
+                                insertCount.ExecuteNonQuery();
+                            }
+                            
                         }
                         else if(position.Equals("Quality Manager"))
                         {
+                            bool records_exist = false;
                             SqlCommand select = new SqlCommand(@"SELECT reject_count_QM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
                             select.Parameters.AddWithValue("@scar_no", scar_no);
                             SqlDataReader reader = select.ExecuteReader();
-                            while (reader.Read())
+                            if (reader.HasRows)
                             {
-                                tempRejectCountWCM = Convert.ToInt16(reader["reject_count_QM"]);
+                                records_exist = true;
                             }
-                            reader.Close();
+                            if (records_exist)
+                            {
+                                while (reader.Read())
+                                {
+                                    tempRejectCountWCM = Convert.ToInt16(reader["reject_count_QM"]);
+                                }
+                                reader.Close();
 
-                            SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM, 
-reject_count_QM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
-                            update.Parameters.AddWithValue("@scar_no", scar_no);
-                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                            update.Parameters.AddWithValue("@comment_WCM", comment);
-                            update.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
-                            update.ExecuteNonQuery();
+                                SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM WHERE scar_no = @scar_no", conn);
+                                updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                                updateStatus.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
+                                updateStatus.Parameters.AddWithValue("@comment_QM", comment);
+                                updateStatus.ExecuteNonQuery();
+
+                                SqlCommand updateCount = new SqlCommand(@"UPDATE dbo.Approval_8D_Reject_Count SET reject_count_QM = @reject_count_QM WHERE scar_no = @scar_no", conn);
+                                updateCount.Parameters.AddWithValue("@scar_no", scar_no);
+                                updateCount.Parameters.AddWithValue("@reject_count_QM", tempRejectCountWCM += 1);
+                                updateCount.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                SqlCommand insertStatus = new SqlCommand(@"INSERT INTO dbo.Approval_8D (approval_status_QM, comment_QM) VALUES (@approval_status_QM, @comment_QM) WHERE scar_no = @scar_no", conn);
+                                insertStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                                insertStatus.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
+                                insertStatus.Parameters.AddWithValue("@comment_QM", comment);
+                                insertStatus.ExecuteNonQuery();
+
+                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_QM) VALUES (@reject_count_QM) WHERE scar_no = @scar_no", conn);
+                                insertCount.Parameters.AddWithValue("@scar_no", scar_no);
+                                insertCount.Parameters.AddWithValue("@reject_count_QM", 1);
+                                insertCount.ExecuteNonQuery();
+                            }
                         }
                         
 

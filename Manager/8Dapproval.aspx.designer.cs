@@ -534,6 +534,24 @@ public partial class Manager_8Dapproval {
     protected global::System.Web.UI.WebControls.Label lblVerifyCAResult;
     
     /// <summary>
+    /// lblDefectMode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblDefectMode;
+    
+    /// <summary>
+    /// chkMOR control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CheckBox chkMOR;
+    
+    /// <summary>
     /// uploadFile control.
     /// </summary>
     /// <remarks>
@@ -568,15 +586,6 @@ public partial class Manager_8Dapproval {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView AttachmentsGridView;
-    
-    /// <summary>
-    /// AttachmentsSqlDataSource control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.SqlDataSource AttachmentsSqlDataSource;
     
     /// <summary>
     /// rdbApproval control.

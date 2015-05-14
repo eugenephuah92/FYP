@@ -17,30 +17,31 @@ public partial class Admin_add_new_defect_modes : System.Web.UI.Page
         }
     }
 
-    protected void ddlDefectGroup()
+    protected void ddlDefectGroup() //Populate Defect Group dropdownlist from database
     {
         string connect = System.Configuration.ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {
-            SqlCommand select = new SqlCommand("SELECT defectGroupID, defectGroup FROM DefectGroup", conn);
+            SqlCommand select = new SqlCommand("SELECT defect_group_ID, defect_group FROM Defect_Group", conn);
             conn.Open();
+
             lstNewDefectGroup.DataSource = select.ExecuteReader();
-            lstNewDefectGroup.DataTextField = "defectGroup";
+            lstNewDefectGroup.DataTextField = "defect_group";
             lstNewDefectGroup.DataBind();
             lstNewDefectGroup.Items.Insert(0, new ListItem("Please Select Defect Group", "0"));
         }
     }
 
-    protected void ddlDefectCategory()
+    protected void ddlDefectCategory() //Populate Defect Category dropdownlist from database
     {
         string connect = System.Configuration.ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {
-            SqlCommand select = new SqlCommand("SELECT defectCategoryID, defectCategory FROM DefectCategory", conn);
+            SqlCommand select = new SqlCommand("SELECT defect_category_ID, defect_category FROM Defect_Category", conn);
             conn.Open();
 
             lstNewDefectCategory.DataSource = select.ExecuteReader();
-            lstNewDefectCategory.DataTextField = "defectCategory";
+            lstNewDefectCategory.DataTextField = "defect_category";
             lstNewDefectCategory.DataBind();
             lstNewDefectCategory.Items.Insert(0, new ListItem("Please Select Defect Category", "0"));
         }
@@ -51,27 +52,27 @@ public partial class Admin_add_new_defect_modes : System.Web.UI.Page
         string connect = System.Configuration.ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
         using (SqlConnection conn = new SqlConnection(connect))
         {
-            if(IsPostBack)
+            if (IsPostBack)
             {
                 if (Page.IsValid)
                 {
-                    SqlCommand insert = new SqlCommand("INSERT INTO DefectModes(defectCode, ipcCode, defectName, defectGroup, defectCategory, defectDescription) Values (@defectCode, @ipcCode, @defectName, @defectGroup, @defectCategory, @defectDescription)", conn);
+                    SqlCommand insert = new SqlCommand("INSERT INTO Defect_Modes(defect_code, IPC_code, defect_name, defect_group, defect_category, defect_description) Values (@defect_code, @IPC_code, @defect_name, @defect_group, @defect_category, @defect_description)", conn);
 
-                    insert.Parameters.AddWithValue("@defectCode", txtNewDefectCode.Text);
-                    insert.Parameters.AddWithValue("@ipcCode", txtNewIPCCode.Text);
-                    if(!String.IsNullOrEmpty(txtNewIPCCode.Text)) //Check if textbox contains value
+                    insert.Parameters.AddWithValue("@defect_code", txtNewDefectCode.Text);
+                    insert.Parameters.AddWithValue("@IPC_code", txtNewIPCCode.Text);
+                    if (!String.IsNullOrEmpty(txtNewIPCCode.Text)) //Check if textbox contains value
                     {
-                        insert.Parameters["@ipcCode"].Value = txtNewIPCCode.Text; //If not empty, pass value
+                        insert.Parameters["@IPC_code"].Value = txtNewIPCCode.Text; //If not empty, pass value
                     }
                     else
                     {
-                        insert.Parameters["@ipcCode"].Value = DBNull.Value; //If empty, set to NULL
+                        insert.Parameters["@IPC_code"].Value = DBNull.Value; //If empty, set to NULL
                     }
-                    insert.Parameters.AddWithValue("@defectName", txtNewDefectName.Text.ToUpper()); //Convert to uppercase
-                    insert.Parameters.AddWithValue("@defectGroup", lstNewDefectGroup.SelectedValue);
-                    insert.Parameters.AddWithValue("@defectCategory", lstNewDefectCategory.SelectedValue);
-                    insert.Parameters.AddWithValue("@defectDescription", txtNewDefectDescription.Text);
-   
+                    insert.Parameters.AddWithValue("@defect_name", txtNewDefectName.Text.ToUpper()); //Convert text to uppercase
+                    insert.Parameters.AddWithValue("@defect_group", lstNewDefectGroup.SelectedValue);
+                    insert.Parameters.AddWithValue("@defect_category", lstNewDefectCategory.SelectedValue);
+                    insert.Parameters.AddWithValue("@defect_description", txtNewDefectDescription.Text);
+
                     conn.Open();
                     insert.ExecuteNonQuery();
 
@@ -88,11 +89,11 @@ public partial class Admin_add_new_defect_modes : System.Web.UI.Page
                     sb.Append("</script>");
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
                 }
-            }        
+            }
         }
     }
 
-    public void ClearFields()
+    protected void ClearFields() //Clear all text fields
     {
         txtNewDefectCode.Text = "";
         txtNewIPCCode.Text = "";

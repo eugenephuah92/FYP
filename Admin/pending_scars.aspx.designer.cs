@@ -12,22 +12,22 @@
 public partial class Admin_pending_scars {
     
     /// <summary>
-    /// show10records control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink show10records;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
     /// lstFilter control.
@@ -55,4 +55,31 @@ public partial class Admin_pending_scars {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    
+    /// <summary>
+    /// updatePanelPendingSCARS control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.UpdatePanel updatePanelPendingSCARS;
+    
+    /// <summary>
+    /// lblNoRows control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
+    
+    /// <summary>
+    /// displayPendingSCAR control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView displayPendingSCAR;
 }

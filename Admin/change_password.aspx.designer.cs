@@ -12,22 +12,22 @@
 public partial class Admin_change_password {
     
     /// <summary>
-    /// txtEmail control.
+    /// txtOldPassword control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtEmail;
+    protected global::System.Web.UI.WebControls.TextBox txtOldPassword;
     
     /// <summary>
-    /// txtNewDefectCode control.
+    /// vldOldPassword control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtNewDefectCode;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldOldPassword;
     
     /// <summary>
     /// txtNewPassword control.
@@ -39,6 +39,15 @@ public partial class Admin_change_password {
     protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
     
     /// <summary>
+    /// vldNewPassword control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldNewPassword;
+    
+    /// <summary>
     /// txtConfirmNewPassword control.
     /// </summary>
     /// <remarks>
@@ -46,6 +55,15 @@ public partial class Admin_change_password {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtConfirmNewPassword;
+    
+    /// <summary>
+    /// vldComparePassword control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CompareValidator vldComparePassword;
     
     /// <summary>
     /// btnChangePassword control.

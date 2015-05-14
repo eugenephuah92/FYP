@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" EnableEventValidation="false" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_pending_scars" Codebehind="pending_scars.aspx.cs"%>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending SCARS" EnableEventValidation="false" Language="C#" MasterPageFile="~/Engineer.Site.Master" AutoEventWireup="true" Inherits="Engineer_pending_scars" Codebehind="~/Engineer/pending_scars.aspx.cs"%>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 <div class="right-panel">
@@ -35,24 +35,27 @@
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-left:25pt; padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
+                                   
+                                   <asp:UpdatePanel ID="updatePanelPendingSCARS" runat="server" UpdateMode="Always">
+                                     <ContentTemplate>
                                    <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
-                                   <asp:GridView ID="displayPendingSCAR" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                   <asp:GridView ID="displayPendingSCAR" BorderWidth="2" HeaderStyle-ForeColor="Black" AllowSorting="true" OnSorting="SCARGridView_Sorting" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
                                        <Columns>
-                                           <asp:TemplateField HeaderText="CAR Number">
+                                           <asp:TemplateField HeaderText="CAR Number" SortExpression="CAR Number">
                                             <ItemTemplate>
                                            <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("scars_forms.aspx?scar_no={0}", Eval("CAR Number")) %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
-                                           <asp:BoundField HeaderText="Defect Name" DataField="Defect Name"  />
-                                           <asp:BoundField HeaderText="Description" DataField="Description"  />
-                                           <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type"  />
-                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"  />
-                                           <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"  />
-                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"  />
+                                           <asp:BoundField HeaderText="Defect Mode" DataField="Defect Mode" SortExpression="Defect Mode"/>
+                                           <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
+                                           <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
+                                           <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"/>
+                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"/>
                                        </Columns>
-                                   
+                                         
                                        </asp:GridView>
-  									
+                                    </ContentTemplate>
+  								</asp:UpdatePanel>	
                                 </div>
                             </div> 
                     </form>

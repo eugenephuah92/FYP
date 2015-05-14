@@ -12,15 +12,6 @@
 public partial class Engineer_home {
     
     /// <summary>
-    /// test control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label test;
-    
-    /// <summary>
     /// lblNewSCAR control.
     /// </summary>
     /// <remarks>
@@ -46,13 +37,4 @@ public partial class Engineer_home {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblClosedSCAR;
-    
-    /// <summary>
-    /// lblTotalSCAR control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblTotalSCAR;
 }

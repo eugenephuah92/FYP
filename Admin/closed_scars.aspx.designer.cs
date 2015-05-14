@@ -12,22 +12,22 @@
 public partial class Admin_closed_scars {
     
     /// <summary>
-    /// show10records control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink show10records;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
     /// lstFilter control.
@@ -57,56 +57,20 @@ public partial class Admin_closed_scars {
     protected global::System.Web.UI.WebControls.LinkButton btnSearch;
     
     /// <summary>
-    /// test control.
+    /// lblNoRows control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList test;
+    protected global::System.Web.UI.WebControls.Label lblNoRows;
     
     /// <summary>
-    /// searchTxt2 control.
+    /// displayClosedSCAR control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt2;
-    
-    /// <summary>
-    /// btnSearch2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch2;
-    
-    /// <summary>
-    /// lstFilter3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
-    
-    /// <summary>
-    /// searchTxt3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt3;
-    
-    /// <summary>
-    /// btnSearch3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
+    protected global::System.Web.UI.WebControls.GridView displayClosedSCAR;
 }

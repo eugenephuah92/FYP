@@ -17,7 +17,7 @@ public partial class Admin_view_defect_modes : System.Web.UI.Page
         lstFilter.Items.Add("Defect Type");
     }
 
-    protected void Gridview1_DeleteConfirm(object sender, GridViewRowEventArgs e)
+    protected void GridviewDFM_DeleteConfirm(object sender, GridViewRowEventArgs e) //Delete selected row when button is clicked
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
@@ -28,6 +28,7 @@ public partial class Admin_view_defect_modes : System.Web.UI.Page
                     Button btn = control as Button;
                     if (btn != null && btn.CommandName == "Delete")
                     {
+                        //Prompt message box for delete confirmation
                         btn.OnClientClick = "if (!confirm('Are you sure you want to delete this entry?')) return;";
                     }
                 }
@@ -35,13 +36,15 @@ public partial class Admin_view_defect_modes : System.Web.UI.Page
         }
     }
 
-    protected void PageSizeChanged(object sender, EventArgs e)
+    protected void PageSizeChanged(object sender, EventArgs e) //Paging
     {
-        GridView1.PageSize = Convert.ToInt32(lstPageSize.SelectedValue);
+        GridViewDFM.PageSize = Convert.ToInt32(lstPageSize.SelectedValue);
     }
-    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+
+    protected void GridViewDFM_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        string temp = e.NewValues["defectName"].ToString().ToUpper();
-        e.NewValues["defectName"] = temp;
+        //Convert Defect Name to uppercase
+        string temp = e.NewValues["defect_name"].ToString().ToUpper();
+        e.NewValues["defect_name"] = temp;
     }
 }

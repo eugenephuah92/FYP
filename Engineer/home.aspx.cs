@@ -21,7 +21,6 @@ public partial class Engineer_home : System.Web.UI.Page
         int newSCAR = 0;
         int closedSCAR = 0;
         int pendingSCAR = 0;
-        int totalSCAR = 0;
 
         using (SqlConnection conn = new SqlConnection(connect))
         {
@@ -40,19 +39,17 @@ public partial class Engineer_home : System.Web.UI.Page
                 {
                     pendingSCAR++;
                 }
-                totalSCAR++;
             }
             rdr.Close();
 
             SqlCommand selectClosed = new SqlCommand("SELECT COUNT(*) FROM dbo.SCAR_History", conn);
             int count = Convert.ToInt16(selectClosed.ExecuteScalar());
             closedSCAR = count;
-            totalSCAR += closedSCAR;
         }
 
         lblNewSCAR.Text = Convert.ToString(newSCAR);
         lblClosedSCAR.Text = Convert.ToString(closedSCAR);
         lblPendingSCAR.Text = Convert.ToString(pendingSCAR);
-        lblTotalSCAR.Text = Convert.ToString(totalSCAR);
     }
+
 }

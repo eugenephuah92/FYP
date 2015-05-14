@@ -1011,15 +1011,6 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.Label showFileNames;
     
     /// <summary>
-    /// btnUpload control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnUpload;
-    
-    /// <summary>
     /// AttachmentsGridView control.
     /// </summary>
     /// <remarks>
@@ -1029,13 +1020,13 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.GridView AttachmentsGridView;
     
     /// <summary>
-    /// AttachmentsSqlDataSource control.
+    /// updatepanel control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.SqlDataSource AttachmentsSqlDataSource;
+    protected global::System.Web.UI.UpdatePanel updatepanel;
     
     /// <summary>
     /// chk8Dapproval control.
@@ -1047,6 +1038,24 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.CheckBox chk8Dapproval;
     
     /// <summary>
+    /// lblWCM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblWCM;
+    
+    /// <summary>
+    /// pnlDropDownListWCM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlDropDownListWCM;
+    
+    /// <summary>
     /// lstWCM control.
     /// </summary>
     /// <remarks>
@@ -1056,6 +1065,24 @@ public partial class Engineer_scars_forms {
     protected global::System.Web.UI.WebControls.DropDownList lstWCM;
     
     /// <summary>
+    /// lblQM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblQM;
+    
+    /// <summary>
+    /// pnlDropDownListQM control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlDropDownListQM;
+    
+    /// <summary>
     /// lstQM control.
     /// </summary>
     /// <remarks>
@@ -1063,15 +1090,6 @@ public partial class Engineer_scars_forms {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList lstQM;
-    
-    /// <summary>
-    /// btnRequestApproval control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnRequestApproval;
     
     /// <summary>
     /// ApprovalGridView control.

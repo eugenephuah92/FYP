@@ -13,7 +13,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 public partial class email_tracker : Page
 {
-    protected List<Email> Emails
+    /*protected List<Email> Emails
     {
         get { return (List<Email>)ViewState["Emails"]; }
         set { ViewState["Emails"] = value; }
@@ -23,7 +23,7 @@ public partial class email_tracker : Page
         Read_Emails();
     }*/
 
-    protected void Page_Load(object sender, EventArgs e)
+    /*protected void Page_Load(object sender, EventArgs e)
     {
 
         this.Read_Emails();
@@ -184,13 +184,11 @@ public partial class email_tracker : Page
     protected void store_textfile_data(string[] storeAttach)
     {
         SqlConnection con;
-        SqlDataReader reader;
         con = new SqlConnection();
         string DatabaseName = "AutoSCARConnectionString";
         con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
 
         string emailbody = storeAttach[1];
-        bool checkString = false;
         string[] tokensbody = emailbody.Split('\n');
         string [] notepad_data = new string [25];
         int count_data = 0;
@@ -265,6 +263,6 @@ defect_type, non_conformity_reported, reject_reason, expected_date_close) VALUES
             
         addSite.ExecuteNonQuery();
         con.Close();
-    }
+    }*/
 
 }

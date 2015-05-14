@@ -1,14 +1,15 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - View SCAR Record" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_view_scar_record" Codebehind="~/Manager/view_scar_record.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - 8D Approval" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_view_scar_record" Codebehind="~/Manager/view_scar_record.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <!-- View individual SCAR Record for managers: Displays details from a particular SCAR Record-->
+<!-- 8D Approval Page for managers: Allow Managers to view SCAR record, download attachments, approve or reject requests -->
 <div class="right-panel">
     <div class="right-panel-inner">
         <div class="col-md-12">
                 <!--Section 1-->
+            <h4>SCAR Record</h4><asp:Label runat="server" ID="ProcessedMessage"/>
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        SCAR Details for P-SOQAP-133772
+                        SCAR Details
                     </div>
                         <div class="panel-body">
                             <table class="table table-condensed">
@@ -20,99 +21,95 @@
                                 <tbody>
                                     <tr>
                                         <th>Car No:</th>
-                                        <td>P-SOQAP-133772</td>
+                                        <td><asp:Label ID="lblCarNo" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Car Revision:</th>
-                                        <td>C</td>
+                                        <td><asp:Label ID="lblCarRev" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Car Type:</th>
-                                        <td>OQA</td>
+                                        <td><asp:Label ID="lblCarType" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Pre Alert:</th>
-                                        <td>Yes</td>
+                                        <td><asp:Label ID="lblPreAlert" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Related Car No:</th>
-                                        <td>N/A</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Related Car No:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblRelatedCarNo" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Related Car Rev:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblRelatedCarRev" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Originator:</th>
-                                        <td>Hairul Azam bin Hassan</td>
+                                        <td><asp:Label ID="lblOriginator" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Recurrence (Ref.No.):</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblRecurrence" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Supplier Contact:</th>
-                                        <td>SharmilaDevi Marimuthu</td>
+                                        <td><asp:Label ID="lblSupplierContact" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Supplier Email:</th>
-                                        <td>sharmiladevi_marimuthu@jabil.com</td>
+                                        <td><asp:Label ID="lblSupplierEmail" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Issued Date:</th>
-                                        <td>04/10/2013</td>
+                                        <td><asp:Label ID="lblIssuedDate" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Originator Department:</th>
-                                        <td>WBU-CTD</td>
+                                        <td><asp:Label ID="lblOriginatorDept" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Originator Contact:</th>
-                                        <td>604-6807891</td>
+                                        <td><asp:Label ID="lblOriginatorContact" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Part No:</th>
-                                        <td>E5072A</td>
+                                        <td><asp:Label ID="lblPartNo" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Part Description:</th>
-                                        <td>Athena</td>
+                                        <td><asp:Label ID="lblPartDescription" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Business Unit:</th>
-                                        <td>CTD</td>
+                                        <td><asp:Label ID="lblBusinessUnit" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Dept / PL:</th>
-                                        <td>PLWN-DTA</td>
+                                        <td><asp:Label ID="lblDeptPL" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Commodity:</th>
-                                        <td>Box Build</td>
+                                        <td><asp:Label ID="lblCommodity" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Defect Quantity:</th>
-                                        <td>1</td>
+                                        <td><asp:Label ID="lblDefectQuantity" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Defect Type:</th>
-                                        <td>Performance</td>
+                                        <td><asp:Label ID="lblDefectType" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Non-Conformity Reported:</th>
-                                        <td>Touch panel mal-function. Unit serial# MY51200563. 5x5 serial# E05072-60101-021-79-1247-00007.</td>
+                                        <td><asp:Label ID="lblNonConformityReported" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Reject Reason for Previous Revision:</th>
-                                        <td>Returned FA unit found similar issue.</td>
+                                        <td><asp:Label ID="lblRejectReason" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th>Expected Date Close:</th>
-                                        <td>01/09/2014</td>
+                                        <td><asp:Label ID="lblExpectedDateClose" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table> 
@@ -126,7 +123,7 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">Root Cause Option:</th>
-                                        <td>Production - Process</td>
+                                        <td><asp:Label ID="lblRootCause" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -139,7 +136,7 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S0 - Overall Summary:</th>
-                                        <td>Touch panel malfunction.</td>
+                                        <td><asp:Label ID="lblOverallSummary" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -152,13 +149,11 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S1 - Problem Verification:</th>
-                                        <td>Touch panel mal-function.<br />
-                                            Conclusion given by Supplier after the complete Failure Analysis is the problem arise due to the Chemical Penetration.
-                                        </td>
+                                        <td><asp:Label ID="lblProbVerification" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Status:</th>
-                                        <td>Valid</td>
+                                        <td><asp:Label ID="lblProbVerificationStatus" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -171,27 +166,37 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S21 - Containment Action:</th>
-                                        <td>Rescreen the remaining unit for the similar defect.</td>
+                                        <td><asp:Label ID="lblContainmentAction" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S22 - Implementation Date:</th>
-                                        <td>10/04/2013</td>
+                                        <td><asp:Label ID="lblS2ImplementationDate" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S23 - Responsible Person</th>
-                                        <td>Wai Moh</td>
+                                        <td><asp:Label ID="lblS2ResponsiblePerson" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S24 - Containment Result:</th>
-                                        <td>NDF</td>
+                                        <td><asp:Label ID="lblContainmentResult" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Screening Area:</th>
-                                        <td>Production</td>
+                                        <td>
+                                            <asp:CheckBox ID="chkProduction" runat="server" Text ="Production" Enabled="false"/>
+                                            <br />
+                                            <asp:CheckBox ID="chkFGI" runat="server" Text ="FGI" Enabled="false"/>
+                                            <br />
+                                            <asp:CheckBox ID="chkRemainingUnits" runat="server" Text ="Remaining units with customers" Enabled="false"/>
+                                            <br />
+                                            <asp:CheckBox ID="chkNA" runat="server" Text ="N/A" Enabled="false"/>
+                                            <br />
+                                            <asp:CheckBox ID="chkUnitInField" runat="server" Text ="Units in Field (with other customers)" Enabled="false"/>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <th class="tablestyle1">Track Action Item:</th>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <th class="tablestyle1">Track Containment Action Item:</th>
+                                        <td><asp:CheckBox ID="chkS2TrackActionItem" runat="server" Enabled="false"/></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -204,11 +209,11 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S31 - Failure Analysis:</th>
-                                        <td>Electrical</td>
+                                        <td><asp:Label ID="lblFailureAnalysis" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S32 - Failure Analysis Results:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblFailureResult" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -221,21 +226,19 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">Man:</th>
-                                        <td>Conclusion given by Supplier after the complete Failure Analysis is the problem arise due to the Chemical Penetration.<br />
-                                            This penetration may have been induced by a liquid saturation thru the substrate edges.
-                                        </td>
+                                        <td><asp:Label ID="lblMan" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Method:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblMethod" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Material:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblMaterial" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Machine:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblMachine" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -248,19 +251,19 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S51 - Corrective Action:</th>
-                                        <td>This is the isolated case. To further monitor.</td>
+                                        <td><asp:Label ID="lblCorrectiveAction" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S52 - Implementation Date:</th>
-                                        <td>05/12/2014</td>
+                                        <td><asp:Label ID="lblS5ImplementationDate" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S53 - Responsible Person</th>
-                                        <td>Wai Moh / Kin Tat</td>
+                                        <td><asp:Label ID="lblS5ResponsiblePerson" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Track Action Item:</th>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td><asp:CheckBox ID="chkS5TrackActionItem" runat="server" Enabled="false"/></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -273,19 +276,19 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S61 - Permanent Corrective Action:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblPermanentCA" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S62 - Implementation Date:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblS6ImplementationDate" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S63 - Responsible Person</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblS6ResponsiblePerson" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">Track Action Item:</th>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                                        <td><asp:CheckBox ID="chkS6TrackActionItem" runat="server" Enabled="false"/></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -298,35 +301,80 @@
                                 <tbody>
                                     <tr>
                                         <th class="tablestyle1">S71 - Verify Effectiveness of Corrective Actions:</th>
-                                        <td>To further monitor for next 3 months.</td>
+                                        <td><asp:Label ID="lblVerifyCA" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S72 - Implementation Date (Start of Monitoring):</th>
-                                        <td>05/12/2014</td>
+                                        <td><asp:Label ID="lblS7ImplementationDate" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S73 - Responsible Person:</th>
-                                        <td>Agilent - Wai Moh / Kin Tat</td>
+                                        <td><asp:Label ID="lblS7ResponsiblePerson" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S74 - Verifier:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblVerifier" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S75 - Verifier Email:</th>
-                                        <td>N/A</td>
+                                        <td><asp:Label ID="lblVerifierEmail" runat="server" /></td>
                                     </tr>
                                     <tr>
                                         <th class="tablestyle1">S76 - Verify Effectiveness of Corrective Actions Result:</th>
-                                        <td>No similar issue encountered during monitoring period.</td>
+                                        <td><asp:Label ID="lblVerifyCAResult" runat="server" /></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <br />
-                               
+                            <div class="form-group">
+                                        <label for="uploadFile" class="col-lg-3 control-label">Defect Mode: </label>
+                                        <div class="col-lg-8">
+                                            <asp:Label ID="lblDefectMode" runat="server"/>
+                                        </div>
+                                <br />
+                                    </div>
+                            <div class="form-group">
+                                        <label for="uploadFile" class="col-lg-3 control-label">MOR Calculated: </label>
+                                        <div class="col-lg-8">
+                                            <asp:CheckBox ID="chkMOR" runat="server" Enabled="false"/>
+                                        </div>
+                                <br />
+                                    </div>
+                                <div class="form-group" style="padding-left:10px;">
+                                    <asp:GridView CssClass="table table-condensed" ID="AttachmentsGridView" runat="server" 
+                                         
+                                        AutoGenerateColumns="False"
+                                         BorderColor="#CCCCCC" Width="100%"
+            BorderStyle="Solid" BorderWidth="1px">
+                                        <HeaderStyle Height="30px" BackColor="#01385B" ForeColor="White" Font-Size="15px" BorderColor="#CCCCCC"
+                BorderStyle="Solid" BorderWidth="1px" />
+                                        <AlternatingRowStyle BackColor="AntiqueWhite" Font-Size="15px" BorderColor="#CCCCCC"
+                BorderStyle="Solid" BorderWidth="1px" />
+                                        <Columns>
+                                            <asp:BoundField DataField="file_name" 
+                                                HeaderText="File Name" SortExpression="file_name" />
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("file_path") %>' runat="server" OnClick = "DownloadFile"></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                        </div>      
+                                
                         </div>
                     </div>
         </div>
     </div><!--/.col-md-12-->
 </div>
+
+     <script type="text/javascript">
+        
+        function ShowMessage(scar_no, message) {
+            alert(message);
+            if (scar_no != 0) {
+                window.location.href = '8Dapproval.aspx?scar_no=' + scar_no;
+            }
+        }
+</script>
 </asp:Content>

@@ -21,6 +21,33 @@ public partial class Admin_new_user_registration {
     protected global::System.Web.UI.WebControls.TextBox txtEmployeeName;
     
     /// <summary>
+    /// vldEmployeeName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmployeeName;
+    
+    /// <summary>
+    /// txtEmployeeID control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtEmployeeID;
+    
+    /// <summary>
+    /// vldEmployeeID control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmployeeID;
+    
+    /// <summary>
     /// txtEmployeeEmail control.
     /// </summary>
     /// <remarks>
@@ -30,6 +57,15 @@ public partial class Admin_new_user_registration {
     protected global::System.Web.UI.WebControls.TextBox txtEmployeeEmail;
     
     /// <summary>
+    /// vldEmployeeEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmployeeEmail;
+    
+    /// <summary>
     /// txtEmployeePosition control.
     /// </summary>
     /// <remarks>
@@ -37,6 +73,33 @@ public partial class Admin_new_user_registration {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtEmployeePosition;
+    
+    /// <summary>
+    /// vldEmployeePosition control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmployeePosition;
+    
+    /// <summary>
+    /// lstPrivilege control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstPrivilege;
+    
+    /// <summary>
+    /// vldPrivilege control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldPrivilege;
     
     /// <summary>
     /// btnCreateNewUser control.

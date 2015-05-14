@@ -21,56 +21,20 @@ public partial class Admin_admin_form_elements {
     protected global::System.Web.UI.WebControls.DropDownList lstElements;
     
     /// <summary>
-    /// lstRootCause control.
+    /// btnAddNewElement control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstRootCause;
+    protected global::System.Web.UI.WebControls.Button btnAddNewElement;
     
     /// <summary>
-    /// btnRemove control.
+    /// btnModifyElement control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnRemove;
-    
-    /// <summary>
-    /// txtAddRootCause control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtAddRootCause;
-    
-    /// <summary>
-    /// btnSaveAdd control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSaveAdd;
-    
-    /// <summary>
-    /// txtModifyRootCause control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtModifyRootCause;
-    
-    /// <summary>
-    /// btnSaveModify control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSaveModify;
+    protected global::System.Web.UI.WebControls.Button btnModifyElement;
 }

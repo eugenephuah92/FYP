@@ -9,50 +9,32 @@
 
 
 
-public partial class Engineer_total_scars {
+public partial class Admin_add_form_elements {
     
     /// <summary>
-    /// show10records control.
+    /// formElements control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink show10records;
+    protected global::System.Web.UI.WebControls.Label formElements;
     
     /// <summary>
-    /// HyperLink1 control.
+    /// txtAddElement control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+    protected global::System.Web.UI.WebControls.TextBox txtAddElement;
     
     /// <summary>
-    /// lstFilter control.
+    /// btnAdd control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter;
-    
-    /// <summary>
-    /// searchTxt control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt;
-    
-    /// <summary>
-    /// btnSearch control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    protected global::System.Web.UI.WebControls.Button btnAdd;
 }
