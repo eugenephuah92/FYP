@@ -55,6 +55,7 @@ public partial class Admin_TAT : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        insert1000();
         if (!this.IsPostBack)
         {
             //Populating a DataTable from database.
@@ -388,7 +389,7 @@ public partial class Admin_TAT : System.Web.UI.Page
         string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
         using (SqlConnection con = new SqlConnection(constr))
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT car_no, supplier_contact, issued_date, scar_status FROM SCAR_request"))
+            using (SqlCommand cmd = new SqlCommand("SELECT car_no, supplier_contact, issued_date, scar_status FROM dbo.[SCAR_request]"))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())
                 {
@@ -419,5 +420,58 @@ public partial class Admin_TAT : System.Web.UI.Page
             sb.Append(hash[i].ToString("X2"));
         }
         return sb.ToString();
+    }
+
+    private void insert1000()
+    {
+        int no = 150920;
+        DateTime dd = DateTime.Parse("2014-01-03");
+        string constr = ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
+        string[] dc = new string []{ "Component", "Placement", "Termination", "Assembly", "Non Product"};
+        // Send notification to WCM
+        for(int i=0; i < 100; i++)
+        {
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[SCAR_Request] ([scar_stage],[scar_type],[scar_status],[car_no],[car_revision],[car_type],[pre_alert],[related_car_no],[related_car_ref],[originator],[recurrence],[supplier_contact],[supplier_email],[issued_date],[originator_dept],[originator_contact],[part_no],[part_description],[business_unit],[dept_pl],[commodity],[defect_quantity],[defect_type],[non_conformity_reported],[reject_reason],[expected_date_close],[save_status],[file_name],[file_path]) VALUES  (@scar_stage, @scar_type, @scar_status, @car_no, @car_revision, @car_type, @pre_alert, @related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description, @business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status, @file_name, @file_path)");
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@scar_stage",  "New SCAR");
+                cmd.Parameters.AddWithValue("@scar_type", "SCAR Type 2");
+                cmd.Parameters.AddWithValue("@scar_status", "Pending");
+                cmd.Parameters.AddWithValue("@car_no", "P-SOQANP-"+no);
+                cmd.Parameters.AddWithValue("@car_revision", "A");
+                cmd.Parameters.AddWithValue("@car_type", "OQA");
+                cmd.Parameters.AddWithValue("@pre_alert", "Yes");
+                cmd.Parameters.AddWithValue("@related_car_no", "P-IOQANP-140909");
+                cmd.Parameters.AddWithValue("@related_car_ref", "A");
+                cmd.Parameters.AddWithValue("@originator", "Hairul Azam bin Hassan");
+                cmd.Parameters.AddWithValue("@recurrence", "N/A");
+                cmd.Parameters.AddWithValue("@supplier_contact", "Shazmeen Zainudin");
+                cmd.Parameters.AddWithValue("@supplier_email", "shazmeen_zainidin@jabil.com");
+                cmd.Parameters.AddWithValue("@issued_date", dd);
+                cmd.Parameters.AddWithValue("@originator_dept", "WBU-CTD");
+                cmd.Parameters.AddWithValue("@originator_contact", "6807891");
+                cmd.Parameters.AddWithValue("@part_no", "E5071C");
+                cmd.Parameters.AddWithValue("@part_description", "Carnelian");
+                cmd.Parameters.AddWithValue("@business_unit", "CTD");
+                cmd.Parameters.AddWithValue("@dept_pl", "PLWN-DTA");
+                cmd.Parameters.AddWithValue("@commodity", "Box Build");
+                cmd.Parameters.AddWithValue("@defect_quantity", 1);
+                int n;
+                n = new Random().Next(0, 4);
+                cmd.Parameters.AddWithValue("@defect_type", dc[n]);
+                cmd.Parameters.AddWithValue("@non_conformity_reported", "abc");
+                cmd.Parameters.AddWithValue("@reject_reason", "abc");
+                cmd.Parameters.AddWithValue("@expected_date_close", dd.AddDays(3));
+                cmd.Parameters.AddWithValue("@save_status", "submit");
+                cmd.Parameters.AddWithValue("@file_name", "");
+                cmd.Parameters.AddWithValue("@file_path", "");
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            dd = dd.AddDays(7);
+            no++;
+        }
     }
 }

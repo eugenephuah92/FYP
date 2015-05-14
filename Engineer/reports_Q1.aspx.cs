@@ -122,13 +122,13 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
             if(record[r].issued_date.Year >= selectedYear)
             {
                 
-                if (record[r].status == "Open")
+                if (record[r].status == "Closed")
                 {
-                    ww_count[0, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Open SCAR according to their respective work weeks
+                    ww_count[1, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Closed SCAR according to their respective work weeks
                 }
                 else
                 {
-                    ww_count[1, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Closed SCAR according to their respective work weeks
+                    ww_count[0, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Open SCAR according to their respective work weeks
                 }
             }            
         }
@@ -146,6 +146,7 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
         Chart_Q1.Series["Open"].SmartLabelStyle.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorGrid.Enabled = false;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = false;
+        Chart_Q1.ChartAreas["Q1"].AxisY.MajorGrid.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
         Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = false; // Enable or disable X-axis label
 
@@ -288,13 +289,13 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
             {
                 if (record[r].issued_date.Month - selectedStartMonth >= 0 && record[r].issued_date.Month - selectedStartMonth <= diff)
                 {
-                    if (record[r].status == "Open")
+                    if (record[r].status == "Closed")
                     {
-                        ww_count[0, record[r].issued_date.Month - selectedStartMonth]++; // Counting the total Open SCAR according to their respective work weeks
+                        ww_count[1, record[r].issued_date.Month - selectedStartMonth]++; // Counting the total Open SCAR according to their respective work weeks
                     }
-                    else if (record[r].status == "Closed")
+                    else
                     {
-                        ww_count[1, record[r].issued_date.Month - selectedStartMonth]++; // Counting the total Closed SCAR according to their respective work weeks
+                        ww_count[0, record[r].issued_date.Month - selectedStartMonth]++; // Counting the total Closed SCAR according to their respective work weeks
                     }
                 }
             }
@@ -435,25 +436,25 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
             // If issued_date(year) equals to the selected year
             if (record[r].issued_date.Year == DateTime.Parse(cldStartDate.Value.ToString()).Year)
             {
-                if (record[r].status == "Open")
+                if (record[r].status == "Closed")
                 {
-                    ww_count[0, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Open SCAR according to their respective work weeks
+                    ww_count[1, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Open SCAR according to their respective work weeks
                 }
                 else
                 {
-                    ww_count[1, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Closed SCAR according to their respective work weeks
+                    ww_count[0, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Closed SCAR according to their respective work weeks
                 }
             }
             // Also capture 1 year before the selected year
             else if (record[r].issued_date.Year == DateTime.Parse(cldStartDate.Value.ToString()).Year - 1)
             {
-                if (record[r].status == "Open")
+                if (record[r].status == "Closed")
                 {
-                    ww_count0[0, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Open SCAR according to their respective work weeks
+                    ww_count0[1, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Open SCAR according to their respective work weeks
                 }
                 else
                 {
-                    ww_count0[1, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Closed SCAR according to their respective work weeks
+                    ww_count0[0, workWeek.retWW(record[r].issued_date) - 1]++; // Counting the total Closed SCAR according to their respective work weeks
                 }
             }
         }
@@ -737,7 +738,7 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
 
         using (SqlConnection con = new SqlConnection(constr))
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT issued_date, scar_status, defect_type FROM SCAR_Request"))
+            using (SqlCommand cmd = new SqlCommand("SELECT [issued_date], [scar_status], [defect_type] FROM dbo.[SCAR_Request]"))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())
                 {
@@ -760,7 +761,7 @@ public partial class Engineer_reports_Q1 : System.Web.UI.Page
 
         using (SqlConnection con = new SqlConnection(constr))
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT defect_category FROM Defect_Category"))
+            using (SqlCommand cmd = new SqlCommand("SELECT [defect_category] FROM dbo.[Defect_Category]"))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())
                 {
