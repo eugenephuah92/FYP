@@ -1,0 +1,456 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using FYP_WebApp.Old_App_Code;
+using System.Net.Mail;
+
+public partial class Engineer_upload_scar_request: System.Web.UI.Page
+{
+    string DatabaseName = "JabilDatabase";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Reset and clears the upload control
+        btnReset.Attributes.Add("onClick", "document.forms[0].reset();return false;");
+    }
+
+    // Upload attachments
+    protected void Upload_Files(object sender, EventArgs e)
+    {
+
+        bool checkSCARType2 = false;
+        bool checkSCARType4 = false;
+        // Checks if Upload SCAR Type 2 Control has file(s)
+        if(uploadSCARType2.HasFile)
+        {
+            Upload_SCAR_Type_2(); // Read files
+        }
+        else
+        {
+            checkSCARType2 = true;
+        }
+
+        // Checks if Upload SCAR Type 4 Control has file(s)
+        if(uploadSCARType4.HasFile)
+        {
+            Upload_SCAR_Type_4(); // Read files
+        }
+        else
+        {
+            checkSCARType4 = true;
+        }
+
+        if (checkSCARType2 && checkSCARType4)
+        {
+            lblSCARType2.Text = "No files found! Please Try Again!";
+            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            lblSCARType4.Text = "No files found! Please Try Againd!";
+            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+        }
+    }
+
+    // Read files from Upload SCAR Type 2 Control
+    protected void Upload_SCAR_Type_2()
+    {
+        bool SCARType2 = true;
+        try
+        {
+            foreach (HttpPostedFile postedFile in uploadSCARType2.PostedFiles)
+            {
+                var allowedExtensions = new[] { ".txt" }; // Only allows .txt files
+                var extension = Path.GetExtension(postedFile.FileName);
+                string filename = Path.GetFileName(postedFile.FileName);
+                string contentType = postedFile.ContentType;
+                if (allowedExtensions.Contains(extension))
+                {
+                    // Reads file contents
+                    using (StreamReader sr = new StreamReader(postedFile.InputStream))
+                    {
+                        String data = sr.ReadToEnd();
+                        // Validation to determine if only SCAR Type 2 file is uploaded
+                        if (data.Contains("for Type-4"))
+                        {
+                            SCARType2 = false;
+                            lblSCARType2.Text = "Only SCAR Type 2 Attachment(s) is allowed!";
+                            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                        }
+                        if(SCARType2)
+                        {
+                            Save_SCAR_Type_2(data); // Saves file contents into database
+                        }
+                    }
+                }
+                else
+                {
+                    lblSCARType2.Text = "Only .txt files are allowed!";
+                    lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                }
+            }
+
+        }
+        catch (Exception err)
+        {
+            lblSCARType2.Text = "Unable to upload file(s)! Please Try Again!" + err.Message;
+            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+        }
+    }
+
+    protected void Upload_SCAR_Type_4()
+    {
+        bool SCARType4 = true;
+        try
+        {
+            foreach (HttpPostedFile postedFile in uploadSCARType4.PostedFiles)
+            {
+                var allowedExtensions = new[] { ".txt" }; // Only allows .txt files
+                var extension = Path.GetExtension(postedFile.FileName);
+                string filename = Path.GetFileName(postedFile.FileName);
+                string contentType = postedFile.ContentType;
+                if (allowedExtensions.Contains(extension))
+                {
+                    // Reads file contents
+                    using (StreamReader sr = new StreamReader(postedFile.InputStream))
+                    {
+                        String data = sr.ReadToEnd();
+                        // Validation to determine if only SCAR Type 4 file is uploaded
+                        if (!data.Contains("for Type-4"))
+                        {
+                            SCARType4 = false;
+                            lblSCARType4.Text = "Only SCAR Type 4 Attachment(s) is allowed!";
+                            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                        }
+                        if (SCARType4)
+                        {
+                            Save_SCAR_Type_4(data); // Saves file contents into database
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    lblSCARType4.Text = "Only .txt files are allowed!";
+                    lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                }
+            }
+
+        }
+        catch (Exception err)
+        {
+            lblSCARType4.Text = "Unable to upload file(s)! Please Try Again!";
+            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+        }
+    }
+
+    // Saves file contents to database
+    protected void Save_SCAR_Type_2(string data)
+    {
+        SqlConnection con;
+        con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+
+        string[] tokensbody = data.Split('\n'); // splits each field into a single array element
+        string[] notepad_data = new string[25];
+        int count_data = 0;
+        for (int jj = 5; jj < 40; jj++)
+        {
+            if (tokensbody[jj].Contains(":"))
+            {
+                string[] element_data = tokensbody[jj].Split(':'); // splits field based on the position of the colon (:) in the field
+                char last_char = tokensbody[jj][tokensbody[jj].Length - 2]; // Checks last character
+                element_data[1] = element_data[1].Trim(); // Removes white space before and after the field data
+                if (last_char == ' ')
+                {
+                    // Sets the field as NA if the field is empty / null
+                    notepad_data[count_data] += "N/A";
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+                else
+                {
+                    // Stores the field data into the array 
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+
+            }
+            else
+            {
+                // Concatenate multiline field data into a single variable
+                if (System.Text.RegularExpressions.Regex.IsMatch(tokensbody[jj], @"\d\w"))
+                {
+                    count_data--;
+                    notepad_data[count_data] += tokensbody[jj];
+                    count_data++;
+
+                }
+            }
+        }
+
+        con.Open();
+
+        SCAR scar_details = new SCAR();
+        scar_details.Car_no += notepad_data[0];
+        scar_details.Car_revision += notepad_data[1];
+        scar_details.Supplier_contact += notepad_data[8];
+        scar_details.Issued_date += notepad_data[10];
+        scar_details.Part_no += notepad_data[13];
+        scar_details.Expected_date_close += notepad_data[22];
+
+        SqlCommand select = new SqlCommand(@"SELECT scar_no, car_revision, supplier_contact, issued_date, part_no, expected_date_close FROM dbo.SCAR_Request 
+WHERE scar_no = @scar_no AND car_revision = @car_revision AND supplier_contact = @supplier_contact AND issued_date = @issued_date AND part_no = @part_no AND 
+expected_date_close = @expected_date_close", con);
+        select.Parameters.AddWithValue("@scar_no", scar_details.Car_no);
+        select.Parameters.AddWithValue("@car_revision", scar_details.Car_revision);
+        select.Parameters.AddWithValue("@supplier_contact", scar_details.Supplier_contact);
+        select.Parameters.AddWithValue("@issued_date", scar_details.Issued_date);
+        select.Parameters.AddWithValue("@part_no", scar_details.Part_no);
+        select.Parameters.AddWithValue("@expected_date_close", scar_details.Expected_date_close);
+
+        bool checkRows = false;
+
+        // Checks for existing / duplicate records
+        using (SqlDataReader reader = select.ExecuteReader())
+        {
+            if (reader.HasRows)
+            {
+                checkRows = true;
+                lblSCARType2.Text = "Upload failed! " + scar_details.Car_no + " already existed!";
+                lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            }
+        }
+
+        // If no duplicate records exist, store data into database
+        if(!checkRows)
+        {
+
+            scar_details.File_name = uploadSCARType2.FileName;
+            uploadSCARType2.PostedFile.SaveAs(Server.MapPath(@"~\Text_Files\Type-2\" + scar_details.File_name.Trim()));
+            scar_details.File_path = @"~\Text_Files\" + scar_details.File_name.Trim();
+            SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, scar_no, 
+car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
+supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity,
+defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status, file_name, file_path) VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,
+@related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description,
+@business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status, @file_name, 
+@file_path)", con);
+
+            DateTime issued_date = Convert.ToDateTime(notepad_data[10]);
+            DateTime expected_date_close = Convert.ToDateTime(notepad_data[22]);
+            addSite.Parameters.AddWithValue("@scar_stage", "New SCAR");
+            addSite.Parameters.AddWithValue("@scar_type", "SCAR Type 2");
+            addSite.Parameters.AddWithValue("@scar_status", "Pending");
+            addSite.Parameters.AddWithValue("@scar_no", notepad_data[0]);
+            addSite.Parameters.AddWithValue("@car_revision", notepad_data[1]);
+            addSite.Parameters.AddWithValue("@car_type", notepad_data[2]);
+            addSite.Parameters.AddWithValue("@pre_alert", notepad_data[3]);
+            addSite.Parameters.AddWithValue("@related_car_no", notepad_data[4]);
+            addSite.Parameters.AddWithValue("@related_car_ref", notepad_data[5]);
+            addSite.Parameters.AddWithValue("@originator", notepad_data[6]);
+            addSite.Parameters.AddWithValue("@recurrence", notepad_data[7]);
+            addSite.Parameters.AddWithValue("@supplier_contact", notepad_data[8]);
+            addSite.Parameters.AddWithValue("@supplier_email", notepad_data[9]);
+            addSite.Parameters.AddWithValue("@issued_date", issued_date);
+            addSite.Parameters.AddWithValue("@originator_dept", notepad_data[11]);
+            addSite.Parameters.AddWithValue("@originator_contact", notepad_data[12]);
+            addSite.Parameters.AddWithValue("@part_no", notepad_data[13]);
+            addSite.Parameters.AddWithValue("@part_description", notepad_data[14]);
+            addSite.Parameters.AddWithValue("@business_unit", notepad_data[15]);
+            addSite.Parameters.AddWithValue("@dept_pl", notepad_data[16]);
+            addSite.Parameters.AddWithValue("@commodity", notepad_data[17]);
+            addSite.Parameters.AddWithValue("@defect_quantity", Convert.ToInt16(notepad_data[18]));
+            addSite.Parameters.AddWithValue("@defect_type", notepad_data[19]);
+            addSite.Parameters.AddWithValue("@non_conformity_reported", notepad_data[20]);
+            addSite.Parameters.AddWithValue("@reject_reason", notepad_data[21]);
+            addSite.Parameters.AddWithValue("@expected_date_close", expected_date_close);
+            addSite.Parameters.AddWithValue("@save_status", "submit");
+            addSite.Parameters.AddWithValue("@file_name", scar_details.File_name);
+            addSite.Parameters.AddWithValue("@file_path", scar_details.File_path);
+
+            addSite.ExecuteNonQuery();
+
+            lblSCARType2.Text = "SCAR Type 2 Attachment(s) has been succesfully uploaded!";
+            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue"); 
+        }
+        con.Close();
+    }
+
+    // Save data into database
+    protected void Save_SCAR_Type_4(string data)
+    {
+        SqlConnection con;
+        con = new SqlConnection();
+        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        con.Open();
+        string[] tokensbody = data.Split('\n');
+        string[] notepad_data = new string[25];
+        int count_data = 0;
+        SCAR scar_details = new SCAR();
+
+        for (int jj = 5; jj < 40; jj++)
+        {
+            if (tokensbody[jj].Contains(":"))
+            {
+                string[] element_data = tokensbody[jj].Split(':'); // splits field based on the position of the colon (:) in the field
+                char last_char = tokensbody[jj][tokensbody[jj].Length - 2]; // Checks last character
+                element_data[1] = element_data[1].Trim(); // Removes white space before and after the field data
+                if (last_char == ' ')
+                {
+                    // Sets the field as NA if the field is empty / null
+                    notepad_data[count_data] += "N/A";
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+                else
+                {
+                    // Stores the field data into the array 
+                    notepad_data[count_data] += element_data[1];
+                    count_data++;
+                }
+
+            }
+            else
+            {
+                // Concatenate multiline field data into a single variable
+                if (System.Text.RegularExpressions.Regex.IsMatch(tokensbody[jj], @"\d\w"))
+                {
+                    count_data--;
+                    notepad_data[count_data] += tokensbody[jj];
+                    count_data++;
+
+                }
+            }
+        }
+
+        scar_details.Car_no += notepad_data[0];
+        scar_details.Car_revision += notepad_data[1];
+        scar_details.Supplier_contact += notepad_data[8];
+        scar_details.Issued_date += notepad_data[10];
+        scar_details.Part_no += notepad_data[13];
+        scar_details.Expected_date_close += notepad_data[22];
+
+        SqlCommand select = new SqlCommand(@"SELECT scar_no, car_revision, supplier_contact, issued_date, part_no, expected_date_close FROM dbo.SCAR_Request 
+WHERE scar_no = @scar_no AND car_revision = @car_revision AND supplier_contact = @supplier_contact AND issued_date = @issued_date AND part_no = @part_no AND 
+expected_date_close = @expected_date_close", con);
+        select.Parameters.AddWithValue("@scar_no", scar_details.Car_no);
+        select.Parameters.AddWithValue("@car_revision", scar_details.Car_revision);
+        select.Parameters.AddWithValue("@supplier_contact", scar_details.Supplier_contact);
+        select.Parameters.AddWithValue("@issued_date", scar_details.Issued_date);
+        select.Parameters.AddWithValue("@part_no", scar_details.Part_no);
+        select.Parameters.AddWithValue("@expected_date_close", scar_details.Expected_date_close);
+
+        string scar_no = "";
+        bool checkRows = false;
+
+        // Check for existing records in the database
+        using (SqlDataReader reader = select.ExecuteReader())
+        {
+            if(reader.HasRows)
+            {
+                while(reader.Read())
+                {
+                   scar_no = Convert.ToString(reader["scar_no"]);
+                   checkRows = true;
+                }
+                
+            }
+            else
+            {
+                lblSCARType4.Text = "No records of " + scar_details.Car_no + " have been found! Please try again!";
+                lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            }
+        }
+
+        // If existing records exists, updates the SCAR Stage and SCAR Type of that particular record
+        if(checkRows)
+        { 
+            if (data.Contains("S76-Verify Effectiveness of Corrective Actions Result"))
+            {
+                SqlCommand updateSCAR = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage, scar_type = @scar_type WHERE scar_no = @scar_no", con);
+                updateSCAR.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+                updateSCAR.Parameters.AddWithValue("@scar_type", "SCAR Type 4");
+                updateSCAR.Parameters.AddWithValue("@scar_no", scar_no);
+                updateSCAR.ExecuteNonQuery();
+                lblSCARType4.Text = "SCAR Type 4 Attachment(s) has been succesfully uploaded!";
+                lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue"); 
+            }
+        }
+        con.Close();
+    }
+
+    protected void Send_Email(object sender, EventArgs e)
+    {
+        try
+        {
+            string path = "";
+            SqlConnection con;
+            con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection Sqlcon = new SqlConnection(con.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT id, file_name, file_path FROM dbo.SCAR_Request", Sqlcon);
+
+                Sqlcon.Open();
+               
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+                while(rdr.Read())
+                {
+                    path = Convert.ToString(rdr["file_name"]);
+                }
+            }
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("leeboonchung92@gmail.com");
+            mail.To.Add("uowfypaug14@gmail.com");
+            mail.Subject = "Test Mail - 1";
+            mail.Body = "mail with attachment";
+
+            string newPath = Server.MapPath(@"~\Text_Files\" + path);
+
+            System.Net.Mail.Attachment attachment;
+            attachment = new System.Net.Mail.Attachment(newPath);
+            mail.Attachments.Add(attachment);
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("leeboonchung92@gmail.com", "boyslikegirls92");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+            lblSCARType4.Text = "Mail Send";
+        }
+        catch (Exception err)
+        {
+            
+        }
+    }
+    
+    /*private void LoadData()
+    {
+        SqlDataAdapter SqlAda;
+        DataSet ds;
+        SqlConnection con;
+        con = new SqlConnection();
+        string DatabaseName = "AutoSCARConnectionString";
+        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        using (SqlConnection Sqlcon = new SqlConnection(con.ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand("SELECT id, attachment_name, attachment_path FROM dbo.SCAR_Request", Sqlcon);
+           
+            Sqlcon.Open();
+            cmd.Connection = Sqlcon;
+            SqlAda = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            SqlAda.Fill(ds);
+            GridViewUploadedFile.DataSource = ds;
+            GridViewUploadedFile.DataBind();
+        }
+    }*/
+}
+
+
