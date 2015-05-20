@@ -35,12 +35,12 @@ public partial class Admin_add_form_elements : System.Web.UI.Page
                     insert.Parameters.AddWithValue("@defect_type", newElement);
                     insert.ExecuteNonQuery();
                     string message = "Defect Type has been successfully added!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to add Defect Type! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -55,12 +55,12 @@ public partial class Admin_add_form_elements : System.Web.UI.Page
                     insert.Parameters.AddWithValue("@root_cause", newElement);
                     insert.ExecuteNonQuery();
                     string message = "Root Cause Option has been successfully added!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to add Root Cause Option! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -75,12 +75,12 @@ public partial class Admin_add_form_elements : System.Web.UI.Page
                     insert.Parameters.AddWithValue("@screeing_area", newElement);
                     insert.ExecuteNonQuery();
                     string message = "Screening Area has been successfully added!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to add Screening Area! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -95,12 +95,12 @@ public partial class Admin_add_form_elements : System.Web.UI.Page
                     insert.Parameters.AddWithValue("@failure_analysis", newElement);
                     insert.ExecuteNonQuery();
                     string message = "Failure Analysis has been successfully added!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to add Failure Analysis! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {

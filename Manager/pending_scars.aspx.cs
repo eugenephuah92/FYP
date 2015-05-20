@@ -24,7 +24,7 @@ public partial class Manager_pending_scars : System.Web.UI.Page
         dt.Columns.Add("Creation Date");
         dt.Columns.Add("SCAR Type");
         dt.Columns.Add("Level of Escalation");
-        dt.Columns.Add("Days Till Next Escalation");
+        dt.Columns.Add("Escalation Date");
 
         DataRow dr;
 
@@ -37,9 +37,9 @@ public partial class Manager_pending_scars : System.Web.UI.Page
 FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON dbo.SCAR_Request.scar_no = dbo.SCAR_Response.scar_no 
 WHERE scar_stage = @scar_stage AND dbo.SCAR_Request.supplier_contact = @supplier_contact", conn);*/
             // select.Parameters.AddWithValue("@supplier_contact", JabilSession.Current.employee_name);
-            SqlCommand select = new SqlCommand(@"SELECT dbo.SCAR_Request.scar_type, dbo.SCAR_Request.scar_no, dbo.SCAR_Request.issued_date, dbo.SCAR_Response.defect_modes 
-FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON dbo.SCAR_Request.scar_no = dbo.SCAR_Response.scar_no 
-WHERE scar_stage = @scar_stage", conn);
+            SqlCommand select = new SqlCommand(@"SELECT dbo.SCAR_Request.scar_type, dbo.SCAR_Request.scar_no, dbo.SCAR_Request.issued_date, dbo.SCAR_Response.defect_modes,
+dbo.TAT.escalation_level, dbo.TAT.trigger_date FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON dbo.SCAR_Request.scar_no = dbo.SCAR_Response.scar_no 
+INNER JOIN dbo.TAT ON dbo.SCAR_Request.scar_no = dbo.TAT.SCAR_ID WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
@@ -56,29 +56,13 @@ WHERE scar_stage = @scar_stage", conn);
                 dr["SCAR Type"] = rdr["scar_type"].ToString();
                 DateTime issued_date = (DateTime)rdr["issued_date"];
                 dr["Creation Date"] = issued_date.ToString("dd-MM-yyyy");
-
+                dr["Level of Escalation"] = rdr["escalation_level"].ToString();
+                dr["Escalation Date"] = rdr["trigger_date"].ToString();
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
 
             }
 
-        }
-
-
-        int j = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT escalation_level, reminder_date FROM dbo.TAT", conn);
-
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[j]["Level of Escalation"] = rdr["escalation_level"].ToString();
-                dt.Rows[j]["Days Till Next Escalation"] = rdr["reminder_date"].ToString();
-                j++;
-            }
         }
 
         displayPendingSCAR.DataSource = dt;
@@ -112,12 +96,11 @@ WHERE scar_stage = @scar_stage", conn);
         DataTable dt = new DataTable();
 
         dt.Columns.Add("CAR Number");
-        dt.Columns.Add("Defect Name");
-        dt.Columns.Add("Description");
+        dt.Columns.Add("Defect Mode");
         dt.Columns.Add("Creation Date");
         dt.Columns.Add("SCAR Type");
         dt.Columns.Add("Level of Escalation");
-        dt.Columns.Add("Days Till Next Escalation");
+        dt.Columns.Add("Escalation Date");
 
         DataRow dr;
 
@@ -130,7 +113,9 @@ WHERE scar_stage = @scar_stage", conn);
 FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON dbo.SCAR_Request.scar_no = dbo.SCAR_Response.scar_no 
 WHERE scar_stage = @scar_stage AND dbo.SCAR_Request.supplier_contact = @supplier_contact", conn);*/
             // select.Parameters.AddWithValue("@supplier_contact", JabilSession.Current.employee_name);
-            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date FROM dbo.SCAR_Request WHERE scar_stage = @scar_stage", conn);
+            SqlCommand select = new SqlCommand(@"SELECT dbo.SCAR_Request.scar_type, dbo.SCAR_Request.scar_no, dbo.SCAR_Request.issued_date, dbo.SCAR_Response.defect_modes,
+dbo.TAT.escalation_level, dbo.TAT.trigger_date FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON dbo.SCAR_Request.scar_no = dbo.SCAR_Response.scar_no 
+INNER JOIN dbo.TAT ON dbo.SCAR_Request.scar_no = dbo.TAT.SCAR_ID WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
@@ -143,50 +128,18 @@ WHERE scar_stage = @scar_stage AND dbo.SCAR_Request.supplier_contact = @supplier
                 dr = dt.NewRow();
 
                 dr["CAR Number"] = rdr["scar_no"].ToString();
-
+                dr["Defect Mode"] = rdr["defect_modes"].ToString();
                 dr["SCAR Type"] = rdr["scar_type"].ToString();
                 DateTime issued_date = (DateTime)rdr["issued_date"];
                 dr["Creation Date"] = issued_date.ToString("dd-MM-yyyy");
-
+                dr["Level of Escalation"] = rdr["escalation_level"].ToString();
+                dr["Escalation Date"] = rdr["trigger_date"].ToString();
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
 
             }
 
         }
-
-        int i = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT defectName, defectDescription FROM dbo.DefectModes", conn);
-
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[i]["Defect Name"] = rdr["defectName"].ToString();
-                dt.Rows[i]["Description"] = rdr["defectDescription"].ToString();
-                i++;
-            }
-        }
-
-        int j = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT escalation_level, reminder_date FROM dbo.TAT", conn);
-
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[j]["Level of Escalation"] = rdr["escalation_level"].ToString();
-                dt.Rows[j]["Days Till Next Escalation"] = rdr["reminder_date"].ToString();
-                j++;
-            }
-        }
-
         displayPendingSCAR.DataSource = dt;
         displayPendingSCAR.DataBind();
 

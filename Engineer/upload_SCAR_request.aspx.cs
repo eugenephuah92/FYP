@@ -48,10 +48,8 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
 
         if (checkSCARType2 && checkSCARType4)
         {
-            lblSCARType2.Text = "No files found! Please Try Again!";
-            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
-            lblSCARType4.Text = "No files found! Please Try Againd!";
-            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            string message = "No files found! Please Try Again!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
     }
 
@@ -59,6 +57,9 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
     protected void Upload_SCAR_Type_2()
     {
         bool SCARType2 = true;
+        string message = null;
+        string successful_message = null;
+        string failed_message = null;
         try
         {
             foreach (HttpPostedFile postedFile in uploadSCARType2.PostedFiles)
@@ -67,6 +68,7 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
                 var extension = Path.GetExtension(postedFile.FileName);
                 string filename = Path.GetFileName(postedFile.FileName);
                 string contentType = postedFile.ContentType;
+                
                 if (allowedExtensions.Contains(extension))
                 {
                     // Reads file contents
@@ -77,33 +79,51 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
                         if (data.Contains("for Type-4"))
                         {
                             SCARType2 = false;
-                            lblSCARType2.Text = "Only SCAR Type 2 Attachment(s) is allowed!";
-                            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+
+                            message = "Only SCAR Type 2 Attachment(s) is allowed!";
                         }
                         if(SCARType2)
                         {
-                            Save_SCAR_Type_2(data); // Saves file contents into database
+                            successful_message += filename + ", ";
+                            Save_SCAR_Type_2(data, postedFile); // Saves file contents into database
                         }
                     }
                 }
                 else
                 {
-                    lblSCARType2.Text = "Only .txt files are allowed!";
-                    lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    failed_message += filename + ", ";
+                    
                 }
             }
 
         }
         catch (Exception err)
         {
-            lblSCARType2.Text = "Unable to upload file(s)! Please Try Again!" + err.Message;
-            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            message = "Unable to upload file(s)! Please Try Again!";
+        }
+        finally
+        {
+            // Attachments that failed to be uploaded
+            if(failed_message != null)
+            {
+                failed_message += " failed to be uploaded! Only .txt files are allowed";
+            }
+            // Attachments that has been uploaded
+            if(successful_message != null)
+            {
+                successful_message += " has been successfully uploaded!";
+            }
+            message = successful_message + "<br/><br/>" + failed_message;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
     }
 
     protected void Upload_SCAR_Type_4()
     {
         bool SCARType4 = true;
+        string message = null;
+        string successful_message = null;
+        string failed_message = null;
         try
         {
             foreach (HttpPostedFile postedFile in uploadSCARType4.PostedFiles)
@@ -122,33 +142,45 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
                         if (!data.Contains("for Type-4"))
                         {
                             SCARType4 = false;
-                            lblSCARType4.Text = "Only SCAR Type 4 Attachment(s) is allowed!";
-                            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                            message = "Only SCAR Type 2 Attachment(s) is allowed!";
                         }
                         if (SCARType4)
                         {
-                            Save_SCAR_Type_4(data); // Saves file contents into database
+                            successful_message += filename + ", ";
+                            Save_SCAR_Type_4(data, postedFile); // Saves file contents into database
                         }
                     }
                     
                 }
                 else
                 {
-                    lblSCARType4.Text = "Only .txt files are allowed!";
-                    lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    failed_message += filename + ", ";
+
                 }
             }
 
         }
         catch (Exception err)
         {
-            lblSCARType4.Text = "Unable to upload file(s)! Please Try Again!";
-            lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            message = "Unable to upload file(s)! Please Try Again!";
+        }
+        finally
+        {
+            if (failed_message != null)
+            {
+                failed_message += " failed to be uploaded! Only .txt files are allowed";
+            }
+            if (successful_message != null)
+            {
+                successful_message += " has been successfully uploaded!";
+            }
+            message = successful_message + "<br/><br/>" + failed_message;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
     }
 
     // Saves file contents to database
-    protected void Save_SCAR_Type_2(string data)
+    protected void Save_SCAR_Type_2(string data, HttpPostedFile postedFile)
     {
         SqlConnection con;
         con = new SqlConnection();
@@ -194,6 +226,7 @@ public partial class Engineer_upload_scar_request: System.Web.UI.Page
 
         con.Open();
 
+        // Stores the respective fields into the object
         SCAR scar_details = new SCAR();
         scar_details.Car_no += notepad_data[0];
         scar_details.Car_revision += notepad_data[1];
@@ -220,25 +253,26 @@ expected_date_close = @expected_date_close", con);
             if (reader.HasRows)
             {
                 checkRows = true;
-                lblSCARType2.Text = "Upload failed! " + scar_details.Car_no + " already existed!";
-                lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                string message = "Upload failed! " + scar_details.Car_no + " already existed!";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
         }
 
         // If no duplicate records exist, store data into database
         if(!checkRows)
         {
-
-            scar_details.File_name = uploadSCARType2.FileName;
-            uploadSCARType2.PostedFile.SaveAs(Server.MapPath(@"~\Text_Files\Type-2\" + scar_details.File_name.Trim()));
+            // Saves the file attachment to file manager directory
+            scar_details.File_name = postedFile.FileName;
+            postedFile.SaveAs(Server.MapPath(@"~\Text_Files\Type-2\" + scar_details.File_name.Trim()));
             scar_details.File_path = @"~\Text_Files\" + scar_details.File_name.Trim();
+
             SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, scar_no, 
 car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
 supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity,
-defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status, file_name, file_path) VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,
+defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status, file_name, file_path, scar_request_method, pending_action) VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,
 @related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description,
 @business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status, @file_name, 
-@file_path)", con);
+@file_path, @scar_request_method, @pending_action)", con);
 
             DateTime issued_date = Convert.ToDateTime(notepad_data[10]);
             DateTime expected_date_close = Convert.ToDateTime(notepad_data[22]);
@@ -271,17 +305,15 @@ defect_type, non_conformity_reported, reject_reason, expected_date_close, save_s
             addSite.Parameters.AddWithValue("@save_status", "submit");
             addSite.Parameters.AddWithValue("@file_name", scar_details.File_name);
             addSite.Parameters.AddWithValue("@file_path", scar_details.File_path);
-
+            addSite.Parameters.AddWithValue("@scar_request_method", "auto");
+            addSite.Parameters.AddWithValue("@pending_action", "Awaiting Engineer Response");
             addSite.ExecuteNonQuery();
-
-            lblSCARType2.Text = "SCAR Type 2 Attachment(s) has been succesfully uploaded!";
-            lblSCARType2.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue"); 
         }
         con.Close();
     }
 
     // Save data into database
-    protected void Save_SCAR_Type_4(string data)
+    protected void Save_SCAR_Type_4(string data, HttpPostedFile postedFile)
     {
         SqlConnection con;
         con = new SqlConnection();
@@ -361,8 +393,8 @@ expected_date_close = @expected_date_close", con);
             }
             else
             {
-                lblSCARType4.Text = "No records of " + scar_details.Car_no + " have been found! Please try again!";
-                lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                string message = "No records of " + scar_details.Car_no + " have been found! Please try again!";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
         }
 
@@ -371,19 +403,33 @@ expected_date_close = @expected_date_close", con);
         { 
             if (data.Contains("S76-Verify Effectiveness of Corrective Actions Result"))
             {
-                SqlCommand updateSCAR = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage, scar_type = @scar_type WHERE scar_no = @scar_no", con);
-                updateSCAR.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
-                updateSCAR.Parameters.AddWithValue("@scar_type", "SCAR Type 4");
-                updateSCAR.Parameters.AddWithValue("@scar_no", scar_no);
-                updateSCAR.ExecuteNonQuery();
-                lblSCARType4.Text = "SCAR Type 4 Attachment(s) has been succesfully uploaded!";
-                lblSCARType4.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue"); 
+                try
+                {
+                    // Update the status of the SCAR to pending and type 4
+                    SqlCommand updateSCAR = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage, scar_type = @scar_type WHERE scar_no = @scar_no", con);
+                    updateSCAR.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+                    updateSCAR.Parameters.AddWithValue("@scar_type", "SCAR Type 4");
+                    updateSCAR.Parameters.AddWithValue("@scar_no", scar_no);
+                    updateSCAR.ExecuteNonQuery();
+                    string message = "SCAR Type 4 Attachment(s) has been succesfully uploaded!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                }
+                catch
+                {
+                    string message = "Unable to upload file(s)! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                }
+                finally
+                {
+                    con.Close();
+                }
+                
             }
         }
-        con.Close();
+       
     }
 
-    protected void Send_Email(object sender, EventArgs e)
+    /*protected void Send_Email(object sender, EventArgs e)
     {
         try
         {
@@ -428,29 +474,8 @@ expected_date_close = @expected_date_close", con);
         {
             
         }
-    }
-    
-    /*private void LoadData()
-    {
-        SqlDataAdapter SqlAda;
-        DataSet ds;
-        SqlConnection con;
-        con = new SqlConnection();
-        string DatabaseName = "AutoSCARConnectionString";
-        con.ConnectionString = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
-        using (SqlConnection Sqlcon = new SqlConnection(con.ConnectionString))
-        {
-            SqlCommand cmd = new SqlCommand("SELECT id, attachment_name, attachment_path FROM dbo.SCAR_Request", Sqlcon);
-           
-            Sqlcon.Open();
-            cmd.Connection = Sqlcon;
-            SqlAda = new SqlDataAdapter(cmd);
-            ds = new DataSet();
-            SqlAda.Fill(ds);
-            GridViewUploadedFile.DataSource = ds;
-            GridViewUploadedFile.DataBind();
-        }
     }*/
+   
 }
 
 

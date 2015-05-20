@@ -64,6 +64,7 @@ public partial class Manager_reports_CAPA {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
     
     /// <summary>
     /// searchTxt3 control.
@@ -73,6 +74,7 @@ public partial class Manager_reports_CAPA {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox searchTxt3;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch;
     
     /// <summary>
     /// btnSearch3 control.
@@ -100,4 +102,6 @@ public partial class Manager_reports_CAPA {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnPrint;
+
+    protected global::System.Web.UI.WebControls.GridView GridViewCAPA;
 }

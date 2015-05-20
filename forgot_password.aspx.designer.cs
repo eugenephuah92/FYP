@@ -39,6 +39,15 @@ public partial class forgot_password {
     protected global::System.Web.UI.WebControls.TextBox txtEmail;
     
     /// <summary>
+    /// vldEmail control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator vldEmail;
+    
+    /// <summary>
     /// btnSubmit control.
     /// </summary>
     /// <remarks>

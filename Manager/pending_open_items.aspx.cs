@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Configuration;
+using System.Drawing;
+using System.IO;
 public partial class Manager_pending_open_items : System.Web.UI.Page
 {
     string DatabaseName = "JabilDatabase";
@@ -80,4 +82,41 @@ dbo. SCAR_Response ON SCAR_Request.scar_no = SCAR_Response.scar_no", conn);
         displayPendingOpenItems.DataBind();
     }
 
+    protected void Export_Items(object sender, EventArgs e)
+    {
+        string attachment = "attachment; filename=Action_Items_Report.xls";
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", attachment);
+        Response.ContentType = "application/ms-excel";
+        using (StringWriter sw = new StringWriter())
+        {
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            displayPendingOpenItems.AllowPaging = false;
+            this.DataBind();
+
+            displayPendingOpenItems.BorderColor = Color.Black;
+            displayPendingOpenItems.HeaderRow.BackColor = Color.White;
+            foreach (TableCell cell in displayPendingOpenItems.HeaderRow.Cells)
+            {
+                cell.BackColor = displayPendingOpenItems.HeaderStyle.BackColor;
+            }
+            foreach (GridViewRow row in displayPendingOpenItems.Rows)
+            {
+                row.BackColor = Color.White;
+                foreach (TableCell cell in row.Cells)
+                {
+                    cell.BackColor = displayPendingOpenItems.RowStyle.BackColor;
+                }
+            }
+            displayPendingOpenItems.RenderControl(hw);
+            Response.Write(sw.ToString());
+            Response.End();
+        }
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //
+    }
 }

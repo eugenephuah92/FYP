@@ -10,13 +10,12 @@
                             Upload SCAR Request Attachment
                         </div>
                         <div class="panel-body" style="padding-top:10pt">
-                            <form class="form-horizontal pad10" action="#" method="post">
-                                    
+                            <form class="form-horizontal pad10" action="#" id="uploadSCAR" method="post">
                                     <div class="row" style="padding-left:20px;padding-top:10pt;">
                                     <div class="form-group">
                                         <label for="uploadFile" class="col-lg-3 control-label">Upload SCAR Type 2 Attachment(s)</label>
                                         <div class="col-lg-4">
-                                            <asp:FileUpload ID="uploadSCARType2" AllowMultiple="true" runat="server" onchange="showSCAR2()"/>
+                                            <asp:FileUpload ID="uploadSCARType2" AllowMultiple="true" accept=".txt" runat="server" onchange="showSCAR2()"/>
                                             <span class="help-block">Maximum file size: 15MB</span>
                                         </div>
                                         <asp:Label ID="lblSCARType2" runat="server" />
@@ -33,7 +32,7 @@
                                 <div class="form-group">
                                         <label for="uploadFile" class="col-lg-3 control-label">Upload SCAR Type 4 Attachment(s)</label>
                                         <div class="col-lg-4">
-                                            <asp:FileUpload ID="uploadSCARType4" AllowMultiple="true" runat="server" onchange="showSCAR4()"/>
+                                            <asp:FileUpload ID="uploadSCARType4" AllowMultiple="true" accept=".txt" runat="server" onchange="showSCAR4()"/>
                                             <span class="help-block">Maximum file size: 15MB</span>
                                         </div>
                                         <asp:Label ID="lblSCARType4" runat="server" />
@@ -45,12 +44,13 @@
                                         <asp:Label ID="lblShowType4Names" runat="server" />
                                     </div>
                                 </div>   
-
+                                <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                </div>
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-1">
                                         <asp:Button CssClass="btn btn-success" ID="btnUpload" runat="server" OnClick="Upload_Files" Text="Upload to Server" />
-                                        <asp:Button CssClass="btn btn-danger" ID="btnReset" runat="server" Text="Clear Attachments" OnClientClick="showSCAR4();showSCAR2" />
-                                        <asp:Button CssClass="btn btn-danger" ID="btnSend" runat="server" OnClick="Send_Email" Text="Send Email" />
+                                        <asp:Button CssClass="btn btn-danger" ID="btnReset" runat="server" Text="Clear Attachments" OnClientClick="clearSCAR();" />
                                     </div>
 
                                 </div>
@@ -63,6 +63,66 @@
             </div>
 </div>
  <script type="text/javascript">
+
+     // For Confirmation
+     $(function () {
+
+         $("#<%=btnUpload.ClientID%>").on("click", function (event) {
+                 event.preventDefault();
+                 $("#messageBox").dialog({
+                     resizable: false,
+                     title: "Upload Confirmation",
+                     open: function () {
+                         var markup = "Are you sure you want to upload the selected file(s)?";
+                         $(this).html(markup);
+                     },
+                     height: 200,
+                     
+                     modal: true,
+                     buttons: {
+                         Ok: function () {
+                             $(this).dialog("close");
+                             __doPostBack($('#<%= btnUpload.ClientID %>').attr('name'), '');
+                        },
+                         Cancel: function () {
+                            $(this).dialog("close");
+                            
+                        }
+                    }
+                });
+            });
+         });
+
+
+     // For Alert
+     function messageBox(message) {
+         $("#messageBox").dialog({
+             modal: true,
+             height: 300,
+             width: 500,
+             title: "Upload Status",
+             open: function () {
+                 var markup = message;
+                 $(this).html(markup);
+             },
+             buttons: {
+                 Close: function () {
+                     $(this).dialog("close");
+                 }
+             },
+
+         });
+         return false;
+     }
+        
+     // Clear Attachments from UploadFile 
+     function clearSCAR()
+     {
+         document.getElementById("<%=lblShowType4Names.ClientID %>").innerHTML = "";
+         document.getElementById("<%=lblShowType2Names.ClientID %>").innerHTML = "";
+     }
+
+     // Shows the file names of the files chosen in SCAR Type 4 upload
      function showSCAR4() {
          var x = document.getElementById("<%=uploadSCARType4.ClientID%>");
          var txt = "";
@@ -90,6 +150,7 @@
          document.getElementById("<%=lblShowType4Names.ClientID %>").innerHTML = txt;
      }
 
+     // Shows the file names of the files chosen in SCAR Type 2 upload
      function showSCAR2() {
          var x = document.getElementById("<%=uploadSCARType2.ClientID%>");
          var txt = "";

@@ -48,8 +48,55 @@
 </div>
 
 <script type="text/javascript">
-    function ShowMessage(message) {
-        alert(message);
-    }
+    // For Confirmation
+    $(function () {
+
+        $("#<%=btnChangePassword.ClientID%>").on("click", function (event) {
+            event.preventDefault();
+            $("#messageBox").dialog({
+                resizable: false,
+                title: "Change Password Confirmation",
+                open: function () {
+                    var markup = "Are you sure you want to change your password?";
+                    $(this).html(markup);
+                },
+                height: 200,
+
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                        __doPostBack($('#<%= btnChangePassword.ClientID %>').attr('name'), '');
+                     },
+                     Cancel: function () {
+                         $(this).dialog("close");
+
+                     }
+                 }
+             });
+        });
+    });
+
+
+     // For Alert
+     function messageBox(message) {
+         $("#messageBox").dialog({
+             modal: true,
+             height: 300,
+             width: 500,
+             title: "Change Password Status",
+             open: function () {
+                 var markup = message;
+                 $(this).html(markup);
+             },
+             buttons: {
+                 Close: function () {
+                     $(this).dialog("close");
+                 }
+             },
+
+         });
+         return false;
+     }
 </script>
 </asp:Content>

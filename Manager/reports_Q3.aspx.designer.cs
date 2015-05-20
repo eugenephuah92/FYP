@@ -18,7 +18,18 @@ public partial class Manager_reports_Q3 {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
+    /// 
+
+    protected global::System.Web.UI.WebControls.TextBox txtWW;
+    protected global::System.Web.UI.WebControls.TextBox txtDefect;
+    protected global::System.Web.UI.WebControls.TextBox txtCAPA;
+    protected global::System.Web.UI.WebControls.TextBox txtPIC;
+    protected global::System.Web.UI.WebControls.TextBox txtDueDate;
+    protected global::System.Web.UI.WebControls.TextBox txtStatus;
+    protected global::System.Web.UI.WebControls.Label lblInfo;
+
     protected global::System.Web.UI.WebControls.TextBox txtWorkingWeek1;
+    protected global::System.Web.UI.WebControls.GridView GridViewQ3;
     
     /// <summary>
     /// txtDefect1 control.

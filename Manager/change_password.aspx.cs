@@ -43,7 +43,7 @@ public partial class Manager_change_password : System.Web.UI.Page
         else
         {
             string message = "New Password and Confirm New Password do not match! Please Try Again!";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
 
         if (checkMatch)
@@ -64,7 +64,7 @@ public partial class Manager_change_password : System.Web.UI.Page
                 else
                 {
                     string message = "Invalid old password! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 reader.Close();
                 if (checkRows)
@@ -77,12 +77,12 @@ public partial class Manager_change_password : System.Web.UI.Page
                         updatePassword.ExecuteNonQuery();
 
                         string message = "Your password has been successfully updated!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                     }
                     catch
                     {
                         string message = "Failed to update your password! Please Try Again!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                     }
                     finally
                     {

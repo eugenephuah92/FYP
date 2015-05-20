@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Configuration;
+using Jabil_Session;
 
 public partial class Admin_closed_scars : System.Web.UI.Page
 {
@@ -19,9 +20,11 @@ public partial class Admin_closed_scars : System.Web.UI.Page
         DataTable dt = new DataTable();
 
         dt.Columns.Add("CAR Number");
-        dt.Columns.Add("Defect Mode");
         dt.Columns.Add("Creation Date");
         dt.Columns.Add("SCAR Type");
+        dt.Columns.Add("Completion Date");
+        dt.Columns.Add("Modified By");
+        dt.Columns.Add("Last Modified");
 
         DataRow dr;
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
@@ -29,12 +32,14 @@ public partial class Admin_closed_scars : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date, defect_modes FROM dbo.SCAR_History WHERE scar_stage = @scar_stage", conn);
+            // SqlCommand select = new SqlCommand ("SELECT scar_type, scar_no, issued_date, defect_modes FROM dbo.SCAR_History WHERE scar_stage = @scar_stage AND supplier_contact = @employee_name", conn);
+            // select.Parameters.AddWithValue("@employee_name", JabilSession.Current.employee_name);
+            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date, completion_date, modified_by, last_modified FROM dbo.SCAR_History WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "Closed SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
             {
-                lblNoRows.Text = "No Records Found for New SCARS!";
+                lblNoRows.Text = "No Records Found for Closed SCARS!";
                 lblNoRows.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
             }
             while (rdr.Read())
@@ -42,11 +47,13 @@ public partial class Admin_closed_scars : System.Web.UI.Page
                 dr = dt.NewRow();
 
                 dr["CAR Number"] = rdr["scar_no"].ToString();
-                dr["Defect Mode"] = rdr["defect_modes"].ToString();
                 dr["SCAR Type"] = rdr["scar_type"].ToString();
                 DateTime issued_date = (DateTime)rdr["issued_date"];
                 dr["Creation Date"] = issued_date.ToString("dd-MM-yyyy");
-
+                DateTime completion_date = (DateTime)rdr["completion_date"];
+                dr["Completion Date"] = issued_date.ToString("dd-MM-yyyy");
+                dr["Modified By"] = rdr["modified_by"].ToString();
+                dr["Last Modified"] = rdr["last_modified"].ToString();
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
             }
@@ -83,19 +90,21 @@ public partial class Admin_closed_scars : System.Web.UI.Page
         DataTable dt = new DataTable();
 
         dt.Columns.Add("CAR Number");
-        dt.Columns.Add("Defect Name");
-        dt.Columns.Add("Description");
         dt.Columns.Add("Creation Date");
         dt.Columns.Add("SCAR Type");
+        dt.Columns.Add("Completion Date");
+        dt.Columns.Add("Modified By");
+        dt.Columns.Add("Last Modified");
 
         DataRow dr;
-
-
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date FROM dbo.SCAR_History WHERE scar_stage = @scar_stage", conn);
+            // SqlCommand select = new SqlCommand ("SELECT scar_type, scar_no, issued_date, defect_modes FROM dbo.SCAR_History WHERE scar_stage = @scar_stage AND supplier_contact = @employee_name", conn);
+            // select.Parameters.AddWithValue("@employee_name", JabilSession.Current.employee_name);
+            SqlCommand select = new SqlCommand("SELECT scar_type, scar_no, issued_date, completion_date, modified_by, last_modified FROM dbo.SCAR_History WHERE scar_stage = @scar_stage", conn);
             select.Parameters.AddWithValue("@scar_stage", "Closed SCAR");
             rdr = select.ExecuteReader();
             if (!rdr.HasRows)
@@ -108,48 +117,17 @@ public partial class Admin_closed_scars : System.Web.UI.Page
                 dr = dt.NewRow();
 
                 dr["CAR Number"] = rdr["scar_no"].ToString();
-
                 dr["SCAR Type"] = rdr["scar_type"].ToString();
                 DateTime issued_date = (DateTime)rdr["issued_date"];
                 dr["Creation Date"] = issued_date.ToString("dd-MM-yyyy");
-
+                DateTime completion_date = (DateTime)rdr["completion_date"];
+                dr["Completion Date"] = issued_date.ToString("dd-MM-yyyy");
+                dr["Modified By"] = rdr["modified_by"].ToString();
+                dr["Last Modified"] = rdr["last_modified"].ToString();
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
-
             }
 
-        }
-
-        int i = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT defectName, defectDescription FROM dbo.DefectModes", conn);
-
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[i]["Defect Name"] = rdr["defectName"].ToString();
-                dt.Rows[i]["Description"] = rdr["defectDescription"].ToString();
-                i++;
-            }
-        }
-
-        int j = 0;
-
-        using (SqlConnection conn = new SqlConnection(connect))
-        {
-            conn.Open();
-            SqlCommand select = new SqlCommand("SELECT escalation_level, reminder_date FROM dbo.TAT", conn);
-
-            rdr = select.ExecuteReader();
-            while (rdr.Read())
-            {
-                dt.Rows[j]["Level of Escalation"] = rdr["escalation_level"].ToString();
-                dt.Rows[j]["Days Till Next Escalation"] = rdr["reminder_date"].ToString();
-                j++;
-            }
         }
 
         displayClosedSCAR.DataSource = dt;

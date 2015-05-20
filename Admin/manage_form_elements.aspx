@@ -29,7 +29,7 @@
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-primary" runat="server" Text="Modify Element" OnClick="Click_Modify"/>
-                                    <asp:Button ID="btnDelete" CssClass="btn btn-danger" runat="server" Text="Delete Element" OnClick="Click_Delete" OnClientClick="if ( ! DeleteConfirmation()) return false;"/>
+                                    <asp:Button ID="btnDelete" CssClass="btn btn-danger" runat="server" Text="Delete Element" OnClick="Click_Delete"/>
                                 </div>
                             </div>
 
@@ -41,12 +41,83 @@
     </div>
 </div>
     <script type="text/javascript">
-        function ShowMessage(message) {
-            alert(message);
-        }
+        // For Modify Confirmation
+        $(function () {
 
-        function DeleteConfirmation() {
-            return confirm("Are you sure you want to delete this element?");
-        }
+            $("#<%=btnSubmit.ClientID%>").on("click", function (event) {
+             event.preventDefault();
+             $("#messageBox").dialog({
+                 resizable: false,
+                 title: "Modify Element Confirmation",
+                 open: function () {
+                     var markup = "Are you sure you want to modify the selected element?";
+                     $(this).html(markup);
+                 },
+                 height: 200,
+
+                 modal: true,
+                 buttons: {
+                     Ok: function () {
+                         $(this).dialog("close");
+                         __doPostBack($('#<%= btnSubmit.ClientID %>').attr('name'), '');
+                         },
+                         Cancel: function () {
+                             $(this).dialog("close");
+
+                         }
+                     }
+                 });
+         });
+     });
+
+        // For Delete Confirmation
+        $(function () {
+
+            $("#<%=btnDelete.ClientID%>").on("click", function (event) {
+                event.preventDefault();
+                $("#messageBox").dialog({
+                    resizable: false,
+                    title: "Delete Element Confirmation",
+                    open: function () {
+                        var markup = "Are you sure you want to delete the selected element?";
+                        $(this).html(markup);
+                    },
+                    height: 200,
+
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            __doPostBack($('#<%= btnDelete.ClientID %>').attr('name'), '');
+                     },
+                     Cancel: function () {
+                         $(this).dialog("close");
+
+                     }
+                 }
+             });
+            });
+        });
+
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Manage Element Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
+
+             });
+             return false;
+         }
     </script>
 </asp:Content>

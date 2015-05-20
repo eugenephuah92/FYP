@@ -85,7 +85,7 @@ public partial class Admin_reports_TAT_frequency : System.Web.UI.Page
         for (int i = 0; i < 12; i++)
         {
             html.Append("<tr>");
-            html.Append("<td><a href='home.aspx?month=" + monthText[i] + "'>" + monthText[i] + "</a></td>");
+            html.Append("<td><a href='scars_by_month.aspx?month=" + monthText[i] + "&year="+year+"'>" + monthText[i] + "</a></td>");
             html.Append("<td>" + TATcount[i, 0] + "</td>");
             html.Append("<td>" + TATcount[i, 1] + "</td>");
             html.Append("</tr>");

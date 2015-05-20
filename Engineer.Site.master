@@ -17,6 +17,7 @@
     <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/select2.css" type="text/css" rel="stylesheet" />
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript">
         function format(icon) {
             var originalOption = icon.element;
@@ -52,8 +53,7 @@
             <asp:ScriptReference Path="Scripts/app.js" />
             <asp:ScriptReference Path="Scripts/MaxLength.min.js" />
             <asp:ScriptReference Path="Scripts/select2.min.js" />
-           
-
+            <asp:ScriptReference Path="Scripts/jquery-ui.js" />
             <%--Site scripts--%>
             
         </Scripts>
@@ -90,6 +90,10 @@
                         <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-th-list"></i>&nbsp;View Corrective / Preventive Actions</a></li>
                         <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-th-list"></i>&nbsp;View Defect Modes</a></li>
                         <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked nav-vertical ">
+                        <li><a href="new_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;New SCAR<span class="badge-active"><asp:Label ID="lblNewSCAR" runat="server"/></span></a></li>
+                        <li><a href="pending_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;Pending SCAR<span class="badge-active"><asp:Label ID="lblPendingSCAR" runat="server"/></span></a></li>
                     </ul>
                 </div>
 

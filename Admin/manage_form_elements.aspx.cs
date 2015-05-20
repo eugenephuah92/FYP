@@ -118,12 +118,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     update.Parameters.AddWithValue("@oldElement", oldElement);
                     update.ExecuteNonQuery();
                     string message = "Defect Type has been updated!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to update Defect Type! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -139,12 +139,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     update.Parameters.AddWithValue("@oldElement", oldElement);
                     update.ExecuteNonQuery();
                     string message = "Root Cause Option has been updated!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to update Root Cause Option! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -160,12 +160,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     update.Parameters.AddWithValue("@oldElement", oldElement);
                     update.ExecuteNonQuery();
                     string message = "Screening Area has been updated!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to update Screening Area! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -181,12 +181,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     update.Parameters.AddWithValue("@oldElement", oldElement);
                     update.ExecuteNonQuery();
                     string message = "Failure Analysis has been updated!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to update Failure Analysis! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -212,12 +212,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     delete.Parameters.AddWithValue("@oldElement", oldElement);
                     delete.ExecuteNonQuery();
                     string message = "Defect Type has been deleted!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to delete Defect Type! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -232,12 +232,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     delete.Parameters.AddWithValue("@oldElement", oldElement);
                     delete.ExecuteNonQuery();
                     string message = "Root Cause Option has been deleted!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to delete Root Cause Option! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -252,12 +252,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     delete.Parameters.AddWithValue("@oldElement", oldElement);
                     delete.ExecuteNonQuery();
                     string message = "Screening Area has been deleted!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to delete Screening Area! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {
@@ -272,12 +272,12 @@ public partial class Admin_manage_form_elements : System.Web.UI.Page
                     delete.Parameters.AddWithValue("@oldElement", oldElement);
                     delete.ExecuteNonQuery();
                     string message = "Failure Analysis has been deleted!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch
                 {
                     string message = "Failed to delete Failure Analysis! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {

@@ -20,7 +20,7 @@
                             <br /><br />
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" Text="Add Element" OnClick="Click_Add" OnClientClick="if ( ! AddConfirmation()) return false;"/>
+                                    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" Text="Add Element" OnClick="Click_Add"/>
                                 </div>
                             </div>
 
@@ -32,12 +32,55 @@
     </div>
 </div>
     <script type="text/javascript">
-        function ShowMessage(message) {
-            alert(message);
-        }
+        // For Confirmation
+        $(function () {
 
-        function AddConfirmation() {
-            return confirm("Are you sure you want to add this element?");
-        }
+            $("#<%=btnAdd.ClientID%>").on("click", function (event) {
+             event.preventDefault();
+             $("#messageBox").dialog({
+                 resizable: false,
+                 title: "Add Element Confirmation",
+                 open: function () {
+                     var markup = "Are you sure you want to add this element?";
+                     $(this).html(markup);
+                 },
+                 height: 200,
+
+                 modal: true,
+                 buttons: {
+                     Ok: function () {
+                         $(this).dialog("close");
+                         __doPostBack($('#<%= btnAdd.ClientID %>').attr('name'), '');
+                         },
+                         Cancel: function () {
+                             $(this).dialog("close");
+
+                         }
+                     }
+                 });
+         });
+     });
+
+
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Add Element Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
+
+             });
+             return false;
+         }
     </script>
 </asp:Content>

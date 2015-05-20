@@ -63,7 +63,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                                     insert.Parameters.AddWithValue("@id", scar_no);
                                     insert.ExecuteNonQuery();
                                     string message = "Your files have been uploaded succesfully!";
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                                     con.Close();
 
                                 }
@@ -73,7 +73,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
                     else
                     {
                         string message = ".exe and .msi files are not allowed! Please Try Again!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
 
                     }
                 }
@@ -82,7 +82,7 @@ public partial class Manager_8Dapproval : System.Web.UI.Page
             catch (Exception err)
             {
                 string message = "Unable to upload files! Please Try Again!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
             finally
             {
@@ -259,7 +259,7 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
         string FileToDelete = Server.MapPath(@"~\Attachments\" + cell.Text);
         File.Delete(FileToDelete);
         string message = cell.Text + " has been deleted!";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
     }
 
     protected void DownloadFile(object sender, EventArgs e)
@@ -326,8 +326,8 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                                     cmd.Parameters.AddWithValue("@scar_no", scar_no);
                                     con.Open();
                                     cmd.ExecuteNonQuery();
-                                    ProcessedMessage.Text = "Your files have been uploaded succesfully!";
-                                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                                    string message = "Your files have been uploaded succesfully!";
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                                     con.Close();
                                 }
                             }
@@ -336,16 +336,16 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                 }
                 else
                 {
-                    ProcessedMessage.Text = ".exe and .msi files are not allowed! Please Try Again!";
-                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    string message = ".exe and .msi files are not allowed! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
             }
 
         }
         catch (Exception err)
         {
-            ProcessedMessage.Text = "Unable to upload files! Please Try Again!";
-            ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            string message = "Unable to upload files! Please Try Again!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
         finally
         {
@@ -385,18 +385,18 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                         {
                             SqlCommand update = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM WHERE scar_no = @scar_no", conn);
                             update.Parameters.AddWithValue("@scar_no", scar_no);
-                            update.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                            update.Parameters.AddWithValue("@comment_WCM", comment);
+                            update.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
+                            update.Parameters.AddWithValue("@comment_QM", comment);
                             update.ExecuteNonQuery();
                         }
-                        ProcessedMessage.Text = "8D Approval Submitted!";
-                        ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                        string message = "8D Approval Submitted!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                     }
                 }
                 catch(Exception err)
                 {
-                    ProcessedMessage.Text = "Unable to submit 8D Approval! Please Try Again!" + err.Message;
-                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    string message = "Unable to submit 8D Approval! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
             }
             else if(approvalStatus.Equals("Reject"))
@@ -424,13 +424,6 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                                     tempRejectCountWCM = Convert.ToInt16(reader["reject_count_WCM"]);
                                 }
                                 reader.Close();
-
-                                SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
-                                updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
-                                updateStatus.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                                updateStatus.Parameters.AddWithValue("@comment_WCM", comment);
-                                updateStatus.ExecuteNonQuery();
-
                                 SqlCommand updateCount = new SqlCommand(@"UPDATE dbo.Approval_8D_Reject_Count SET reject_count_WCM = @reject_count_WCM WHERE scar_no = @scar_no", conn);
                                 updateCount.Parameters.AddWithValue("@scar_no", scar_no);
                                 updateCount.Parameters.AddWithValue("@reject_count_WCM", tempRejectCountWCM += 1);
@@ -438,23 +431,23 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                             }
                             else
                             {
-                                SqlCommand insertStatus = new SqlCommand(@"INSERT INTO dbo.Approval_8D (approval_status_WCM, comment_WCM) VALUES (@approval_status_WCM, @comment_WCM) WHERE scar_no = @scar_no", conn);
-                                insertStatus.Parameters.AddWithValue("@scar_no", scar_no);
-                                insertStatus.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
-                                insertStatus.Parameters.AddWithValue("@comment_WCM", comment);
-                                insertStatus.ExecuteNonQuery();
-
-                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_WCM) VALUES (@reject_count_WCM) WHERE scar_no = @scar_no", conn);
+                                reader.Close();
+                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_WCM, scar_no) VALUES (@reject_count_WCM, @scar_no)", conn);
                                 insertCount.Parameters.AddWithValue("@scar_no", scar_no);
                                 insertCount.Parameters.AddWithValue("@reject_count_WCM", 1);
                                 insertCount.ExecuteNonQuery();
                             }
+                            SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_WCM = @approval_status_WCM, comment_WCM = @comment_WCM WHERE scar_no = @scar_no", conn);
+                            updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                            updateStatus.Parameters.AddWithValue("@approval_status_WCM", approvalStatus);
+                            updateStatus.Parameters.AddWithValue("@comment_WCM", comment);
+                            updateStatus.ExecuteNonQuery();
                             
                         }
                         else if(position.Equals("Quality Manager"))
                         {
                             bool records_exist = false;
-                            SqlCommand select = new SqlCommand(@"SELECT reject_count_QM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                            SqlCommand select = new SqlCommand(@"SELECT reject_count_QM FROM dbo.Approval_8D_Reject_Count WHERE scar_no = @scar_no", conn);
                             select.Parameters.AddWithValue("@scar_no", scar_no);
                             SqlDataReader reader = select.ExecuteReader();
                             if (reader.HasRows)
@@ -469,12 +462,6 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                                 }
                                 reader.Close();
 
-                                SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM WHERE scar_no = @scar_no", conn);
-                                updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
-                                updateStatus.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
-                                updateStatus.Parameters.AddWithValue("@comment_QM", comment);
-                                updateStatus.ExecuteNonQuery();
-
                                 SqlCommand updateCount = new SqlCommand(@"UPDATE dbo.Approval_8D_Reject_Count SET reject_count_QM = @reject_count_QM WHERE scar_no = @scar_no", conn);
                                 updateCount.Parameters.AddWithValue("@scar_no", scar_no);
                                 updateCount.Parameters.AddWithValue("@reject_count_QM", tempRejectCountWCM += 1);
@@ -482,28 +469,27 @@ scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                             }
                             else
                             {
-                                SqlCommand insertStatus = new SqlCommand(@"INSERT INTO dbo.Approval_8D (approval_status_QM, comment_QM) VALUES (@approval_status_QM, @comment_QM) WHERE scar_no = @scar_no", conn);
-                                insertStatus.Parameters.AddWithValue("@scar_no", scar_no);
-                                insertStatus.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
-                                insertStatus.Parameters.AddWithValue("@comment_QM", comment);
-                                insertStatus.ExecuteNonQuery();
+                                reader.Close();
 
-                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_QM) VALUES (@reject_count_QM) WHERE scar_no = @scar_no", conn);
+                                SqlCommand insertCount = new SqlCommand(@"INSERT INTO dbo.Approval_8D_Reject_Count (reject_count_QM, scar_no) VALUES (@reject_count_QM, @scar_no)", conn);
                                 insertCount.Parameters.AddWithValue("@scar_no", scar_no);
                                 insertCount.Parameters.AddWithValue("@reject_count_QM", 1);
                                 insertCount.ExecuteNonQuery();
                             }
+                            SqlCommand updateStatus = new SqlCommand(@"UPDATE dbo.Approval_8D SET approval_status_QM = @approval_status_QM, comment_QM = @comment_QM WHERE scar_no = @scar_no", conn);
+                            updateStatus.Parameters.AddWithValue("@scar_no", scar_no);
+                            updateStatus.Parameters.AddWithValue("@approval_status_QM", approvalStatus);
+                            updateStatus.Parameters.AddWithValue("@comment_QM", comment);
+                            updateStatus.ExecuteNonQuery();
                         }
-                        
-
-                        ProcessedMessage.Text = "8D Approval Submitted!";
-                        ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                        string message = "8D Approval Submitted!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                     }
                 }
                 catch (Exception err)
                 {
-                    ProcessedMessage.Text = "Unable to submit 8D Approval! Please Try Again!";
-                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    string message = "Unable to submit 8D Approval! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
             }
         }

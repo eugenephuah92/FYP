@@ -44,13 +44,13 @@ public partial class Manager_reports_TAT_frequency : System.Web.UI.Page
     {
 
     }
-    
+
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         // Parse the value of the selected year and month
         int year = int.Parse(lstYear.SelectedValue.ToString());
         //int month = int.Parse(lstMonth.SelectedValue.ToString());
-        int[,] TATcount = new int[12,2];
+        int[,] TATcount = new int[12, 2];
         string[] monthText = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
         DataTable dt = this.GetData();
 
@@ -63,12 +63,12 @@ public partial class Manager_reports_TAT_frequency : System.Web.UI.Page
                 // Counter for 1st level escalation
                 if (row["escalation_count"].ToString() == "1")
                 {
-                    TATcount[month-1, 0]++;
+                    TATcount[month - 1, 0]++;
                 }
                 // Counter for 2nd level escalation
                 else if (row["escalation_count"].ToString() == "2")
                 {
-                    TATcount[month-1, 1]++;
+                    TATcount[month - 1, 1]++;
                 }
             }
         }
@@ -85,11 +85,11 @@ public partial class Manager_reports_TAT_frequency : System.Web.UI.Page
         for (int i = 0; i < 12; i++)
         {
             html.Append("<tr>");
-            html.Append("<td><a href='home.aspx?month="+ monthText[i] +"'>" + monthText[i] + "</a></td>");
+            html.Append("<td><a href='scars_by_month.aspx?month=" + monthText[i] + "&year=" + year + "'>" + monthText[i] + "</a></td>");
             html.Append("<td>" + TATcount[i, 0] + "</td>");
             html.Append("<td>" + TATcount[i, 1] + "</td>");
             html.Append("</tr>");
-        }           
+        }
         html.Append("</tbody>");
         html.Append("</table>");
 

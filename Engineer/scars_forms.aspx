@@ -216,8 +216,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-3">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" onClick="Save_Request" ValidationGroup="SCAR_Request" runat="server" Text="Save" />
-                                        <asp:Button CssClass="btn btn-success" ID="btnSubmitSec1" onClick="Submit_Request" ValidationGroup="SCAR_Request" runat="server" Text="Submit" />
+                                        <asp:Button CssClass="btn btn-primary" ID="btnSaveSec1" onClick="Save_Request" ValidationGroup="SCAR_Request" runat="server" Text="Save as Draft" />
+                                        <asp:Button CssClass="btn btn-success" ID="btnSubmitSec1" onClick="Submit_Request" ValidationGroup="SCAR_Request" runat="server" Text="Submit Request" />
                                     </div>
                                 </div>
                         </div>
@@ -707,6 +707,7 @@
                                         <div class="col-lg-8">
                                             <asp:FileUpload ID="uploadFile" AllowMultiple="true" runat="server" onchange="showFiles()" />
                                             <span class="help-block">Maximum file size: 15MB / 5 file(s)</span>
+                                            <span class="help-block">File Name must include SCAR No. Eg: 8D_Powerpoint_P1234.pptx</span>
                                             <asp:Label ID="showFileNames" runat="server"/>
                                             <br /><br />
                                             
@@ -731,6 +732,7 @@
                                                 HeaderText="File Name" SortExpression="file_name" />
                                             
                                         </Columns>
+                                        
                                     </asp:GridView>
                                 </div>
                                     <div class="form-group">
@@ -785,8 +787,6 @@
                                         <label for="lstDefectMode" class="col-lg-3 control-label">Defect Mode</label>
                                         <div class="col-lg-8">
                                             <asp:DropDownList CssClass="form-control" ID="lstDefectMode" runat="server">
-                                                <asp:ListItem>Please Select Defect Mode</asp:ListItem>
-                                                <asp:ListItem Value="Spoil">Spoil</asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:Label ID="lblDefectMode" runat="server" />
                                         </div>
@@ -815,11 +815,13 @@
                                             <br /><br />
                                         </div>
                                     </div>
-                                
+                                    <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-3">
-                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate();if ( ! SaveConfirmation()) return false;" ValidationGroup="SCAR_Response" OnClick="Save_Response" runat="server" Text="Save to Database" />
-                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate();if ( ! SubmitConfirmation()) return false;" ValidationGroup="SCAR_Response" OnClick="Submit_Response" Text="Send to Client" />
+                                            <asp:Button CssClass="btn btn-primary" ID="btnSave2" OnClientClick="Validate();" ValidationGroup="SCAR_Response" OnClick="Save_Response" runat="server" Text="Save as Draft" />
+                                            <asp:Button CssClass="btn btn-success" ID="btnSubmit" runat="server" OnClientClick="Validate()" ValidationGroup="SCAR_Response" OnClick="Submit_Response" Text="Send to Client" />
                                         </div>
                                     </div>
                             </div>
@@ -968,13 +970,6 @@
 </script>
 
 <script type="text/javascript" >
-    function SaveConfirmation() {
-        return confirm("Are you sure you want to save this data?");
-    }
-
-    function SubmitConfirmation() {
-        return confirm("Are you sure you want to submit this data?");
-    }
 
     function Validate() {
 
@@ -1031,14 +1026,144 @@
          document.getElementById("<%=showFileNames.ClientID %>").innerHTML = txt;
      }
 
+        // For Save Request Confirmation
+        $(function () {
 
-        function ShowMessage(scar_no, message) {
-            alert(message);
-           if (scar_no != 0)
-            {
-                window.location.href = 'scars_forms.aspx?scar_no=' + scar_no;
-            }
-        }
+            $("#<%=btnSaveSec1.ClientID%>").on("click", function (event) {
+                event.preventDefault();
+                $("#messageBox").dialog({
+                    resizable: false,
+                    title: "Save Confirmation",
+                    open: function () {
+                        var markup = "Are you sure you want to save as draft?";
+                        $(this).html(markup);
+                    },
+                    height: 200,
+
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            __doPostBack($('#<%= btnSaveSec1.ClientID %>').attr('name'), '');
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+
+                        }
+                    }
+                });
+            });
+        });
+
+        // For Submit Request Confirmation
+        $(function () {
+
+            $("#<%=btnSubmitSec1.ClientID%>").on("click", function (event) {
+                event.preventDefault();
+                $("#messageBox").dialog({
+                    resizable: false,
+                    title: "Submit Confirmation",
+                    open: function () {
+                        var markup = "Are you sure you want to submit the SCAR Request?";
+                        $(this).html(markup);
+                    },
+                    height: 200,
+
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            __doPostBack($('#<%= btnSubmitSec1.ClientID %>').attr('name'), '');
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+
+                        }
+                    }
+                });
+            });
+        });
+
+        // For Save Response Confirmation
+        $(function () {
+
+            $("#<%=btnSave2.ClientID%>").on("click", function (event) {
+                event.preventDefault();
+                $("#messageBox").dialog({
+                    resizable: false,
+                    title: "Save Confirmation",
+                    open: function () {
+                        var markup = "Are you sure you want to save as draft?";
+                        $(this).html(markup);
+                    },
+                    height: 200,
+
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            __doPostBack($('#<%= btnSave2.ClientID %>').attr('name'), '');
+                     },
+                     Cancel: function () {
+                         $(this).dialog("close");
+
+                     }
+                 }
+             });
+            });
+        });
+
+        // For Submit Response Confirmation
+        $(function () {
+
+            $("#<%=btnSubmit.ClientID%>").on("click", function (event) {
+                event.preventDefault();
+                $("#messageBox").dialog({
+                    resizable: false,
+                    title: "Submit Confirmation",
+                    open: function () {
+                        var markup = "Are you sure you want to send the SCAR Response to the client?";
+                        $(this).html(markup);
+                    },
+                    height: 200,
+
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            __doPostBack($('#<%= btnSubmit.ClientID %>').attr('name'), '');
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+
+                        }
+                    }
+                });
+            });
+        });
+
+
+     // For Alert
+     function messageBox(scar_no, message) {
+         $("#messageBox").dialog({
+             modal: true,
+             height: 300,
+             width: 500,
+             title: "SCAR Form Status",
+             open: function () {
+                 var markup = message;
+                 $(this).html(markup);
+             },
+             buttons: {
+                 Close: function () {
+                     $(this).dialog("close");
+                 }
+             },
+
+         });
+         return false;
+     }
+
 </script>
 
 </asp:Content>

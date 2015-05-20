@@ -26,7 +26,7 @@ public partial class Admin_admin_form_elements : System.Web.UI.Page
         if(Selected_Form_Elements().Equals("N/A"))
         {
             string message = "Please Select Form Elements!";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
         else
         {
@@ -41,7 +41,7 @@ public partial class Admin_admin_form_elements : System.Web.UI.Page
         if (Selected_Form_Elements().Equals("N/A"))
         {
             string message = "Please Select Form Elements!";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
         }
         else
         {

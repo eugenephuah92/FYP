@@ -113,9 +113,26 @@
     </div>
 </div>
     <script type="text/javascript">
-    function ShowMessage(message) {
-        alert(message);
-        window.location("manage_user_accounts.aspx");
-        }
+
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Manage User Account Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
+
+             });
+             return false;
+         }
 </script>
 </asp:Content>

@@ -182,7 +182,7 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
             delete.ExecuteNonQuery();
         }
         string message = employee_name.Text + " has been removed from the system!";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
     }
 
     protected void UsersGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -231,12 +231,12 @@ employee_position = @employee_position, privilege = @privilege WHERE id = @id",c
                 updateUsers.Parameters.AddWithValue("@privilege", ((TextBox)(row.Cells[6].Controls[0])).Text);
                 updateUsers.ExecuteNonQuery();
                 string message = "User details has been successfully updated!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
             catch
             {
                 string message = "Failed to update user details! Please Try Again!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
             finally
             {

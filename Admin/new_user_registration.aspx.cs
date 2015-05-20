@@ -64,7 +64,7 @@ public partial class Admin_new_user_registration : System.Web.UI.Page
             if(records_exists)
             {
                 string message = "User already exists in the system! Please Try Again!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
             }
             else
             {
@@ -81,12 +81,12 @@ VALUES (@employee_ID, @employee_name, @employee_email, @employee_position, @pass
                     insertUser.Parameters.AddWithValue("@privilege", employee_details.Privilege);
                     insertUser.ExecuteNonQuery();
                     string message = "User has been successfully added into the system!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch (Exception err)
                 {
                     string message = "Failed to add new user! Please Try Again!" + err.Message;
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + message + "')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally
                 {

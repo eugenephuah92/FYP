@@ -438,5 +438,57 @@
              window.location.href = '8Dapproval.aspx?scar_no=' + scar_no;
          }
      }
+
+
+     // For Confirmation
+     $(function () {
+
+         $("#<%=btnUpload.ClientID%>").on("click", function (event) {
+             event.preventDefault();
+             $("#messageBox").dialog({
+                 resizable: false,
+                 title: "Upload Confirmation",
+                 open: function () {
+                     var markup = "Are you sure you want to upload the selected file(s)?";
+                     $(this).html(markup);
+                 },
+                 height: 200,
+
+                 modal: true,
+                 buttons: {
+                     Ok: function () {
+                         $(this).dialog("close");
+                         __doPostBack($('#<%= btnUpload.ClientID %>').attr('name'), '');
+                         },
+                         Cancel: function () {
+                             $(this).dialog("close");
+
+                         }
+                     }
+                 });
+         });
+     });
+
+
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Upload Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
+
+             });
+             return false;
+         }
 </script>
 </asp:Content>

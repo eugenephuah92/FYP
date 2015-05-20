@@ -33,8 +33,26 @@
     </div>
 </div>
     <script type="text/javascript">
-        function ShowMessage(message) {
-            alert(message);
-        }
+
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Form Elements Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
+
+             });
+             return false;
+         }
     </script>
 </asp:Content>

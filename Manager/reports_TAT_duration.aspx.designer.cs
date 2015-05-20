@@ -12,13 +12,31 @@
 public partial class Manager_reports_TAT_duration {
     
     /// <summary>
-    /// lstFilter control.
+    /// lstPageSize control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter;
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
+    
+    /// <summary>
+    /// txtDuration control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtDuration;
+    
+    /// <summary>
+    /// RequiredFieldValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
     /// btnSearch control.
@@ -28,6 +46,33 @@ public partial class Manager_reports_TAT_duration {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnSearch;
+    
+    /// <summary>
+    /// btnClear control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnClear;
+    
+    /// <summary>
+    /// txtRowCount control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label txtRowCount;
+    
+    /// <summary>
+    /// GridViewTAT_Duration control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView GridViewTAT_Duration;
     
     /// <summary>
     /// btnExport control.

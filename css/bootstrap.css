@@ -5194,6 +5194,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-radius: 10px;
 }
 
+.test
+{
+    background-color:red;
+}
+
 .badge:empty {
   display: none;
 }

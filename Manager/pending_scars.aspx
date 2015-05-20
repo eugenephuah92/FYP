@@ -50,7 +50,7 @@
                                            <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
                                            <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
                                            <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"/>
-                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"/>
+                                           <asp:BoundField HeaderText="Escalation Date" DataField="Escalation Date"/>
                                        </Columns>
                                          
                                        </asp:GridView>

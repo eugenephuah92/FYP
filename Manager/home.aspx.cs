@@ -15,6 +15,12 @@ public partial class Manager_home : System.Web.UI.Page
     string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
+        string checkPrivilege = JabilSession.Current.privilege;
+        if (checkPrivilege == null)
+        {
+            Response.Redirect("../Logout.aspx");
+        }
+
         SqlDataReader rdr;
 
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
@@ -46,6 +52,7 @@ public partial class Manager_home : System.Web.UI.Page
             SqlCommand selectClosed = new SqlCommand("SELECT COUNT(*) FROM dbo.SCAR_History", conn);
             int count = Convert.ToInt16(selectClosed.ExecuteScalar());
             closedSCAR = count;
+            
 
             if(JabilSession.Current.employee_position.Equals("Work Cell Manager"))
             {
@@ -57,7 +64,6 @@ public partial class Manager_home : System.Web.UI.Page
             {
                 SqlCommand select8D = new SqlCommand(@"SELECT COUNT(*) FROM dbo.Approval_8D WHERE name_QM = @name_QM", conn);
                 select8D.Parameters.AddWithValue("@name_QM", JabilSession.Current.employee_name);
-                SqlDataReader reader = select8D.ExecuteReader();
                 request8D = Convert.ToInt16(select8D.ExecuteScalar());
             }
             

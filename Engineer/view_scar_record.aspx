@@ -368,13 +368,4 @@
     </div><!--/.col-md-12-->
 </div>
 
-     <script type="text/javascript">
-
-         function ShowMessage(scar_no, message) {
-             alert(message);
-             if (scar_no != 0) {
-                 window.location.href = '8Dapproval.aspx?scar_no=' + scar_no;
-             }
-         }
-</script>
 </asp:Content>

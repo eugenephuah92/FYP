@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Globalization;
 using Jabil_Employee;
 using Jabil_Session;
-
+using CryptoLib;
 public partial class Engineer_scars_forms : System.Web.UI.Page
 {
     string DatabaseName = "JabilDatabase";
@@ -21,30 +21,33 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
-            string Temp_SCAR_No = Request.QueryString["scar_no"];
+            string Temp_SCAR_No = Request.QueryString["scar_no"];   // Gets SCAR Number from URL
+
+            /* Populate dropdrown list */
             ddlDefectType();
             ddlRootCauseOption();
             ddlFailureAnalysis();
             ddlSCARStatus();
             ddlScreeningArea();
+            ddlDefectCategory();
             txtVerifyCAResult.Visible = false;
             lblfortxtVerifyCAResults.Visible = false;
 
             if (!String.IsNullOrEmpty(Temp_SCAR_No))
             {
-                Display_Approval_GridView();
-                Display_Attachments_Grid_View(Temp_SCAR_No);
-                SCAR_Status_Control(Temp_SCAR_No);
-                Read_Existing_Request_Records(Temp_SCAR_No);
-                SCAR_Status_Control(Temp_SCAR_No);
+                Display_Approval_GridView();    //  Displays the 8D Approval Status and Comments
+                Display_Attachments_Grid_View(Temp_SCAR_No);    // Displays the attachments related to the SCAR
+                SCAR_Status_Control(Temp_SCAR_No);  // Disable / Hides certain fields in the form based on the SCAR's current stage
+                Read_Existing_Request_Records(Temp_SCAR_No);    // Reads existing SCAR request data into form
+                Check_Manager_Approval(Temp_SCAR_No);
                 string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connect))
                 {
                     conn.Open();
-                    SqlCommand select = new SqlCommand(@"SELECT scar_no, scar_stage FROM dbo.SCAR_Request WHERE scar_no = @temp_SCAR_No AND scar_stage = @scarStage OR scar_stage = @scarStageClosed", conn);
+                    // Reads existing SCAR Response data
+                    SqlCommand select = new SqlCommand(@"SELECT scar_no, scar_stage FROM dbo.SCAR_Request WHERE scar_no = @temp_SCAR_No AND scar_stage = @scarStage", conn);
                     select.Parameters.AddWithValue("temp_SCAR_No", Temp_SCAR_No);
                     select.Parameters.AddWithValue("scarStage", "Pending SCAR");
-                    select.Parameters.AddWithValue("scarStageClosed", "Closed SCAR");
                     SqlDataReader reader;
                     reader = select.ExecuteReader();
 
@@ -66,7 +69,44 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }  
     }
 
-   
+
+    protected void Check_Manager_Approval(string scar_no)
+    {
+        bool check_rows = false;
+        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        using (SqlConnection conn = new SqlConnection(connect))
+        {
+            if(!IsPostBack)
+            {
+                conn.Open();
+                // Reads existing SCAR Response data
+                SqlCommand select = new SqlCommand(@"SELECT scar_no, approval_status_WCM, approval_status_QM FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
+                select.Parameters.AddWithValue("scar_no", scar_no);
+
+                SqlDataReader reader;
+                reader = select.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    check_rows = true;
+                }
+                if(check_rows)
+                {
+                    while(reader.Read())
+                    {
+                        if(reader["approval_status_WCM"].Equals("Reject") || reader["approval_status_QM"].Equals("Reject"))
+                        {
+                            btnSubmit.Enabled = false;
+                        }
+
+                    }
+                }
+            }
+            conn.Close();
+        }
+    }
+
+   // Checks current SCAR stage in order to modify form dynamics and elements (hides / disable certain form elements)
     protected void SCAR_Status_Control(string scar_no)
     {
         if (!IsPostBack)
@@ -87,13 +127,11 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                     }
                     else if (Convert.ToString(reader["scar_status"]).Equals("SCAR Type 2 Rejected"))
                     {
-                        Move_Data_To_History(scar_no, Convert.ToString(reader["scar_status"]), Convert.ToString(reader["scar_type"]));
+                        
                         Read_Only_Response_Form(scar_no, "SCAR Type 2 Rejected");
                     }
                     else if (Convert.ToString(reader["scar_status"]).Equals("SCAR Type 4 Accepted"))
                     {
-                        // Move data to history table
-                        Move_Data_To_History(scar_no, Convert.ToString(reader["scar_status"]), Convert.ToString(reader["scar_type"]));
                         lstCurrentStatus.Enabled = false;
                         btnChangeStatus.Enabled = false;
                         btnSubmit.Enabled = false;
@@ -105,7 +143,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
                     }
                     else if (Convert.ToString(reader["scar_status"]).Equals("SCAR Type 4 Rejected"))
                     {
-                        Move_Data_To_History(scar_no, Convert.ToString(reader["scar_status"]), Convert.ToString(reader["scar_type"]));
+                        
                         Read_Only_Response_Form(scar_no, "SCAR Type 4 Rejected");
                     }
                     else
@@ -117,6 +155,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         }
     }
 
+    // Hides / Disables certain fields in the response form
     protected void Read_Only_Response_Form(string scar_no, string scar_status)
     {
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
@@ -182,6 +221,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         
     }
 
+    // Moves SCAR data into dbo.SCAR_History database table once the SCAR reaches a particular stage (SCAR Type 2 Rejected, SCAR Type 4 Accepted or SCAR Type 4 Rejected)
     protected void Move_Data_To_History(string scar_no, string scar_status, string scar_type)
     {
         SCAR scar_details = new SCAR();
@@ -191,6 +231,7 @@ public partial class Engineer_scars_forms : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
+            // Reads SCAR Request data and stores into object
             SqlCommand selectRequest = new SqlCommand(@"SELECT scar_no, car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, 
 supplier_contact, supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity, 
 defect_type, non_conformity_reported, reject_reason, expected_date_close, file_name, file_path FROM dbo.SCAR_Request WHERE scar_no = @scar_no", conn);
@@ -227,6 +268,7 @@ defect_type, non_conformity_reported, reject_reason, expected_date_close, file_n
             }
             readerRequest.Close();
 
+            // Reads SCAR Response data and stores into object
             SqlCommand selectResponse = new SqlCommand(@"SELECT root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, 
 s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, 
 s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, 
@@ -272,6 +314,7 @@ s72_implementation_date, s73_responsible_person, s74_verifier, s75_verifier_emai
             }
             readerResponse.Close();
 
+            // Inserts the SCAR Data into the dbo.SCAR_History table in the database
             SqlCommand insert = new SqlCommand(@"INSERT INTO dbo.SCAR_History (scar_stage, scar_type, scar_status, scar_no, car_revision, car_type, pre_alert, related_car_no, 
 related_car_ref, originator, recurrence, supplier_contact, supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, 
 dept_pl, commodity, defect_quantity, defect_type, non_conformity_reported, reject_reason, expected_date_close, file_name, file_path, 
@@ -279,7 +322,7 @@ root_cause_option, s0_overall_summary, s1_problem_verification, problem_verifica
 s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, s32_failure_analysis_results, s4_man, s4_method, s4_material, s4_machine, 
 s51_corrective_action, s52_implementation_date, s53_responsible_person, track_corrective_action, s61_permanent_corrective_action, s62_implementation_date, 
 s63_responsible_person, track_permanent_corrective_action, s71_verify_corrective_action_effectiveness, s72_implementation_date, s73_responsible_person, s74_verifier,
-s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, completion_date) 
+s75_verifier_email, s76_verify_corrective_action_result_effectiveness, defect_modes, mor_calculated, completion_date, modified_by, last_modified) 
 VALUES 
 (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert, @related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, 
 @issued_date, @originator_dept, @originator_contact, @part_no, @part_description, @business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, 
@@ -288,7 +331,7 @@ VALUES
 @s24_containment_result, @screening_area, @track_containment_action, @s31_failure_analysis, @s32_failure_analysis_results, @s4_man, @s4_method, @s4_material, @s4_machine, 
 @s51_corrective_action, @s52_implementation_date, @s53_responsible_person, @track_corrective_action, @s61_permanent_corrective_action, @s62_implementation_date, 
 @s63_responsible_person, @track_permanent_corrective_action, @s71_verify_corrective_action_effectiveness, @s72_implementation_date, @s73_responsible_person, @s74_verifier,
-@s75_verifier_email, @s76_verify_corrective_action_result_effectiveness, @defect_modes, @mor_calculated, @completion_date)", conn);
+@s75_verifier_email, @s76_verify_corrective_action_result_effectiveness, @defect_modes, @mor_calculated, @completion_date, @modified_by, @last_modified)", conn);
 
             insert.Parameters.AddWithValue("@scar_stage", "Closed SCAR");
             insert.Parameters.AddWithValue("@scar_type", scar_type);
@@ -351,13 +394,17 @@ VALUES
             insert.Parameters.AddWithValue("@s76_verify_corrective_action_result_effectiveness", scar_response_details.S76_verifiy_effectiveness_of_corrective_actions_results);
             insert.Parameters.AddWithValue("@defect_modes", scar_response_details.Defect_mode);
             insert.Parameters.AddWithValue("@mor_calculated", scar_response_details.MOR_Calculated);
+            insert.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+
+            DateTime currentDateTime = DateTime.Now;
+            insert.Parameters.AddWithValue("@last_modified", currentDateTime);
 
             DateTime completion_date = DateTime.Now;
             insert.Parameters.AddWithValue("@completion_date", completion_date);
 
             insert.ExecuteNonQuery();
 
-
+            // Removes the SCAR data from the dbo.SCAR_Request and dbo.SCAR_Response table
             SqlCommand deleteResponse = new SqlCommand(@"DELETE FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
             deleteResponse.Parameters.AddWithValue("@scar_no", scar_details.Car_no);
             deleteResponse.ExecuteNonQuery();
@@ -367,11 +414,12 @@ VALUES
             deleteRequest.ExecuteNonQuery();
 
             string message = "SCAR Response has been updated!" + scar_details.Car_no + " - Revision: " + scar_details.Car_revision + " has been closed!";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
             
         }
     }
 
+    // SCAR Status dropdown list that specifies whether the SCAR is accepted or rejected
     protected void ddlSCARStatus()
     {
         if (!IsPostBack)
@@ -428,6 +476,7 @@ FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON SCAR_Request.scar_no = SCA
         }
     }
 
+    // Screening Area dropdown list
     protected void ddlScreeningArea()
     {
         if (!IsPostBack)
@@ -447,6 +496,7 @@ FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON SCAR_Request.scar_no = SCA
         }
     }
 
+    // Defect Type dropdown list
     protected void ddlDefectType()
     {
         if (!IsPostBack)
@@ -467,6 +517,7 @@ FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON SCAR_Request.scar_no = SCA
         }    
     }
 
+    // Root Cause Option dropdown list
     protected void ddlRootCauseOption()
     { 
         if (!IsPostBack)
@@ -487,6 +538,7 @@ FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON SCAR_Request.scar_no = SCA
         }
     }
 
+    // Failure Analysis dropdown list
     protected void ddlFailureAnalysis()
     {
         if (!IsPostBack)
@@ -507,7 +559,25 @@ FROM dbo.SCAR_Request INNER JOIN dbo.SCAR_Response ON SCAR_Request.scar_no = SCA
         }
     }
 
+    protected void ddlDefectCategory()
+    {
+        if (!IsPostBack)
+        {
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
 
+                SqlCommand select = new SqlCommand("SELECT defect_category FROM dbo.Defect_Category", conn);
+                conn.Open();
+
+                lstDefectMode.DataSource = select.ExecuteReader();
+                lstDefectMode.DataTextField = "defect_category";
+                lstDefectMode.DataValueField = "defect_category";
+                lstDefectMode.DataBind();
+                lstDefectMode.Items.Insert(0, new ListItem("Please Select Defect Mode", "0"));
+            }
+        }
+    }
 
     /* Populate Request Form based on existing data */
     protected void Read_Existing_Request_Records(string scar_no)
@@ -961,9 +1031,12 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                         SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, scar_no, 
             car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
             supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity,
-            defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status) VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,
-            @related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description,
-            @business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status)", con);
+            defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status, modified_by, last_modified, pending_action, scar_request_method) 
+VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,@related_car_no, @related_car_ref, @originator, @recurrence, 
+@supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description, @business_unit, @dept_pl, @commodity, 
+@defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status, @modified_by, @last_modified, @pending_action, @scar_request_method)", con);
+
+                        DateTime currentDateTime = DateTime.Now;
 
                         addSite.Parameters.AddWithValue("@scar_stage", "New SCAR");
                         addSite.Parameters.AddWithValue("@scar_type", "SCAR Type 2");
@@ -992,16 +1065,19 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                         addSite.Parameters.AddWithValue("@reject_reason", scar_details.Reject_reason);
                         addSite.Parameters.AddWithValue("@expected_date_close", expected_date_close);
                         addSite.Parameters.AddWithValue("@save_status", "save");
+                        addSite.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);                        
+                        addSite.Parameters.AddWithValue("@last_modified", currentDateTime);
+                        addSite.Parameters.AddWithValue("@pending_action", "Awaiting SCAR Request Submission");
+                        addSite.Parameters.AddWithValue("@scar_request_method", "manual");
                         addSite.ExecuteNonQuery();
 
-                        string message = "SCAR Request has been saved!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_details.Car_no + "','" + message + "')", true);
+                        string message = "SCAR Request for : " + scar_details.Car_no  + " has been saved!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     catch (Exception err)
                     {
-                        string message = "SCAR Request cannot be saved! Please try again!"; 
-                        string temp_no = "0";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + temp_no + "','" + message + "')", true);
+                        string message = "SCAR Request for : " + scar_details.Car_no + " cannot be saved! Please try again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     finally
                     {
@@ -1026,7 +1102,9 @@ car_type = @car_type, pre_alert = @pre_alert, related_car_no = @related_car_no, 
 supplier_contact = @supplier_contact, supplier_email = @supplier_email, issued_date = @issued_date, originator_dept = @originator_dept, originator_contact = @originator_contact, 
 part_no = @part_no, part_description = @part_description, business_unit = @business_unit, dept_pl = @dept_pl, commodity = @commodity, defect_quantity = @defect_quantity, 
 defect_type = @defect_type, non_conformity_reported = @non_conformity_reported, reject_reason = @reject_reason, expected_date_close = @expected_date_close, 
-save_status = @save_status", con);
+save_status = @save_status, modified_by = @modified_by, last_modified = @last_modified", con);
+
+                                DateTime currentDateTime = DateTime.Now;
                                 update_data.Parameters.AddWithValue("@scar_no", scar_details.Car_no);
                                 update_data.Parameters.AddWithValue("@car_revision", scar_details.Car_revision);
                                 update_data.Parameters.AddWithValue("@car_type", scar_details.Car_type);
@@ -1051,25 +1129,25 @@ save_status = @save_status", con);
                                 update_data.Parameters.AddWithValue("@reject_reason", scar_details.Reject_reason);
                                 update_data.Parameters.AddWithValue("@expected_date_close", expected_date_close);
                                 update_data.Parameters.AddWithValue("@save_status", "save");
+                                update_data.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                                update_data.Parameters.AddWithValue("@last_modified", currentDateTime);
                                 update_data.ExecuteNonQuery();
 
-                                string message = "SCAR Request has been updated!";
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_details.Car_no + "','" + message + "')", true);
+                                string message = "SCAR Request for : " + scar_details.Car_no + " has been updated!";
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                                 process_submit = true;
                             }
                         }
                         if (!process_submit)
                         {
-                            string message = "SCAR Request has NOT been updated! Please Try Again!";
-                            string temp_no = "0";
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + temp_no + "','" + message + "')", true);
+                            string message = "SCAR Request for : " + scar_details.Car_no + " has NOT been updated! Please Try Again!";
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                         }
                     }
                     catch (Exception err)
                     {
-                        string message = "SCAR Request has NOT been updated! Please Try Again!";
-                        string temp_no = "0";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + temp_no + "','" + message + "')", true);
+                        string message = "SCAR Request for : " + scar_details.Car_no + " has NOT been updated! Please Try Again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     finally
                     {
@@ -1088,9 +1166,12 @@ save_status = @save_status", con);
                         SqlCommand addSite = new SqlCommand(@"INSERT INTO dbo.SCAR_Request (scar_stage, scar_type, scar_status, scar_no, 
             car_revision, car_type, pre_alert, related_car_no, related_car_ref, originator, recurrence, supplier_contact,
             supplier_email, issued_date, originator_dept, originator_contact, part_no, part_description, business_unit, dept_pl, commodity, defect_quantity,
-            defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status) VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,
-            @related_car_no, @related_car_ref, @originator, @recurrence, @supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description,
-            @business_unit, @dept_pl, @commodity, @defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status)", con);
+            defect_type, non_conformity_reported, reject_reason, expected_date_close, save_status, modified_by, last_modified, pending_action, scar_request_method) 
+VALUES (@scar_stage, @scar_type, @scar_status, @scar_no, @car_revision, @car_type, @pre_alert,@related_car_no, @related_car_ref, @originator, @recurrence, 
+@supplier_contact, @supplier_email, @issued_date, @originator_dept, @originator_contact, @part_no, @part_description, @business_unit, @dept_pl, @commodity, 
+@defect_quantity, @defect_type, @non_conformity_reported, @reject_reason, @expected_date_close, @save_status, @modified_by, @last_modified, @pending_action, @scar_request_method)", con);
+
+                        DateTime currentDateTime = DateTime.Now;
 
                         addSite.Parameters.AddWithValue("@scar_stage", "New SCAR");
                         addSite.Parameters.AddWithValue("@scar_type", "SCAR Type 2");
@@ -1119,16 +1200,19 @@ save_status = @save_status", con);
                         addSite.Parameters.AddWithValue("@reject_reason", scar_details.Reject_reason);
                         addSite.Parameters.AddWithValue("@expected_date_close", expected_date_close);
                         addSite.Parameters.AddWithValue("@save_status", "submit");
+                        addSite.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);                        
+                        addSite.Parameters.AddWithValue("@last_modified", currentDateTime);
+                        addSite.Parameters.AddWithValue("@pending_action", "Awaiting SCAR Response Submission");
+                        addSite.Parameters.AddWithValue("@scar_request_method", "manual");
                         addSite.ExecuteNonQuery();
 
-                        string message = "SCAR Request is successful!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_details.Car_no + "','" + message + "')", true);
+                        string message = "SCAR Request for : " + scar_details.Car_no + " is successful!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     catch (Exception err)
                     {
-                        string message = "SCAR Request is not successful! Please try again!";
-                        string temp_no = "0";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + temp_no + "','" + message + "')", true);
+                        string message = "SCAR Request for : " + scar_details.Car_no + " is not successful! Please Try Again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     finally
                     {
@@ -1151,9 +1235,11 @@ save_status = @save_status", con);
                                 SqlCommand update_data = new SqlCommand(@"UPDATE TABLE dbo.SCAR_Request SET scar_no = @scar_no, car_revision = @car_revision, 
 car_type = @car_type, pre_alert = @pre_alert, related_car_no = @related_car_no, related_car_rev = @related_car_rev, originator = @originator, recurrence = @recurrence, 
 supplier_contact = @supplier_contact, supplier_email = @supplier_email, issued_date = @issued_date, originator_dept = @originator_dept, originator_contact = @originator_contact, 
-part_no = @part_no, part_description = @part_description, business_unit = @business_unit, dept_pl = @dept_pl, commodity = @commodity, defect_quantity = @defect_quantity,
+part_no = @part_no, part_description = @part_description, business_unit = @business_unit, dept_pl = @dept_pl, commodity = @commodity, defect_quantity = @defect_quantity, 
 defect_type = @defect_type, non_conformity_reported = @non_conformity_reported, reject_reason = @reject_reason, expected_date_close = @expected_date_close, 
-save_status = @save_status", con);
+save_status = @save_status, modified_by = @modified_by, last_modified = @last_modified, pending_action = @pending_action", con);
+
+                                DateTime currentDateTime = DateTime.Now;
                                 update_data.Parameters.AddWithValue("@scar_no", scar_details.Car_no);
                                 update_data.Parameters.AddWithValue("@car_revision", scar_details.Car_revision);
                                 update_data.Parameters.AddWithValue("@car_type", scar_details.Car_type);
@@ -1178,23 +1264,26 @@ save_status = @save_status", con);
                                 update_data.Parameters.AddWithValue("@reject_reason", scar_details.Reject_reason);
                                 update_data.Parameters.AddWithValue("@expected_date_close", expected_date_close);
                                 update_data.Parameters.AddWithValue("@save_status", "submit");
+                                update_data.Parameters.AddWithValue("@pending_action", "Awaiting SCAR Response Submission");
+                                update_data.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                                update_data.Parameters.AddWithValue("@last_modified", currentDateTime);
                                 update_data.ExecuteNonQuery();
 
-                                string message = "SCAR Request is successful!";
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_details.Car_no + "','" + message + "')", true);
+                                string message = "SCAR Request for : " + scar_details.Car_no + " is successful!";
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                                 process_submit = true;
                             }
                         }
                         if (!process_submit)
                         {
-                            string message = "SCAR Request is not successful! Record already exists!";
-                            string temp_no = "0";
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + temp_no + "','" + message + "')", true);
+                            string message = "SCAR Request is not successful! " + scar_details.Car_no + " already exists!";
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                         }
                     }
                     catch (Exception err)
                     {
-
+                        string message = "SCAR Request for : " + scar_details.Car_no + " is not successful! Please Try Again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_details.Car_no + "', '" + message + "')", true);
                     }
                     finally
                     {
@@ -1978,8 +2067,13 @@ save_status = @save_status", con);
                     var disallowedExtensions = new[] { ".txt", ".msi" };
                     var extension = Path.GetExtension(postedFile.FileName);
                     string filename = Path.GetFileName(postedFile.FileName);
+                    string filename_withoutextension = Path.GetFileNameWithoutExtension(postedFile.FileName);
                     string contentType = postedFile.ContentType;
                     
+                    if(!filename.Contains(scar_no))
+                    {
+                        filename = filename_withoutextension + "_" + scar_no + extension;
+                    }
 
                     if (!disallowedExtensions.Contains(extension))
                     {
@@ -2002,7 +2096,7 @@ save_status = @save_status", con);
                                     insert.Parameters.AddWithValue("@id", scar_no);
                                     insert.ExecuteNonQuery();
                                     string message = "Your files have been uploaded succesfully!";
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                                     con.Close();
 
                                 }
@@ -2012,7 +2106,7 @@ save_status = @save_status", con);
                     else
                     {
                         string message = ".exe and .msi files are not allowed! Please Try Again!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
 
                     }
                 }
@@ -2021,7 +2115,7 @@ save_status = @save_status", con);
             catch (Exception err)
             {
                 string message = "Unable to upload files! Please Try Again!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
             }
             finally
             {
@@ -2046,8 +2140,6 @@ save_status = @save_status", con);
                 string scar_no = Request.QueryString["scar_no"];
                 try
                 {
-                    
-                    
                     // SQL command to insert data into database
                     SqlCommand addResponse = new SqlCommand(@"INSERT INTO dbo.SCAR_Response (root_cause_option, s0_overall_summary, s1_problem_verification, problem_verification_status, 
 s21_containment_action, s22_implementation_date, s23_responsible_person, s24_containment_result, screening_area, track_containment_action, s31_failure_analysis, 
@@ -2099,28 +2191,30 @@ VALUES (@root_cause_option, @overall_summary, @problem_verification, @problem_ve
 
                     try
                     {
-                        SqlCommand update_response = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage WHERE scar_no = @scar_no", con);
+                        SqlCommand update_request = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_stage, modified_by = @modified_by, last_modified = @last_modified, 
+pending_action = @pending_action WHERE scar_no = @scar_no", con);
 
-                        update_response.Parameters.AddWithValue("@scar_no", scar_no);
-                        update_response.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+                        update_request.Parameters.AddWithValue("@scar_no", scar_no);
+                        update_request.Parameters.AddWithValue("@scar_stage", "Pending SCAR");
+                        update_request.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                        DateTime currentDateTime = DateTime.Now;
+                        update_request.Parameters.AddWithValue("@last_modified", currentDateTime);
+                        update_request.Parameters.AddWithValue("@pending_action", "Awaiting SCAR Response Submission");
 
-                        update_response.ExecuteNonQuery();
+                        update_request.ExecuteNonQuery();
 
-                        string message = "SCAR Response has been saved!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                        string message = "SCAR Response for : " + scar_no + " has been saved!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                     }
                     catch(Exception er)
                     {
                         
                     }
-
-                    
-
                 }
                 catch (Exception err)
                 {
-                    string message = "SCAR Response cannot be saved! Please Try Again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                    string message = "SCAR Response for : " + scar_no + " cannot be saved! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                 }
                 finally
                 {
@@ -2197,16 +2291,33 @@ mor_calculated = @mor_calculated WHERE scar_no = @scar_no", con);
                             update_response.Parameters.AddWithValue("@mor_calculated", scar_response_details.MOR_Calculated);
 
                             update_response.ExecuteNonQuery();
-                            string message = "SCAR Response has been updated!";
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
-                            //ProcessedMessage.Text = "SCAR Response has been updated!";
-                            //ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+
+                            try
+                            {
+                                SqlCommand update_request = new SqlCommand(@"UPDATE dbo.SCAR_Request SET modified_by = @modified_by, last_modified = @last_modified, pending_action = @pending_action
+WHERE scar_no = @scar_no", con);
+
+                                update_request.Parameters.AddWithValue("@scar_no", scar_no);
+                                update_request.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                                DateTime currentDateTime = DateTime.Now;
+                                update_request.Parameters.AddWithValue("@last_modified", currentDateTime);
+                                update_request.Parameters.AddWithValue("@pending_action", "Awaiting SCAR Response Submission");
+
+                                update_request.ExecuteNonQuery();
+                            }
+                            catch (Exception er)
+                            {
+
+                            }
+
+                            string message = "SCAR Response for : " + scar_no + " has been updated!";
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                         }
                     }
                     catch (Exception err)
                     {
-                        string message = "SCAR Response has NOT been updated! Please Try Again!";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                        string message = "SCAR Response for : " + scar_no + " has NOT been updated! Please Try Again!";
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                     }
                     finally
                     {
@@ -2261,10 +2372,11 @@ mor_calculated = @mor_calculated WHERE scar_no = @scar_no", con);
         string scar_no = Request.QueryString["scar_no"];
         if(chk8Dapproval.Checked)
         {
+            // Checks if both dropdown list has been selected
             if (lstWCM.SelectedItem.Text.Equals(Convert.ToString("Please Select WCM")) || lstQM.SelectedItem.Text.Equals(Convert.ToString("Please Select QM")))
             {
                 string message = "Please Select Respective QM / WCM"; ;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
             }
             else if (lstWCM.SelectedItem.Value != Convert.ToString(0) && lstQM.SelectedItem.Value != Convert.ToString(0))
             {
@@ -2288,6 +2400,7 @@ mor_calculated = @mor_calculated WHERE scar_no = @scar_no", con);
                 reader = select.ExecuteReader();
                 while (reader.Read())
                 {
+                    // Gets WCM data
                     if (!WCM_details.Employee_name.Equals("N/A"))
                     {
                         if (WCM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && WCM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
@@ -2300,6 +2413,7 @@ mor_calculated = @mor_calculated WHERE scar_no = @scar_no", con);
                         }
                     }
 
+                    // Gets QM data
                     if (!QM_details.Employee_name.Equals("N/A"))
                     {
                         if (QM_details.Employee_name.CompareTo(reader["employee_name"]) == 0 && QM_details.Employee_ID.CompareTo(reader["employee_ID"]) == 0)
@@ -2316,26 +2430,33 @@ mor_calculated = @mor_calculated WHERE scar_no = @scar_no", con);
 
                 try
                 {
+                    // Stores notice in database
                     string currentDateTime = DateTime.Now.ToString();
-                    string noticeBody = "You have a pending 8D Approval Request - " + scar_no + " by " + JabilSession.Current.employee_name + ". Click on <a href='8DApproval.aspx?scar_no=" + scar_no + "'>here</a> to view SCAR!";
-                    SqlCommand addNoticeWCM = new SqlCommand(@"INSERT INTO dbo.Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) 
-VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus)", con);
-                    addNoticeWCM.Parameters.AddWithValue("@NoticeFrom", JabilSession.Current.employee_name);
-                    addNoticeWCM.Parameters.AddWithValue("@NoticeTo", WCM_details.Employee_name);
-                    addNoticeWCM.Parameters.AddWithValue("@NoticeSubject", "8D Approval Request");
-                    addNoticeWCM.Parameters.AddWithValue("@NoticeBody", noticeBody);
-                    addNoticeWCM.Parameters.AddWithValue("@NoticeTimeStamp",currentDateTime);
-                    addNoticeWCM.Parameters.AddWithValue("@ReadStatus", "Unread");
+                    string noticeBody = "You have a pending 8D Approval Request - " + scar_no + " by " + JabilSession.Current.employee_name + ". Click link to view SCAR!<br/> <a href='8DApproval.aspx?scar_no=" + scar_no + "'>View SCAR</a> ";
+                    SqlCommand addNoticeWCM = new SqlCommand(@"INSERT INTO dbo.Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) 
+VALUES (@hash, @Notice_From, @Notice_To, @Notice_Subject, @Notice_Body, @Notice_Timestamp, @Read_Status)", con);
+                    string hashWCM = WCM_details.Employee_name + scar_no + noticeBody;
+                    hashWCM = Encryptor.MD5HASH(hashWCM);
+                    addNoticeWCM.Parameters.AddWithValue("@hash", hashWCM);
+                    addNoticeWCM.Parameters.AddWithValue("@Notice_From", JabilSession.Current.employee_name);
+                    addNoticeWCM.Parameters.AddWithValue("@Notice_To", WCM_details.Employee_name);
+                    addNoticeWCM.Parameters.AddWithValue("@Notice_Subject", "8D Approval Request");
+                    addNoticeWCM.Parameters.AddWithValue("@Notice_Body", noticeBody);
+                    addNoticeWCM.Parameters.AddWithValue("@Notice_TimeStamp",currentDateTime);
+                    addNoticeWCM.Parameters.AddWithValue("@Read_Status", "False");
                     addNoticeWCM.ExecuteNonQuery();
 
-                    SqlCommand addNoticeQM = new SqlCommand(@"INSERT INTO dbo.Notice (NoticeFrom, NoticeTo, NoticeSubject, NoticeBody, NoticeTimestamp, ReadStatus) 
-VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @ReadStatus)", con);
-                    addNoticeQM.Parameters.AddWithValue("@NoticeFrom", JabilSession.Current.employee_name);
-                    addNoticeQM.Parameters.AddWithValue("@NoticeTo", QM_details.Employee_name);
-                    addNoticeQM.Parameters.AddWithValue("@NoticeSubject", "8D Approval Request");
-                    addNoticeQM.Parameters.AddWithValue("@NoticeBody", noticeBody);
-                    addNoticeQM.Parameters.AddWithValue("@NoticeTimeStamp", currentDateTime);
-                    addNoticeQM.Parameters.AddWithValue("@ReadStatus", "Unread");
+                    SqlCommand addNoticeQM = new SqlCommand(@"INSERT INTO dbo.Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) 
+VALUES (@hash, @Notice_From, @Notice_To, @Notice_Subject, @Notice_Body, @Notice_Timestamp, @Read_Status)", con);
+                    string hashQM = QM_details.Employee_name + scar_no + noticeBody;
+                    hashQM = Encryptor.MD5HASH(hashQM);
+                    addNoticeQM.Parameters.AddWithValue("@hash", hashQM);
+                    addNoticeQM.Parameters.AddWithValue("@Notice_From", JabilSession.Current.employee_name);
+                    addNoticeQM.Parameters.AddWithValue("@Notice_To", QM_details.Employee_name);
+                    addNoticeQM.Parameters.AddWithValue("@Notice_Subject", "8D Approval Request");
+                    addNoticeQM.Parameters.AddWithValue("@Notice_Body", noticeBody);
+                    addNoticeQM.Parameters.AddWithValue("@Notice_TimeStamp", currentDateTime);
+                    addNoticeQM.Parameters.AddWithValue("@Read_Status", "False");
                     addNoticeQM.ExecuteNonQuery();
 
                     // SQL command to insert data into database
@@ -2358,7 +2479,8 @@ VALUES (@NoticeFrom, @NoticeTo, @NoticeSubject, @NoticeBody, @NoticeTimestamp, @
                     addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
 
                     addQM.ExecuteNonQuery();*/
-
+                    
+                    // Insert approval request into database
                     SqlCommand addApproval = new SqlCommand(@"INSERT INTO Approval_8D (name_WCM, name_QM, approval_status_WCM, approval_status_QM, comment_WCM, comment_QM, sent_date, sent_time, scar_no)
 VALUES (@name_WCM, @name_QM, @approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @sent_date, @sent_time, @scar_no)", con);
 
@@ -2391,13 +2513,13 @@ VALUES (@name_WCM, @name_QM, @approval_status_WCM, @approval_status_QM, @comment
                     addApproval.Parameters.AddWithValue("@scar_no", scar_no);
 
                     addApproval.ExecuteNonQuery();
-                    string message = "8D Approval Request has been successfully sent!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                    string message = "8D Approval Request for: " + scar_no + " has been successfully sent!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                 }
                 catch (Exception err)
                 {
-                    string message = "8D Approval Request cannot be sent! Please try again!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+                    string message = "8D Approval Request for: " + scar_no + " cannot be sent! Please try again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                 }
                 finally
                 {
@@ -2427,7 +2549,7 @@ VALUES (@name_WCM, @name_QM, @approval_status_WCM, @approval_status_QM, @comment
         string FileToDelete = Server.MapPath(@"~\Attachments\" + cell.Text);
         File.Delete(FileToDelete);
         string message = cell.Text + " has been deleted!";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "ShowMessage('" + scar_no + "','" + message + "')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
     }
 
 
@@ -2702,16 +2824,28 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     update.Parameters.AddWithValue("@scar_no", scar_no);
                     update.Parameters.AddWithValue("@status", "submit");
                     update.ExecuteNonQuery();
+
+                    SqlCommand update_request = new SqlCommand(@"UPDATE dbo.SCAR_Request SET modified_by = @modified_by, last_modified = @last_modified, 
+pending_action = @pending_action WHERE scar_no = @scar_no", conn);
+
+                    update_request.Parameters.AddWithValue("@scar_no", scar_no);
+                    update_request.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                    DateTime currentDateTime = DateTime.Now;
+                    update_request.Parameters.AddWithValue("@last_modified", currentDateTime);
+                    update_request.Parameters.AddWithValue("@pending_action", "Awaiting Client Response");
+
+                    update_request.ExecuteNonQuery();
+
                 }
 
-                ProcessedMessage.Text = "SCAR Response has been successfully sent!";
-                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                string message = "SCAR Response for : " + scar_no + "  has been successfully sent!";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
             }
         }
         catch (Exception err)
         {
-            ProcessedMessage.Text = "SCAR Response cannot be sent! Please try again!" + err.Message;
-            ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+            string message = "SCAR Response for : " + scar_no + "  cannot be sent! Please Try Again";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
         }
 
     }
@@ -2729,9 +2863,12 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                 try
                 {
                     conn.Open();
-                    SqlCommand update = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_status = @scar_status WHERE scar_no = @scar_no", conn);
+                    SqlCommand update = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_status = @scar_status, modified_by = @modified_by, last_modified = @last_modified WHERE scar_no = @scar_no", conn);
                     update.Parameters.AddWithValue("@scar_no", scar_no);
                     update.Parameters.AddWithValue("@scar_status", SCAR_Status);
+                    update.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                    DateTime currentDateTime = DateTime.Now;
+                    update.Parameters.AddWithValue("@last_modified", currentDateTime);
                     update.ExecuteNonQuery();
                     if(SCAR_Status.Equals("SCAR Type 4 Accepted"))
                     {
@@ -2750,21 +2887,21 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
                     }
                     else
                     {
-                        ProcessedMessage.Text = "SCAR Status has been updated to " + SCAR_Status + "!";
-                        ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                        string message = "SCAR Status for : " + scar_no + "  has been updated to " + SCAR_Status;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                     }  
                 }
                 catch (Exception err)
                 {
-                    ProcessedMessage.Text = "SCAR Status cannot be changed! Please try again!" + err.Message;
-                    ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                    string message = "SCAR Status for : " + scar_no + "  cannot be changed! Please try again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                 } 
             }
         }
         
     }
 
-
+    // Display Attachments related to SCAR
     protected void Display_Attachments_Grid_View(string scar_no)
     {
         if (!IsPostBack)
@@ -2784,7 +2921,8 @@ status, scar_no FROM dbo.SCAR_Response WHERE scar_no = @scar_no", conn);
         }
 
     }
-
+    
+    // Sorts Attachment Grid View
     protected void AttachmentsGridView_Sorting(object sender, GridViewSortEventArgs e)
     {
         string scar_no = Request.QueryString["scar_no"];
@@ -2893,6 +3031,7 @@ FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
         
     }
 
+    // Closes the SCAR 
     protected void Close_SCAR_Issue(string scar_no)
     {
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
@@ -2901,71 +3040,74 @@ FROM dbo.Approval_8D WHERE scar_no = @scar_no", conn);
             try
             {
                 conn.Open();
-                SqlCommand update = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_stage = @scar_status WHERE scar_no = @scar_no", conn);
+                SqlCommand update = new SqlCommand(@"UPDATE dbo.SCAR_Request SET scar_status = @scar_status, modified_by = @modified_by, last_modified = @last_modified WHERE scar_no = @scar_no", conn);
                 update.Parameters.AddWithValue("@scar_no", scar_no);
                 update.Parameters.AddWithValue("@scar_status", "Closed SCAR");
+                update.Parameters.AddWithValue("@modified_by", JabilSession.Current.employee_name);
+                DateTime currentDateTime = DateTime.Now;
+                update.Parameters.AddWithValue("@last_modified", currentDateTime);
                 update.ExecuteNonQuery();
-                ProcessedMessage.Text = "SCAR Issue has been closed!";
-                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("blue");
+                string message = scar_no + " has been closed!";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
                 lstCurrentStatus.Enabled = false;
             }
             catch (Exception err)
             {
-                ProcessedMessage.Text = "SCAR Issue cannot be closed! Please try again!";
-                ProcessedMessage.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
+                string message = scar_no + " cannot be closed! Please try Again";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + scar_no + "', '" + message + "')", true);
             }
         }
     }
 
+
+    // Check if the approval checkbox is checked or unchecked
     protected void Approval_CheckedChanged(object sender, EventArgs e)
     {
-
-            if (chk8Dapproval.Checked)
+        if (chk8Dapproval.Checked)
+        {
+            string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connect))
             {
-                string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
-                using (SqlConnection conn = new SqlConnection(connect))
-                {
 
-                    SqlCommand selectWCM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
-                    conn.Open();
-                    selectWCM.Parameters.AddWithValue("employee_position", "Work Cell Manager");
+                SqlCommand selectWCM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
+                conn.Open();
+                selectWCM.Parameters.AddWithValue("employee_position", "Work Cell Manager");
 
-                    lstWCM.DataSource = selectWCM.ExecuteReader();
-                    lstWCM.DataTextField = "employee_name";
-                    lstWCM.DataValueField = "employee_ID";
-                    lstWCM.DataBind();
-                    lstWCM.Items.Insert(0, new ListItem("Please Select WCM", "0"));
-                    lstWCM.Items.Insert(1, new ListItem("N/A", "N/A"));
+                lstWCM.DataSource = selectWCM.ExecuteReader();
+                lstWCM.DataTextField = "employee_name";
+                lstWCM.DataValueField = "employee_ID";
+                lstWCM.DataBind();
+                lstWCM.Items.Insert(0, new ListItem("Please Select WCM", "0"));
+                lstWCM.Items.Insert(1, new ListItem("N/A", "N/A"));
 
-                    conn.Close();
-                }
-                
-                using (SqlConnection conn = new SqlConnection(connect))
-                {
-                    SqlCommand selectQM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
-                    conn.Open();
-                    selectQM.Parameters.AddWithValue("employee_position", "Quality Manager");
-
-                    lstQM.DataSource = selectQM.ExecuteReader();
-                    lstQM.DataTextField = "employee_name";
-                    lstQM.DataValueField = "employee_ID";
-                    lstQM.DataBind();
-                    lstQM.Items.Insert(0, new ListItem("Please Select QM", "0"));
-                    lstQM.Items.Insert(1, new ListItem("N/A", "N/A"));
-                }
-
-                lstWCM.Visible = true;
-                lstQM.Visible = true;
-                lblWCM.Visible = true;
-                lblQM.Visible = true;
+                conn.Close();
             }
-            else
+
+            using (SqlConnection conn = new SqlConnection(connect))
             {
-                lblWCM.Visible = false;
-                lstWCM.Visible = false;
-                lblQM.Visible = false;
-                lstQM.Visible = false;
-            }    
-           
+                SqlCommand selectQM = new SqlCommand("SELECT employee_ID, employee_name, employee_position FROM dbo.Employee WHERE employee_position = @employee_position", conn);
+                conn.Open();
+                selectQM.Parameters.AddWithValue("employee_position", "Quality Manager");
+
+                lstQM.DataSource = selectQM.ExecuteReader();
+                lstQM.DataTextField = "employee_name";
+                lstQM.DataValueField = "employee_ID";
+                lstQM.DataBind();
+                lstQM.Items.Insert(0, new ListItem("Please Select QM", "0"));
+                lstQM.Items.Insert(1, new ListItem("N/A", "N/A"));
+            }
+
+            lstWCM.Visible = true;
+            lstQM.Visible = true;
+            lblWCM.Visible = true;
+            lblQM.Visible = true;
+        }
+        else
+        {
+            lblWCM.Visible = false;
+            lstWCM.Visible = false;
+            lblQM.Visible = false;
+            lstQM.Visible = false;
+        }    
     }
 }

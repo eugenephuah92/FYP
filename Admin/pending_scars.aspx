@@ -43,14 +43,16 @@
                                        <Columns>
                                            <asp:TemplateField HeaderText="CAR Number" SortExpression="CAR Number">
                                             <ItemTemplate>
-                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("view_scar_record.aspx?scar_no={0}", Eval("CAR Number")) %>'></asp:HyperLink>
+                                           <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# String.Format("scars_forms.aspx?scar_no={0}", Eval("CAR Number")) %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
-                                           <asp:BoundField HeaderText="Defect Mode" DataField="Defect Mode" SortExpression="Defect Mode"/>
                                            <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
+                                           <asp:BoundField HeaderText="Current Progress" DataField="Current Progress" SortExpression="Current Progress"/>
                                            <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
                                            <asp:BoundField HeaderText="Level of Escalation" DataField="Level of Escalation"/>
-                                           <asp:BoundField HeaderText="Days Till Next Escalation" DataField="Days Till Next Escalation"/>
+                                           <asp:BoundField HeaderText="Escalation Date" DataField="Escalation Date"/>
+                                           <asp:BoundField HeaderText="Modified By" DataField="Modified By"/>
+                                           <asp:BoundField HeaderText="Last Modified" DataField="Last Modified"/>
                                        </Columns>
                                          
                                        </asp:GridView>

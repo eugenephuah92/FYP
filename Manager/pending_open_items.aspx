@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending Open Items" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_pending_open_items" Codebehind="~/Manager/pending_open_items.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Pending Open Items" Language="C#" MasterPageFile="~/Manager.Site.Master" EnableEventValidation="false" AutoEventWireup="true" Inherits="Manager_pending_open_items" Codebehind="~/Manager/pending_open_items.aspx.cs" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Pending Open Items Page for managers: Displays the pending open items for tracking -->
@@ -11,13 +11,12 @@
                 </div>
                     <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                         <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
-                        <asp:GridView ID="displayPendingOpenItems" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                        <asp:GridView ID="displayPendingOpenItems" runat="server" BorderWidth="2" AlternatingRowStyle-BorderWidth="2"  OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
                                        <Columns>
                                            <asp:BoundField HeaderText="CAR Number" DataField="CAR Number"  />
                                            <asp:TemplateField HeaderText="S2 - Containment Action">
                                             <ItemTemplate>
-                                               
-                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackContainmentAction" Checked='<%#Convert.ToBoolean(Eval("S2 Track Containment Action"))%>' />
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackContainmentAction" Text="Track Item" Checked='<%#Convert.ToBoolean(Eval("S2 Track Containment Action"))%>' />
                                                <br />
                                                <asp:Label runat="server" ID="lbls21ContainmentAction" Text='<%#Eval("S21 Containment Action")%>'/>
                                                <br />
@@ -28,8 +27,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="S5 - Corrective Action">
                                             <ItemTemplate>
-                                               
-                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackCorrectiveAction" Checked='<%#Convert.ToBoolean(Eval("S5 Track Corrective Action"))%>' />
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackCorrectiveAction" Text="Track Item" Checked='<%#Convert.ToBoolean(Eval("S5 Track Corrective Action"))%>' />
                                                <br />
                                                <asp:Label runat="server" ID="lbls51CorrectiveAction" Text='<%#Eval("S51 Corrective Action")%>'/>
                                                <br />
@@ -40,8 +38,7 @@
                                             </asp:TemplateField>
                                            <asp:TemplateField HeaderText="S6 - Permanent Corrective Action">
                                             <ItemTemplate>
-                                               
-                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackPermanentCorrectiveAction" Checked='<%#Convert.ToBoolean(Eval("S6 Track Permanent Corrective Action"))%>' />
+                                               <asp:CheckBox runat="server" Enabled="false" ID="chkTrackPermanentCorrectiveAction" Text="Track Item" Checked='<%#Convert.ToBoolean(Eval("S6 Track Permanent Corrective Action"))%>' />
                                                <br />
                                                <asp:Label runat="server" ID="lbls61PermanentCorrectiveAction" Text='<%#Eval("S61 Permanent Corrective Action")%>'/>
                                                <br />
@@ -56,8 +53,8 @@
                         
                         <div class="form-group" style="text-align:center">
                             <div>
-                                <asp:Button CssClass="btn btn-success" Text="Export" runat="server" />
-                                <asp:Button CssClass="btn btn-success" Text="Print" runat="server" />
+                                <asp:Button CssClass="btn btn-success" Text="Export" runat="server" OnClick="Export_Items"/>
+                                <asp:Button CssClass="btn btn-primary" Text="Print" OnClientClick="print()" runat="server" />
                             </div>
                         </div>
                              
@@ -66,4 +63,16 @@
         </div><!--/.col-md-12-->
     </div>
 </div>
+    <!-- Print gridview -->
+    <script type="text/javascript">
+        function print() {
+            var prtContent = document.getElementById('<%= displayPendingOpenItems.ClientID %>');
+            var printWindow = window.open('', '', 'left=100,top=100,width=0,height=0,resizable=1');
+            printWindow.document.write(prtContent.outerHTML);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+    </script>
 </asp:Content>

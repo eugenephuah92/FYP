@@ -9,6 +9,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/theme-light.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" />
 
 
     <!--[if lt IE 9]>
@@ -25,10 +26,12 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Scripts>
             <%--Framework scripts--%>
-            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="Scripts/jquery-1.11.0.min.js" />
-            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="Scripts/bootstrap.min.js" />
-            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="Scripts/app.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="Scripts/select2.min.js" />
+            <asp:ScriptReference Path="Scripts/jquery-1.11.0.min.js" />
+            <asp:ScriptReference Path="Scripts/bootstrap.min.js" />
+            <asp:ScriptReference Path="Scripts/app.js" />
+            <asp:ScriptReference Path="Scripts/MaxLength.min.js" />
+            <asp:ScriptReference Path="Scripts/select2.min.js" />
+            <asp:ScriptReference Path="Scripts/jquery-ui.js" />
             <%--Site scripts--%>
             
         </Scripts>
@@ -41,12 +44,13 @@
             Auto SCAR & TAT System
         <div class="form-group clearfix">
                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <asp:TextBox ID="txtEmail" CssClass="form-control tb" placeholder="Email Address" runat="server" />
+                    <asp:TextBox ID="txtEmail" CssClass="form-control tb" placeholder="Email Address" runat="server" TextMode="Email"/>
+                    <asp:RequiredFieldValidator ID="vldEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email Address is Required!" />
                 </div>
         </div>
         <div class="form-group clearfix">
             <p class="small text-muted pull-left"><a href="index.aspx"><i class="fa fa-lock"></i>&nbsp; Back to Login</a></p>
-            <asp:Button ID="btnSubmit" CssClass="btn btn-success pull-right" Text="Submit" runat="server" /> 
+            <asp:Button ID="btnSubmit" CssClass="btn btn-success pull-right" OnClick="Reset_Password" Text="Submit" runat="server" /> 
         </div>
 
     </div><!--/.col-md-4-->
@@ -59,10 +63,57 @@
     </footer>
 </body>
 
+<script type="text/javascript">
+    // For Confirmation
+    $(function () {
+
+        $("#<%=btnSubmit.ClientID%>").on("click", function (event) {
+             event.preventDefault();
+             $("#messageBox").dialog({
+                 resizable: false,
+                 title: "Password Reset Confirmation",
+                 open: function () {
+                     var markup = "Are you sure you want to reset your password?";
+                     $(this).html(markup);
+                 },
+                 height: 200,
+
+                 modal: true,
+                 buttons: {
+                     Ok: function () {
+                         $(this).dialog("close");
+                         __doPostBack($('#<%= btnSubmit.ClientID %>').attr('name'), '');
+                         },
+                         Cancel: function () {
+                             $(this).dialog("close");
+
+                         }
+                     }
+                 });
+         });
+     });
 
 
-<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+         // For Alert
+         function messageBox(message) {
+             $("#messageBox").dialog({
+                 modal: true,
+                 height: 300,
+                 width: 500,
+                 title: "Reset Password Status",
+                 open: function () {
+                     var markup = message;
+                     $(this).html(markup);
+                 },
+                 buttons: {
+                     Close: function () {
+                         $(this).dialog("close");
+                     }
+                 },
 
+             });
+             return false;
+         }
+
+</script>
 </html>

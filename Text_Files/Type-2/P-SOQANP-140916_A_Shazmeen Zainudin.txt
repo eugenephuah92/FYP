@@ -1,7 +1,7 @@
 ------------------------------------------------------------------
-EMG CARE Supplier Corrective Action Request (SCAR)
+EMG CARE Supplier Corrective Action Request (SCAR)               
 ------------------------------------------------------------------
-Section1: (For Reference Only)
+Section1: (For Reference Only)                                    
 ==================================================================
 Car No: P-SOQANP-140916
 Car Revision: A
@@ -10,14 +10,14 @@ Pre Alert: Yes
 Related CAR No: P-IOQANP-140909
 Related CAR Rev: A
 Originator: Hairul Azam bin Hassan
-Recurrence (Ref.No): N/A
+Recurrence (Ref.No.): 
 ------------------------------------------------------------------
 
 Supplier Contact: Shazmeen Zainudin
 Supplier Email: shazmeen_zainudin@jabil.com
 ------------------------------------------------------------------
 
-Issued Date: 2014-03-13
+Issued Date: 13 Mar 2014
 Originator Department: WBU-CTD
 Originator Contact: 6807891
 ------------------------------------------------------------------
@@ -34,110 +34,147 @@ Non-Conformity Reported: Wrong orientation of BNC pin. Unit serial number MY4651
 Reject Reason for Previous Revision: N/A
 
 ------------------------------------------------------------------
-Expected Date Close: 2014-04-03
+Expected Date Close: 03 Apr 2014
 ------------------------------------------------------------------
 
+==================================================================
 
-Section2
+
+Section2: (To Be Filled In By Supplier)                           
 ==================================================================
 ------------------------------------------------------------------
-=========================
-==*Root Cause Category*==
-=========================
-Agilent and CM joint issue - Material
+=======================                                           
+==*Root Cause Option*==                                           
+=======================                                           
+(key in Y after * to indicate the option selected-ONE OPTION ONLY)
+!RC 1=Agilent and CM joint issue – Material*
+!RC 2=CM (Product) - Assembly*
+!RC 3=CM (Product) - Documentation*
+!RC 4=CM (Product) - Material*
+!RC 5=CM (Product) - Process*
+!RC 6=CM (Product) - Testing*
+!RC 7=Customer - Application*
+!RC 8=Customer - Forwarder*
+!RC 9=Customer - Misunderstanding*
+!RC 10=Design - Hardware*
+!RC 11=Design - Software*
+!RC 12=Design - Specification*
+!RC 13=Documentation - BCL / Packing List*
+!RC 14=Documentation - BOM*
+!RC 15=Documentation - ECO*
+!RC 16=Documentation - User Guide / Operation Manual*
+!RC 17=Electrical Overstress (EOS)*
+!RC 18=Electrostatic Discharge (ESD)*
+!RC 19=Field - CCC (Order Related)*
+!RC 20=Field - Sales Process*
+!RC 21=Field - Support Process*
+!RC 22=Logistics - Forwarder*
+!RC 23=Logistics - Shipping*
+!RC 24=Logistics - Warehouse*
+!RC 25=Marketing - Manual / Service Guide Documentation*
+!RC 26=Marketing - Product Option*
+!RC 27=No Trouble Found - Functional failure*
+!RC 28=No Trouble Found - Missing items*
+!RC 29=No Trouble Found - Non Functional failure*
+!RC 30=No Trouble Found - Specification*
+!RC 31=ODM - Assembly*
+!RC 32=ODM - Documentation*
+!RC 33=ODM - Material*
+!RC 34=ODM - Process*
+!RC 35=ODM - Testing*
+!RC 36=Others*
+!RC 37=Production - Assembly*
+!RC 38=Production - Machine*
+!RC 39=Production - Micro*
+!RC 40=Production - Micro (CM)*
+!RC 41=Production - MTA*
+!RC 42=Production - MTA (CM)*
+!RC 43=Production - Planning*
+!RC 44=Production - Process*
+!RC 45=Production - Test*
+!RC 46=Supplier - Documentation*
+!RC 47=Supplier - Material*
+!RC 48=Supplier - Process*
+!RC 49=Supplier - Testing*
+!RC 50=Supplier – Assembly*
 ------------------------------------------------------------------
 
-
-====================
-*S0-Overall Summary*
-====================
-**S0-Overall Summary = test
+====================                                            
+*S0-Overall Summary* (COMPULSORY-Max 1000 chars)                
+====================                                            
+**S0-Overall Summary~
 
 ------------------------------------------------------------------
-=========================
-*S1-Problem Verification*
-=========================
-**S1-Problem Verification = test
+=========================                                       
+*S1-Problem Verification*(COMPULSORY-Max 1000 chars)            
+=========================                                       
+**S1-Problem Verification~
 
-
-==*Status*==
-Valid
+==*Status*==                                                    
+(key in Y after * to indicate the option selected-ONE OPTION ONLY)
+!PV 1=Valid*
+!PV 2=Invalid*
 ------------------------------------------------------------------
 
-=======================
-*S2-Containment Action*
-=======================
-**S21-Containment Action = N/A
+=======================                                         
+*S2-Containment Action*(COMPULSORY-Max 1000 chars)              
+=======================                                         
+**S21-Containment Action~
+**S22-Implementation Date~
+**S23-Responsible Person~
+**S24-Containment Result~
 
-**S22-Implementation Date = 1900-01-01
-
-**S23-Responsible Person = N/A
-
-**S24-Containment Result = N/A
-
-
-==*Screening Area*==
-N/A
+==*Screening Area*==                                            
+(key in Y after * to indicate the options selected-CAN BE MULTIPLE OPTIONS)
+!SA 1=Production*
+!SA 2=FGI*
+!SA 3=Remaining units with customers*
+!SA 4=N/A*
+!SA 5=Units in Field (with other customers)*
 ------------------------------------------------------------------
 
-
-=====================
-*S3-Failure Analysis*
-=====================
-**S31-Failure Analysis = 0
-
-**S32-Failure Analysis Results = N/A
+=====================                                           
+*S3-Failure Analysis*(COMPULSORY-Max 1000 chars)                
+=====================                                           
+**S31-Failure Analysis (Visual / Electrical / Physical)~
+**S32-Failure Analysis Results~
 ------------------------------------------------------------------
 
-
-===============
-*S4-Root Cause*
-===============
-**S4 =
-Man = N/A
-
-Method = N/A
-
-Material = N/A
-
-Machine = N/A
+===============                                                 
+*S4-Root Cause*(COMPULSORY-Max 1000 chars)                      
+===============                                                 
+**S4~
+Man-
+Method-
+Material-
+Machine-
 ------------------------------------------------------------------
 
-
-======================
-*S5-Corrective Action*
-======================
-**S51-Corrective Action = N/A
-
-**S52-Implementation Date = 1900-01-01
-
-**S53-Responsible Person = N/A
+======================                                          
+*S5-Corrective Action*(COMPULSORY-Max 1000 chars)               
+======================                                          
+**S51-Corrective Action~
+**S52-Implementation Date~
+**S53-Responsible Person~
 ------------------------------------------------------------------
 
-
-================================
-*S6-Permanent Corrective Action*
-================================
-**S61-Permanent Corrective Action = s61_permanent_corrective_action
-
-**S62-Implementation Date = 1900-01-01
-
-**S63-Responsible Person = N/A
+================================                                
+*S6-Permanent Corrective Action*(COMPULSORY-Max 1000 chars)     
+================================                                
+**S61-Permanent Corrective Action~
+**S62-Implementation Date~
+**S63-Responsible Person~
 ------------------------------------------------------------------
 
-
-===============================================
-*S7-Verify Effectiveness of Corrective Actions*
-===============================================
-**S71-Verify Effectiveness of Corrective Actions = N/A
-
-**S72-Implementation Date(Start of Monitoring) = 1900-01-01
-
-**S73-Responsible Person = N/A
-
-**S74-Verifier = N/A
-
-**S75-Verifier Email = N/A
+===============================================                 
+*S7-Verify Effectiveness of Corrective Actions*(COMPULSORY-Max 1000 chars)       
+IMPORTANT : Verifier Email MUST be a VALID Email address. Failure to do so will result in this CAR being rejected.
+===============================================                 
+**S71-Verify Effectiveness of Corrective Actions~
+**S72-Implementation Date(Start of Monitoring)~
+**S73-Responsible Person~
+**S74-Verifier~
+**S75-Verifier Email~
 ------------------------------------------------------------------
 
 

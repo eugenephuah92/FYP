@@ -42,10 +42,12 @@
                                            <asp:HyperLink ID="link" runat="server" Text='<%#Eval("CAR Number") %>' NavigateUrl='<%# Eval("CAR Number","view_scar_record.aspx?scar_no={0}") %>'></asp:HyperLink>
                                             </ItemTemplate>
                                             </asp:TemplateField>
-                                           <asp:BoundField HeaderText="Defect Mode" DataField="Defect Mode" SortExpression="Defect Mode"/>
                                            
                                            <asp:BoundField HeaderText="SCAR Type" DataField="SCAR Type" SortExpression="SCAR Type"/>
                                            <asp:BoundField HeaderText="Creation Date" DataField="Creation Date"/>
+                                           <asp:BoundField HeaderText="Completion Date" DataField="Completion Date"/>
+                                           <asp:BoundField HeaderText="Modified By" DataField="Modified By"/>
+                                           <asp:BoundField HeaderText="Last Modified" DataField="Last Modified"/>
                                        </Columns>
                                    
                                        </asp:GridView>
