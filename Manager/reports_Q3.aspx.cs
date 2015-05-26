@@ -116,7 +116,7 @@ public partial class Manager_reports_Q3 : System.Web.UI.Page
         txtStatus.Text = "";
     }
 
-    protected void btnAdd_Click(object sender, EventArgs e)
+    protected void btnAdd_Click(object sender, EventArgs e) //Add data to gridview
     {
         if (Page.IsValid)
         {
@@ -129,7 +129,7 @@ public partial class Manager_reports_Q3 : System.Web.UI.Page
         ClearFields();
     }
 
-    protected void btnClear_Click(object sender, EventArgs e)
+    protected void btnClear_Click(object sender, EventArgs e) //Clear all fields
     {
         ClearFields();
     }

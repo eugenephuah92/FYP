@@ -34,6 +34,9 @@
                                                 <asp:CompareValidator ID="vldComparePassword" runat="server" ControlToCompare="txtNewPassword" ValidationGroup="Password" ControlToValidate="txtConfirmNewPassword" ErrorMessage="Passwords do not match!" ForeColor="Red" />
                                             </div>
                                             <br /><br />
+                                            <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-10 col-lg-offset-2">

@@ -30,22 +30,40 @@ public partial class Manager_reports_Q1 {
     protected global::System.Web.UI.WebControls.DropDownList lstGenerateOptions;
     
     /// <summary>
-    /// lblYearOptions control.
+    /// lblYearOptions1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblYearOptions;
+    protected global::System.Web.UI.WebControls.Label lblYearOptions1;
     
     /// <summary>
-    /// lstYearOptions control.
+    /// lstYearOptions1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstYearOptions;
+    protected global::System.Web.UI.WebControls.DropDownList lstYearOptions1;
+    
+    /// <summary>
+    /// lblYearOptions2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblYearOptions2;
+    
+    /// <summary>
+    /// lstYearOptions2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstYearOptions2;
     
     /// <summary>
     /// btnGenerateYear control.
@@ -120,6 +138,15 @@ public partial class Manager_reports_Q1 {
     protected global::System.Web.UI.WebControls.Button btnGenerateMonth;
     
     /// <summary>
+    /// lblNote1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblNote1;
+    
+    /// <summary>
     /// lblStartDate control.
     /// </summary>
     /// <remarks>
@@ -147,6 +174,15 @@ public partial class Manager_reports_Q1 {
     protected global::System.Web.UI.WebControls.Button btnGenerateWW;
     
     /// <summary>
+    /// Report4Q control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl Report4Q;
+    
+    /// <summary>
     /// UpdatePanel1 control.
     /// </summary>
     /// <remarks>
@@ -165,13 +201,13 @@ public partial class Manager_reports_Q1 {
     protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_Q1;
     
     /// <summary>
-    /// PlaceHolder1 control.
+    /// GridView1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
+    protected global::System.Web.UI.WebControls.GridView GridView1;
     
     /// <summary>
     /// UpdatePanel2 control.
@@ -210,20 +246,11 @@ public partial class Manager_reports_Q1 {
     protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_Q4;
     
     /// <summary>
-    /// btnExport_Q1 control.
+    /// btnExport control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnExport_Q1;
-    
-    /// <summary>
-    /// btnPrint_Q1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnPrint_Q1;
+    protected global::System.Web.UI.WebControls.Button btnExport;
 }

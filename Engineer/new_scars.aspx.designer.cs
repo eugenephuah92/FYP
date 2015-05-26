@@ -12,22 +12,13 @@
 public partial class Engineer_new_scars {
     
     /// <summary>
-    /// display10records control.
+    /// lstPageSize control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton display10records;
-    
-    /// <summary>
-    /// display50records control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton display50records;
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
     
     /// <summary>
     /// lstFilter control.
@@ -39,13 +30,31 @@ public partial class Engineer_new_scars {
     protected global::System.Web.UI.WebControls.DropDownList lstFilter;
     
     /// <summary>
-    /// searchTxt control.
+    /// RequiredFieldValidatorFilter control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFilter;
+    
+    /// <summary>
+    /// txtSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch;
+    
+    /// <summary>
+    /// RequiredFieldValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
     /// btnSearch control.
@@ -54,16 +63,52 @@ public partial class Engineer_new_scars {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// lblNoRows control.
+    /// btnClear control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNoRows;
+    protected global::System.Web.UI.WebControls.Button btnClear;
+    
+    /// <summary>
+    /// lstFilter1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter1;
+    
+    /// <summary>
+    /// txtSearch1 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch1;
+    
+    /// <summary>
+    /// lstFilter2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter2;
+    
+    /// <summary>
+    /// txtSearch2 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch2;
     
     /// <summary>
     /// displayNewSCAR control.

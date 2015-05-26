@@ -21,15 +21,6 @@ public partial class Admin_view_defect_category {
     protected global::System.Web.UI.WebControls.GridView GridViewDFC;
     
     /// <summary>
-    /// SqlDataSource1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-    
-    /// <summary>
     /// GridViewDFG control.
     /// </summary>
     /// <remarks>
@@ -37,13 +28,4 @@ public partial class Admin_view_defect_category {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView GridViewDFG;
-    
-    /// <summary>
-    /// SqlDataSource2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
 }

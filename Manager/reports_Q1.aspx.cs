@@ -20,14 +20,14 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
 {
     public double[] test { get; set; }
     protected double[] totalRecord { get; set; }
-    
+
     struct Case
     {
         public DateTime issued_date;
         public string status;
         public string defect_category;
     };
-    
+
     DataTable dt, dt1;  // Populating a DataTable from database.
     Case[] record;
     string[] defect_category;
@@ -35,11 +35,10 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //DateTime joinDate;
         Chart_Q1.DataBind();
         getSCARRecord();
         getDefectCategoryRecord();
-        getGenerateOptions();        
+        getGenerateOptions();
     }
 
     // Get the record details 
@@ -48,6 +47,7 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         dt = this.GetSCAR();
         record = new Case[dt.Rows.Count];
         int i = 0;
+
         foreach (DataRow row in dt.Rows)
         {
             record[i].issued_date = DateTime.Parse(row["issued_date"].ToString());
@@ -57,18 +57,20 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         }
     }
 
-    // to store all the defect categories into the string array
+    // Store all the defect categories into the string array
     protected void getDefectCategoryRecord()
     {
         dt1 = this.GetDefectCategory();
         defect_category = new string[dt1.Rows.Count];
         int i = 0;
+
         foreach (DataRow row in dt1.Rows)
         {
             defect_category[i] = row["defect_category"].ToString();
             i++;
         }
     }
+
     // Options to generate the graph based on user's selection
     protected void getGenerateOptions()
     {
@@ -80,160 +82,201 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         }
 
         getYearOptions();
-        getMonthOptions();
-        getWWOptions();
+        //getMonthOptions();
+        //getWWOptions();
     }
 
     protected void getYearOptions()
     {
         if (lstGenerateOptions.SelectedItem.ToString() == "Yearly")
         {
-            lblYearOptions.Visible = true;
-            lstYearOptions.Visible = true;
-            btnGenerateYear.Visible = true;
+            monthFieldNotVisible();
+            wwFieldNotVisible();
+            yearFieldVisible();
 
-            // Add selection items into another dropdown list
-            lstYearOptions.Items.Add("1995"); lstYearOptions.Items.Add("1996"); lstYearOptions.Items.Add("1997");
-            lstYearOptions.Items.Add("1998"); lstYearOptions.Items.Add("1999"); lstYearOptions.Items.Add("2000");
-            lstYearOptions.Items.Add("2001"); lstYearOptions.Items.Add("2002"); lstYearOptions.Items.Add("2003");
-            lstYearOptions.Items.Add("2004"); lstYearOptions.Items.Add("2005"); lstYearOptions.Items.Add("2006");
-            lstYearOptions.Items.Add("2007"); lstYearOptions.Items.Add("2008"); lstYearOptions.Items.Add("2009");
-            lstYearOptions.Items.Add("2010"); lstYearOptions.Items.Add("2011"); lstYearOptions.Items.Add("2012");
-            lstYearOptions.Items.Add("2013"); lstYearOptions.Items.Add("2014"); lstYearOptions.Items.Add("2015");
+            for (int i = 4; i >= 0; i--)
+            {
+                lstYearOptions1.Items.Add((DateTime.Now.Year - i).ToString());  // Add selection items into dropdown list 1 (from year)
+                lstYearOptions2.Items.Add((DateTime.Now.Year - i).ToString());  // Add selection items into dropdown list 2 (to year)
+            }
         }
-        else 
+        else if (lstGenerateOptions.SelectedItem.ToString() == "Monthly")
         {
-            lblYearOptions.Visible = false;
-            lstYearOptions.Visible = false;
-            btnGenerateYear.Visible = false;
+            yearFieldNotVisible();
+            wwFieldNotVisible();
+            monthFieldVisible();
+
+            for (int i = 4; i >= 0; i--)
+            {
+                lstMonthYear.Items.Add((DateTime.Now.Year - i).ToString());
+            }
+        }
+        else if (lstGenerateOptions.SelectedItem.ToString() == "Working Week")
+        {
+            yearFieldNotVisible();
+            monthFieldNotVisible();
+            wwFieldVisible();
+        }
+        else
+        {
+            yearFieldNotVisible();
+            monthFieldNotVisible();
+            wwFieldNotVisible();
         }
     }
 
-    protected void generateYear()
+    protected void yearFieldVisible()
     {
-        int selectedYear = int.Parse(lstYearOptions.SelectedItem.ToString());
-        int diff = DateTime.Now.Year - selectedYear; // To calculate the number of years of data to display
+        lblYearOptions1.Visible = true;
+        lblYearOptions2.Visible = true;
+        lstYearOptions1.Visible = true;
+        lstYearOptions2.Visible = true;
+        btnGenerateYear.Visible = true;
+    }
+
+    protected void yearFieldNotVisible()
+    {
+        lblYearOptions1.Visible = false;
+        lblYearOptions2.Visible = false;
+        lstYearOptions1.Visible = false;
+        lstYearOptions2.Visible = false;
+        btnGenerateYear.Visible = false;
+    }
+
+    protected void monthFieldVisible()
+    {
+        lblMonthOptions1.Visible = true;
+        lblMonthOptions2.Visible = true;
+        lstMonthOptions1.Visible = true;
+        lstMonthOptions2.Visible = true;
+        lblMonthYear.Visible = true;
+        lstMonthYear.Visible = true;
+        btnGenerateMonth.Visible = true;
+    }
+
+    protected void monthFieldNotVisible()
+    {
+        lblMonthOptions1.Visible = false;
+        lblMonthOptions2.Visible = false;
+        lstMonthOptions1.Visible = false;
+        lstMonthOptions2.Visible = false;
+        lblMonthYear.Visible = false;
+        lstMonthYear.Visible = false;
+        btnGenerateMonth.Visible = false;
+    }
+
+    protected void wwFieldVisible()
+    {
+        lblNote1.Visible = true;
+        lblStartDate.Visible = true;
+        cldStartDate.Visible = true;
+        btnGenerateWW.Visible = true;
+    }
+
+    protected void wwFieldNotVisible()
+    {
+        lblNote1.Visible = false;
+        lblStartDate.Visible = false;
+        cldStartDate.Visible = false;
+        btnGenerateWW.Visible = false;
+    }
+
+    protected void generateQ1Year()
+    {
+        int selectedFromYear = int.Parse(lstYearOptions1.SelectedItem.ToString());
+        int selectedToYear = int.Parse(lstYearOptions2.SelectedItem.ToString());
+        int diff = selectedToYear - selectedFromYear; // To calculate the number of years of data to display
         int[] count1 = new int[2];
         int[,] ww_count = new int[2, diff + 1]; // 2-D array to store total number of open/closed based on WW
 
         for (int r = 0; r < dt.Rows.Count; r++)
         {
-            if(record[r].issued_date.Year >= selectedYear)
+            if (record[r].issued_date.Year >= selectedFromYear && record[r].issued_date.Year <= selectedToYear)
             {
-                
                 if (record[r].status == "Closed")
                 {
-                    ww_count[1, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Closed SCAR according to their respective work weeks
+                    ww_count[1, selectedToYear - record[r].issued_date.Year]++; // Counting the total Closed SCAR according to their respective work weeks
                 }
                 else
                 {
-                    ww_count[0, DateTime.Now.Year - record[r].issued_date.Year]++; // Counting the total Open SCAR according to their respective work weeks
+                    ww_count[0, selectedToYear - record[r].issued_date.Year]++; // Counting the total Open SCAR according to their respective work weeks
                 }
-            }            
+            }
         }
 
+        /* Graph settings based on the year selected */
         // Graph title
         Title graphTitle = new Title();
         graphTitle.Name = "tTitle";
         graphTitle.Text = "PCA / HLA Voice of Customer Trend (Agilent)";
         Chart_Q1.Titles.Add(graphTitle);
         graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q1.ChartAreas["Q1"].AxisX.Title = "Year";  // X-axis title    
+        Chart_Q1.ChartAreas["Q1"].AxisY.Title = "Quantity";  // Y-axis title
 
         Chart_Q1.Series["Open"].ChartType = SeriesChartType.Column;
         Chart_Q1.Series["Open"]["DrawingStyle"] = "Emboss";
         Chart_Q1.Series["Open"].IsValueShownAsLabel = false;  // Show value of each bar or category 
         Chart_Q1.Series["Open"].SmartLabelStyle.Enabled = true;
+        Chart_Q1.Series["Closed"].ChartType = SeriesChartType.Column;
+        Chart_Q1.Series["Closed"]["DrawingStyle"] = "Emboss";
+        Chart_Q1.Series["Closed"].IsValueShownAsLabel = false;  // Show value of each bar or category 
+        Chart_Q1.Series["Closed"].SmartLabelStyle.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorGrid.Enabled = false;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = false;
         Chart_Q1.ChartAreas["Q1"].AxisY.MajorGrid.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
-        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = false; // Enable or disable X-axis label
+        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
 
         // Create chart legend
         Chart_Q1.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
-        Chart_Q1.Legends["Legend1"].DockedToChartArea = "Q1";  // Set docking of the chart legend to the Q1
-        Chart_Q1.Legends["Legend1"].Position.Auto = false;
-        Chart_Q1.Legends["Legend1"].Position = new ElementPosition(85, 13, 15, 10);  // Parameters (x, y, width, height)
+        Chart_Q1.Legends["Legend1"].IsDockedInsideChartArea = false;
+        Chart_Q1.Legends["Legend1"].Position.Auto = true;
+        Chart_Q1.Legends["Legend1"].Title = "Category";
+        Chart_Q1.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q1.Legends["Legend1"].BorderWidth = 1;
 
-        // Assign the legend to Open
+        // Assign the legend
         Chart_Q1.Series["Open"].Legend = "Legend1";
         Chart_Q1.Series["Open"].IsVisibleInLegend = true;
 
-        StringBuilder html = new StringBuilder();  // Building an HTML string.
+        DataTable dt_table = new DataTable();
+        dt_table.Columns.Add(" ", Type.GetType("System.String"));
+        dt_table.Columns.Add("Open", Type.GetType("System.String"));
+        dt_table.Columns.Add("Closed", Type.GetType("System.String"));
+        dt_table.Columns.Add("Total", Type.GetType("System.String"));
 
-        // Table start.
-        html.Append("<table border = '1'>");
-        string[,] rowHeader = new String[3, 20];
-
-        html.Append("<tr>");
-        html.Append("<td>");
-        html.Append("</td>");
-
-        for (int i = diff; i >= 0; i-- )
+        for (int i = diff; i >= 0; i--)
         {
-            html.Append("<td>");
-            html.Append(DateTime.Now.Year - i);
-            html.Append("</td>");
+            dt_table.Rows.Add();
+            dt_table.Rows[dt_table.Rows.Count - 1][" "] = selectedToYear - i;
+            dt_table.Rows[dt_table.Rows.Count - 1]["Open"] = ww_count[0, i];
+            dt_table.Rows[dt_table.Rows.Count - 1]["Closed"] = ww_count[1, i];
+            dt_table.Rows[dt_table.Rows.Count - 1]["Total"] = ww_count[0, i] + ww_count[1, i];
         }
 
-        html.Append("</tr>");
+        Chart_Q1.DataBind();
 
         // For loop to populate the graph
         for (int i = diff; i >= 0; i--)
         {
-            Chart_Q1.Series["Open"].Points.AddY(ww_count[0, i]);
-            Chart_Q1.Series["Closed"].Points.AddY(ww_count[1, i]);
+            Chart_Q1.Series["Open"].Points.AddXY((selectedToYear - i).ToString(), ww_count[0, i]);
+            Chart_Q1.Series["Closed"].Points.AddXY((selectedToYear - i).ToString(), ww_count[1, i]);
         }
 
-        // For loop to display the date in table
-        for (int i = 0; i < 2; i++)
-        {
-            html.Append("<tr>");
-
-            if (i == 0)
-            {
-                html.Append("<td>");
-                html.Append("Open");
-                html.Append("</td>");
-            }
-            else
-            {
-                html.Append("<td>");
-                html.Append("Closed");
-                html.Append("</td>");
-            }
-
-            for (int j = diff; j >= 0; j--)
-            {
-                html.Append("<td>");
-                html.Append(ww_count[i, j]);
-                html.Append("</td>");
-            }
-            html.Append("</tr>");
-        }
-        html.Append("<tr>");
-        html.Append("<td>Total</td>");
-
-        // For loop to display the total number of scar status
-        for (int i = diff; i >= 0; i--)
-        {
-            html.Append("<td>");
-            html.Append(ww_count[0, i] + ww_count[1, i]); // sum total of open or closed according to WW
-            html.Append("</td>");
-        }
-
-        html.Append("</table>");  // Table end.
-
-        // Append the HTML string to Placeholder.
-        PlaceHolder1.Controls.Add(new Literal { Text = html.ToString() });
+        GridView1.DataSource = dt_table;
+        GridView1.DataBind();
     }
 
     // Button to generate graph based on the year selected
     protected void btnGenerateYear_Click(object sender, EventArgs e)
     {
-        generateYear();
+        generateQ1Year();
+        generateQ2Year();
+        generateQ4Year();
     }
 
+    /*
     protected void getMonthOptions()
     {
         if (lstGenerateOptions.SelectedItem.ToString() == "Monthly")
@@ -246,9 +289,6 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             lstMonthYear.Visible = true;
             btnGenerateMonth.Visible = true;
 
-            lstMonthYear.Items.Add("1995"); lstMonthYear.Items.Add("1996"); lstMonthYear.Items.Add("1997");
-            lstMonthYear.Items.Add("1998"); lstMonthYear.Items.Add("1999"); lstMonthYear.Items.Add("2000");
-            lstMonthYear.Items.Add("2001"); lstMonthYear.Items.Add("2002"); lstMonthYear.Items.Add("2003");
             lstMonthYear.Items.Add("2004"); lstMonthYear.Items.Add("2005"); lstMonthYear.Items.Add("2006");
             lstMonthYear.Items.Add("2007"); lstMonthYear.Items.Add("2008"); lstMonthYear.Items.Add("2009");
             lstMonthYear.Items.Add("2010"); lstMonthYear.Items.Add("2011"); lstMonthYear.Items.Add("2012");
@@ -265,9 +305,10 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             btnGenerateMonth.Visible = false;
         }
     }
+     */
 
     // Function to generate graph based on the criteria selected by month
-    protected void generateMonth()
+    protected void generateQ1Month()
     {
         int selectedStartMonth = int.Parse(lstMonthOptions1.SelectedItem.Value.ToString());
         int selectedEndMonth = int.Parse(lstMonthOptions2.SelectedItem.Value.ToString());
@@ -300,111 +341,76 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             }
         }
 
+        /* Graph settings based on the month selected */
         // Graph title
         Title graphTitle = new Title();
         graphTitle.Name = "tTitle";
         graphTitle.Text = "PCA / HLA Voice of Customer Trend (Agilent)";
         Chart_Q1.Titles.Add(graphTitle);
         graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q1.ChartAreas["Q1"].AxisX.Title = "Month";  // X-axis title    
+        Chart_Q1.ChartAreas["Q1"].AxisY.Title = "Quantity";  // Y-axis title
 
         Chart_Q1.Series["Open"].ChartType = SeriesChartType.Column;
         Chart_Q1.Series["Open"]["DrawingStyle"] = "Emboss";
         Chart_Q1.Series["Open"].IsValueShownAsLabel = false;  // Show value of each bar or category 
         Chart_Q1.Series["Open"].SmartLabelStyle.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorGrid.Enabled = false;
-        Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = false;
+        Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
-        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = false; // Enable or disable X-axis label
+        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
 
         // Create chart legend
         Chart_Q1.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
-        Chart_Q1.Legends["Legend1"].DockedToChartArea = "Q1";  // Set docking of the chart legend to the ChartArea1
-        Chart_Q1.Legends["Legend1"].Position.Auto = false;
-        Chart_Q1.Legends["Legend1"].Position = new ElementPosition(85, 13, 15, 10);  // Parameters (x, y, width, height)
+        Chart_Q1.Legends["Legend1"].IsDockedInsideChartArea = false;
+        Chart_Q1.Legends["Legend1"].Position.Auto = true;
+        Chart_Q1.Legends["Legend1"].Title = "Category";
+        Chart_Q1.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q1.Legends["Legend1"].BorderWidth = 1;
 
-        // Assign the legend to Open
+        // Assign the legend
         Chart_Q1.Series["Open"].Legend = "Legend1";
         Chart_Q1.Series["Open"].IsVisibleInLegend = true;
 
-        StringBuilder html = new StringBuilder();  // Building an HTML string.
-
-        // Table start.
-        html.Append("<table border = '1'>");
-        string[,] rowHeader = new String[3, 20];
- 
         DateTimeFormatInfo mfi = new DateTimeFormatInfo();
-        //DateTime yy = new DateTime(selectedMonthYear);
 
-        html.Append("<tr>");
-        html.Append("<td>");
-        html.Append("</td>");
+        DataTable dt_table = new DataTable();
+        dt_table.Columns.Add(" ", Type.GetType("System.String"));
+        dt_table.Columns.Add("Open", Type.GetType("System.String"));
+        dt_table.Columns.Add("Closed", Type.GetType("System.String"));
+        dt_table.Columns.Add("Total", Type.GetType("System.String"));
 
-        for (int i = 0; i <= diff; i++)
+        for (int i = diff; i >= 0; i--)
         {
-            html.Append("<td>");
-            html.Append(mfi.GetMonthName(selectedStartMonth + i).ToString());
-            //html.Append(selectedMonthYear.ToString("YY"));
-            html.Append("</td>");
+            dt_table.Rows.Add();
+            dt_table.Rows[dt_table.Rows.Count - 1][" "] = mfi.GetMonthName(selectedEndMonth - i).ToString();
+            dt_table.Rows[dt_table.Rows.Count - 1]["Open"] = ww_count[0, i];
+            dt_table.Rows[dt_table.Rows.Count - 1]["Closed"] = ww_count[1, i];
+            dt_table.Rows[dt_table.Rows.Count - 1]["Total"] = ww_count[0, i] + ww_count[1, i];
         }
 
-        html.Append("</tr>");
-        
+        Chart_Q1.DataBind();
+
         // For loop to populate the graph
-        for (int i = 0; i <= diff; i++)
+        for (int i = diff; i >= 0; i--)
         {
-            Chart_Q1.Series["Open"].Points.AddY(ww_count[0, i]);
-            Chart_Q1.Series["Closed"].Points.AddY(ww_count[1, i]);
+            Chart_Q1.Series["Open"].Points.AddXY(mfi.GetMonthName(selectedEndMonth - i).ToString(), ww_count[0, i]);
+            Chart_Q1.Series["Closed"].Points.AddXY(mfi.GetMonthName(selectedEndMonth - i).ToString(), ww_count[1, i]);
         }
 
-        // For loop to display the date in table
-        for (int i = 0; i < 2; i++)
-        {
-            html.Append("<tr>");
-
-            if (i == 0)
-            {
-                html.Append("<td>");
-                html.Append("Open");
-                html.Append("</td>");
-            }
-            else
-            {
-                html.Append("<td>");
-                html.Append("Closed");
-                html.Append("</td>");
-            }
-
-            for (int j = 0; j <= diff; j++)
-            {
-                html.Append("<td>");
-                html.Append(ww_count[i, j]);
-                html.Append("</td>");
-            }
-            html.Append("</tr>");
-        }
-        html.Append("<tr>");
-        html.Append("<td>Total</td>");
-
-        // For loop to display the total number of scar status
-        for (int i = 0; i <= diff; i++)
-        {
-            html.Append("<td>");
-            html.Append(ww_count[0, i] + ww_count[1, i]); // sum total of open or closed according to WW
-            html.Append("</td>");
-        }
-
-        html.Append("</table>");  // Table end.
-
-        // Append the HTML string to Placeholder.
-        PlaceHolder1.Controls.Add(new Literal { Text = html.ToString() });
+        GridView1.DataSource = dt_table;
+        GridView1.DataBind();
     }
 
     // Button to generate graph based on the criteria selected
     protected void btnGenerateMonth_Click(object sender, EventArgs e)
     {
-        generateMonth();
+        generateQ1Month();
+        generateQ2Month();
+        generateQ4Month();
     }
 
+    /*
     protected void getWWOptions()
     {
         if (lstGenerateOptions.SelectedItem.ToString() == "Working Week")
@@ -420,9 +426,10 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             btnGenerateWW.Visible = false;
         }
     }
+    */
 
     // Function to generate graph based on selected date (work week)
-    protected void generateWW()
+    protected void generateQ1WW()
     {
         int[] count1 = new int[2];
         int[,] ww_count = new int[2, 52]; // 2-D array to store total number of open/closed based on WW
@@ -458,146 +465,225 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             }
         }
 
+        /* Graph settings based on the work week selected */
         // Graph title
         Title graphTitle = new Title();
         graphTitle.Name = "tTitle";
         graphTitle.Text = "PCA / HLA Voice of Customer Trend (Agilent)";
         Chart_Q1.Titles.Add(graphTitle);
         graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q1.ChartAreas["Q1"].AxisX.Title = "Work Week";  // X-axis title    
+        Chart_Q1.ChartAreas["Q1"].AxisY.Title = "Quantity";  // Y-axis title
 
         Chart_Q1.Series["Open"].ChartType = SeriesChartType.Column;
         Chart_Q1.Series["Open"]["DrawingStyle"] = "Emboss";
         Chart_Q1.Series["Open"].IsValueShownAsLabel = false;  // Show value of each bar or category 
         Chart_Q1.Series["Open"].SmartLabelStyle.Enabled = true;
+        Chart_Q1.Series["Closed"].ChartType = SeriesChartType.Column;
+        Chart_Q1.Series["Closed"]["DrawingStyle"] = "Emboss";
+        Chart_Q1.Series["Closed"].IsValueShownAsLabel = false;  // Show value of each bar or category 
+        Chart_Q1.Series["Closed"].SmartLabelStyle.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisX.MajorGrid.Enabled = false;
-        Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = false;
+        Chart_Q1.ChartAreas["Q1"].AxisX.MajorTickMark.Enabled = true;
         Chart_Q1.ChartAreas["Q1"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
-        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = false; // Enable or disable X-axis label
+        Chart_Q1.ChartAreas["Q1"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
 
         // Create chart legend
         Chart_Q1.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
-        Chart_Q1.Legends["Legend1"].DockedToChartArea = "Q1";  // Set docking of the chart legend to the Q1
-        Chart_Q1.Legends["Legend1"].Position.Auto = false;
-        Chart_Q1.Legends["Legend1"].Position = new ElementPosition(85, 13, 15, 10);  // Parameters (x, y, width, height)
+        Chart_Q1.Legends["Legend1"].IsDockedInsideChartArea = false;  // Set docking of the chart legend to the Q1
+        Chart_Q1.Legends["Legend1"].Position.Auto = true;
+        Chart_Q1.Legends["Legend1"].Title = "Category";
+        Chart_Q1.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q1.Legends["Legend1"].BorderWidth = 1;
 
         // Assign the legend to Open
         Chart_Q1.Series["Open"].Legend = "Legend1";
         Chart_Q1.Series["Open"].IsVisibleInLegend = true;
 
-        StringBuilder html = new StringBuilder();  // Building an HTML string.
+        DataTable dt_table = new DataTable();
+        dt_table.Columns.Add(" ", Type.GetType("System.String"));
+        dt_table.Columns.Add("Open", Type.GetType("System.String"));
+        dt_table.Columns.Add("Closed", Type.GetType("System.String"));
+        dt_table.Columns.Add("Total", Type.GetType("System.String"));
 
-        // Table start.
-        html.Append("<table border = '1'>");
-        string[,] rowHeader = new String[3, 20];
-
-        html.Append("<tr>");
-        html.Append("<td>");
-        html.Append("</td>");
-        
         for (int i = startweek; i <= selectedWeek; i++)
         {
-            html.Append("<td>Week ");
-            
-            if(i < 0)
+            dt_table.Rows.Add();
+
+            if (i < 0)
             {
-                html.Append(i + 53);
+                dt_table.Rows[dt_table.Rows.Count - 1][" "] = "Week " + (i + 53);
+                dt_table.Rows[dt_table.Rows.Count - 1]["Open"] = ww_count0[0, (i + 52)];
+                dt_table.Rows[dt_table.Rows.Count - 1]["Closed"] = ww_count0[1, (i + 52)];
+                dt_table.Rows[dt_table.Rows.Count - 1]["Total"] = ww_count0[0, (i + 52)] + ww_count0[1, (i + 52)];
             }
             else
             {
-                html.Append(i + 1);
+                dt_table.Rows[dt_table.Rows.Count - 1][" "] = "Week " + i;
+                dt_table.Rows[dt_table.Rows.Count - 1]["Open"] = ww_count[0, i];
+                dt_table.Rows[dt_table.Rows.Count - 1]["Closed"] = ww_count[1, i];
+                dt_table.Rows[dt_table.Rows.Count - 1]["Total"] = ww_count[0, i] + ww_count[1, i];
             }
-
-            html.Append("</td>");
         }
-        
-        html.Append("</tr>");
-        
+
+        Chart_Q1.DataBind();
+
         // For loop to populate the graph
         for (int i = startweek; i <= selectedWeek; i++)
         {
-            if(i < 0)
+            if (i < 0)
             {
-                Chart_Q1.Series["Open"].Points.AddY(ww_count0[0, i + 52]);
-                Chart_Q1.Series["Closed"].Points.AddY(ww_count0[1, i + 52]);
+                Chart_Q1.Series["Open"].Points.AddXY("Week " + (i + 53), ww_count0[0, (i + 52)]);
+                Chart_Q1.Series["Closed"].Points.AddXY("Week " + (i + 53), ww_count0[1, (i + 52)]);
             }
             else
             {
-                Chart_Q1.Series["Open"].Points.AddY(ww_count[0, i]);
-                Chart_Q1.Series["Closed"].Points.AddY(ww_count[1, i]);
+                Chart_Q1.Series["Open"].Points.AddXY("Week " + i, ww_count[0, i]);
+                Chart_Q1.Series["Closed"].Points.AddXY("Week " + i, ww_count[1, i]);
             }
         }
 
-        // For loop to display the data in table
-        for (int i = 0; i < 2; i++)
-        {
-            html.Append("<tr>");
-
-            if (i == 0)
-            {
-                html.Append("<td>");
-                html.Append("Open");
-                html.Append("</td>");
-            }
-            else
-            {
-                html.Append("<td>");
-                html.Append("Closed");
-                html.Append("</td>");
-            }
-
-            for (int j = startweek; j <= selectedWeek; j++)
-            {
-                html.Append("<td>");
-                
-                if(j < 0)
-                {
-                    html.Append(ww_count0[i, j + 52]);
-                }
-                else
-                {
-                    html.Append(ww_count[i, j]);
-                }
-                
-                html.Append("</td>");
-            }
-
-            html.Append("</tr>");
-        }
-
-        html.Append("<tr>");
-        html.Append("<td>Total</td>");
-
-        // For loop to display the total number of scar status
-        for (int i = startweek; i <= selectedWeek; i++)
-        {
-            html.Append("<td>");
-            
-            if(i < 0)
-            {
-                html.Append(ww_count0[0, i + 52] + ww_count0[1, i + 52]); // sum total of open or closed according to WW
-            }
-            else
-            {
-                html.Append(ww_count[0, i] + ww_count[1, i]); // sum total of open or closed according to WW
-            }
-            
-            html.Append("</td>");
-        }
-
-        html.Append("</table>");  // Table end.
-
-        // Append the HTML string to Placeholder.
-        PlaceHolder1.Controls.Add(new Literal { Text = html.ToString() });
+        GridView1.DataSource = dt_table;
+        GridView1.DataBind();
     }
 
     protected void btnGenerateWW_Click(object sender, EventArgs e)
     {
-        generateWW();
-        generateQ2();
-        generateQ4();
+        generateQ1WW();
+        generateQ2WW();
+        generateQ4WW();
     }
 
-    protected void generateQ2()
+    protected void generateQ2Year()
+    {
+        int selectedFromYear = int.Parse(lstYearOptions1.SelectedItem.ToString());
+        int selectedToYear = int.Parse(lstYearOptions2.SelectedItem.ToString());
+        int[] defect_category_count = new int[dt1.Rows.Count];
+
+        for (int r = 0; r < dt.Rows.Count; r++)
+        {
+            if (record[r].issued_date.Year >= selectedFromYear && record[r].issued_date.Year <= selectedToYear)
+            {
+                int a = 0;
+
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    if (record[r].defect_category == defect_category[i])
+                    {
+                        defect_category_count[a]++;  // Count the total number of categories
+                    }
+                    a++;
+                }
+            }
+        }
+
+        /* Graph settings for second quadrant(Q2) */
+        // Graph title
+        Title graphTitle = new Title();
+        graphTitle.Name = "tTitle";
+        graphTitle.Text = "Overall SCAR Pareto for 5 Weeks";
+        Chart_Q2.Titles.Add(graphTitle);
+        graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q2.ChartAreas["Q2"].AxisX.Title = "Defect Modes";  // X-axis title    
+        Chart_Q2.ChartAreas["Q2"].AxisY.Title = "No. of Issues";  // Y-axis title
+
+        Chart_Q2.Series["Categories"].ChartType = SeriesChartType.Column;
+        Chart_Q2.Series["Categories"]["DrawingStyle"] = "Emboss";
+        Chart_Q2.Series["Categories"].IsValueShownAsLabel = false;  // show value of each bar or category 
+        Chart_Q2.Series["Categories"].SmartLabelStyle.Enabled = true;
+        Chart_Q2.ChartAreas["Q2"].AxisX.MajorGrid.Enabled = false;
+        Chart_Q2.ChartAreas["Q2"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
+        Chart_Q2.ChartAreas["Q2"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
+
+        // Create chart legend
+        Chart_Q2.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
+        Chart_Q2.Legends["Legend1"].IsDockedInsideChartArea = false;  // Set docking of the chart legend to the ChartArea1
+        Chart_Q2.Legends["Legend1"].Position.Auto = true;
+        Chart_Q2.Legends["Legend1"].Title = "Defect Modes";
+        Chart_Q2.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q2.Legends["Legend1"].BorderWidth = 1;
+
+        Chart_Q2.Series["Categories"].Legend = "Legend1";
+        Chart_Q2.Series["Categories"].IsVisibleInLegend = true;
+
+        Chart_Q2.DataBind();
+
+        // For loop to populate the graph
+        for (int i = 0; i < defect_category_count.Count(); i++)
+        {
+            Chart_Q2.Series["Categories"].Points.AddXY(defect_category[i], defect_category_count[i]);
+        }
+    }
+
+    protected void generateQ2Month()
+    {
+        int selectedStartMonth = int.Parse(lstMonthOptions1.SelectedItem.Value.ToString());
+        int selectedEndMonth = int.Parse(lstMonthOptions2.SelectedItem.Value.ToString());
+        int selectedMonthYear = int.Parse(lstMonthYear.SelectedItem.ToString());
+        int diff = selectedEndMonth - selectedStartMonth; // To calculate the number of years of data to display
+        int[] defect_category_count = new int[dt1.Rows.Count];
+
+        for (int r = 0; r < dt.Rows.Count; r++)
+        {
+            if (record[r].issued_date.Year == selectedMonthYear && record[r].issued_date.Month >= selectedStartMonth && record[r].issued_date.Month <= selectedEndMonth)
+            {
+                if (record[r].issued_date.Month - selectedStartMonth >= 0 && record[r].issued_date.Month - selectedStartMonth <= diff)
+                {
+                    int a = 0;
+
+                    for (int i = 0; i < dt1.Rows.Count; i++)
+                    {
+                        if (record[r].defect_category == defect_category[i])
+                        {
+                            defect_category_count[a]++;  // Count the total number of categories
+                        }
+                        a++;
+                    }
+                }
+            }
+        }
+
+        /* Graph settings for second quadrant(Q2) */
+        // Graph title
+        Title graphTitle = new Title();
+        graphTitle.Name = "tTitle";
+        graphTitle.Text = "Overall SCAR Pareto for 5 Weeks";
+        Chart_Q2.Titles.Add(graphTitle);
+        graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q2.ChartAreas["Q2"].AxisX.Title = "Defect Modes";  // X-axis title    
+        Chart_Q2.ChartAreas["Q2"].AxisY.Title = "No. of Issues";  // Y-axis title
+
+        Chart_Q2.Series["Categories"].ChartType = SeriesChartType.Column;
+        Chart_Q2.Series["Categories"]["DrawingStyle"] = "Emboss";
+        Chart_Q2.Series["Categories"].IsValueShownAsLabel = false;  // show value of each bar or category 
+        Chart_Q2.Series["Categories"].SmartLabelStyle.Enabled = true;
+        Chart_Q2.ChartAreas["Q2"].AxisX.MajorGrid.Enabled = false;
+        Chart_Q2.ChartAreas["Q2"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
+        Chart_Q2.ChartAreas["Q2"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
+
+        // Create chart legend
+        Chart_Q2.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
+        Chart_Q2.Legends["Legend1"].IsDockedInsideChartArea = false;  // Set docking of the chart legend to the ChartArea1
+        Chart_Q2.Legends["Legend1"].Position.Auto = true;
+        Chart_Q2.Legends["Legend1"].Title = "Defect Modes";
+        Chart_Q2.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q2.Legends["Legend1"].BorderWidth = 1;
+
+        // Assign the legend
+        Chart_Q2.Series["Categories"].Legend = "Legend1";
+        Chart_Q2.Series["Categories"].IsVisibleInLegend = true;
+
+        Chart_Q2.DataBind();
+
+        // For loop to populate the graph
+        for (int i = 0; i < defect_category_count.Count(); i++)
+        {
+            Chart_Q2.Series["Categories"].Points.AddXY(defect_category[i], defect_category_count[i]);
+        }
+    }
+
+    // Generate second quadrant(Q2)
+    protected void generateQ2WW()
     {
         int selectedWeek = workWeek.retWW(DateTime.Parse(cldStartDate.Value.ToString()));
         int startweek = selectedWeek - 4; // Which week to start displaying data
@@ -620,12 +706,15 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             }
         }
 
+        /* Graph settings for second quadrant(Q2) */
         // Graph title
         Title graphTitle = new Title();
         graphTitle.Name = "tTitle";
         graphTitle.Text = "Overall SCAR Pareto for 5 Weeks";
         Chart_Q2.Titles.Add(graphTitle);
         graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q2.ChartAreas["Q2"].AxisX.Title = "Defect Modes";  // X-axis title    
+        Chart_Q2.ChartAreas["Q2"].AxisY.Title = "No. of Issues";  // Y-axis title
 
         Chart_Q2.Series["Categories"].ChartType = SeriesChartType.Column;
         Chart_Q2.Series["Categories"]["DrawingStyle"] = "Emboss";
@@ -634,19 +723,18 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         Chart_Q2.ChartAreas["Q2"].AxisX.MajorGrid.Enabled = false;
         Chart_Q2.ChartAreas["Q2"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
         Chart_Q2.ChartAreas["Q2"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
-        Chart_Q2.ChartAreas["Q2"].AxisX.Title = "Defect Modes";  // X-axis title    
-        Chart_Q2.ChartAreas["Q2"].AxisY.Title = "No. of Issues";  // Y-axis title
 
         // Create chart legend
         Chart_Q2.Legends.Add(new Legend("Legend1"));  // Create a legend called "Legend1"
-        Chart_Q2.Legends["Legend1"].DockedToChartArea = "Q2";  // Set docking of the chart legend to the ChartArea1
-        Chart_Q2.Legends["Legend1"].Position.Auto = false;
-        Chart_Q2.Legends["Legend1"].Position = new ElementPosition(85, 13, 15, 10);  // Parameters (x, y, width, height)
+        Chart_Q2.Legends["Legend1"].IsDockedInsideChartArea = false;  // Set docking of the chart legend to the ChartArea1
+        Chart_Q2.Legends["Legend1"].Position.Auto = true;
+        Chart_Q2.Legends["Legend1"].Title = "Defect Modes";
+        Chart_Q2.Legends["Legend1"].BorderColor = System.Drawing.Color.LightGray;
+        Chart_Q2.Legends["Legend1"].BorderWidth = 1;
 
-        // Assign the legend to Open
+        // Assign the legend
         Chart_Q2.Series["Categories"].Legend = "Legend1";
         Chart_Q2.Series["Categories"].IsVisibleInLegend = true;
-        //Chart_Q2.DataSource = defect_category_count;
 
         Chart_Q2.DataBind();
 
@@ -657,39 +745,43 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         }
     }
 
-
-    protected void generateQ4()
+    protected void generateQ4Year()
     {
-        int selectedWeek = workWeek.retWW(DateTime.Parse(cldStartDate.Value.ToString()));
-        int startweek = selectedWeek - 4; // Which week to start displaying data
-        int weekcount = selectedWeek - startweek + 1;   // Total count of weeks including startweek
-        int[,] defect_modes_count = new int[weekcount, dt1.Rows.Count];
+        int selectedFromYear = int.Parse(lstYearOptions1.SelectedItem.ToString());
+        int selectedToYear = int.Parse(lstYearOptions2.SelectedItem.ToString());
+        int diff = selectedToYear - selectedFromYear + 1; // To calculate the number of years of data to display
+        int[,] defect_modes_count = new int[diff, dt1.Rows.Count];
 
-        for(int r = 0; r < dt.Rows.Count; r++)
+        for (int r = 0; r < dt.Rows.Count; r++)
         {
-            int ww = workWeek.retWW(record[r].issued_date);
-            if (ww >= startweek && ww <= selectedWeek)
+            int ww = record[r].issued_date.Year;
+
+            if (ww >= selectedFromYear && ww <= selectedToYear)
             {
                 for (int i = 0; i < dt1.Rows.Count; i++)
                 {
                     if (record[r].defect_category == defect_category[i])
                     {
-                        defect_modes_count[ww - startweek, i]++;  // Count the total number of categories
+                        defect_modes_count[ww - selectedFromYear, i]++;  // Count the total number of categories
                     }
                 }
 
             }
         }
 
+        /* Graph settings for fourth quadrant(Q4) */
         // Graph title
         Title graphTitle = new Title();
         graphTitle.Name = "tTitle";
-        graphTitle.Text = "Top 5 Defect By Week";
+        graphTitle.Text = "Top 5 Defect By Year";
         Chart_Q4.Titles.Add(graphTitle);
         graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
-        // Set the anchor for the chart
-        Chart_Q4.ChartAreas[0].Position.Width = 80; // Specify the width of chartarea in percentage
-        Chart_Q4.ChartAreas[0].Position.Height = 80;    // Specify the height of chartarea in percentage
+        Chart_Q4.ChartAreas["Q4"].AxisX.Title = "Year";  // X-axis title    
+        Chart_Q4.ChartAreas["Q4"].AxisY.Title = "No. of Issues";  // Y-axis title
+
+        Chart_Q4.ChartAreas["Q4"].AxisX.MajorGrid.Enabled = false;
+        Chart_Q4.ChartAreas["Q4"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
+        Chart_Q4.ChartAreas["Q4"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
 
         for (int i = 0; i < dt1.Rows.Count; i++)
         {
@@ -703,15 +795,166 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             // Create chart legend
             Chart_Q4.Legends.Add(new Legend(defect_category[i]));  // Create each individual legend         
             Chart_Q4.Legends[defect_category[i]].IsDockedInsideChartArea = false;
-            //Chart_Q4.Legends[defect_modes[i]].Position = new ElementPosition(100, 0, 15, 30);  // Parameters (x, y, width, height)
-
+            Chart_Q4.Legends[defect_category[i]].Title = "Defect Modes Category";
+            Chart_Q4.Legends[defect_category[i]].BorderColor = System.Drawing.Color.LightGray;
+            Chart_Q4.Legends[defect_category[i]].BorderWidth = 1;
         }
+
+        Chart_Q4.DataBind();
+
+        // For loop to populate the graph
+        for (int i = 0; i < dt1.Rows.Count; i++)
+        {
+            for (int j = 0; j < diff; j++)
+            {
+                if (defect_modes_count[j, i] < 0)
+                {
+                    Chart_Q4.Series[i].Points.AddXY((selectedFromYear + j).ToString(), 0);
+                }
+                else
+                {
+                    Chart_Q4.Series[i].Points.AddXY((selectedFromYear + j).ToString(), defect_modes_count[j, i]);
+                }
+            }
+        }
+    }
+
+    protected void generateQ4Month()
+    {
+        int selectedStartMonth = int.Parse(lstMonthOptions1.SelectedItem.Value.ToString());
+        int selectedEndMonth = int.Parse(lstMonthOptions2.SelectedItem.Value.ToString());
+        int selectedMonthYear = int.Parse(lstMonthYear.SelectedItem.ToString());
+        int diff = selectedEndMonth - selectedStartMonth + 1; // To calculate the number of years of data to display
+        int[,] defect_modes_count = new int[diff, dt1.Rows.Count];
+
+        for (int r = 0; r < dt.Rows.Count; r++)
+        {
+            if (record[r].issued_date.Year == selectedMonthYear && record[r].issued_date.Month >= selectedStartMonth && record[r].issued_date.Month <= selectedEndMonth)
+            {
+                if (record[r].issued_date.Month - selectedStartMonth >= 0 && record[r].issued_date.Month - selectedStartMonth <= diff)
+                {
+                    for (int i = 0; i < dt1.Rows.Count; i++)
+                    {
+                        if (record[r].defect_category == defect_category[i])
+                        {
+                            defect_modes_count[record[r].issued_date.Month - selectedStartMonth, i]++;  // Count the total number of categories
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Graph settings for fourth quadrant(Q4) */
+        // Graph title
+        Title graphTitle = new Title();
+        graphTitle.Name = "tTitle";
+        graphTitle.Text = "Top 5 Defect By Month";
+        Chart_Q4.Titles.Add(graphTitle);
+        graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
+        Chart_Q4.ChartAreas["Q4"].AxisX.Title = "Month";  // X-axis title    
+        Chart_Q4.ChartAreas["Q4"].AxisY.Title = "No. of Issues";  // Y-axis title
 
         Chart_Q4.ChartAreas["Q4"].AxisX.MajorGrid.Enabled = false;
         Chart_Q4.ChartAreas["Q4"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
         Chart_Q4.ChartAreas["Q4"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
+
+        for (int i = 0; i < dt1.Rows.Count; i++)
+        {
+            Series series = Chart_Q4.Series.Add(defect_category[i]);
+            series.ChartType = SeriesChartType.StackedColumn;
+            series.Name = defect_category[i];
+            series.IsValueShownAsLabel = false;
+            series.SmartLabelStyle.Enabled = true;
+            series["DrawingStyle"] = "Emboss";
+
+            // Create chart legend
+            Chart_Q4.Legends.Add(new Legend(defect_category[i]));  // Create each individual legend         
+            Chart_Q4.Legends[defect_category[i]].IsDockedInsideChartArea = false;
+            Chart_Q4.Legends[defect_category[i]].Position.Auto = true;
+            Chart_Q4.Legends[defect_category[i]].Title = "Defect Modes Category";
+            Chart_Q4.Legends[defect_category[i]].BorderColor = System.Drawing.Color.LightGray;
+            Chart_Q4.Legends[defect_category[i]].BorderWidth = 1;
+        }
+
+        DateTimeFormatInfo mfi = new DateTimeFormatInfo();
+
+        // For loop to populate the graph
+        for (int i = 0; i < dt1.Rows.Count; i++)
+        {
+            for (int j = 0; j < diff; j++)
+            {
+                if (defect_modes_count[j, i] < 0)
+                {
+                    Chart_Q4.Series[i].Points.AddXY(mfi.GetMonthName(selectedStartMonth + j).ToString(), 0);
+                }
+                else
+                {
+                    Chart_Q4.Series[i].Points.AddXY(mfi.GetMonthName(selectedStartMonth + j).ToString(), defect_modes_count[j, i]);
+                }
+            }
+        }
+    }
+
+    // Generate fourth quadrant(Q4)
+    protected void generateQ4WW()
+    {
+        int selectedWeek = workWeek.retWW(DateTime.Parse(cldStartDate.Value.ToString()));
+        int startweek = selectedWeek - 4; // Which week to start displaying data
+        int weekcount = selectedWeek - startweek + 1;   // Total count of weeks including startweek
+        int[,] defect_modes_count = new int[weekcount, dt1.Rows.Count];
+
+        for (int r = 0; r < dt.Rows.Count; r++)
+        {
+            int ww = workWeek.retWW(record[r].issued_date);
+            if (ww >= startweek && ww <= selectedWeek)
+            {
+                for (int i = 0; i < dt1.Rows.Count; i++)
+                {
+                    if (record[r].defect_category == defect_category[i])
+                    {
+                        defect_modes_count[ww - startweek, i]++;  // Count the total number of categories
+                    }
+                }
+            }
+        }
+
+        /* Graph settings for fourth quadrant(Q4) */
+        // Graph title
+        Title graphTitle = new Title();
+        graphTitle.Name = "tTitle";
+        graphTitle.Text = "Top 5 Defect By Week";
+        Chart_Q4.Titles.Add(graphTitle);
+        graphTitle.Font = new System.Drawing.Font("Arial", 14, System.Drawing.FontStyle.Bold);
         Chart_Q4.ChartAreas["Q4"].AxisX.Title = "Work Week";  // X-axis title    
         Chart_Q4.ChartAreas["Q4"].AxisY.Title = "No. of Issues";  // Y-axis title
+
+        Chart_Q4.ChartAreas["Q4"].AxisX.MajorGrid.Enabled = false;
+        Chart_Q4.ChartAreas["Q4"].AxisY.LabelStyle.Interval = 1;  // X-axis interval
+        Chart_Q4.ChartAreas["Q4"].AxisX.LabelStyle.Enabled = true; // Enable or disable X-axis label
+
+        // Set the anchor for the chart
+        /*
+        Chart_Q4.ChartAreas[0].Position.Width = 80; // Specify the width of chartarea in percentage
+        Chart_Q4.ChartAreas[0].Position.Height = 80;    // Specify the height of chartarea in percentage
+        */
+
+        for (int i = 0; i < dt1.Rows.Count; i++)
+        {
+            Series series = Chart_Q4.Series.Add(defect_category[i]);
+            series.ChartType = SeriesChartType.StackedColumn;
+            series.Name = defect_category[i];
+            series.IsValueShownAsLabel = false;
+            series.SmartLabelStyle.Enabled = true;
+            series["DrawingStyle"] = "Emboss";
+
+            // Create chart legend
+            Chart_Q4.Legends.Add(new Legend(defect_category[i]));  // Create each individual legend         
+            Chart_Q4.Legends[defect_category[i]].IsDockedInsideChartArea = false;
+            Chart_Q4.Legends[defect_category[i]].Position.Auto = true;
+            Chart_Q4.Legends[defect_category[i]].Title = "Defect Modes Category";
+            Chart_Q4.Legends[defect_category[i]].BorderColor = System.Drawing.Color.LightGray;
+            Chart_Q4.Legends[defect_category[i]].BorderWidth = 1;
+        }
 
         // For loop to populate the graph
         for (int i = 0; i < dt1.Rows.Count; i++)
@@ -747,7 +990,7 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
                     using (DataTable dt = new DataTable())
                     {
                         sda.Fill(dt);
-                        return dt;                        
+                        return dt;
                     }
                 }
             }
@@ -776,6 +1019,8 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
             }
         }
     }
+
+    // Export graph to picture and excel file
     protected void exportChart()
     {
         string tmpChartName = "1stQuardrant.jpg";
@@ -783,7 +1028,7 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         string imgPath = HttpContext.Current.Request.PhysicalApplicationPath + tmpChartName;
         Chart_Q1.SaveImage(imgPath, ChartImageFormat.Png);
 
-        string imgPath2 = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/" + tmpChartName);
+        string imgPaths = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/" + tmpChartName);
 
         Response.Clear();
         Response.Buffer = true;
@@ -791,28 +1036,15 @@ public partial class Manager_reports_Q1 : System.Web.UI.Page
         Response.AddHeader("content-disposition", "attachment; filename=testQ1.xls;");
         StringWriter stringWrite = new StringWriter();
         HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
-        string headerTable = @"<Table><tr><td><img src='" + imgPath2 + @"' \></td></tr></Table>";
+        string headerTable = @"<Table><tr><td><img src='" + imgPaths + @"' \></td></tr></Table>";
         Response.Write(headerTable);
         Response.Write(stringWrite.ToString());
         Response.End();
     }
 
-    // Export graph to picture and excel file
-    protected void btnExport_Q1_Click(object sender, EventArgs e)
+    protected void btnExport_Click(object sender, EventArgs e)
     {
-        generateWW();
+        generateQ1WW();
         exportChart();
     }
 }
-
-/*  protected void printRepOne(object sender, EventArgs e)
-    {
-        Session["printType"] = 2;
-        Response.Redirect("print.aspx");
-    }
-    protected void printRepTwo(object sender, EventArgs e)
-    {
-        Session["printType"] = 3;
-        Response.Redirect("print.aspx");
-    }
-*/

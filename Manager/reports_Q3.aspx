@@ -1,19 +1,6 @@
 ﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Manager.Site.Master" AutoEventWireup="true" Inherits="Manager_reports_Q3" Codebehind="~/Manager/reports_Q3.aspx.cs" EnableEventValidation="false" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <!-- Print gridview -->
-    <script type="text/javascript">
-        function print() {
-            var prtContent = document.getElementById('<%= GridViewQ3.ClientID %>');
-            var printWindow = window.open('', '', 'left=100,top=100,width=0,height=0,resizable=1');
-            printWindow.document.write(prtContent.outerHTML);
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-    </script>
-
     <div class="right-panel">
         <div class="right-panel-inner">
             <div class="col-md-12">
@@ -96,6 +83,7 @@
                                 </asp:GridView>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-lg-12" style="text-align: center">
                                 <asp:Button ID="btnExport" CssClass="btn btn-success" Text="Export to Excel" runat="server" OnClick="btnExport_Click" Visible="false" />
@@ -108,4 +96,17 @@
             <!--/.col-md-12-->
         </div>
     </div>
+
+    <!-- Print gridview -->
+    <script type="text/javascript">
+        function print() {
+            var prtContent = document.getElementById('<%= GridViewQ3.ClientID %>');
+            var printWindow = window.open('', '', 'left=100,top=100,width=0,height=0,resizable=1');
+            printWindow.document.write(prtContent.outerHTML);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+    </script>
 </asp:Content>

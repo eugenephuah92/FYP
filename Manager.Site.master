@@ -16,6 +16,7 @@
     <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/select2.css" type="text/css" rel="stylesheet" />
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript">
         function format(icon) {
             var originalOption = icon.element;
@@ -28,7 +29,15 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function bodyUnload() {
+            if (clicked == false)//browser is closed
+            {
+                location.href = "../Logout.aspx";
+            }
+        }
 
+    </script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body class="clearfix">
@@ -37,10 +46,12 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Scripts>
             <%--Framework scripts--%>
-            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="Scripts/jquery-1.11.0.min.js" />
-            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="Scripts/bootstrap.min.js" />
-            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="Scripts/app.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="Scripts/select2.min.js" />
+            <asp:ScriptReference Path="Scripts/jquery-1.11.0.min.js" />
+            <asp:ScriptReference Path="Scripts/bootstrap.min.js" />
+            <asp:ScriptReference Path="Scripts/app.js" />
+            <asp:ScriptReference Path="Scripts/MaxLength.min.js" />
+            <asp:ScriptReference Path="Scripts/select2.min.js" />
+            <asp:ScriptReference Path="Scripts/jquery-ui.js" />
             <%--Site scripts--%>
             
         </Scripts>
@@ -64,7 +75,6 @@
                         <li <% if (GetPageName.Value == "8Drequest" || GetPageName.Value == "8Dapproval") Response.Write("class=\"nav-active\"");%>><a href="#" class="nav-parent"><i class="fa fa-link"></i> 8D Powerpoint<i class="fa fa-sort-down subm"></i></a>
                             <ul class="children">
                     	        <li><a href="8Drequest.aspx">Pending 8D Requests</a></li>
-                                <li><a href="8Dapproval.aspx">8D Approval</a></li>
                                 <li><a href="scar_log.aspx">SCAR Log</a></li>
                             </ul>
                         </li>
@@ -79,17 +89,17 @@
                                 <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
                             </ul>
                         </li>
+                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-file"></i>&nbsp;SCAR Log</a></li>
                         <li <% if (GetPageName.Value == "pending_open_items") Response.Write("class=\"nav-active\"");%>><a href="pending_open_items.aspx"><i class="fa fa-file"></i>&nbsp;Track Open Action Items</a></li>
-                        <li <% if (GetPageName.Value == "scar_record") Response.Write("class=\"nav-active\"");%>><a href="scar_record.aspx"><i class="fa fa-file"></i>&nbsp;Total SCAR</a></li>
                         <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
 
                     </ul>
 
                     <ul class="nav nav-pills nav-stacked nav-vertical ">
 
-                        <li><a href="new_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;New SCAR<span class="badge"><asp:Label ID="lblNewSCAR" runat="server"/></span></a></li>
-                        <li><a href="pending_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;Pending SCAR<span class="badge"><asp:Label ID="lblPendingSCAR" runat="server"/></span></a></li>
-                        <li><a href="8Drequest.aspx"><i class="fa fa-list-alt"></i>&nbsp;Pending 8D Request<span class="badge"><asp:Label ID="lbl8DRequest" runat="server"/></span></a></li>
+                        <li><a href="new_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;New SCAR<span class="badge-active"><asp:Label ID="lblNewSCAR" runat="server"/></span></a></li>
+                        <li><a href="pending_scars.aspx"><i class="fa fa-list-alt"></i>&nbsp;Pending SCAR<span class="badge-active"><asp:Label ID="lblPendingSCAR" runat="server"/></span></a></li>
+                        <li><a href="8Drequest.aspx"><i class="fa fa-list-alt"></i>&nbsp;Pending 8D Request<span class="badge-active"><asp:Label ID="lbl8DRequest" runat="server"/></span></a></li>
                     </ul>
                 </div>
 

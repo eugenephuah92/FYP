@@ -30,13 +30,13 @@ public partial class Admin_reports_TAT_frequency {
     protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// Placeholder1 control.
+    /// GridViewTAT_Frequency control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.PlaceHolder Placeholder1;
+    protected global::System.Web.UI.WebControls.GridView GridViewTAT_Frequency;
     
     /// <summary>
     /// btnExport control.

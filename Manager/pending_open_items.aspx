@@ -11,7 +11,7 @@
                 </div>
                     <div class="panel-body" style="padding-left:30pt; padding-right:30pt; padding-top:15pt">
                         <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
-                        <asp:GridView ID="displayPendingOpenItems" runat="server" BorderWidth="2" AlternatingRowStyle-BorderWidth="2"  OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                        <asp:GridView ID="displayPendingOpenItems" runat="server" OnPageIndexChanging="OnPageIndexChanging" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table">
                                        <Columns>
                                            <asp:BoundField HeaderText="CAR Number" DataField="CAR Number"  />
                                            <asp:TemplateField HeaderText="S2 - Containment Action">
@@ -48,7 +48,14 @@
                                             </ItemTemplate>
                                             </asp:TemplateField>
                                        </Columns>
-                                   
+                                   <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                        <PagerStyle CssClass="cssPager" BackColor="#1C5E55" ForeColor="White" HorizontalAlign="Center" />
+                                        <PagerSettings Mode="NumericFirstLast" PageButtonCount="5" />
+                                        <RowStyle BackColor="#E3EAEB" />
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <EmptyDataTemplate>
+                                            <label style="color: Red; font-weight: bold">No records found for Pending Open Items !</label>
+                                        </EmptyDataTemplate>
                                        </asp:GridView>
                         
                         <div class="form-group" style="text-align:center">

@@ -9,7 +9,7 @@
 
 
 
-public partial class Admin_scar_log {
+public partial class Admin_manage_TAT {
     
     /// <summary>
     /// display10records control.
@@ -39,13 +39,31 @@ public partial class Admin_scar_log {
     protected global::System.Web.UI.WebControls.DropDownList lstFilter;
     
     /// <summary>
-    /// searchTxt control.
+    /// RequiredFieldValidatorFilter control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFilter;
+    
+    /// <summary>
+    /// txtSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch;
+    
+    /// <summary>
+    /// RequiredFieldValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
     /// btnSearch control.
@@ -54,86 +72,77 @@ public partial class Admin_scar_log {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// test control.
+    /// btnClear control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList test;
+    protected global::System.Web.UI.WebControls.Button btnClear;
     
     /// <summary>
-    /// searchTxt2 control.
+    /// lstFilter1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt2;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter1;
     
     /// <summary>
-    /// btnSearch2 control.
+    /// txtSearch1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch2;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch1;
     
     /// <summary>
-    /// lstFilter3 control.
+    /// lstFilter2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter2;
     
     /// <summary>
-    /// searchTxt3 control.
+    /// txtSearch2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt3;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch2;
     
     /// <summary>
-    /// btnSearch3 control.
+    /// GridViewTAT control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
+    protected global::System.Web.UI.WebControls.GridView GridViewTAT;
     
     /// <summary>
-    /// updatePanelSCARLog control.
+    /// btnExport control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.UpdatePanel updatePanelSCARLog;
+    protected global::System.Web.UI.WebControls.Button btnExport;
     
     /// <summary>
-    /// lblNoRows control.
+    /// btnPrint control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNoRows;
-    
-    /// <summary>
-    /// displaySCARLog control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView displaySCARLog;
+    protected global::System.Web.UI.WebControls.Button btnPrint;
 }

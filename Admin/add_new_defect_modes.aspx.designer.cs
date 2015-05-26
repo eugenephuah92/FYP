@@ -12,6 +12,15 @@
 public partial class Admin_add_new_defect_modes {
     
     /// <summary>
+    /// txtCheck control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label txtCheck;
+    
+    /// <summary>
     /// txtNewDefectCode control.
     /// </summary>
     /// <remarks>
@@ -28,15 +37,6 @@ public partial class Admin_add_new_defect_modes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectCode;
-    
-    /// <summary>
-    /// CompareValidatorDefectCode control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.CompareValidator CompareValidatorDefectCode;
     
     /// <summary>
     /// txtNewIPCCode control.
@@ -57,6 +57,15 @@ public partial class Admin_add_new_defect_modes {
     protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorIPCCode;
     
     /// <summary>
+    /// CustomValidatorIPCCode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorIPCCode;
+    
+    /// <summary>
     /// txtNewDefectName control.
     /// </summary>
     /// <remarks>
@@ -73,6 +82,15 @@ public partial class Admin_add_new_defect_modes {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectName;
+    
+    /// <summary>
+    /// CustomValidatorDefectName control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorDefectName;
     
     /// <summary>
     /// lstNewDefectGroup control.
@@ -129,11 +147,74 @@ public partial class Admin_add_new_defect_modes {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDefectDesc;
     
     /// <summary>
-    /// btnSubmit control.
+    /// btnSubmitDFM control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSubmit;
+    protected global::System.Web.UI.WebControls.Button btnSubmitDFM;
+    
+    /// <summary>
+    /// lstDefectCode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstDefectCode;
+    
+    /// <summary>
+    /// RequiredFieldValidatorDC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDC;
+    
+    /// <summary>
+    /// txtIPCCode control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtIPCCode;
+    
+    /// <summary>
+    /// RequiredFieldValidatorIPC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorIPC;
+    
+    /// <summary>
+    /// RegularExpressionValidatorIPC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorIPC;
+    
+    /// <summary>
+    /// CustomValidatorIPC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorIPC;
+    
+    /// <summary>
+    /// btnSubmitIPC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnSubmitIPC;
 }

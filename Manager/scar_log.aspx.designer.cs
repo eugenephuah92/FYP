@@ -12,22 +12,13 @@
 public partial class Manager_scar_log {
     
     /// <summary>
-    /// display10records control.
+    /// lstPageSize control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton display10records;
-    
-    /// <summary>
-    /// display50records control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton display50records;
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
     
     /// <summary>
     /// lstFilter control.
@@ -39,13 +30,31 @@ public partial class Manager_scar_log {
     protected global::System.Web.UI.WebControls.DropDownList lstFilter;
     
     /// <summary>
-    /// searchTxt control.
+    /// RequiredFieldValidatorFilter control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt;
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFilter;
+    
+    /// <summary>
+    /// txtSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch;
+    
+    /// <summary>
+    /// RequiredFieldValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
     /// btnSearch control.
@@ -54,61 +63,16 @@ public partial class Manager_scar_log {
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch;
+    protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// test control.
+    /// btnClear control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList test;
-    
-    /// <summary>
-    /// searchTxt2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt2;
-    
-    /// <summary>
-    /// btnSearch2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch2;
-    
-    /// <summary>
-    /// lstFilter3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
-    
-    /// <summary>
-    /// searchTxt3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt3;
-    
-    /// <summary>
-    /// btnSearch3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
+    protected global::System.Web.UI.WebControls.Button btnClear;
     
     /// <summary>
     /// updatePanelSCARLog control.
@@ -118,15 +82,6 @@ public partial class Manager_scar_log {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.UpdatePanel updatePanelSCARLog;
-    
-    /// <summary>
-    /// lblNoRows control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Label lblNoRows;
     
     /// <summary>
     /// displaySCARLog control.

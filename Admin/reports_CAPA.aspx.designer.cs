@@ -75,58 +75,40 @@ public partial class Admin_reports_CAPA {
     protected global::System.Web.UI.WebControls.Button btnClear;
     
     /// <summary>
-    /// test control.
+    /// lstFilter1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList test;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter1;
     
     /// <summary>
-    /// searchTxt2 control.
+    /// txtSearch1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt2;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch1;
     
     /// <summary>
-    /// btnSearch2 control.
+    /// lstFilter2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch2;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter2;
     
     /// <summary>
-    /// lstFilter3 control.
+    /// txtSearch2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
-    
-    /// <summary>
-    /// searchTxt3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt3;
-    
-    /// <summary>
-    /// btnSearch3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch2;
     
     /// <summary>
     /// GridViewCAPA control.

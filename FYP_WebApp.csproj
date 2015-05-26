@@ -81,20 +81,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\add_new_corrective_action.aspx" />
     <Content Include="Admin\add_new_defect_category.aspx" />
     <Content Include="Admin\add_new_defect_modes.aspx" />
     <Content Include="Admin\add_new_escalation_reminder.aspx" />
     <Content Include="Admin\add_form_elements.aspx" />
+    <Content Include="Admin\manage_escalation_reminder.aspx" />
     <Content Include="Admin\manage_form_elements.aspx" />
     <Content Include="Admin\admin_form_elements.aspx" />
-    <Content Include="Admin\assign_qe_to_qel_qm.aspx" />
     <Content Include="Admin\change_password.aspx" />
     <Content Include="Admin\closed_scars.aspx" />
     <Content Include="Admin\home.aspx" />
+    <Content Include="Admin\manage_TAT.aspx" />
+    <Content Include="Admin\manage_TAT_relationship.aspx" />
     <Content Include="Admin\manage_user_accounts.aspx" />
     <Content Include="Admin\manual_escalation.aspx" />
-    <Content Include="Admin\scars_by_month.aspx" />
     <Content Include="Admin\new_scars.aspx" />
     <Content Include="Admin\new_user_registration.aspx" />
     <Content Include="Admin\pending_scars.aspx" />
@@ -106,9 +106,7 @@
     <Content Include="Admin\reports_Q4.aspx" />
     <Content Include="Admin\reports_TAT_duration.aspx" />
     <Content Include="Admin\reports_TAT_frequency.aspx" />
-    <Content Include="Admin\scar_log.aspx" />
     <Content Include="Admin\TAT.aspx" />
-    <Content Include="Admin\view_corrective_action.aspx" />
     <Content Include="Admin\view_defect_category.aspx" />
     <Content Include="Admin\view_defect_modes.aspx" />
     <Content Include="Admin\view_scar_record.aspx" />
@@ -155,19 +153,18 @@
     <Content Include="Engineer\closed_scars.aspx" />
     <Content Include="Engineer\new_scars.aspx" />
     <Content Include="Engineer\pending_scars.aspx" />
+    <Content Include="Engineer\reports_Q1.aspx" />
     <Content Include="Engineer\upload_SCAR_request.aspx" />
     <Content Include="Engineer\change_password.aspx" />
     <Content Include="Engineer\home.aspx" />
     <Content Include="Engineer\reports.aspx" />
     <Content Include="Engineer\reports_CAPA.aspx" />
-    <Content Include="Engineer\reports_Q1.aspx" />
     <Content Include="Engineer\reports_Q2.aspx" />
     <Content Include="Engineer\reports_Q3.aspx" />
     <Content Include="Engineer\reports_Q4.aspx" />
     <Content Include="Engineer\reports_TAT_duration.aspx" />
     <Content Include="Engineer\reports_TAT_frequency.aspx" />
     <Content Include="Engineer\scars_forms.aspx" />
-    <Content Include="Engineer\view_corrective_action.aspx" />
     <Content Include="Engineer\view_defect_modes.aspx" />
     <Content Include="Engineer\view_scar_record.aspx" />
     <Content Include="favicon.ico" />
@@ -507,23 +504,16 @@
     <Compile Include="Admin.Site.master.designer.cs">
       <DependentUpon>Admin.Site.master</DependentUpon>
     </Compile>
-    <Compile Include="Admin\add_new_corrective_action.aspx.cs">
-      <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\add_new_corrective_action.aspx.designer.cs">
-      <DependentUpon>add_new_corrective_action.aspx</DependentUpon>
-    </Compile>
-    <None Include="Admin\add_new_defect_modes.aspx.cs">
-      <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
     <Compile Include="Admin\add_new_defect_category.aspx.cs">
       <DependentUpon>add_new_defect_category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_new_defect_category.aspx.designer.cs">
       <DependentUpon>add_new_defect_category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\add_new_defect_modes.aspx.cs">
+      <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_new_defect_modes.aspx.designer.cs">
       <DependentUpon>add_new_defect_modes.aspx</DependentUpon>
@@ -532,15 +522,22 @@
       <DependentUpon>add_new_escalation_reminder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\add_new_escalation_reminder.aspx.designer.cs">
-      <DependentUpon>add_new_escalation_reminder.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\add_form_elements.aspx.cs">
       <DependentUpon>add_form_elements.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\add_form_elements.aspx.designer.cs">
       <DependentUpon>add_form_elements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\add_new_escalation_reminder.aspx.designer.cs">
+      <DependentUpon>add_new_escalation_reminder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\manage_escalation_reminder.aspx.cs">
+      <DependentUpon>manage_escalation_reminder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\manage_escalation_reminder.aspx.designer.cs">
+      <DependentUpon>manage_escalation_reminder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\manage_form_elements.aspx.cs">
       <DependentUpon>manage_form_elements.aspx</DependentUpon>
@@ -555,13 +552,6 @@
     </Compile>
     <Compile Include="Admin\admin_form_elements.aspx.designer.cs">
       <DependentUpon>admin_form_elements.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\assign_qe_to_qel_qm.aspx.cs">
-      <DependentUpon>assign_qe_to_qel_qm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\assign_qe_to_qel_qm.aspx.designer.cs">
-      <DependentUpon>assign_qe_to_qel_qm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
@@ -584,6 +574,20 @@
     <Compile Include="Admin\home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\manage_TAT.aspx.cs">
+      <DependentUpon>manage_TAT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\manage_TAT.aspx.designer.cs">
+      <DependentUpon>manage_TAT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\manage_TAT_relationship.aspx.cs">
+      <DependentUpon>manage_TAT_relationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\manage_TAT_relationship.aspx.designer.cs">
+      <DependentUpon>manage_TAT_relationship.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\manage_user_accounts.aspx.cs">
       <DependentUpon>manage_user_accounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -597,13 +601,6 @@
     </Compile>
     <Compile Include="Admin\manual_escalation.aspx.designer.cs">
       <DependentUpon>manual_escalation.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\scars_by_month.aspx.cs">
-      <DependentUpon>scars_by_month.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\scars_by_month.aspx.designer.cs">
-      <DependentUpon>scars_by_month.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\new_scars.aspx.cs">
       <DependentUpon>new_scars.aspx</DependentUpon>
@@ -682,13 +679,6 @@
     <Compile Include="Admin\reports_TAT_frequency.aspx.designer.cs">
       <DependentUpon>reports_TAT_frequency.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\scar_log.aspx.cs">
-      <DependentUpon>scar_log.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\scar_log.aspx.designer.cs">
-      <DependentUpon>scar_log.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\TAT.aspx.cs">
       <DependentUpon>TAT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -696,23 +686,16 @@
     <Compile Include="Admin\TAT.aspx.designer.cs">
       <DependentUpon>TAT.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\view_corrective_action.aspx.cs">
-      <DependentUpon>view_corrective_action.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\view_corrective_action.aspx.designer.cs">
-      <DependentUpon>view_corrective_action.aspx</DependentUpon>
-    </Compile>
-    <None Include="Admin\view_defect_modes.aspx.cs">
-      <DependentUpon>view_defect_modes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </None>
     <Compile Include="Admin\view_defect_category.aspx.cs">
       <DependentUpon>view_defect_category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\view_defect_category.aspx.designer.cs">
       <DependentUpon>view_defect_category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\view_defect_modes.aspx.cs">
+      <DependentUpon>view_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\view_defect_modes.aspx.designer.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
@@ -751,6 +734,13 @@
     <Compile Include="Engineer\pending_scars.aspx.designer.cs">
       <DependentUpon>pending_scars.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Engineer\reports_Q1.aspx.cs">
+      <DependentUpon>reports_Q1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Engineer\reports_Q1.aspx.designer.cs">
+      <DependentUpon>reports_Q1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Engineer\upload_SCAR_request.aspx.cs">
       <DependentUpon>upload_SCAR_request.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -770,9 +760,6 @@
     <Compile Include="Engineer\reports_CAPA.aspx.designer.cs">
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Engineer\reports_Q1.aspx.designer.cs">
-      <DependentUpon>reports_Q1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Engineer\reports_Q2.aspx.designer.cs">
       <DependentUpon>reports_Q2.aspx</DependentUpon>
     </Compile>
@@ -788,8 +775,9 @@
     <Compile Include="Engineer\scars_forms.aspx.designer.cs">
       <DependentUpon>scars_forms.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Engineer\view_corrective_action.aspx.designer.cs">
-      <DependentUpon>view_corrective_action.aspx</DependentUpon>
+    <Compile Include="Engineer\view_defect_modes.aspx.cs">
+      <DependentUpon>view_defect_modes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Engineer\view_defect_modes.aspx.designer.cs">
       <DependentUpon>view_defect_modes.aspx</DependentUpon>
@@ -846,6 +834,10 @@
     </Compile>
     <Compile Include="Manager\reports_CAPA.aspx.designer.cs">
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\reports_Q1.aspx.cs">
+      <DependentUpon>reports_Q1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manager\reports_Q1.aspx.designer.cs">
       <DependentUpon>reports_Q1.aspx</DependentUpon>
@@ -906,10 +898,6 @@
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Engineer\reports_Q1.aspx.cs">
-      <DependentUpon>reports_Q1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Engineer\reports_Q2.aspx.cs">
       <DependentUpon>reports_Q2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -932,14 +920,6 @@
     </Compile>
     <Compile Include="Engineer\scars_forms.aspx.cs">
       <DependentUpon>scars_forms.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Engineer\view_corrective_action.aspx.cs">
-      <DependentUpon>view_corrective_action.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Engineer\view_defect_modes.aspx.cs">
-      <DependentUpon>view_defect_modes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="forgot_password.aspx.cs">
@@ -994,10 +974,6 @@
       <DependentUpon>reports_CAPA.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Manager\reports_Q1.aspx.cs">
-      <DependentUpon>reports_Q1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Manager\reports_Q2.aspx.cs">
       <DependentUpon>reports_Q2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1031,6 +1007,9 @@
     <Compile Include="Old_App_Code\Encryption.cs" />
     <Compile Include="Old_App_Code\getWW.cs" />
     <Compile Include="Old_App_Code\JabilSession.cs" />
+    <Compile Include="Old_App_Code\NEL.cs" />
+    <Compile Include="Old_App_Code\Notification.cs" />
+    <Compile Include="Old_App_Code\Outbox.cs" />
     <Compile Include="Old_App_Code\SCAR.cs" />
     <Compile Include="Old_App_Code\SCAR_Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

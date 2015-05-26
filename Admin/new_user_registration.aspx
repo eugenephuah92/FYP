@@ -55,6 +55,9 @@
                                         <asp:RequiredFieldValidator ID="vldPrivilege" runat="server" ControlToValidate="lstPrivilege" ErrorMessage="Please Select the User Privilege!" />
                                     </div>
                                     <br /><br />
+                                    <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">

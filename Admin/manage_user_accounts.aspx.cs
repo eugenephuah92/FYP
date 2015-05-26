@@ -15,9 +15,15 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
     string DatabaseName = "JabilDatabase";
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
-            SqlDataReader rdr;
+            BindData();
+        }
+    }
+
+    protected void BindData()
+    {
+         SqlDataReader rdr;
 
             DataTable dt = new DataTable();
             dt.Columns.Add("ID");
@@ -37,11 +43,6 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
                 conn.Open();
                 SqlCommand select = new SqlCommand(@"SELECT id, employee_ID, employee_name, employee_email, employee_position, privilege FROM dbo.Employee", conn);
                 rdr = select.ExecuteReader();
-                if (!rdr.HasRows)
-                {
-                    lblNoRows.Text = "No Records Found for Employees!";
-                    lblNoRows.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
-                }
                 while (rdr.Read())
                 {
                     dr = dt.NewRow();
@@ -55,33 +56,83 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
                     dt.AcceptChanges();
                 }
             }
-            Session["EmployeeTable"] = dt;
             displayUsers.DataSource = dt;
             displayUsers.DataBind();
+    }
+
+    private void SearchData() //Search function
+    {
+        string constr = System.Configuration.ConfigurationManager.ConnectionStrings["JabilDatabase"].ConnectionString;
+        SqlConnection con = new SqlConnection(constr);
+        con.Open();
+        string query = string.Empty;
+        query = "SELECT id, employee_ID, employee_name, employee_email, employee_position, privilege FROM dbo.Employee WHERE ";
+        // Normal Search
+        if (lstFilter.SelectedValue.ToString() == "Employee Name")
+        {
+            query += "employee_name LIKE '" + txtSearch.Text + "%'";
         }
-       
-    }
+        else if (lstFilter.SelectedValue.ToString() == "Employee ID")
+        {
+            query += "employee_id LIKE '" + txtSearch.Text + "%'";
+        }
+        else if (lstFilter.SelectedValue.ToString() == "Employee Email")
+        {
+            query += "employee_email LIKE '" + txtSearch.Text + "%'";
+        }
+        else if (lstFilter.SelectedValue.ToString() == "Employee Position")
+        {
+            query += "employee_position LIKE '" + txtSearch.Text + "%'";
+        }
+        else if (lstFilter.SelectedValue.ToString() == "Privilege")
+        {
+            query += "privilege LIKE '" + txtSearch.Text + "%'";
+        }
+        //Advanced Search
+        if (txtSearch.Text != "")
+        {
+            if (lstFilter1.SelectedValue.ToString() == "Employee Name")
+            {
+                query += "AND employee_name LIKE '" + txtSearch1.Text + "%'";
+            }
+            else if (lstFilter1.SelectedValue.ToString() == "Employee ID")
+            {
+                query += "AND employee_id LIKE '" + txtSearch1.Text + "%'";
+            }
+            else if (lstFilter1.SelectedValue.ToString() == "Employee Position")
+            {
+                query += "AND employee_position LIKE '" + txtSearch1.Text + "%'";
+            }
+            else if (lstFilter1.SelectedValue.ToString() == "Employee Email")
+            {
+                query += "AND employee_email LIKE '" + txtSearch1.Text + "%'";
+            }
+            else if (lstFilter1.SelectedValue.ToString() == "Privilege")
+            {
+                query += "AND privilege LIKE '" + txtSearch1.Text + "%'";
+            }
 
-    protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        displayUsers.PageIndex = e.NewPageIndex;
-        displayUsers.DataBind();
-    }
-
-    protected void Show_10_Records(object sender, EventArgs e)
-    {
-        displayUsers.PageSize = 10;
-        displayUsers.DataBind();
-    }
-
-    protected void Show_50_Records(object sender, EventArgs e)
-    {
-        displayUsers.PageSize = 50;
-        displayUsers.DataBind();
-    }
-
-    protected void UsersGridView_Sorting(object sender, GridViewSortEventArgs e)
-    {
+            if (lstFilter2.SelectedValue.ToString() == "Employee Name")
+            {
+                query += "AND employee_name LIKE '" + txtSearch2.Text + "%'";
+            }
+            else if (lstFilter2.SelectedValue.ToString() == "Employee ID")
+            {
+                query += "AND employee_id LIKE '" + txtSearch2.Text + "%'";
+            }
+            else if (lstFilter2.SelectedValue.ToString() == "Employee Position")
+            {
+                query += "AND employee_position LIKE '" + txtSearch2.Text + "%'";
+            }
+            else if (lstFilter2.SelectedValue.ToString() == "Employee Email")
+            {
+                query += "AND employee_email LIKE '" + txtSearch2.Text + "%'";
+            }
+            else if (lstFilter2.SelectedValue.ToString() == "Privilege")
+            {
+                query += "AND privilege LIKE '" + txtSearch2.Text + "%'";
+            }
+        }
         SqlDataReader rdr;
 
         DataTable dt = new DataTable();
@@ -100,13 +151,8 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            SqlCommand select = new SqlCommand(@"SELECT id, employee_ID, employee_name, employee_email, employee_position, privilege FROM dbo.Employee", conn);
+            SqlCommand select = new SqlCommand(query, conn);
             rdr = select.ExecuteReader();
-            if (!rdr.HasRows)
-            {
-                lblNoRows.Text = "No Records Found for Employees!";
-                lblNoRows.ForeColor = System.Drawing.ColorTranslator.FromHtml("red");
-            }
             while (rdr.Read())
             {
                 dr = dt.NewRow();
@@ -116,56 +162,59 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
                 dr["Employee Email"] = rdr["employee_email"].ToString();
                 dr["Employee Position"] = rdr["employee_position"].ToString();
                 dr["Privilege"] = rdr["privilege"].ToString();
-
                 dt.Rows.Add(dr);
                 dt.AcceptChanges();
             }
         }
-
         displayUsers.DataSource = dt;
         displayUsers.DataBind();
+    }
 
-        if (dt != null)
+    protected void btnSearch_Click(object sender, EventArgs e) //Search gridview data
+    {
+        if (Page.IsValid)
         {
-            DataView dataView = new DataView(dt);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
-            displayUsers.DataSource = dataView;
-            displayUsers.DataBind();
+            SearchData();
         }
     }
 
-    private string GridViewSortDirection
+    protected void btnClear_Click(object sender, EventArgs e) //Clear all search fields
     {
-        get { return ViewState["SortDirection"] as string ?? "DESC"; }
-        set { ViewState["SortDirection"] = value; }
+        lstFilter.ClearSelection();
+        txtSearch.Text = "";
+        lstFilter1.ClearSelection();
+        txtSearch1.Text = "";
+        lstFilter2.ClearSelection();
+        txtSearch2.Text = "";
+
+        BindData();
     }
 
-    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    protected void PageSizeChanged(object sender, EventArgs e) //Change page size
     {
-        switch (GridViewSortDirection)
+        if (!String.IsNullOrEmpty(txtSearch.Text))
         {
-            case "ASC":
-                GridViewSortDirection = "DESC";
-                break;
-
-            case "DESC":
-                GridViewSortDirection = "ASC";
-                break;
-        }
-
-        return GridViewSortDirection;
-    }
-
-    protected void SetSortDirection(string sortDirection)
-    {
-        if (sortDirection == "ASC")
-        {
-            sortDirection = "DESC";
+            displayUsers.PageSize = Convert.ToInt32(lstPageSize.SelectedValue);
+            SearchData();
         }
         else
         {
-            sortDirection = "ASC";
+            displayUsers.PageSize = Convert.ToInt32(lstPageSize.SelectedValue);
+            BindData();
+        }
+    }
+
+    protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e) //Allow paging
+    {
+        if (!String.IsNullOrEmpty(txtSearch.Text))
+        {
+            displayUsers.PageIndex = e.NewPageIndex;
+            SearchData();
+        }
+        else
+        {
+            displayUsers.PageIndex = e.NewPageIndex;
+            BindData();
         }
     }
 
@@ -174,29 +223,61 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
         TableCell cell = displayUsers.Rows[e.RowIndex].Cells[2];
         TableCell employee_name = displayUsers.Rows[e.RowIndex].Cells[3];
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
-        using (SqlConnection conn = new SqlConnection(connect))
+        if (!String.IsNullOrEmpty(txtSearch.Text))
         {
-            conn.Open();
-            SqlCommand delete = new SqlCommand("DELETE from dbo.Employee where employee_ID = @employee_ID", conn);
-            delete.Parameters.AddWithValue("@employee_ID", cell.Text);
-            delete.ExecuteNonQuery();
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand delete = new SqlCommand("DELETE from dbo.Employee where employee_ID = @employee_ID", conn);
+                delete.Parameters.AddWithValue("@employee_ID", cell.Text);
+                delete.ExecuteNonQuery();
+            }
+            string message = employee_name.Text + " has been removed from the system!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+            BindData();
         }
-        string message = employee_name.Text + " has been removed from the system!";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+        else
+        {
+            using (SqlConnection conn = new SqlConnection(connect))
+            {
+                conn.Open();
+                SqlCommand delete = new SqlCommand("DELETE from dbo.Employee where employee_ID = @employee_ID", conn);
+                delete.Parameters.AddWithValue("@employee_ID", cell.Text);
+                delete.ExecuteNonQuery();
+            }
+            string message = employee_name.Text + " has been removed from the system!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+            BindData();
+        }
+        
     }
 
     protected void UsersGridView_RowEditing(object sender, GridViewEditEventArgs e)
     {
-        displayUsers.EditIndex = e.NewEditIndex;
-        displayUsers.DataSource = Session["EmployeeTable"];
-        displayUsers.DataBind();
+        if (!String.IsNullOrEmpty(txtSearch.Text))
+        {
+            displayUsers.EditIndex = e.NewEditIndex;
+            SearchData();
+        }
+        else
+        {
+            displayUsers.EditIndex = e.NewEditIndex;
+            BindData();
+        }       
     }
 
     protected void UsersGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
-        displayUsers.EditIndex = -1;
-        displayUsers.DataSource = Session["EmployeeTable"];
-        displayUsers.DataBind();
+        if (!String.IsNullOrEmpty(txtSearch.Text))
+        {
+            displayUsers.EditIndex = -1;
+            SearchData();
+        }
+        else
+        {
+            displayUsers.EditIndex = -1;
+            BindData();
+        }
     }
 
     protected void UsersGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -208,48 +289,76 @@ public partial class Admin_manage_user_accounts : System.Web.UI.Page
         //Update the values.
         
         GridViewRow row = displayUsers.Rows[e.RowIndex];
-        dt.Rows[row.DataItemIndex]["Employee ID"] = ((TextBox)(row.Cells[2].Controls[0])).Text;
-        dt.Rows[row.DataItemIndex]["Employee Name"] = ((TextBox)(row.Cells[3].Controls[0])).Text;
-        dt.Rows[row.DataItemIndex]["Employee Email"] = ((TextBox)(row.Cells[4].Controls[0])).Text;
-        dt.Rows[row.DataItemIndex]["Employee Position"] = ((TextBox)(row.Cells[5].Controls[0])).Text;
-        dt.Rows[row.DataItemIndex]["Privilege"] = ((TextBox)(row.Cells[6].Controls[0])).Text;
 
         string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
 
         using (SqlConnection conn = new SqlConnection(connect))
         {
             conn.Open();
-            try
+            if (!String.IsNullOrEmpty(txtSearch.Text))
             {
-                SqlCommand updateUsers = new SqlCommand(@"UPDATE dbo.Employee SET employee_ID = @employee_ID, employee_name = @employee_name, employee_email = @employee_email, 
-employee_position = @employee_position, privilege = @privilege WHERE id = @id",conn);
-                updateUsers.Parameters.AddWithValue("@id", displayUsers.DataKeys[e.RowIndex].Values[0].ToString());
-                updateUsers.Parameters.AddWithValue("@employee_ID", ((TextBox)(row.Cells[2].Controls[0])).Text);
-                updateUsers.Parameters.AddWithValue("@employee_name", ((TextBox)(row.Cells[3].Controls[0])).Text);
-                updateUsers.Parameters.AddWithValue("@employee_email", ((TextBox)(row.Cells[4].Controls[0])).Text);
-                updateUsers.Parameters.AddWithValue("@employee_position", ((TextBox)(row.Cells[5].Controls[0])).Text);
-                updateUsers.Parameters.AddWithValue("@privilege", ((TextBox)(row.Cells[6].Controls[0])).Text);
-                updateUsers.ExecuteNonQuery();
-                string message = "User details has been successfully updated!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                try
+                {
+                    SqlCommand updateUsers = new SqlCommand(@"UPDATE dbo.Employee SET employee_ID = @employee_ID, employee_name = @employee_name, employee_email = @employee_email, 
+employee_position = @employee_position, privilege = @privilege WHERE id = @id", conn);
+                    updateUsers.Parameters.AddWithValue("@id", displayUsers.DataKeys[e.RowIndex].Values[0].ToString());
+                    updateUsers.Parameters.AddWithValue("@employee_ID", ((TextBox)(row.Cells[2].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_name", ((TextBox)(row.Cells[3].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_email", ((TextBox)(row.Cells[4].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_position", ((TextBox)(row.Cells[5].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@privilege", ((TextBox)(row.Cells[6].Controls[0])).Text);
+                    updateUsers.ExecuteNonQuery();
+                    string message = "User details has been successfully updated!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                    //Reset the edit index.
+                    displayUsers.EditIndex = -1;
+
+                    //Bind data to the GridView control.
+                    SearchData();
+                }
+                catch
+                {
+                    string message = "Failed to update user details! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-            catch
+            else
             {
-                string message = "Failed to update user details! Please Try Again!";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            
+                try
+                {
+                    SqlCommand updateUsers = new SqlCommand(@"UPDATE dbo.Employee SET employee_ID = @employee_ID, employee_name = @employee_name, employee_email = @employee_email, 
+employee_position = @employee_position, privilege = @privilege WHERE id = @id", conn);
+                    updateUsers.Parameters.AddWithValue("@id", displayUsers.DataKeys[e.RowIndex].Values[0].ToString());
+                    updateUsers.Parameters.AddWithValue("@employee_ID", ((TextBox)(row.Cells[2].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_name", ((TextBox)(row.Cells[3].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_email", ((TextBox)(row.Cells[4].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@employee_position", ((TextBox)(row.Cells[5].Controls[0])).Text);
+                    updateUsers.Parameters.AddWithValue("@privilege", ((TextBox)(row.Cells[6].Controls[0])).Text);
+                    updateUsers.ExecuteNonQuery();
+                    string message = "User details has been successfully updated!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                    //Reset the edit index.
+                    displayUsers.EditIndex = -1;
+
+                    //Bind data to the GridView control.
+                    BindData();
+                }
+                catch
+                {
+                    string message = "Failed to update user details! Please Try Again!";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }     
         }
 
-        //Reset the edit index.
-        displayUsers.EditIndex = -1;
-
-        //Bind data to the GridView control.
-        displayUsers.DataSource = Session["EmployeeTable"];
-        displayUsers.DataBind();
+        
     }
 }

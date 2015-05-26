@@ -13,6 +13,8 @@ using System.Globalization;
 using Jabil_Employee;
 using Jabil_Session;
 using CryptoLib;
+using Notice_Alert;
+using Email_Alert;
 public partial class Engineer_scars_forms : System.Web.UI.Page
 {
     string DatabaseName = "JabilDatabase";
@@ -2431,55 +2433,32 @@ WHERE scar_no = @scar_no", con);
                 try
                 {
                     // Stores notice in database
+                    Notification notice_details_WCM = new Notification();
                     string currentDateTime = DateTime.Now.ToString();
                     string noticeBody = "You have a pending 8D Approval Request - " + scar_no + " by " + JabilSession.Current.employee_name + ". Click link to view SCAR!<br/> <a href='8DApproval.aspx?scar_no=" + scar_no + "'>View SCAR</a> ";
-                    SqlCommand addNoticeWCM = new SqlCommand(@"INSERT INTO dbo.Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) 
-VALUES (@hash, @Notice_From, @Notice_To, @Notice_Subject, @Notice_Body, @Notice_Timestamp, @Read_Status)", con);
                     string hashWCM = WCM_details.Employee_name + scar_no + noticeBody;
                     hashWCM = Encryptor.MD5HASH(hashWCM);
-                    addNoticeWCM.Parameters.AddWithValue("@hash", hashWCM);
-                    addNoticeWCM.Parameters.AddWithValue("@Notice_From", JabilSession.Current.employee_name);
-                    addNoticeWCM.Parameters.AddWithValue("@Notice_To", WCM_details.Employee_name);
-                    addNoticeWCM.Parameters.AddWithValue("@Notice_Subject", "8D Approval Request");
-                    addNoticeWCM.Parameters.AddWithValue("@Notice_Body", noticeBody);
-                    addNoticeWCM.Parameters.AddWithValue("@Notice_TimeStamp",currentDateTime);
-                    addNoticeWCM.Parameters.AddWithValue("@Read_Status", "False");
-                    addNoticeWCM.ExecuteNonQuery();
+                    notice_details_WCM.Hash = hashWCM;
+                    notice_details_WCM.Notice_From = JabilSession.Current.employee_name;
+                    notice_details_WCM.Notice_To = WCM_details.Employee_name;
+                    notice_details_WCM.Notice_Subject = "8D Approval Request";
+                    notice_details_WCM.Notice_Body = noticeBody;
+                    notice_details_WCM.Notice_Timestamp = currentDateTime;
+                    notice_details_WCM.Read_Status = false;
+                    notice_details_WCM.Insert_Email("JabilDatabase");
 
-                    SqlCommand addNoticeQM = new SqlCommand(@"INSERT INTO dbo.Notice (hash, Notice_From, Notice_To, Notice_Subject, Notice_Body, Notice_Timestamp, Read_Status) 
-VALUES (@hash, @Notice_From, @Notice_To, @Notice_Subject, @Notice_Body, @Notice_Timestamp, @Read_Status)", con);
+                    Notification notice_details_QM = new Notification();
                     string hashQM = QM_details.Employee_name + scar_no + noticeBody;
                     hashQM = Encryptor.MD5HASH(hashQM);
-                    addNoticeQM.Parameters.AddWithValue("@hash", hashQM);
-                    addNoticeQM.Parameters.AddWithValue("@Notice_From", JabilSession.Current.employee_name);
-                    addNoticeQM.Parameters.AddWithValue("@Notice_To", QM_details.Employee_name);
-                    addNoticeQM.Parameters.AddWithValue("@Notice_Subject", "8D Approval Request");
-                    addNoticeQM.Parameters.AddWithValue("@Notice_Body", noticeBody);
-                    addNoticeQM.Parameters.AddWithValue("@Notice_TimeStamp", currentDateTime);
-                    addNoticeQM.Parameters.AddWithValue("@Read_Status", "False");
-                    addNoticeQM.ExecuteNonQuery();
+                    notice_details_QM.Hash = hashQM;
+                    notice_details_QM.Notice_From = JabilSession.Current.employee_name;
+                    notice_details_QM.Notice_To = QM_details.Employee_name;
+                    notice_details_QM.Notice_Subject = "8D Approval Request";
+                    notice_details_QM.Notice_Body = noticeBody;
+                    notice_details_QM.Notice_Timestamp = currentDateTime;
+                    notice_details_QM.Read_Status = false;
+                    notice_details_QM.Insert_Email("JabilDatabase");
 
-                    // SQL command to insert data into database
-                    /*SqlCommand addWCM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
-    VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
-
-                    addWCM.Parameters.AddWithValue("@recipient_email_address", WCM_details.Employee_email);
-                    addWCM.Parameters.AddWithValue("@recipient_name", WCM_details.Employee_name);
-                    addWCM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
-                    addWCM.Parameters.AddWithValue("@email_content", email_details.Email_content);
-
-                    addWCM.ExecuteNonQuery();
-
-                    SqlCommand addQM = new SqlCommand(@"INSERT INTO dbo.email (recipient_email_address, recipient_name, email_subject, email_content)
-    VALUES (@recipient_email_address, @recipient_name, @email_subject, @email_content)", con);
-
-                    addQM.Parameters.AddWithValue("@recipient_email_address", QM_details.Employee_email);
-                    addQM.Parameters.AddWithValue("@recipient_name", QM_details.Employee_name);
-                    addQM.Parameters.AddWithValue("@email_subject", email_details.Email_header);
-                    addQM.Parameters.AddWithValue("@email_content", email_details.Email_content);
-
-                    addQM.ExecuteNonQuery();*/
-                    
                     // Insert approval request into database
                     SqlCommand addApproval = new SqlCommand(@"INSERT INTO Approval_8D (name_WCM, name_QM, approval_status_WCM, approval_status_QM, comment_WCM, comment_QM, sent_date, sent_time, scar_no)
 VALUES (@name_WCM, @name_QM, @approval_status_WCM, @approval_status_QM, @comment_WCM, @comment_QM, @sent_date, @sent_time, @scar_no)", con);

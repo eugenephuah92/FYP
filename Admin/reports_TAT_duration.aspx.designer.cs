@@ -39,6 +39,15 @@ public partial class Admin_reports_TAT_duration {
     protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
+    /// CompareValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CompareValidator CompareValidatorSearch;
+    
+    /// <summary>
     /// btnSearch control.
     /// </summary>
     /// <remarks>

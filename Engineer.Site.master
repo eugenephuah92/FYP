@@ -11,7 +11,6 @@
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="css/uploadify.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/theme-blue.css" rel="stylesheet" type="text/css">
@@ -86,8 +85,8 @@
                                 <li><a href="reports_TAT_duration.aspx">Duration needed to close SCAR</a></li>
                             </ul>
                         </li>
-                        <li <% if (GetPageName.Value == "scar_log") Response.Write("class=\"nav-active\"");%>><a href="scar_log.aspx"><i class="fa fa-file"></i>&nbsp;SCAR Log</a></li>
-                        <li <% if (GetPageName.Value == "view_corrective_action") Response.Write("class=\"nav-active\"");%>><a href="view_corrective_action.aspx"><i class="fa fa-th-list"></i>&nbsp;View Corrective / Preventive Actions</a></li>
+                        
+                        
                         <li <% if (GetPageName.Value == "view_defect_modes") Response.Write("class=\"nav-active\"");%>><a href="view_defect_modes.aspx"><i class="fa fa-th-list"></i>&nbsp;View Defect Modes</a></li>
                         <li <% if (GetPageName.Value == "change_password") Response.Write("class=\"nav-active\"");%>><a href="change_password.aspx"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                     </ul>

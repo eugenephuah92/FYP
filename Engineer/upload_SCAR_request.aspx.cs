@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using FYP_WebApp.Old_App_Code;
 using System.Net.Mail;
+using Notice_Alert;
+using CryptoLib;
 
 public partial class Engineer_upload_scar_request: System.Web.UI.Page
 {
@@ -308,6 +310,21 @@ defect_type, non_conformity_reported, reject_reason, expected_date_close, save_s
             addSite.Parameters.AddWithValue("@scar_request_method", "auto");
             addSite.Parameters.AddWithValue("@pending_action", "Awaiting Engineer Response");
             addSite.ExecuteNonQuery();
+
+            // Add into TAT Table
+            /*SqlCommand insert_TAT = new SqlCommand(@"INSERT INTO dbo.TAT (SCAR_ID, employee_ID, issued_date, escalation_level, trigger_date, escalation_count, modified_by, last_modified) 
+VALUES (@SCAR_ID, @employee_ID, @issued_date, @escalation_level, @trigger_date, @escalation_count, @modified_by, @last_modified)", con);
+            insert_TAT.Parameters.AddWithValue("@SCAR_ID", notepad_data[0]);
+            insert_TAT.Parameters.AddWithValue("@employee_ID", notepad_data[8]);
+            insert_TAT.Parameters.AddWithValue("@issued_date", issued_date);
+            insert_TAT.Parameters.AddWithValue("@escalation_level", 0);
+            DateTime trigger_date = issued_date.AddDays(6);
+            insert_TAT.Parameters.AddWithValue("@trigger_date", trigger_date);
+            insert_TAT.Parameters.AddWithValue("@escalation_count", 0);
+            insert_TAT.Parameters.AddWithValue("@modified_by", Jabil_Session.JabilSession.Current.employee_name);
+            DateTime currentDateTime = DateTime.Now;
+            insert_TAT.Parameters.AddWithValue("@last_modified", currentDateTime);
+            insert_TAT.ExecuteNonQuery();*/
         }
         con.Close();
     }

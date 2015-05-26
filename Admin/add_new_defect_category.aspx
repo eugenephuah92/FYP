@@ -5,6 +5,7 @@
     <div class="right-panel">
         <div class="right-panel-inner">
             <div class="col-md-12">
+                <!-- Add New Defect Category panel -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         Add New Defect Category 
@@ -19,10 +20,10 @@
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatorDefectCategory" runat="server" 
                                     ErrorMessage="* Defect Category ONLY accept alphabets (letters)" ForeColor="Red" ControlToValidate="txtNewDefectCategory" ValidationExpression="^[a-zA-Z ]+$" ValidationGroup="DC" Display="Dynamic"></asp:RegularExpressionValidator>
                                 <asp:CustomValidator ID="CustomValidatorDefectCategory" runat="server" 
-                                    ErrorMessage="* Defect Category is already existed" ForeColor="Red" ControlToValidate="txtNewDefectCategory" OnServerValidate="ValidateDefectCategory" ValidationGroup="DC" Display="Dynamic"></asp:CustomValidator>
+                                    ErrorMessage="* Defect Category entered is already existed in the database" ForeColor="Red" ControlToValidate="txtNewDefectCategory" OnServerValidate="ValidateDefectCategory" ValidationGroup="DC" Display="Dynamic"></asp:CustomValidator>
                             </div>
                             <br /><br />
-                        </div>
+                        </div>                     
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <asp:Button CssClass="btn btn-success" ID="btnSubmitDC" runat="server" Text="Submit" OnClick="btnSubmitDC_Click" ValidationGroup="DC" />
@@ -30,6 +31,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Add New Defect Group panel -->
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         Add New Defect Group
@@ -42,7 +45,7 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorDefectGroup" runat="server"
                                     ErrorMessage="* Defect Group is a required field" ForeColor="Red" ControlToValidate="txtNewDefectGroup" ValidationGroup="DG" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <asp:CustomValidator ID="CustomValidatorDefectGroup" runat="server" 
-                                    ErrorMessage="* Defect Group is already existed" ForeColor="Red" ControlToValidate="txtNewDefectGroup" OnServerValidate="ValidateDefectGroup" ValidationGroup="DG" Display="Dynamic"></asp:CustomValidator>
+                                    ErrorMessage="* Defect Group entered is already existed in the database" ForeColor="Red" ControlToValidate="txtNewDefectGroup" OnServerValidate="ValidateDefectGroup" ValidationGroup="DG" Display="Dynamic"></asp:CustomValidator>
                             </div>
                             <br /><br />
                         </div>
@@ -53,7 +56,32 @@
                         </div>
                     </div>
                 </div>
+                <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        //Alert box
+        function messageBox(message) { 
+            $("#messageBox").dialog({
+                modal: true,
+                height: 300,
+                width: 520,
+                title: "Save Status",
+                open: function () {
+                    var markup = message;
+                    $(this).html(markup);
+                },
+                buttons: {
+                    OK: function () {
+                        $(this).dialog("close");
+                    }
+                },
+
+            });
+            return false;
+        }
+    </script>
 </asp:Content>

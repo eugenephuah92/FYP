@@ -9,50 +9,32 @@
 
 
 
-public partial class Manager_reports_TAT_frequency {
+public partial class Admin_assign_qe_to_qel_qm {
     
     /// <summary>
-    /// lstYear control.
+    /// display10records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstYear;
+    protected global::System.Web.UI.WebControls.LinkButton display10records;
     
     /// <summary>
-    /// btnSearch control.
+    /// display50records control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnSearch;
+    protected global::System.Web.UI.WebControls.LinkButton display50records;
     
     /// <summary>
-    /// GridViewTAT_Frequency control.
+    /// GridViewTAT_Relationship control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.GridView GridViewTAT_Frequency;
-    
-    /// <summary>
-    /// btnExport control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnExport;
-    
-    /// <summary>
-    /// btnPrint control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnPrint;
+    protected global::System.Web.UI.WebControls.GridView GridViewTAT_Relationship;
 }

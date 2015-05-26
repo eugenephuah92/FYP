@@ -80,12 +80,12 @@ VALUES (@employee_ID, @employee_name, @employee_email, @employee_position, @pass
                     insertUser.Parameters.AddWithValue("@password", employee_details.Employee_password);
                     insertUser.Parameters.AddWithValue("@privilege", employee_details.Privilege);
                     insertUser.ExecuteNonQuery();
-                    string message = "User has been successfully added into the system!";
+                    string message = "User: " + employee_details.Employee_name + " has been successfully added into the system!";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 catch (Exception err)
                 {
-                    string message = "Failed to add new user! Please Try Again!" + err.Message;
+                    string message = "Failed to add new user: " + employee_details.Employee_name + " ! Please Try Again!" + err.Message;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "key", "messageBox('" + message + "')", true);
                 }
                 finally

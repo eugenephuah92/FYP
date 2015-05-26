@@ -7,12 +7,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using Jabil_Session;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Configuration;
+using System.Configuration;
 public partial class Admin_SiteMaster : MasterPage
 {
     private const string AntiXsrfTokenKey = "__AntiXsrfToken";
     private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
     private string _antiXsrfTokenValue;
-
+    string DatabaseName = "JabilDatabase";
     protected void Page_Init(object sender, EventArgs e)
     {
         // The code below helps to protect against XSRF attacks
@@ -79,5 +83,34 @@ public partial class Admin_SiteMaster : MasterPage
         {
             Response.Redirect("../Logout.aspx");
         }
+
+        SqlDataReader rdr;
+
+        string connect = ConfigurationManager.ConnectionStrings[DatabaseName].ConnectionString;
+        int newSCAR = 0;
+        int pendingSCAR = 0;
+        using (SqlConnection conn = new SqlConnection(connect))
+        {
+            conn.Open();
+            SqlCommand select = new SqlCommand("SELECT scar_stage FROM dbo.SCAR_Request", conn);
+
+            rdr = select.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                if (rdr["scar_stage"].ToString().Equals("New SCAR"))
+                {
+                    newSCAR++;
+                }
+                else if (rdr["scar_stage"].ToString().Equals("Pending SCAR"))
+                {
+                    pendingSCAR++;
+                }
+            }
+            rdr.Close();
+        }
+
+        lblNewSCAR.Text = Convert.ToString(newSCAR);
+        lblPendingSCAR.Text = Convert.ToString(pendingSCAR);
     }
 }

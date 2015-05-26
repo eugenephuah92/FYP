@@ -12,6 +12,15 @@
 public partial class Manager_reports_CAPA {
     
     /// <summary>
+    /// lstPageSize control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
+    
+    /// <summary>
     /// lstFilter control.
     /// </summary>
     /// <remarks>
@@ -19,6 +28,33 @@ public partial class Manager_reports_CAPA {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.DropDownList lstFilter;
+    
+    /// <summary>
+    /// RequiredFieldValidatorFilter control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorFilter;
+    
+    /// <summary>
+    /// txtSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox txtSearch;
+    
+    /// <summary>
+    /// RequiredFieldValidatorSearch control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorSearch;
     
     /// <summary>
     /// btnSearch control.
@@ -30,60 +66,58 @@ public partial class Manager_reports_CAPA {
     protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// test control.
+    /// btnClear control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList test;
+    protected global::System.Web.UI.WebControls.Button btnClear;
     
     /// <summary>
-    /// searchTxt2 control.
+    /// lstFilter1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt2;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter1;
     
     /// <summary>
-    /// btnSearch2 control.
+    /// txtSearch1 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch2;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch1;
     
     /// <summary>
-    /// lstFilter3 control.
+    /// lstFilter2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList lstFilter3;
-    protected global::System.Web.UI.WebControls.DropDownList lstPageSize;
+    protected global::System.Web.UI.WebControls.DropDownList lstFilter2;
     
     /// <summary>
-    /// searchTxt3 control.
+    /// txtSearch2 control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox searchTxt3;
-    protected global::System.Web.UI.WebControls.TextBox txtSearch;
+    protected global::System.Web.UI.WebControls.TextBox txtSearch2;
     
     /// <summary>
-    /// btnSearch3 control.
+    /// GridViewCAPA control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.LinkButton btnSearch3;
+    protected global::System.Web.UI.WebControls.GridView GridViewCAPA;
     
     /// <summary>
     /// btnExport control.
@@ -102,6 +136,4 @@ public partial class Manager_reports_CAPA {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.Button btnPrint;
-
-    protected global::System.Web.UI.WebControls.GridView GridViewCAPA;
 }

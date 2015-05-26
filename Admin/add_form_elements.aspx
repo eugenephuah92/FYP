@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Auto SCAR &amp; TAT - Add Form Elements" Language="C#" MasterPageFile="~/Admin.Site.Master" EnableEventValidation="false" AutoEventWireup="true" Inherits="Admin_add_form_elements" Codebehind="add_form_elements.aspx.cs" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <!-- Manage Form Elements Page for admin: Allows Admin to edit/add/remove form element values -->
 <div class="right-panel">
@@ -18,9 +18,12 @@
                                 </div>
                             </div>
                             <br /><br />
+                        <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" Text="Add Element" OnClick="Click_Add"/>
+                                    <asp:Button CssClass="btn btn-primary" ID="btnAdd" runat="server" Text="Add Element" OnClick="Click_Add" />
                                 </div>
                             </div>
 

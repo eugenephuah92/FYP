@@ -12,186 +12,103 @@
 public partial class Manager_reports_Q3 {
     
     /// <summary>
-    /// txtWorkingWeek1 control.
+    /// txtWW control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    /// 
-
     protected global::System.Web.UI.WebControls.TextBox txtWW;
+    
+    /// <summary>
+    /// CustomValidatorCheckEmpty control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorCheckEmpty;
+    
+    /// <summary>
+    /// txtDefect control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtDefect;
+    
+    /// <summary>
+    /// txtCAPA control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtCAPA;
+    
+    /// <summary>
+    /// txtPIC control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtPIC;
+    
+    /// <summary>
+    /// txtDueDate control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtDueDate;
+    
+    /// <summary>
+    /// txtStatus control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.TextBox txtStatus;
+    
+    /// <summary>
+    /// btnAddRecord control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnAddRecord;
+    
+    /// <summary>
+    /// btnClear control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnClear;
+    
+    /// <summary>
+    /// lblInfo control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.Label lblInfo;
-
-    protected global::System.Web.UI.WebControls.TextBox txtWorkingWeek1;
+    
+    /// <summary>
+    /// GridViewQ3 control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
     protected global::System.Web.UI.WebControls.GridView GridViewQ3;
-    
-    /// <summary>
-    /// txtDefect1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefect1;
-    
-    /// <summary>
-    /// txtCAPA1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtCAPA1;
-    
-    /// <summary>
-    /// txtPIC1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtPIC1;
-    
-    /// <summary>
-    /// txtDueDate1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDueDate1;
-    
-    /// <summary>
-    /// txtStatus1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtStatus1;
-    
-    /// <summary>
-    /// txtWorkingWeek2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtWorkingWeek2;
-    
-    /// <summary>
-    /// txtDefect2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefect2;
-    
-    /// <summary>
-    /// txtCAPA2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtCAPA2;
-    
-    /// <summary>
-    /// txtPIC2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtPIC2;
-    
-    /// <summary>
-    /// txtDueDate2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDueDate2;
-    
-    /// <summary>
-    /// txtStatus2 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtStatus2;
-    
-    /// <summary>
-    /// txtWorkingWeek3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtWorkingWeek3;
-    
-    /// <summary>
-    /// txtDefect3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDefect3;
-    
-    /// <summary>
-    /// txtCAPA3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtCAPA3;
-    
-    /// <summary>
-    /// txtPIC3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtPIC3;
-    
-    /// <summary>
-    /// txtDueDate3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtDueDate3;
-    
-    /// <summary>
-    /// txtStatus3 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.TextBox txtStatus3;
-    
-    /// <summary>
-    /// btnAddRow control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnAddRow;
     
     /// <summary>
     /// btnExport control.

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_reports_TAT_frequency" CodeBehind="~/Admin/reports_TAT_frequency.aspx.cs" %>
+﻿<%@ Page Title="Auto SCAR &amp; TAT - Reports" Language="C#" MasterPageFile="~/Admin.Site.Master" AutoEventWireup="true" Inherits="Admin_reports_TAT_frequency" CodeBehind="~/Admin/reports_TAT_frequency.aspx.cs" EnableEventValidation="false" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div class="right-panel">
@@ -9,6 +9,7 @@
                         Report - Frequency of Cases of TAT Triggering
                     </div>
                     <div class="panel-body">
+                        <!-- Select year to display gridview -->
                         <div class="row" style="padding-left: 15pt">
                             <div class="col-md-2" style="padding-top: 10pt">                             
                                 <asp:DropDownList CssClass="form-control" ID="lstYear" runat="server">
@@ -35,16 +36,20 @@
                                 <asp:Button ID="btnSearch" CssClass="btn btn-primary" Text="Search" runat="server" OnClick="btnSearch_Click" />
                             </div>
                         </div>
+                        <br />
 
-                        <div class="form-group">
-                            <div class="col-lg-12" style="align-content:center; padding-top: 20pt">
-                                <asp:PlaceHolder ID="Placeholder1" runat="server"></asp:PlaceHolder>
-                            </div>
+                        <div class="panel-body">
+                            <!-- TAT Frequency Gridview -->
+                            <asp:GridView ID="GridViewTAT_Frequency" CssClass="table" runat="server" AutoGenerateColumns="True" CellPadding="4" ForeColor="#333333">
+                                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                <RowStyle BackColor="#E3EAEB" />
+                                <AlternatingRowStyle BackColor="White" />
+                            </asp:GridView>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-12" style="text-align: center">
-                                <asp:Button ID="btnExport" CssClass="btn btn-success" Text="Export to Excel" runat="server" Visible="false" />
-                                <asp:Button ID="btnPrint" CssClass="btn btn-success" Text="Print" runat="server" Visible="false" />
+                                <asp:Button ID="btnExport" CssClass="btn btn-success" Text="Export to Excel" runat="server" OnClick="btnExport_Click" Visible="false" />
+                                <asp:Button ID="btnPrint" CssClass="btn btn-success" Text="Print" runat="server" OnClick="btnPrint_Click" Visible="false" />
                             </div>
                         </div>
                     </div>

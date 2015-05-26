@@ -9,67 +9,79 @@
                     Manage User Account
                 </div>
                 <div class="panel-body">
-                	<div class="col-md-6">
-                	    <p style="padding-top:10pt"> | <asp:LinkButton ID="display10records" runat="server" Text="Show 10 Records" OnClick="Show_10_Records"/> | <asp:LinkButton ID="display50records" runat="server" Text="Show 50 Records" OnClick="Show_50_Records"/> |
-                    </div>
-                            <div class="row">
-                                <div class="col-md-3"  style="padding-top:10pt">
-                                    <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">  
-                                        <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
-                                    </asp:DropDownList>
-                            	</div>
-                                <div class="col-md-3"  style="padding-top:10pt">
-                                    <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="searchTxt" runat="server" placeholder="Search For..." />
-                                        <span class="input-group-btn">
-                                            <asp:LinkButton CssClass="btn btn-default" ID="btnSearch" runat="server">
-                                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                            </asp:LinkButton>
-                                        </span>
+                    <!-- Record per page -->
+                        <div class="col-md-5" style="padding-top: 10pt">
+                            Records per page :
+                                <asp:DropDownList ID="lstPageSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageSizeChanged" Font-Size="Medium">
+                                    <asp:ListItem Text="10" Value="10" Selected="True" />
+                                    <asp:ListItem Text="20" Value="20" />
+                                    <asp:ListItem Text="50" Value="50" />
+                                </asp:DropDownList>
+                        </div>
+                        <!-- Search -->
+                        <div class="row">
+                            <div class="col-md-2" style="padding-top: 10pt">
+                                <asp:DropDownList CssClass="form-control" ID="lstFilter" runat="server">
+                                    <asp:ListItem Selected="True">Select filter</asp:ListItem>
+                                    <asp:ListItem Value="Employee Name">Employee Name</asp:ListItem>
+                                    <asp:ListItem Value="Employee ID">Employee ID</asp:ListItem>
+                                    <asp:ListItem Value="Employee Email">Employee Email</asp:ListItem>
+                                    <asp:ListItem Value="Employee Position">Employee Position</asp:ListItem>
+                                    <asp:ListItem Value="Privilege">Privilege</asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorFilter" runat="server" ErrorMessage="* No filter is selected" ForeColor="Red" ControlToValidate="lstFilter" InitialValue="Select filter" Display="Dynamic" ValidationGroup="Search"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-2" style="padding-top: 10pt">
+                                <asp:TextBox CssClass="form-control" ID="txtSearch" runat="server" placeholder="Enter keyword" />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorSearch" runat="server" ErrorMessage="* Keyword is required" ForeColor="Red" ControlToValidate="txtSearch" Display="Dynamic" ValidationGroup="Search"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-1" style="padding-top: 10pt">
+                                <asp:Button CssClass="btn btn-primary" ID="btnSearch" Text="Search" runat="server" OnClick="btnSearch_Click" ValidationGroup="Search" />
+                            </div>
+                            <div class="col-md-1" style="padding-top: 10pt">
+                                <asp:Button CssClass="btn btn-danger" ID="btnClear" Text="Clear" runat="server" OnClick="btnClear_Click" />
+                            </div> 
+
+                            <!-- Advanced Search -->
+                            <div class="panel-group" id="accordion" role="tablist">
+                                <div class="col-md-7 pull-right">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration: none">+ Advanced Search
+                                        </a>
                                     </div>
-                                </div>
-                                <!-- Advanced Search -->
-                                <div class="panel-group" id="accordion" role="tablist">
-                                    <div class="col-md-6 pull-right">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration:none">
-                                                + Advanced Search
-                                            </a>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne">
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-6"  style="padding-top:10pt">
-                                                        <asp:DropDownList CssClass="form-control" ID="test" runat="server">  
-                                                            <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
-                                                        </asp:DropDownList>
-                            	                    </div>
-                                                    <div class="col-md-6"  style="padding-top:10pt">
-                                                        <div class="input-group">
-                                                            <asp:TextBox CssClass="form-control" ID="searchTxt2" runat="server" placeholder="Search for..." />
-                                                            <span class="input-group-btn">
-                                                                <asp:LinkButton CssClass="btn btn-default" ID="btnSearch2" runat="server">
-                                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                                                </asp:LinkButton>
-                                                            </span>
-                                                        </div>
+                                    <div id="collapseOne" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-4" style="padding-top: 10pt">
+                                                    <asp:DropDownList CssClass="form-control" ID="lstFilter1" runat="server">
+                                                        <asp:ListItem Selected="True">Select filter</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Name">Employee Name</asp:ListItem>
+                                                        <asp:ListItem Value="Employee ID">Employee ID</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Email">Employee Email</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Position">Employee Position</asp:ListItem>
+                                                        <asp:ListItem Value="Privilege">Privilege</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                                <div class="col-md-6" style="padding-top: 10pt">
+                                                    <div class="input-group">
+                                                        <asp:TextBox CssClass="form-control" ID="txtSearch1" runat="server" placeholder="Enter keyword" />
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-6"  style="padding-top:10pt">
-                                                        <asp:DropDownList CssClass="form-control" ID="lstFilter3" runat="server">  
-                                                            <asp:ListItem Selected="True">Please Select Filter</asp:ListItem>
-                                                        </asp:DropDownList>
-                            	                    </div>
-                                                    <div class="col-md-6"  style="padding-top:10pt">
-                                                        <div class="input-group">
-                                                            <asp:TextBox CssClass="form-control" ID="searchTxt3" runat="server" placeholder="Search for..." />
-                                                            <span class="input-group-btn">
-                                                                <asp:LinkButton CssClass="btn btn-default" ID="btnSearch3" runat="server">
-                                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                                                </asp:LinkButton>
-                                                            </span>
-                                                        </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4" style="padding-top: 10pt">
+                                                    <asp:DropDownList CssClass="form-control" ID="lstFilter2" runat="server">
+                                                        <asp:ListItem Selected="True">Select filter</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Name">Employee Name</asp:ListItem>
+                                                        <asp:ListItem Value="Employee ID">Employee ID</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Email">Employee Email</asp:ListItem>
+                                                        <asp:ListItem Value="Employee Position">Employee Position</asp:ListItem>
+                                                        <asp:ListItem Value="Privilege">Privilege</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                                <div class="col-md-6" style="padding-top: 10pt">
+                                                    <div class="input-group">
+                                                        <asp:TextBox CssClass="form-control" ID="txtSearch2" runat="server" placeholder="Enter keyword" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,33 +89,40 @@
                                     </div>
                                 </div>
                             </div>
-                        </p>
+                        </div> 
+                        <br />
                     <form class="form-horizontal pad10" action="#" method="post">
                             <div class="form-group">
                                 <div class="col-lg-12" style="padding-right:30pt; padding-top:15pt">
                                 	<!-- Table -->
-                                    
-                                    <asp:Label ID="lblNoRows" runat="server" CssClass="col-lg-12 col-md-offset-3" />
-                                   <asp:GridView ID="displayUsers" BorderWidth="2" AlternatingRowStyle-BorderWidth="2" 
-                                       AutoGenerateDeleteButton="true" AutoGenerateEditButton="true" OnRowDeleting="UsersGridView_RowDeleting" OnRowEditing="UsersGridView_RowEditing" OnRowCancelingEdit="UsersGridView_RowCancelingEdit" 
-        OnRowUpdating="UsersGridView_RowUpdating"
-                                       AllowSorting="true" DataKeyNames="id" OnSorting="UsersGridView_Sorting" runat="server" OnPageIndexChanging="OnPageIndexChanging" 
-                                       AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table table-striped table-bordered table-hover">
+                                   <asp:GridView ID="displayUsers" AutoGenerateDeleteButton="true" AutoGenerateEditButton="true" OnRowDeleting="UsersGridView_RowDeleting" OnRowEditing="UsersGridView_RowEditing" OnRowCancelingEdit="UsersGridView_RowCancelingEdit" 
+                                        OnRowUpdating="UsersGridView_RowUpdating"
+                                       DataKeyNames="id"  runat="server" OnPageIndexChanging="OnPageIndexChanging" 
+                                       AutoGenerateColumns="false" AllowPaging="true" PageSize="10" CssClass="table">
                                        <Columns>
                                            <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:HiddenField ID="getID" runat="server" Value='<%# Eval("ID") %>' />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                           <asp:BoundField HeaderText="Employee ID" DataField="Employee ID" SortExpression="Employee ID"/>
-                                           <asp:BoundField HeaderText="Employee Name" DataField="Employee Name" SortExpression="Employee Name"/>
-                                           <asp:BoundField HeaderText="Employee Email" DataField="Employee Email" SortExpression="Employee Email"/>
-                                           <asp:BoundField HeaderText="Employee Position" DataField="Employee Position" SortExpression="Employee Position"/>
-                                           <asp:BoundField HeaderText="Privilege" DataField="Privilege" SortExpression="Privilege"/>
+                                           <asp:BoundField HeaderText="Employee ID" DataField="Employee ID"/>
+                                           <asp:BoundField HeaderText="Employee Name" DataField="Employee Name"/>
+                                           <asp:BoundField HeaderText="Employee Email" DataField="Employee Email" />
+                                           <asp:BoundField HeaderText="Employee Position" DataField="Employee Position" />
+                                           <asp:BoundField HeaderText="Privilege" DataField="Privilege"/>
                                        </Columns>
-                                   
+                                         <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                        <PagerStyle CssClass="cssPager" BackColor="#1C5E55" ForeColor="White" HorizontalAlign="Center" />
+                                        <PagerSettings Mode="NumericFirstLast" PageButtonCount="5" />
+                                        <RowStyle BackColor="#E3EAEB" />
+                                        <AlternatingRowStyle BackColor="White" />
+                                        <EmptyDataTemplate>
+                                            <label style="color: Red; font-weight: bold">No records found for Users !</label>
+                                        </EmptyDataTemplate>
                                        </asp:GridView>
-  									
+  									<div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                                    </div>
                                 </div>
                             </div>  
                     </form>

@@ -56,14 +56,16 @@ public partial class Manager_home : System.Web.UI.Page
 
             if(JabilSession.Current.employee_position.Equals("Work Cell Manager"))
             {
-                SqlCommand select8D = new SqlCommand(@"SELECT COUNT(*) FROM dbo.Approval_8D WHERE name_WCM = @name_WCM", conn);
+                SqlCommand select8D = new SqlCommand(@"SELECT COUNT(*) FROM dbo.Approval_8D WHERE name_WCM = @name_WCM AND approval_status_WCM = @approval_status_WCM", conn);
                 select8D.Parameters.AddWithValue("@name_WCM", JabilSession.Current.employee_name);
+                select8D.Parameters.AddWithValue("@approval_status_WCM", "pending");
                 request8D = Convert.ToInt16(select8D.ExecuteScalar());
             }
             else if(JabilSession.Current.employee_position.Equals("Quality Manager"))
             {
-                SqlCommand select8D = new SqlCommand(@"SELECT COUNT(*) FROM dbo.Approval_8D WHERE name_QM = @name_QM", conn);
+                SqlCommand select8D = new SqlCommand(@"SELECT COUNT(*) FROM dbo.Approval_8D WHERE name_QM = @name_QM AND approval_status_QM = @approval_status_QM", conn);
                 select8D.Parameters.AddWithValue("@name_QM", JabilSession.Current.employee_name);
+                select8D.Parameters.AddWithValue("@approval_status_QM", "pending");
                 request8D = Convert.ToInt16(select8D.ExecuteScalar());
             }
             

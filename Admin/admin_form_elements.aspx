@@ -19,6 +19,9 @@
                                 </div>
                             </div>
                             <br /><br />
+                            <div id="messageBox" title="jQuery MessageBox In Asp.net" style="display: none;">
+                                    
+                            </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <asp:Button ID="btnAddNewElement" CssClass="btn btn-primary" Text="Add New Element" OnClick="Click_Add" runat="server" />
